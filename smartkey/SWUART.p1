@@ -1,0 +1,1707 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"90 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _INDF `Vuc  1 e@0 ]
+"94 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR0 `Vuc  1 e@1 ]
+"98 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PCL `Vuc  1 e@2 ]
+"102 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _STATUS `Vuc  1 e@3 ]
+"104 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _CARRY `Vb  1 e@24 ]
+"105 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _DC `Vb  1 e@25 ]
+"106 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _ZERO `Vb  1 e@26 ]
+"107 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _nPD `Vb  1 e@27 ]
+"108 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _nTO `Vb  1 e@28 ]
+"109 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RP0 `Vb  1 e@29 ]
+"110 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RP1 `Vb  1 e@30 ]
+"111 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _FSR_B8 `Vb  1 e@31 ]
+"113 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _C `Vb  1 e@24 ]
+"114 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _HC `Vb  1 e@25 ]
+"115 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _Z `Vb  1 e@26 ]
+"116 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _nPF `Vb  1 e@27 ]
+"117 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _nTF `Vb  1 e@28 ]
+"118 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PAGE0 `Vb  1 e@29 ]
+"119 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PAGE1 `Vb  1 e@30 ]
+[s S2 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S2 . CARRY DC ZERO nPD nTO RP FSR_B8 ]
+[s S3 :5 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S3 . . RP0 RP1 ]
+[s S4 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 ]
+[n S4 . C HC Z nPF nTF PAGE ]
+[s S5 :5 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S5 . . PAGE0 PAGE1 ]
+[u S1 `S2 1 `S3 1 `S4 1 `S5 1 ]
+[n S1 . . . . . ]
+"150 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _STATUSbits `VS1  1 e@3 ]
+"154 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _FSR `Vuc  1 e@4 ]
+"158 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PORTA `Vuc  1 e@5 ]
+"160 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RA0 `Vb  1 e@40 ]
+"161 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RA1 `Vb  1 e@41 ]
+"162 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RA2 `Vb  1 e@42 ]
+"163 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RA3 `Vb  1 e@43 ]
+"164 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RA4 `Vb  1 e@44 ]
+"165 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RA6 `Vb  1 e@46 ]
+"166 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RA7 `Vb  1 e@47 ]
+"168 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PA0 `Vb  1 e@40 ]
+"169 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PA1 `Vb  1 e@41 ]
+"170 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PA2 `Vb  1 e@42 ]
+"171 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PA3 `Vb  1 e@43 ]
+"172 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PA4 `Vb  1 e@44 ]
+"173 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PA6 `Vb  1 e@46 ]
+"174 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PA7 `Vb  1 e@47 ]
+[s S7 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S7 . RA0 RA1 RA2 RA3 RA4 . RA6 RA7 ]
+[s S8 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S8 . PA0 PA1 PA2 PA3 PA4 . PA6 PA7 ]
+[u S6 `S7 1 `S8 1 ]
+[n S6 . . . ]
+"197 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PORTAbits `VS6  1 e@5 ]
+"201 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PORTC `Vuc  1 e@7 ]
+"203 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RC0 `Vb  1 e@56 ]
+"204 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RC1 `Vb  1 e@57 ]
+"205 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RC2 `Vb  1 e@58 ]
+"206 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RC3 `Vb  1 e@59 ]
+"207 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RC4 `Vb  1 e@60 ]
+"209 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PC0 `Vb  1 e@56 ]
+"210 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PC1 `Vb  1 e@57 ]
+"211 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PC2 `Vb  1 e@58 ]
+"212 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PC3 `Vb  1 e@59 ]
+"213 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PC4 `Vb  1 e@60 ]
+[s S10 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S10 . RC0 RC1 RC2 RC3 RC4 ]
+[s S11 :5 `uc 1 ]
+[n S11 . RC ]
+[s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S12 . PC0 PC1 PC2 PC3 PC4 ]
+[s S13 :5 `uc 1 ]
+[n S13 . PC ]
+[u S9 `S10 1 `S11 1 `S12 1 `S13 1 ]
+[n S9 . . . . . ]
+"237 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PORTCbits `VS9  1 e@7 ]
+"241 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PCLATH `Vuc  1 e@10 ]
+[s S15 :5 `uc 1 ]
+[n S15 . . ]
+[u S14 `S15 1 ]
+[n S14 . . ]
+"248 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PCLATHbits `VS14  1 e@10 ]
+"252 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _INTCON `Vuc  1 e@11 ]
+"254 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PAIF `Vb  1 e@88 ]
+"255 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _INTF `Vb  1 e@89 ]
+"256 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T0IF `Vb  1 e@90 ]
+"257 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PAIE `Vb  1 e@91 ]
+"258 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _INTE `Vb  1 e@92 ]
+"259 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T0IE `Vb  1 e@93 ]
+"260 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PEIE `Vb  1 e@94 ]
+"261 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _GIE `Vb  1 e@95 ]
+[s S17 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S17 . PAIF INTF T0IF PAIE INTE T0IE PEIE GIE ]
+[u S16 `S17 1 ]
+[n S16 . . ]
+"274 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _INTCONbits `VS16  1 e@11 ]
+"278 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PIR1 `Vuc  1 e@12 ]
+"280 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR1IF `Vb  1 e@96 ]
+"281 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR2IF `Vb  1 e@97 ]
+"282 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _CKMEAIF `Vb  1 e@102 ]
+"283 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EEIF `Vb  1 e@103 ]
+[s S19 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S19 . TMR1IF TMR2IF . . . . CKMEAIF EEIF ]
+[u S18 `S19 1 ]
+[n S18 . . ]
+"297 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PIR1bits `VS18  1 e@12 ]
+"301 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR1L `Vuc  1 e@14 ]
+"305 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR1H `Vuc  1 e@15 ]
+"309 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T1CON `Vuc  1 e@16 ]
+"311 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR1ON `Vb  1 e@128 ]
+"312 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR1CS `Vb  1 e@129 ]
+"313 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T1SYNC `Vb  1 e@130 ]
+"314 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T1CKPS0 `Vb  1 e@132 ]
+"315 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T1CKPS1 `Vb  1 e@133 ]
+"316 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR1GE `Vb  1 e@134 ]
+"317 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T1GINV `Vb  1 e@135 ]
+[s S21 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S21 . TMR1ON TMR1CS T1SYNC . T1CKPS TMR1GE T1GINV ]
+[s S22 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S22 . . T1CKPS0 T1CKPS1 ]
+[u S20 `S21 1 `S22 1 ]
+[n S20 . . . ]
+"334 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T1CONbits `VS20  1 e@16 ]
+"338 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR2 `Vuc  1 e@17 ]
+"342 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T2CON `Vuc  1 e@18 ]
+"344 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T2CKPS0 `Vb  1 e@144 ]
+"345 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T2CKPS1 `Vb  1 e@145 ]
+"346 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR2ON `Vb  1 e@146 ]
+"347 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TOUTPS0 `Vb  1 e@147 ]
+"348 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TOUTPS1 `Vb  1 e@148 ]
+"349 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TOUTPS2 `Vb  1 e@149 ]
+"350 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TOUTPS3 `Vb  1 e@150 ]
+[s S24 :2 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S24 . T2CKPS TMR2ON TOUTPS ]
+[s S25 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S25 . T2CKPS0 T2CKPS1 . TOUTPS0 TOUTPS1 TOUTPS2 TOUTPS3 ]
+[u S23 `S24 1 `S25 1 ]
+[n S23 . . . ]
+"367 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T2CONbits `VS23  1 e@18 ]
+"372 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWMR1L `Vuc  1 e@19 ]
+"376 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWMR1H `Vuc  1 e@20 ]
+"380 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWM1CON `Vuc  1 e@21 ]
+"382 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWM1M0 `Vb  1 e@168 ]
+"383 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWM1M1 `Vb  1 e@169 ]
+"384 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWM1M2 `Vb  1 e@170 ]
+"385 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWM1M3 `Vb  1 e@171 ]
+"386 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _DC1B0 `Vb  1 e@172 ]
+"387 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _DC1B1 `Vb  1 e@173 ]
+"388 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _P1M0 `Vb  1 e@174 ]
+"389 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _P1M1 `Vb  1 e@175 ]
+[s S27 :4 `uc 1 :2 `uc 1 :2 `uc 1 ]
+[n S27 . EPWM1M DC1B P1M ]
+[s S28 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S28 . EPWM1M0 EPWM1M1 EPWM1M2 EPWM1M3 DC1B0 DC1B1 P1M0 P1M1 ]
+[u S26 `S27 1 `S28 1 ]
+[n S26 . . . ]
+"407 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWM1CONbits `VS26  1 e@21 ]
+"412 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PWM1CON `Vuc  1 e@22 ]
+"414 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PDC0 `Vb  1 e@176 ]
+"415 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PDC1 `Vb  1 e@177 ]
+"416 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PDC2 `Vb  1 e@178 ]
+"417 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PDC3 `Vb  1 e@179 ]
+"418 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PDC4 `Vb  1 e@180 ]
+"419 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PDC5 `Vb  1 e@181 ]
+"420 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PDC6 `Vb  1 e@182 ]
+"421 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PRSEN `Vb  1 e@183 ]
+[s S30 :7 `uc 1 :1 `uc 1 ]
+[n S30 . PDC PRSEN ]
+[s S31 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S31 . PDC0 PDC1 PDC2 PDC3 PDC4 PDC5 PDC6 ]
+[u S29 `S30 1 `S31 1 ]
+[n S29 . . . ]
+"437 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PWM1CONbits `VS29  1 e@22 ]
+"442 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWMAS `Vuc  1 e@23 ]
+"444 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWMAS0 `Vb  1 e@188 ]
+"445 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWMAS1 `Vb  1 e@189 ]
+"446 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWMAS2 `Vb  1 e@190 ]
+"447 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWMASE `Vb  1 e@191 ]
+[s S33 :4 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S33 . . EPWMAS EPWMASE ]
+[s S34 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S34 . . . . . EPWMAS0 EPWMAS1 EPWMAS2 ]
+[u S32 `S33 1 `S34 1 ]
+[n S32 . . . ]
+"464 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWMASbits `VS32  1 e@23 ]
+"468 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WDTCON `Vuc  1 e@24 ]
+"470 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SWDTEN `Vb  1 e@192 ]
+"471 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WDTPS0 `Vb  1 e@193 ]
+"472 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WDTPS1 `Vb  1 e@194 ]
+"473 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WDTPS2 `Vb  1 e@195 ]
+"474 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WDTPS3 `Vb  1 e@196 ]
+[s S36 :1 `uc 1 :4 `uc 1 ]
+[n S36 . SWDTEN WDTPS ]
+[s S37 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S37 . . WDTPS0 WDTPS1 WDTPS2 WDTPS3 ]
+[u S35 `S36 1 `S37 1 ]
+[n S35 . . . ]
+"489 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WDTCONbits `VS35  1 e@24 ]
+"494 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _MSCKCON `Vuc  1 e@27 ]
+"496 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _CKCNTI `Vb  1 e@217 ]
+"497 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _CKMAVG `Vb  1 e@218 ]
+"498 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SLVREN `Vb  1 e@220 ]
+"499 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T2CKSRC `Vb  1 e@221 ]
+[s S39 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S39 . . CKCNTI CKMAVG . SLVREN T2CKSRC . . ]
+[u S38 `S39 1 ]
+[n S38 . . ]
+"514 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _MSCKCONbits `VS38  1 e@27 ]
+"518 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SOSCPRL `Vuc  1 e@28 ]
+"522 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SOSCPRH `Vuc  1 e@29 ]
+[s S41 :4 `uc 1 ]
+[n S41 . SOSCPRH ]
+[u S40 `S41 1 ]
+[n S40 . . ]
+"529 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SOSCPRHbits `VS40  1 e@29 ]
+"538 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _OPTION `Vuc  1 e@129 ]
+"540 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PS0 `Vb  1 e@1032 ]
+"541 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PS1 `Vb  1 e@1033 ]
+"542 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PS2 `Vb  1 e@1034 ]
+"543 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PSA `Vb  1 e@1035 ]
+"544 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T0SE `Vb  1 e@1036 ]
+"545 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _T0CS `Vb  1 e@1037 ]
+"546 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _INTEDG `Vb  1 e@1038 ]
+"547 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _nPAPU `Vb  1 e@1039 ]
+[s S43 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S43 . PS PSA T0SE T0CS INTEDG nPAPU ]
+[s S44 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S44 . PS0 PS1 PS2 ]
+[u S42 `S43 1 `S44 1 ]
+[n S42 . . . ]
+"563 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _OPTIONbits `VS42  1 e@129 ]
+"567 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISA `Vuc  1 e@133 ]
+"569 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISA0 `Vb  1 e@1064 ]
+"570 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISA1 `Vb  1 e@1065 ]
+"571 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISA2 `Vb  1 e@1066 ]
+"572 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISA3 `Vb  1 e@1067 ]
+"573 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISA4 `Vb  1 e@1068 ]
+"575 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISA6 `Vb  1 e@1070 ]
+"576 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISA7 `Vb  1 e@1071 ]
+[s S46 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S46 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 . TRISA6 TRISA7 ]
+[u S45 `S46 1 ]
+[n S45 . . ]
+"589 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISAbits `VS45  1 e@133 ]
+"594 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISC `Vuc  1 e@135 ]
+"596 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISC0 `Vb  1 e@1080 ]
+"597 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISC1 `Vb  1 e@1081 ]
+"598 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISC2 `Vb  1 e@1082 ]
+"599 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISC3 `Vb  1 e@1083 ]
+"600 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISC4 `Vb  1 e@1084 ]
+[s S48 :5 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S48 . TRISC . . ]
+[s S49 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S49 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 ]
+[u S47 `S48 1 `S49 1 ]
+[n S47 . . . ]
+"617 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TRISCbits `VS47  1 e@135 ]
+"621 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUC `Vuc  1 e@136 ]
+"623 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUC0 `Vb  1 e@1088 ]
+"624 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUC1 `Vb  1 e@1089 ]
+"625 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUC2 `Vb  1 e@1090 ]
+"626 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUC3 `Vb  1 e@1091 ]
+"627 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUC4 `Vb  1 e@1092 ]
+[s S51 :5 `uc 1 ]
+[n S51 . WPUC ]
+[s S52 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S52 . WPUC0 WPUC1 WPUC2 WPUC3 WPUC4 ]
+[u S50 `S51 1 `S52 1 ]
+[n S50 . . . ]
+"642 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUCbits `VS50  1 e@136 ]
+"647 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPD `Vuc  1 e@137 ]
+"649 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPDC3 `Vb  1 e@1097 ]
+"650 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPDC2 `Vb  1 e@1098 ]
+"651 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPDC1 `Vb  1 e@1099 ]
+"652 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPDA4 `Vb  1 e@1100 ]
+[s S54 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 ]
+[n S54 . . WPDC3 WPDC2 WPDC1 WPDA4 . ]
+[u S53 `S54 1 ]
+[n S53 . . ]
+"663 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPDbits `VS53  1 e@137 ]
+"667 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PIE1 `Vuc  1 e@140 ]
+"669 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR1IE `Vb  1 e@1120 ]
+"670 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _TMR2IE `Vb  1 e@1121 ]
+"671 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _CKMEAIE `Vb  1 e@1126 ]
+"672 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EEIE `Vb  1 e@1127 ]
+[s S56 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S56 . TMR1IE TMR2IE . . . . CKMEAIE EEIE ]
+[u S55 `S56 1 ]
+[n S55 . . ]
+"685 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PIE1bits `VS55  1 e@140 ]
+"691 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PCON `Vuc  1 e@142 ]
+"693 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _nBOR `Vb  1 e@1136 ]
+"694 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _nPOR `Vb  1 e@1137 ]
+"695 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _LVDW `Vb  1 e@1138 ]
+"696 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _LVDEN `Vb  1 e@1139 ]
+"697 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _LVDL0 `Vb  1 e@1140 ]
+"698 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _LVDL1 `Vb  1 e@1141 ]
+"699 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _LVDL2 `Vb  1 e@1142 ]
+"700 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _VREF_OE `Vb  1 e@1143 ]
+[s S58 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S58 . nBOR nPOR LVDW LVDEN LVDL VREF_OE ]
+[s S59 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S59 . . LVDL0 LVDL1 LVDL2 ]
+[u S57 `S58 1 `S59 1 ]
+[n S57 . . . ]
+"718 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PCONbits `VS57  1 e@142 ]
+"722 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _OSCCON `Vuc  1 e@143 ]
+"724 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SCS `Vb  1 e@1144 ]
+"725 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _LTS `Vb  1 e@1145 ]
+"726 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _HTS `Vb  1 e@1146 ]
+"728 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IRCF0 `Vb  1 e@1148 ]
+"729 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IRCF1 `Vb  1 e@1149 ]
+"730 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IRCF2 `Vb  1 e@1150 ]
+"731 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _LFMOD `Vb  1 e@1151 ]
+[s S61 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S61 . SCS LTS HTS . IRCF LFMOD ]
+[s S62 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S62 . . IRCF0 IRCF1 IRCF2 ]
+[u S60 `S61 1 `S62 1 ]
+[n S60 . . . ]
+"748 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _OSCCONbits `VS60  1 e@143 ]
+"752 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWM1AUX `Vuc  1 e@144 ]
+"754 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _P1COE `Vb  1 e@1154 ]
+"755 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _P1DOE `Vb  1 e@1155 ]
+"756 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _P1EOE `Vb  1 e@1156 ]
+"757 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _P1FOE `Vb  1 e@1157 ]
+"758 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _P1OS `Vb  1 e@1158 ]
+"759 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _AUX1EN `Vb  1 e@1159 ]
+[s S64 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S64 . . . P1COE P1DOE P1EOE P1FOE P1OS AUX1EN ]
+[u S63 `S64 1 ]
+[n S63 . . ]
+"772 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EPWM1AUXbits `VS63  1 e@144 ]
+"776 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _PR2 `Vuc  1 e@146 ]
+"780 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUA `Vuc  1 e@149 ]
+"781 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPU `Vuc  1 e@149 ]
+"783 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUA0 `Vb  1 e@1192 ]
+"784 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUA1 `Vb  1 e@1193 ]
+"785 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUA2 `Vb  1 e@1194 ]
+"786 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUA3 `Vb  1 e@1195 ]
+"787 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUA4 `Vb  1 e@1196 ]
+"788 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUA6 `Vb  1 e@1198 ]
+"789 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUA7 `Vb  1 e@1199 ]
+"791 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPU0 `Vb  1 e@1192 ]
+"792 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPU1 `Vb  1 e@1193 ]
+"793 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPU2 `Vb  1 e@1194 ]
+"794 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPU3 `Vb  1 e@1195 ]
+"795 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPU4 `Vb  1 e@1196 ]
+"796 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPU6 `Vb  1 e@1198 ]
+"797 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPU7 `Vb  1 e@1199 ]
+[s S66 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S66 . WPUA0 WPUA1 WPUA2 WPUA3 WPUA4 . WPUA6 WPUA7 ]
+[s S67 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S67 . WPU0 WPU1 WPU2 WPU3 WPU4 . WPU6 WPU7 ]
+[u S65 `S66 1 `S67 1 ]
+[n S65 . . . ]
+"820 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WPUAbits `VS65  1 e@149 ]
+"824 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOCA `Vuc  1 e@150 ]
+"825 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOC `Vuc  1 e@150 ]
+"827 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOCA0 `Vb  1 e@1200 ]
+"828 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOCA1 `Vb  1 e@1201 ]
+"829 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOCA2 `Vb  1 e@1202 ]
+"830 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOCA3 `Vb  1 e@1203 ]
+"831 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOCA4 `Vb  1 e@1204 ]
+"832 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOCA6 `Vb  1 e@1206 ]
+"833 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOCA7 `Vb  1 e@1207 ]
+"835 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOC0 `Vb  1 e@1200 ]
+"836 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOC1 `Vb  1 e@1201 ]
+"837 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOC2 `Vb  1 e@1202 ]
+"838 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOC3 `Vb  1 e@1203 ]
+"839 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOC4 `Vb  1 e@1204 ]
+"840 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOC6 `Vb  1 e@1206 ]
+"841 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOC7 `Vb  1 e@1207 ]
+[s S69 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S69 . IOCA0 IOCA1 IOCA2 IOCA3 IOCA4 . IOCA6 IOCA7 ]
+[s S70 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S70 . IOC0 IOC1 IOC2 IOC3 IOC4 . IOC6 IOC7 ]
+[u S68 `S69 1 `S70 1 ]
+[n S68 . . . ]
+"864 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _IOCAbits `VS68  1 e@150 ]
+"869 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EEDAT `Vuc  1 e@154 ]
+"870 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EEDATA `Vuc  1 e@154 ]
+"874 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EEADR `Vuc  1 e@155 ]
+"879 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EECON1 `Vuc  1 e@156 ]
+"881 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _RD `Vb  1 e@1248 ]
+"882 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WREN1 `Vb  1 e@1250 ]
+"883 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WRERR `Vb  1 e@1251 ]
+"884 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WREN2 `Vb  1 e@1252 ]
+"885 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WREN3 `Vb  1 e@1253 ]
+[s S72 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S72 . RD . WREN1 WRERR WREN2 WREN3 ]
+[u S71 `S72 1 ]
+[n S71 . . ]
+"896 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EECON1bits `VS71  1 e@156 ]
+"900 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EECON2 `Vuc  1 e@157 ]
+"902 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _WR `Vb  1 e@1256 ]
+[s S74 :1 `uc 1 ]
+[n S74 . WR ]
+[u S73 `S74 1 ]
+[n S73 . . ]
+"908 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _EECON2bits `VS73  1 e@157 ]
+"915 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR00 `Vuc  1 e@0 ]
+"916 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR01 `Vuc  1 e@1 ]
+"917 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR02 `Vuc  1 e@2 ]
+"918 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR03 `Vuc  1 e@3 ]
+"919 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR04 `Vuc  1 e@4 ]
+"920 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR05 `Vuc  1 e@5 ]
+"921 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR06 `Vuc  1 e@6 ]
+"922 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR07 `Vuc  1 e@7 ]
+"923 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR08 `Vuc  1 e@8 ]
+"924 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR09 `Vuc  1 e@9 ]
+"925 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR0A `Vuc  1 e@10 ]
+"926 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR0B `Vuc  1 e@11 ]
+"927 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR0C `Vuc  1 e@12 ]
+"928 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR0D `Vuc  1 e@13 ]
+"929 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR0E `Vuc  1 e@14 ]
+"930 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR0F `Vuc  1 e@15 ]
+"932 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR10 `Vuc  1 e@16 ]
+"933 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR11 `Vuc  1 e@17 ]
+"934 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR12 `Vuc  1 e@18 ]
+"935 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR13 `Vuc  1 e@19 ]
+"936 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR14 `Vuc  1 e@20 ]
+"937 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR15 `Vuc  1 e@21 ]
+"938 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR16 `Vuc  1 e@22 ]
+"939 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR17 `Vuc  1 e@23 ]
+"940 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR18 `Vuc  1 e@24 ]
+"941 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR1B `Vuc  1 e@27 ]
+"942 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR1C `Vuc  1 e@28 ]
+"943 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR1D `Vuc  1 e@29 ]
+"946 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR80 `Vuc  1 e@128 ]
+"947 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR81 `Vuc  1 e@129 ]
+"948 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR82 `Vuc  1 e@130 ]
+"949 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR83 `Vuc  1 e@131 ]
+"950 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR84 `Vuc  1 e@132 ]
+"951 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR85 `Vuc  1 e@133 ]
+"952 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR86 `Vuc  1 e@134 ]
+"953 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR87 `Vuc  1 e@135 ]
+"954 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR88 `Vuc  1 e@136 ]
+"955 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR89 `Vuc  1 e@137 ]
+"956 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR8A `Vuc  1 e@138 ]
+"957 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR8B `Vuc  1 e@139 ]
+"958 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR8C `Vuc  1 e@140 ]
+"959 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR8D `Vuc  1 e@141 ]
+"960 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR8E `Vuc  1 e@142 ]
+"961 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR8F `Vuc  1 e@143 ]
+"963 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR90 `Vuc  1 e@144 ]
+"964 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR91 `Vuc  1 e@145 ]
+"965 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR92 `Vuc  1 e@146 ]
+"966 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR93 `Vuc  1 e@147 ]
+"967 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR94 `Vuc  1 e@148 ]
+"968 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR95 `Vuc  1 e@149 ]
+"969 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR96 `Vuc  1 e@150 ]
+"970 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR97 `Vuc  1 e@151 ]
+"971 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR98 `Vuc  1 e@152 ]
+"972 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR9A `Vuc  1 e@154 ]
+"973 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR9B `Vuc  1 e@155 ]
+"974 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR9C `Vuc  1 e@156 ]
+"975 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR9D `Vuc  1 e@157 ]
+"977 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR100 `Vuc  1 e@256 ]
+"978 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR101 `Vuc  1 e@257 ]
+"979 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR102 `Vuc  1 e@258 ]
+"980 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR103 `Vuc  1 e@259 ]
+"981 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR104 `Vuc  1 e@260 ]
+"982 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR105 `Vuc  1 e@261 ]
+"983 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR106 `Vuc  1 e@262 ]
+"984 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR107 `Vuc  1 e@263 ]
+"985 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR10A `Vuc  1 e@266 ]
+"986 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR10B `Vuc  1 e@267 ]
+"987 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR10C `Vuc  1 e@268 ]
+"988 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR10D `Vuc  1 e@269 ]
+"989 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR10E `Vuc  1 e@270 ]
+"990 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f685.h
+[v _SFR10F `Vuc  1 e@271 ]
+"16 swuart.h
+[v _swUartSendByte `(v  0 ef1`uc ]
+"154 D:\OneDrive\SmarRF\MCU\MC82\IDE\ORIGINIDE_V2.0.9\Program Files (x86)\HI-TECH Software\PICC\9.83\include\SYSCFG.h
+[v __delay `(v  0 ef1`ul ]
+[p i __delay ]
+[; ;pic16f685.h: 90: volatile unsigned char INDF @ 0x000;
+[; ;pic16f685.h: 94: volatile unsigned char TMR0 @ 0x001;
+[; ;pic16f685.h: 98: volatile unsigned char PCL @ 0x002;
+[; ;pic16f685.h: 102: volatile unsigned char STATUS @ 0x003;
+[; ;pic16f685.h: 104: volatile bit CARRY @ ((unsigned)&STATUS*8)+0;
+[; ;pic16f685.h: 105: volatile bit DC @ ((unsigned)&STATUS*8)+1;
+[; ;pic16f685.h: 106: volatile bit ZERO @ ((unsigned)&STATUS*8)+2;
+[; ;pic16f685.h: 107: volatile bit nPD @ ((unsigned)&STATUS*8)+3;
+[; ;pic16f685.h: 108: volatile bit nTO @ ((unsigned)&STATUS*8)+4;
+[; ;pic16f685.h: 109: volatile bit RP0 @ ((unsigned)&STATUS*8)+5;
+[; ;pic16f685.h: 110: volatile bit RP1 @ ((unsigned)&STATUS*8)+6;
+[; ;pic16f685.h: 111: volatile bit FSR_B8 @ ((unsigned)&STATUS*8)+7;
+[; ;pic16f685.h: 113: volatile bit C @ ((unsigned)&STATUS*8)+0;
+[; ;pic16f685.h: 114: volatile bit HC @ ((unsigned)&STATUS*8)+1;
+[; ;pic16f685.h: 115: volatile bit Z @ ((unsigned)&STATUS*8)+2;
+[; ;pic16f685.h: 116: volatile bit nPF @ ((unsigned)&STATUS*8)+3;
+[; ;pic16f685.h: 117: volatile bit nTF @ ((unsigned)&STATUS*8)+4;
+[; ;pic16f685.h: 118: volatile bit PAGE0 @ ((unsigned)&STATUS*8)+5;
+[; ;pic16f685.h: 119: volatile bit PAGE1 @ ((unsigned)&STATUS*8)+6;
+[; ;pic16f685.h: 122: volatile union {
+[; ;pic16f685.h: 123: struct {
+[; ;pic16f685.h: 124: unsigned CARRY : 1;
+[; ;pic16f685.h: 125: unsigned DC : 1;
+[; ;pic16f685.h: 126: unsigned ZERO : 1;
+[; ;pic16f685.h: 127: unsigned nPD : 1;
+[; ;pic16f685.h: 128: unsigned nTO : 1;
+[; ;pic16f685.h: 129: unsigned RP : 2;
+[; ;pic16f685.h: 130: unsigned FSR_B8 : 1;
+[; ;pic16f685.h: 131: };
+[; ;pic16f685.h: 132: struct {
+[; ;pic16f685.h: 133: unsigned : 5;
+[; ;pic16f685.h: 134: unsigned RP0 : 1;
+[; ;pic16f685.h: 135: unsigned RP1 : 1;
+[; ;pic16f685.h: 136: };
+[; ;pic16f685.h: 137: struct {
+[; ;pic16f685.h: 138: unsigned C : 1;
+[; ;pic16f685.h: 139: unsigned HC : 1;
+[; ;pic16f685.h: 140: unsigned Z : 1;
+[; ;pic16f685.h: 141: unsigned nPF : 1;
+[; ;pic16f685.h: 142: unsigned nTF : 1;
+[; ;pic16f685.h: 143: unsigned PAGE : 2;
+[; ;pic16f685.h: 144: };
+[; ;pic16f685.h: 145: struct {
+[; ;pic16f685.h: 146: unsigned : 5;
+[; ;pic16f685.h: 147: unsigned PAGE0 : 1;
+[; ;pic16f685.h: 148: unsigned PAGE1 : 1;
+[; ;pic16f685.h: 149: };
+[; ;pic16f685.h: 150: } STATUSbits @ 0x003;
+[; ;pic16f685.h: 154: volatile unsigned char FSR @ 0x004;
+[; ;pic16f685.h: 158: volatile unsigned char PORTA @ 0x005;
+[; ;pic16f685.h: 160: volatile bit RA0 @ ((unsigned)&PORTA*8)+0;
+[; ;pic16f685.h: 161: volatile bit RA1 @ ((unsigned)&PORTA*8)+1;
+[; ;pic16f685.h: 162: volatile bit RA2 @ ((unsigned)&PORTA*8)+2;
+[; ;pic16f685.h: 163: volatile bit RA3 @ ((unsigned)&PORTA*8)+3;
+[; ;pic16f685.h: 164: volatile bit RA4 @ ((unsigned)&PORTA*8)+4;
+[; ;pic16f685.h: 165: volatile bit RA6 @ ((unsigned)&PORTA*8)+6;
+[; ;pic16f685.h: 166: volatile bit RA7 @ ((unsigned)&PORTA*8)+7;
+[; ;pic16f685.h: 168: volatile bit PA0 @ ((unsigned)&PORTA*8)+0;
+[; ;pic16f685.h: 169: volatile bit PA1 @ ((unsigned)&PORTA*8)+1;
+[; ;pic16f685.h: 170: volatile bit PA2 @ ((unsigned)&PORTA*8)+2;
+[; ;pic16f685.h: 171: volatile bit PA3 @ ((unsigned)&PORTA*8)+3;
+[; ;pic16f685.h: 172: volatile bit PA4 @ ((unsigned)&PORTA*8)+4;
+[; ;pic16f685.h: 173: volatile bit PA6 @ ((unsigned)&PORTA*8)+6;
+[; ;pic16f685.h: 174: volatile bit PA7 @ ((unsigned)&PORTA*8)+7;
+[; ;pic16f685.h: 176: volatile union {
+[; ;pic16f685.h: 177: struct {
+[; ;pic16f685.h: 178: unsigned RA0 : 1;
+[; ;pic16f685.h: 179: unsigned RA1 : 1;
+[; ;pic16f685.h: 180: unsigned RA2 : 1;
+[; ;pic16f685.h: 181: unsigned RA3 : 1;
+[; ;pic16f685.h: 182: unsigned RA4 : 1;
+[; ;pic16f685.h: 183: unsigned : 1;
+[; ;pic16f685.h: 184: unsigned RA6 : 1;
+[; ;pic16f685.h: 185: unsigned RA7 : 1;
+[; ;pic16f685.h: 186: };
+[; ;pic16f685.h: 187: struct {
+[; ;pic16f685.h: 188: unsigned PA0 : 1;
+[; ;pic16f685.h: 189: unsigned PA1 : 1;
+[; ;pic16f685.h: 190: unsigned PA2 : 1;
+[; ;pic16f685.h: 191: unsigned PA3 : 1;
+[; ;pic16f685.h: 192: unsigned PA4 : 1;
+[; ;pic16f685.h: 193: unsigned : 1;
+[; ;pic16f685.h: 194: unsigned PA6 : 1;
+[; ;pic16f685.h: 195: unsigned PA7 : 1;
+[; ;pic16f685.h: 196: };
+[; ;pic16f685.h: 197: } PORTAbits @ 0x005;
+[; ;pic16f685.h: 201: volatile unsigned char PORTC @ 0x007;
+[; ;pic16f685.h: 203: volatile bit RC0 @ ((unsigned)&PORTC*8)+0;
+[; ;pic16f685.h: 204: volatile bit RC1 @ ((unsigned)&PORTC*8)+1;
+[; ;pic16f685.h: 205: volatile bit RC2 @ ((unsigned)&PORTC*8)+2;
+[; ;pic16f685.h: 206: volatile bit RC3 @ ((unsigned)&PORTC*8)+3;
+[; ;pic16f685.h: 207: volatile bit RC4 @ ((unsigned)&PORTC*8)+4;
+[; ;pic16f685.h: 209: volatile bit PC0 @ ((unsigned)&PORTC*8)+0;
+[; ;pic16f685.h: 210: volatile bit PC1 @ ((unsigned)&PORTC*8)+1;
+[; ;pic16f685.h: 211: volatile bit PC2 @ ((unsigned)&PORTC*8)+2;
+[; ;pic16f685.h: 212: volatile bit PC3 @ ((unsigned)&PORTC*8)+3;
+[; ;pic16f685.h: 213: volatile bit PC4 @ ((unsigned)&PORTC*8)+4;
+[; ;pic16f685.h: 215: volatile union {
+[; ;pic16f685.h: 216: struct {
+[; ;pic16f685.h: 217: unsigned RC0 : 1;
+[; ;pic16f685.h: 218: unsigned RC1 : 1;
+[; ;pic16f685.h: 219: unsigned RC2 : 1;
+[; ;pic16f685.h: 220: unsigned RC3 : 1;
+[; ;pic16f685.h: 221: unsigned RC4 : 1;
+[; ;pic16f685.h: 222: };
+[; ;pic16f685.h: 223: struct {
+[; ;pic16f685.h: 224: unsigned RC : 5;
+[; ;pic16f685.h: 225: };
+[; ;pic16f685.h: 227: struct {
+[; ;pic16f685.h: 228: unsigned PC0 : 1;
+[; ;pic16f685.h: 229: unsigned PC1 : 1;
+[; ;pic16f685.h: 230: unsigned PC2 : 1;
+[; ;pic16f685.h: 231: unsigned PC3 : 1;
+[; ;pic16f685.h: 232: unsigned PC4 : 1;
+[; ;pic16f685.h: 233: };
+[; ;pic16f685.h: 234: struct {
+[; ;pic16f685.h: 235: unsigned PC : 5;
+[; ;pic16f685.h: 236: };
+[; ;pic16f685.h: 237: } PORTCbits @ 0x007;
+[; ;pic16f685.h: 241: volatile unsigned char PCLATH @ 0x00A;
+[; ;pic16f685.h: 244: volatile union {
+[; ;pic16f685.h: 245: struct {
+[; ;pic16f685.h: 246: unsigned : 5;
+[; ;pic16f685.h: 247: };
+[; ;pic16f685.h: 248: } PCLATHbits @ 0x00A;
+[; ;pic16f685.h: 252: volatile unsigned char INTCON @ 0x00B;
+[; ;pic16f685.h: 254: volatile bit PAIF @ ((unsigned)&INTCON*8)+0;
+[; ;pic16f685.h: 255: volatile bit INTF @ ((unsigned)&INTCON*8)+1;
+[; ;pic16f685.h: 256: volatile bit T0IF @ ((unsigned)&INTCON*8)+2;
+[; ;pic16f685.h: 257: volatile bit PAIE @ ((unsigned)&INTCON*8)+3;
+[; ;pic16f685.h: 258: volatile bit INTE @ ((unsigned)&INTCON*8)+4;
+[; ;pic16f685.h: 259: volatile bit T0IE @ ((unsigned)&INTCON*8)+5;
+[; ;pic16f685.h: 260: volatile bit PEIE @ ((unsigned)&INTCON*8)+6;
+[; ;pic16f685.h: 261: volatile bit GIE @ ((unsigned)&INTCON*8)+7;
+[; ;pic16f685.h: 263: volatile union {
+[; ;pic16f685.h: 264: struct {
+[; ;pic16f685.h: 265: unsigned PAIF : 1;
+[; ;pic16f685.h: 266: unsigned INTF : 1;
+[; ;pic16f685.h: 267: unsigned T0IF : 1;
+[; ;pic16f685.h: 268: unsigned PAIE : 1;
+[; ;pic16f685.h: 269: unsigned INTE : 1;
+[; ;pic16f685.h: 270: unsigned T0IE : 1;
+[; ;pic16f685.h: 271: unsigned PEIE : 1;
+[; ;pic16f685.h: 272: unsigned GIE : 1;
+[; ;pic16f685.h: 273: };
+[; ;pic16f685.h: 274: } INTCONbits @ 0x00B;
+[; ;pic16f685.h: 278: volatile unsigned char PIR1 @ 0x00C;
+[; ;pic16f685.h: 280: volatile bit TMR1IF @ ((unsigned)&PIR1*8)+0;
+[; ;pic16f685.h: 281: volatile bit TMR2IF @ ((unsigned)&PIR1*8)+1;
+[; ;pic16f685.h: 282: volatile bit CKMEAIF @ ((unsigned)&PIR1*8)+6;
+[; ;pic16f685.h: 283: volatile bit EEIF @ ((unsigned)&PIR1*8)+7;
+[; ;pic16f685.h: 286: volatile union {
+[; ;pic16f685.h: 287: struct {
+[; ;pic16f685.h: 288: unsigned TMR1IF : 1;
+[; ;pic16f685.h: 289: unsigned TMR2IF : 1;
+[; ;pic16f685.h: 290: unsigned : 1;
+[; ;pic16f685.h: 291: unsigned : 1;
+[; ;pic16f685.h: 292: unsigned : 1;
+[; ;pic16f685.h: 293: unsigned : 1;
+[; ;pic16f685.h: 294: unsigned CKMEAIF : 1;
+[; ;pic16f685.h: 295: unsigned EEIF : 1;
+[; ;pic16f685.h: 296: };
+[; ;pic16f685.h: 297: } PIR1bits @ 0x00C;
+[; ;pic16f685.h: 301: volatile unsigned char TMR1L @ 0x00E;
+[; ;pic16f685.h: 305: volatile unsigned char TMR1H @ 0x00F;
+[; ;pic16f685.h: 309: volatile unsigned char T1CON @ 0x0010;
+[; ;pic16f685.h: 311: volatile bit TMR1ON @ ((unsigned)&T1CON*8)+0;
+[; ;pic16f685.h: 312: volatile bit TMR1CS @ ((unsigned)&T1CON*8)+1;
+[; ;pic16f685.h: 313: volatile bit T1SYNC @ ((unsigned)&T1CON*8)+2;
+[; ;pic16f685.h: 314: volatile bit T1CKPS0 @ ((unsigned)&T1CON*8)+4;
+[; ;pic16f685.h: 315: volatile bit T1CKPS1 @ ((unsigned)&T1CON*8)+5;
+[; ;pic16f685.h: 316: volatile bit TMR1GE @ ((unsigned)&T1CON*8)+6;
+[; ;pic16f685.h: 317: volatile bit T1GINV @ ((unsigned)&T1CON*8)+7;
+[; ;pic16f685.h: 319: volatile union {
+[; ;pic16f685.h: 320: struct {
+[; ;pic16f685.h: 321: unsigned TMR1ON : 1;
+[; ;pic16f685.h: 322: unsigned TMR1CS : 1;
+[; ;pic16f685.h: 323: unsigned T1SYNC : 1;
+[; ;pic16f685.h: 324: unsigned : 1;
+[; ;pic16f685.h: 325: unsigned T1CKPS : 2;
+[; ;pic16f685.h: 326: unsigned TMR1GE : 1;
+[; ;pic16f685.h: 327: unsigned T1GINV : 1;
+[; ;pic16f685.h: 328: };
+[; ;pic16f685.h: 329: struct {
+[; ;pic16f685.h: 330: unsigned : 4;
+[; ;pic16f685.h: 331: unsigned T1CKPS0 : 1;
+[; ;pic16f685.h: 332: unsigned T1CKPS1 : 1;
+[; ;pic16f685.h: 333: };
+[; ;pic16f685.h: 334: } T1CONbits @0x0010;
+[; ;pic16f685.h: 338: volatile unsigned char TMR2 @ 0x011;
+[; ;pic16f685.h: 342: volatile unsigned char T2CON @ 0x012;
+[; ;pic16f685.h: 344: volatile bit T2CKPS0 @ ((unsigned)&T2CON*8)+0;
+[; ;pic16f685.h: 345: volatile bit T2CKPS1 @ ((unsigned)&T2CON*8)+1;
+[; ;pic16f685.h: 346: volatile bit TMR2ON @ ((unsigned)&T2CON*8)+2;
+[; ;pic16f685.h: 347: volatile bit TOUTPS0 @ ((unsigned)&T2CON*8)+3;
+[; ;pic16f685.h: 348: volatile bit TOUTPS1 @ ((unsigned)&T2CON*8)+4;
+[; ;pic16f685.h: 349: volatile bit TOUTPS2 @ ((unsigned)&T2CON*8)+5;
+[; ;pic16f685.h: 350: volatile bit TOUTPS3 @ ((unsigned)&T2CON*8)+6;
+[; ;pic16f685.h: 352: volatile union {
+[; ;pic16f685.h: 353: struct {
+[; ;pic16f685.h: 354: unsigned T2CKPS : 2;
+[; ;pic16f685.h: 355: unsigned TMR2ON : 1;
+[; ;pic16f685.h: 356: unsigned TOUTPS : 4;
+[; ;pic16f685.h: 357: };
+[; ;pic16f685.h: 358: struct {
+[; ;pic16f685.h: 359: unsigned T2CKPS0 : 1;
+[; ;pic16f685.h: 360: unsigned T2CKPS1 : 1;
+[; ;pic16f685.h: 361: unsigned : 1;
+[; ;pic16f685.h: 362: unsigned TOUTPS0 : 1;
+[; ;pic16f685.h: 363: unsigned TOUTPS1 : 1;
+[; ;pic16f685.h: 364: unsigned TOUTPS2 : 1;
+[; ;pic16f685.h: 365: unsigned TOUTPS3 : 1;
+[; ;pic16f685.h: 366: };
+[; ;pic16f685.h: 367: } T2CONbits @ 0x012;
+[; ;pic16f685.h: 372: volatile unsigned char EPWMR1L @ 0x013;
+[; ;pic16f685.h: 376: volatile unsigned char EPWMR1H @ 0x014;
+[; ;pic16f685.h: 380: volatile unsigned char EPWM1CON @ 0x015;
+[; ;pic16f685.h: 382: volatile bit EPWM1M0 @ ((unsigned)&EPWM1CON*8)+0;
+[; ;pic16f685.h: 383: volatile bit EPWM1M1 @ ((unsigned)&EPWM1CON*8)+1;
+[; ;pic16f685.h: 384: volatile bit EPWM1M2 @ ((unsigned)&EPWM1CON*8)+2;
+[; ;pic16f685.h: 385: volatile bit EPWM1M3 @ ((unsigned)&EPWM1CON*8)+3;
+[; ;pic16f685.h: 386: volatile bit DC1B0 @ ((unsigned)&EPWM1CON*8)+4;
+[; ;pic16f685.h: 387: volatile bit DC1B1 @ ((unsigned)&EPWM1CON*8)+5;
+[; ;pic16f685.h: 388: volatile bit P1M0 @ ((unsigned)&EPWM1CON*8)+6;
+[; ;pic16f685.h: 389: volatile bit P1M1 @ ((unsigned)&EPWM1CON*8)+7;
+[; ;pic16f685.h: 391: volatile union {
+[; ;pic16f685.h: 392: struct {
+[; ;pic16f685.h: 393: unsigned EPWM1M : 4;
+[; ;pic16f685.h: 394: unsigned DC1B : 2;
+[; ;pic16f685.h: 395: unsigned P1M : 2;
+[; ;pic16f685.h: 396: };
+[; ;pic16f685.h: 397: struct {
+[; ;pic16f685.h: 398: unsigned EPWM1M0 : 1;
+[; ;pic16f685.h: 399: unsigned EPWM1M1 : 1;
+[; ;pic16f685.h: 400: unsigned EPWM1M2 : 1;
+[; ;pic16f685.h: 401: unsigned EPWM1M3 : 1;
+[; ;pic16f685.h: 402: unsigned DC1B0 : 1;
+[; ;pic16f685.h: 403: unsigned DC1B1 : 1;
+[; ;pic16f685.h: 404: unsigned P1M0 : 1;
+[; ;pic16f685.h: 405: unsigned P1M1 : 1;
+[; ;pic16f685.h: 406: };
+[; ;pic16f685.h: 407: } EPWM1CONbits @ 0x015;
+[; ;pic16f685.h: 412: volatile unsigned char PWM1CON @ 0x016;
+[; ;pic16f685.h: 414: volatile bit PDC0 @ ((unsigned)&PWM1CON*8)+0;
+[; ;pic16f685.h: 415: volatile bit PDC1 @ ((unsigned)&PWM1CON*8)+1;
+[; ;pic16f685.h: 416: volatile bit PDC2 @ ((unsigned)&PWM1CON*8)+2;
+[; ;pic16f685.h: 417: volatile bit PDC3 @ ((unsigned)&PWM1CON*8)+3;
+[; ;pic16f685.h: 418: volatile bit PDC4 @ ((unsigned)&PWM1CON*8)+4;
+[; ;pic16f685.h: 419: volatile bit PDC5 @ ((unsigned)&PWM1CON*8)+5;
+[; ;pic16f685.h: 420: volatile bit PDC6 @ ((unsigned)&PWM1CON*8)+6;
+[; ;pic16f685.h: 421: volatile bit PRSEN @ ((unsigned)&PWM1CON*8)+7;
+[; ;pic16f685.h: 423: volatile union {
+[; ;pic16f685.h: 424: struct {
+[; ;pic16f685.h: 425: unsigned PDC : 7;
+[; ;pic16f685.h: 426: unsigned PRSEN : 1;
+[; ;pic16f685.h: 427: };
+[; ;pic16f685.h: 428: struct {
+[; ;pic16f685.h: 429: unsigned PDC0 : 1;
+[; ;pic16f685.h: 430: unsigned PDC1 : 1;
+[; ;pic16f685.h: 431: unsigned PDC2 : 1;
+[; ;pic16f685.h: 432: unsigned PDC3 : 1;
+[; ;pic16f685.h: 433: unsigned PDC4 : 1;
+[; ;pic16f685.h: 434: unsigned PDC5 : 1;
+[; ;pic16f685.h: 435: unsigned PDC6 : 1;
+[; ;pic16f685.h: 436: };
+[; ;pic16f685.h: 437: } PWM1CONbits @ 0x016;
+[; ;pic16f685.h: 442: volatile unsigned char EPWMAS @ 0x017;
+[; ;pic16f685.h: 444: volatile bit EPWMAS0 @ ((unsigned)&EPWMAS*8)+4;
+[; ;pic16f685.h: 445: volatile bit EPWMAS1 @ ((unsigned)&EPWMAS*8)+5;
+[; ;pic16f685.h: 446: volatile bit EPWMAS2 @ ((unsigned)&EPWMAS*8)+6;
+[; ;pic16f685.h: 447: volatile bit EPWMASE @ ((unsigned)&EPWMAS*8)+7;
+[; ;pic16f685.h: 449: volatile union {
+[; ;pic16f685.h: 450: struct {
+[; ;pic16f685.h: 451: unsigned : 4;
+[; ;pic16f685.h: 452: unsigned EPWMAS : 3;
+[; ;pic16f685.h: 453: unsigned EPWMASE : 1;
+[; ;pic16f685.h: 454: };
+[; ;pic16f685.h: 455: struct {
+[; ;pic16f685.h: 456: unsigned : 1;
+[; ;pic16f685.h: 457: unsigned : 1;
+[; ;pic16f685.h: 458: unsigned : 1;
+[; ;pic16f685.h: 459: unsigned : 1;
+[; ;pic16f685.h: 460: unsigned EPWMAS0 : 1;
+[; ;pic16f685.h: 461: unsigned EPWMAS1 : 1;
+[; ;pic16f685.h: 462: unsigned EPWMAS2 : 1;
+[; ;pic16f685.h: 463: };
+[; ;pic16f685.h: 464: } EPWMASbits @ 0x017;
+[; ;pic16f685.h: 468: volatile unsigned char WDTCON @ 0x018;
+[; ;pic16f685.h: 470: volatile bit SWDTEN @ ((unsigned)&WDTCON*8)+0;
+[; ;pic16f685.h: 471: volatile bit WDTPS0 @ ((unsigned)&WDTCON*8)+1;
+[; ;pic16f685.h: 472: volatile bit WDTPS1 @ ((unsigned)&WDTCON*8)+2;
+[; ;pic16f685.h: 473: volatile bit WDTPS2 @ ((unsigned)&WDTCON*8)+3;
+[; ;pic16f685.h: 474: volatile bit WDTPS3 @ ((unsigned)&WDTCON*8)+4;
+[; ;pic16f685.h: 477: volatile union {
+[; ;pic16f685.h: 478: struct {
+[; ;pic16f685.h: 479: unsigned SWDTEN : 1;
+[; ;pic16f685.h: 480: unsigned WDTPS : 4;
+[; ;pic16f685.h: 481: };
+[; ;pic16f685.h: 482: struct {
+[; ;pic16f685.h: 483: unsigned : 1;
+[; ;pic16f685.h: 484: unsigned WDTPS0 : 1;
+[; ;pic16f685.h: 485: unsigned WDTPS1 : 1;
+[; ;pic16f685.h: 486: unsigned WDTPS2 : 1;
+[; ;pic16f685.h: 487: unsigned WDTPS3 : 1;
+[; ;pic16f685.h: 488: };
+[; ;pic16f685.h: 489: } WDTCONbits @ 0x018;
+[; ;pic16f685.h: 494: volatile unsigned char MSCKCON @ 0x01B;
+[; ;pic16f685.h: 496: volatile bit CKCNTI @ ((unsigned)&MSCKCON*8)+1;
+[; ;pic16f685.h: 497: volatile bit CKMAVG @ ((unsigned)&MSCKCON*8)+2;
+[; ;pic16f685.h: 498: volatile bit SLVREN @ ((unsigned)&MSCKCON*8)+4;
+[; ;pic16f685.h: 499: volatile bit T2CKSRC @ ((unsigned)&MSCKCON*8)+5;
+[; ;pic16f685.h: 503: volatile union {
+[; ;pic16f685.h: 504: struct {
+[; ;pic16f685.h: 505: unsigned : 1;
+[; ;pic16f685.h: 506: unsigned CKCNTI : 1;
+[; ;pic16f685.h: 507: unsigned CKMAVG : 1;
+[; ;pic16f685.h: 508: unsigned : 1;
+[; ;pic16f685.h: 509: unsigned SLVREN : 1;
+[; ;pic16f685.h: 510: unsigned T2CKSRC : 1;
+[; ;pic16f685.h: 511: unsigned : 1;
+[; ;pic16f685.h: 512: unsigned : 1;
+[; ;pic16f685.h: 513: };
+[; ;pic16f685.h: 514: } MSCKCONbits @ 0x01B;
+[; ;pic16f685.h: 518: volatile unsigned char SOSCPRL @ 0x01C;
+[; ;pic16f685.h: 522: volatile unsigned char SOSCPRH @ 0x01D;
+[; ;pic16f685.h: 525: volatile union {
+[; ;pic16f685.h: 526: struct {
+[; ;pic16f685.h: 527: unsigned SOSCPRH : 4;
+[; ;pic16f685.h: 528: };
+[; ;pic16f685.h: 529: } SOSCPRHbits @ 0x01D;
+[; ;pic16f685.h: 538: volatile unsigned char OPTION @ 0x081;
+[; ;pic16f685.h: 540: volatile bit PS0 @ ((unsigned)&OPTION*8)+0;
+[; ;pic16f685.h: 541: volatile bit PS1 @ ((unsigned)&OPTION*8)+1;
+[; ;pic16f685.h: 542: volatile bit PS2 @ ((unsigned)&OPTION*8)+2;
+[; ;pic16f685.h: 543: volatile bit PSA @ ((unsigned)&OPTION*8)+3;
+[; ;pic16f685.h: 544: volatile bit T0SE @ ((unsigned)&OPTION*8)+4;
+[; ;pic16f685.h: 545: volatile bit T0CS @ ((unsigned)&OPTION*8)+5;
+[; ;pic16f685.h: 546: volatile bit INTEDG @ ((unsigned)&OPTION*8)+6;
+[; ;pic16f685.h: 547: volatile bit nPAPU @ ((unsigned)&OPTION*8)+7;
+[; ;pic16f685.h: 549: volatile union {
+[; ;pic16f685.h: 550: struct {
+[; ;pic16f685.h: 551: unsigned PS : 3;
+[; ;pic16f685.h: 552: unsigned PSA : 1;
+[; ;pic16f685.h: 553: unsigned T0SE : 1;
+[; ;pic16f685.h: 554: unsigned T0CS : 1;
+[; ;pic16f685.h: 555: unsigned INTEDG : 1;
+[; ;pic16f685.h: 556: unsigned nPAPU : 1;
+[; ;pic16f685.h: 557: };
+[; ;pic16f685.h: 558: struct {
+[; ;pic16f685.h: 559: unsigned PS0 : 1;
+[; ;pic16f685.h: 560: unsigned PS1 : 1;
+[; ;pic16f685.h: 561: unsigned PS2 : 1;
+[; ;pic16f685.h: 562: };
+[; ;pic16f685.h: 563: } OPTIONbits @ 0x081;
+[; ;pic16f685.h: 567: volatile unsigned char TRISA @ 0x085;
+[; ;pic16f685.h: 569: volatile bit TRISA0 @ ((unsigned)&TRISA*8)+0;
+[; ;pic16f685.h: 570: volatile bit TRISA1 @ ((unsigned)&TRISA*8)+1;
+[; ;pic16f685.h: 571: volatile bit TRISA2 @ ((unsigned)&TRISA*8)+2;
+[; ;pic16f685.h: 572: volatile bit TRISA3 @ ((unsigned)&TRISA*8)+3;
+[; ;pic16f685.h: 573: volatile bit TRISA4 @ ((unsigned)&TRISA*8)+4;
+[; ;pic16f685.h: 575: volatile bit TRISA6 @ ((unsigned)&TRISA*8)+6;
+[; ;pic16f685.h: 576: volatile bit TRISA7 @ ((unsigned)&TRISA*8)+7;
+[; ;pic16f685.h: 578: volatile union {
+[; ;pic16f685.h: 579: struct {
+[; ;pic16f685.h: 580: unsigned TRISA0 : 1;
+[; ;pic16f685.h: 581: unsigned TRISA1 : 1;
+[; ;pic16f685.h: 582: unsigned TRISA2 : 1;
+[; ;pic16f685.h: 583: unsigned TRISA3 : 1;
+[; ;pic16f685.h: 584: unsigned TRISA4 : 1;
+[; ;pic16f685.h: 585: unsigned : 1;
+[; ;pic16f685.h: 586: unsigned TRISA6 : 1;
+[; ;pic16f685.h: 587: unsigned TRISA7 : 1;
+[; ;pic16f685.h: 588: };
+[; ;pic16f685.h: 589: } TRISAbits @ 0x085;
+[; ;pic16f685.h: 594: volatile unsigned char TRISC @ 0x087;
+[; ;pic16f685.h: 596: volatile bit TRISC0 @ ((unsigned)&TRISC*8)+0;
+[; ;pic16f685.h: 597: volatile bit TRISC1 @ ((unsigned)&TRISC*8)+1;
+[; ;pic16f685.h: 598: volatile bit TRISC2 @ ((unsigned)&TRISC*8)+2;
+[; ;pic16f685.h: 599: volatile bit TRISC3 @ ((unsigned)&TRISC*8)+3;
+[; ;pic16f685.h: 600: volatile bit TRISC4 @ ((unsigned)&TRISC*8)+4;
+[; ;pic16f685.h: 603: volatile union {
+[; ;pic16f685.h: 604: struct {
+[; ;pic16f685.h: 605: unsigned TRISC : 5;
+[; ;pic16f685.h: 606: unsigned : 1;
+[; ;pic16f685.h: 607: unsigned : 1;
+[; ;pic16f685.h: 608: };
+[; ;pic16f685.h: 609: struct {
+[; ;pic16f685.h: 610: unsigned TRISC0 : 1;
+[; ;pic16f685.h: 611: unsigned TRISC1 : 1;
+[; ;pic16f685.h: 612: unsigned TRISC2 : 1;
+[; ;pic16f685.h: 613: unsigned TRISC3 : 1;
+[; ;pic16f685.h: 614: unsigned TRISC4 : 1;
+[; ;pic16f685.h: 616: };
+[; ;pic16f685.h: 617: } TRISCbits @ 0x087;
+[; ;pic16f685.h: 621: volatile unsigned char WPUC @ 0x088;
+[; ;pic16f685.h: 623: volatile bit WPUC0 @ ((unsigned)&WPUC*8)+0;
+[; ;pic16f685.h: 624: volatile bit WPUC1 @ ((unsigned)&WPUC*8)+1;
+[; ;pic16f685.h: 625: volatile bit WPUC2 @ ((unsigned)&WPUC*8)+2;
+[; ;pic16f685.h: 626: volatile bit WPUC3 @ ((unsigned)&WPUC*8)+3;
+[; ;pic16f685.h: 627: volatile bit WPUC4 @ ((unsigned)&WPUC*8)+4;
+[; ;pic16f685.h: 630: volatile union {
+[; ;pic16f685.h: 631: struct {
+[; ;pic16f685.h: 632: unsigned WPUC : 5;
+[; ;pic16f685.h: 633: };
+[; ;pic16f685.h: 634: struct {
+[; ;pic16f685.h: 635: unsigned WPUC0 : 1;
+[; ;pic16f685.h: 636: unsigned WPUC1 : 1;
+[; ;pic16f685.h: 637: unsigned WPUC2 : 1;
+[; ;pic16f685.h: 638: unsigned WPUC3 : 1;
+[; ;pic16f685.h: 639: unsigned WPUC4 : 1;
+[; ;pic16f685.h: 641: };
+[; ;pic16f685.h: 642: } WPUCbits @ 0x088;
+[; ;pic16f685.h: 647: volatile unsigned char WPD @ 0x089;
+[; ;pic16f685.h: 649: volatile bit WPDC3 @ ((unsigned)&WPD*8)+1;
+[; ;pic16f685.h: 650: volatile bit WPDC2 @ ((unsigned)&WPD*8)+2;
+[; ;pic16f685.h: 651: volatile bit WPDC1 @ ((unsigned)&WPD*8)+3;
+[; ;pic16f685.h: 652: volatile bit WPDA4 @ ((unsigned)&WPD*8)+4;
+[; ;pic16f685.h: 654: volatile union {
+[; ;pic16f685.h: 655: struct {
+[; ;pic16f685.h: 656: unsigned : 1;
+[; ;pic16f685.h: 657: unsigned WPDC3 : 1;
+[; ;pic16f685.h: 658: unsigned WPDC2 : 1;
+[; ;pic16f685.h: 659: unsigned WPDC1 : 1;
+[; ;pic16f685.h: 660: unsigned WPDA4 : 1;
+[; ;pic16f685.h: 661: unsigned : 3;
+[; ;pic16f685.h: 662: };
+[; ;pic16f685.h: 663: } WPDbits @ 0x089;
+[; ;pic16f685.h: 667: volatile unsigned char PIE1 @ 0x08C;
+[; ;pic16f685.h: 669: volatile bit TMR1IE @ ((unsigned)&PIE1*8)+0;
+[; ;pic16f685.h: 670: volatile bit TMR2IE @ ((unsigned)&PIE1*8)+1;
+[; ;pic16f685.h: 671: volatile bit CKMEAIE @ ((unsigned)&PIE1*8)+6;
+[; ;pic16f685.h: 672: volatile bit EEIE @ ((unsigned)&PIE1*8)+7;
+[; ;pic16f685.h: 674: volatile union {
+[; ;pic16f685.h: 675: struct {
+[; ;pic16f685.h: 676: unsigned TMR1IE : 1;
+[; ;pic16f685.h: 677: unsigned TMR2IE : 1;
+[; ;pic16f685.h: 678: unsigned : 1;
+[; ;pic16f685.h: 679: unsigned : 1;
+[; ;pic16f685.h: 680: unsigned : 1;
+[; ;pic16f685.h: 681: unsigned : 1;
+[; ;pic16f685.h: 682: unsigned CKMEAIE : 1;
+[; ;pic16f685.h: 683: unsigned EEIE : 1;
+[; ;pic16f685.h: 684: };
+[; ;pic16f685.h: 685: } PIE1bits @ 0x08C;
+[; ;pic16f685.h: 691: volatile unsigned char PCON @ 0x08E;
+[; ;pic16f685.h: 693: volatile bit nBOR @ ((unsigned)&PCON*8)+0;
+[; ;pic16f685.h: 694: volatile bit nPOR @ ((unsigned)&PCON*8)+1;
+[; ;pic16f685.h: 695: volatile bit LVDW @ ((unsigned)&PCON*8)+2;
+[; ;pic16f685.h: 696: volatile bit LVDEN @ ((unsigned)&PCON*8)+3;
+[; ;pic16f685.h: 697: volatile bit LVDL0 @ ((unsigned)&PCON*8)+4;
+[; ;pic16f685.h: 698: volatile bit LVDL1 @ ((unsigned)&PCON*8)+5;
+[; ;pic16f685.h: 699: volatile bit LVDL2 @ ((unsigned)&PCON*8)+6;
+[; ;pic16f685.h: 700: volatile bit VREF_OE @ ((unsigned)&PCON*8)+7;
+[; ;pic16f685.h: 702: volatile union {
+[; ;pic16f685.h: 703: struct {
+[; ;pic16f685.h: 704: unsigned nBOR : 1;
+[; ;pic16f685.h: 705: unsigned nPOR : 1;
+[; ;pic16f685.h: 706: unsigned LVDW : 1;
+[; ;pic16f685.h: 707: unsigned LVDEN : 1;
+[; ;pic16f685.h: 708: unsigned LVDL : 3;
+[; ;pic16f685.h: 709: unsigned VREF_OE : 1;
+[; ;pic16f685.h: 711: };
+[; ;pic16f685.h: 712: struct {
+[; ;pic16f685.h: 713: unsigned : 4;
+[; ;pic16f685.h: 714: unsigned LVDL0 : 1;
+[; ;pic16f685.h: 715: unsigned LVDL1 : 1;
+[; ;pic16f685.h: 716: unsigned LVDL2 : 1;
+[; ;pic16f685.h: 717: };
+[; ;pic16f685.h: 718: } PCONbits @ 0x08E;
+[; ;pic16f685.h: 722: volatile unsigned char OSCCON @ 0x08F;
+[; ;pic16f685.h: 724: volatile bit SCS @ ((unsigned)&OSCCON*8)+0;
+[; ;pic16f685.h: 725: volatile bit LTS @ ((unsigned)&OSCCON*8)+1;
+[; ;pic16f685.h: 726: volatile bit HTS @ ((unsigned)&OSCCON*8)+2;
+[; ;pic16f685.h: 728: volatile bit IRCF0 @ ((unsigned)&OSCCON*8)+4;
+[; ;pic16f685.h: 729: volatile bit IRCF1 @ ((unsigned)&OSCCON*8)+5;
+[; ;pic16f685.h: 730: volatile bit IRCF2 @ ((unsigned)&OSCCON*8)+6;
+[; ;pic16f685.h: 731: volatile bit LFMOD @ ((unsigned)&OSCCON*8)+7;
+[; ;pic16f685.h: 733: volatile union {
+[; ;pic16f685.h: 734: struct {
+[; ;pic16f685.h: 735: unsigned SCS : 1;
+[; ;pic16f685.h: 736: unsigned LTS : 1;
+[; ;pic16f685.h: 737: unsigned HTS : 1;
+[; ;pic16f685.h: 738: unsigned : 1;
+[; ;pic16f685.h: 739: unsigned IRCF : 3;
+[; ;pic16f685.h: 740: unsigned LFMOD : 1;
+[; ;pic16f685.h: 741: };
+[; ;pic16f685.h: 742: struct {
+[; ;pic16f685.h: 743: unsigned : 4;
+[; ;pic16f685.h: 744: unsigned IRCF0 : 1;
+[; ;pic16f685.h: 745: unsigned IRCF1 : 1;
+[; ;pic16f685.h: 746: unsigned IRCF2 : 1;
+[; ;pic16f685.h: 747: };
+[; ;pic16f685.h: 748: } OSCCONbits @ 0x08F;
+[; ;pic16f685.h: 752: volatile unsigned char EPWM1AUX @ 0x090;
+[; ;pic16f685.h: 754: volatile bit P1COE @ ((unsigned)&EPWM1AUX*8)+2;
+[; ;pic16f685.h: 755: volatile bit P1DOE @ ((unsigned)&EPWM1AUX*8)+3;
+[; ;pic16f685.h: 756: volatile bit P1EOE @ ((unsigned)&EPWM1AUX*8)+4;
+[; ;pic16f685.h: 757: volatile bit P1FOE @ ((unsigned)&EPWM1AUX*8)+5;
+[; ;pic16f685.h: 758: volatile bit P1OS @ ((unsigned)&EPWM1AUX*8)+6;
+[; ;pic16f685.h: 759: volatile bit AUX1EN @ ((unsigned)&EPWM1AUX*8)+7;
+[; ;pic16f685.h: 761: volatile union {
+[; ;pic16f685.h: 762: struct {
+[; ;pic16f685.h: 763: unsigned : 1;
+[; ;pic16f685.h: 764: unsigned : 1;
+[; ;pic16f685.h: 765: unsigned P1COE : 1;
+[; ;pic16f685.h: 766: unsigned P1DOE : 1;
+[; ;pic16f685.h: 767: unsigned P1EOE : 1;
+[; ;pic16f685.h: 768: unsigned P1FOE : 1;
+[; ;pic16f685.h: 769: unsigned P1OS : 1;
+[; ;pic16f685.h: 770: unsigned AUX1EN : 1;
+[; ;pic16f685.h: 771: };
+[; ;pic16f685.h: 772: } EPWM1AUXbits @ 0x090;
+[; ;pic16f685.h: 776: volatile unsigned char PR2 @ 0x092;
+[; ;pic16f685.h: 780: volatile unsigned char WPUA @ 0x095;
+[; ;pic16f685.h: 781: volatile unsigned char WPU @ 0x095;
+[; ;pic16f685.h: 783: volatile bit WPUA0 @ ((unsigned)&WPUA*8)+0;
+[; ;pic16f685.h: 784: volatile bit WPUA1 @ ((unsigned)&WPUA*8)+1;
+[; ;pic16f685.h: 785: volatile bit WPUA2 @ ((unsigned)&WPUA*8)+2;
+[; ;pic16f685.h: 786: volatile bit WPUA3 @ ((unsigned)&WPUA*8)+3;
+[; ;pic16f685.h: 787: volatile bit WPUA4 @ ((unsigned)&WPUA*8)+4;
+[; ;pic16f685.h: 788: volatile bit WPUA6 @ ((unsigned)&WPUA*8)+6;
+[; ;pic16f685.h: 789: volatile bit WPUA7 @ ((unsigned)&WPUA*8)+7;
+[; ;pic16f685.h: 791: volatile bit WPU0 @ ((unsigned)&WPUA*8)+0;
+[; ;pic16f685.h: 792: volatile bit WPU1 @ ((unsigned)&WPUA*8)+1;
+[; ;pic16f685.h: 793: volatile bit WPU2 @ ((unsigned)&WPUA*8)+2;
+[; ;pic16f685.h: 794: volatile bit WPU3 @ ((unsigned)&WPUA*8)+3;
+[; ;pic16f685.h: 795: volatile bit WPU4 @ ((unsigned)&WPUA*8)+4;
+[; ;pic16f685.h: 796: volatile bit WPU6 @ ((unsigned)&WPUA*8)+6;
+[; ;pic16f685.h: 797: volatile bit WPU7 @ ((unsigned)&WPUA*8)+7;
+[; ;pic16f685.h: 799: volatile union {
+[; ;pic16f685.h: 800: struct {
+[; ;pic16f685.h: 801: unsigned WPUA0 : 1;
+[; ;pic16f685.h: 802: unsigned WPUA1 : 1;
+[; ;pic16f685.h: 803: unsigned WPUA2 : 1;
+[; ;pic16f685.h: 804: unsigned WPUA3 : 1;
+[; ;pic16f685.h: 805: unsigned WPUA4 : 1;
+[; ;pic16f685.h: 806: unsigned : 1;
+[; ;pic16f685.h: 807: unsigned WPUA6 : 1;
+[; ;pic16f685.h: 808: unsigned WPUA7 : 1;
+[; ;pic16f685.h: 809: };
+[; ;pic16f685.h: 810: struct {
+[; ;pic16f685.h: 811: unsigned WPU0 : 1;
+[; ;pic16f685.h: 812: unsigned WPU1 : 1;
+[; ;pic16f685.h: 813: unsigned WPU2 : 1;
+[; ;pic16f685.h: 814: unsigned WPU3 : 1;
+[; ;pic16f685.h: 815: unsigned WPU4 : 1;
+[; ;pic16f685.h: 816: unsigned : 1;
+[; ;pic16f685.h: 817: unsigned WPU6 : 1;
+[; ;pic16f685.h: 818: unsigned WPU7 : 1;
+[; ;pic16f685.h: 819: };
+[; ;pic16f685.h: 820: } WPUAbits @ 0x095;
+[; ;pic16f685.h: 824: volatile unsigned char IOCA @ 0x096;
+[; ;pic16f685.h: 825: volatile unsigned char IOC @ 0x096;
+[; ;pic16f685.h: 827: volatile bit IOCA0 @ ((unsigned)&IOCA*8)+0;
+[; ;pic16f685.h: 828: volatile bit IOCA1 @ ((unsigned)&IOCA*8)+1;
+[; ;pic16f685.h: 829: volatile bit IOCA2 @ ((unsigned)&IOCA*8)+2;
+[; ;pic16f685.h: 830: volatile bit IOCA3 @ ((unsigned)&IOCA*8)+3;
+[; ;pic16f685.h: 831: volatile bit IOCA4 @ ((unsigned)&IOCA*8)+4;
+[; ;pic16f685.h: 832: volatile bit IOCA6 @ ((unsigned)&IOCA*8)+6;
+[; ;pic16f685.h: 833: volatile bit IOCA7 @ ((unsigned)&IOCA*8)+7;
+[; ;pic16f685.h: 835: volatile bit IOC0 @ ((unsigned)&IOCA*8)+0;
+[; ;pic16f685.h: 836: volatile bit IOC1 @ ((unsigned)&IOCA*8)+1;
+[; ;pic16f685.h: 837: volatile bit IOC2 @ ((unsigned)&IOCA*8)+2;
+[; ;pic16f685.h: 838: volatile bit IOC3 @ ((unsigned)&IOCA*8)+3;
+[; ;pic16f685.h: 839: volatile bit IOC4 @ ((unsigned)&IOCA*8)+4;
+[; ;pic16f685.h: 840: volatile bit IOC6 @ ((unsigned)&IOCA*8)+6;
+[; ;pic16f685.h: 841: volatile bit IOC7 @ ((unsigned)&IOCA*8)+7;
+[; ;pic16f685.h: 843: volatile union {
+[; ;pic16f685.h: 844: struct {
+[; ;pic16f685.h: 845: unsigned IOCA0 : 1;
+[; ;pic16f685.h: 846: unsigned IOCA1 : 1;
+[; ;pic16f685.h: 847: unsigned IOCA2 : 1;
+[; ;pic16f685.h: 848: unsigned IOCA3 : 1;
+[; ;pic16f685.h: 849: unsigned IOCA4 : 1;
+[; ;pic16f685.h: 850: unsigned : 1;
+[; ;pic16f685.h: 851: unsigned IOCA6 : 1;
+[; ;pic16f685.h: 852: unsigned IOCA7 : 1;
+[; ;pic16f685.h: 853: };
+[; ;pic16f685.h: 854: struct {
+[; ;pic16f685.h: 855: unsigned IOC0 : 1;
+[; ;pic16f685.h: 856: unsigned IOC1 : 1;
+[; ;pic16f685.h: 857: unsigned IOC2 : 1;
+[; ;pic16f685.h: 858: unsigned IOC3 : 1;
+[; ;pic16f685.h: 859: unsigned IOC4 : 1;
+[; ;pic16f685.h: 860: unsigned : 1;
+[; ;pic16f685.h: 861: unsigned IOC6 : 1;
+[; ;pic16f685.h: 862: unsigned IOC7 : 1;
+[; ;pic16f685.h: 863: };
+[; ;pic16f685.h: 864: } IOCAbits @ 0x096;
+[; ;pic16f685.h: 869: volatile unsigned char EEDAT @ 0x09A;
+[; ;pic16f685.h: 870: volatile unsigned char EEDATA @ 0x09A;
+[; ;pic16f685.h: 874: volatile unsigned char EEADR @ 0x09B;
+[; ;pic16f685.h: 879: volatile unsigned char EECON1 @ 0x09C;
+[; ;pic16f685.h: 881: volatile bit RD @ ((unsigned)&EECON1*8)+0;
+[; ;pic16f685.h: 882: volatile bit WREN1 @ ((unsigned)&EECON1*8)+2;
+[; ;pic16f685.h: 883: volatile bit WRERR @ ((unsigned)&EECON1*8)+3;
+[; ;pic16f685.h: 884: volatile bit WREN2 @ ((unsigned)&EECON1*8)+4;
+[; ;pic16f685.h: 885: volatile bit WREN3 @ ((unsigned)&EECON1*8)+5;
+[; ;pic16f685.h: 887: volatile union {
+[; ;pic16f685.h: 888: struct {
+[; ;pic16f685.h: 889: unsigned RD : 1;
+[; ;pic16f685.h: 890: unsigned : 1;
+[; ;pic16f685.h: 891: unsigned WREN1 : 1;
+[; ;pic16f685.h: 892: unsigned WRERR : 1;
+[; ;pic16f685.h: 893: unsigned WREN2 : 1;
+[; ;pic16f685.h: 894: unsigned WREN3 : 1;
+[; ;pic16f685.h: 895: };
+[; ;pic16f685.h: 896: } EECON1bits @ 0x09C;
+[; ;pic16f685.h: 900: volatile unsigned char EECON2 @ 0x09D;
+[; ;pic16f685.h: 902: volatile bit WR @ ((unsigned)&EECON2*8)+0;
+[; ;pic16f685.h: 904: volatile union {
+[; ;pic16f685.h: 905: struct {
+[; ;pic16f685.h: 906: unsigned WR : 1;
+[; ;pic16f685.h: 907: };
+[; ;pic16f685.h: 908: } EECON2bits @ 0x09d;
+[; ;pic16f685.h: 915: volatile unsigned char SFR00 @0x000;
+[; ;pic16f685.h: 916: volatile unsigned char SFR01 @0x001;
+[; ;pic16f685.h: 917: volatile unsigned char SFR02 @0x002;
+[; ;pic16f685.h: 918: volatile unsigned char SFR03 @0x003;
+[; ;pic16f685.h: 919: volatile unsigned char SFR04 @0x004;
+[; ;pic16f685.h: 920: volatile unsigned char SFR05 @0x005;
+[; ;pic16f685.h: 921: volatile unsigned char SFR06 @0x006;
+[; ;pic16f685.h: 922: volatile unsigned char SFR07 @0x007;
+[; ;pic16f685.h: 923: volatile unsigned char SFR08 @0x008;
+[; ;pic16f685.h: 924: volatile unsigned char SFR09 @0x009;
+[; ;pic16f685.h: 925: volatile unsigned char SFR0A @0x00A;
+[; ;pic16f685.h: 926: volatile unsigned char SFR0B @0x00B;
+[; ;pic16f685.h: 927: volatile unsigned char SFR0C @0x00C;
+[; ;pic16f685.h: 928: volatile unsigned char SFR0D @0x00D;
+[; ;pic16f685.h: 929: volatile unsigned char SFR0E @0x00E;
+[; ;pic16f685.h: 930: volatile unsigned char SFR0F @0x00F;
+[; ;pic16f685.h: 932: volatile unsigned char SFR10 @0x010;
+[; ;pic16f685.h: 933: volatile unsigned char SFR11 @0x011;
+[; ;pic16f685.h: 934: volatile unsigned char SFR12 @0x012;
+[; ;pic16f685.h: 935: volatile unsigned char SFR13 @0x013;
+[; ;pic16f685.h: 936: volatile unsigned char SFR14 @0x014;
+[; ;pic16f685.h: 937: volatile unsigned char SFR15 @0x015;
+[; ;pic16f685.h: 938: volatile unsigned char SFR16 @0x016;
+[; ;pic16f685.h: 939: volatile unsigned char SFR17 @0x017;
+[; ;pic16f685.h: 940: volatile unsigned char SFR18 @0x018;
+[; ;pic16f685.h: 941: volatile unsigned char SFR1B @0x01B;
+[; ;pic16f685.h: 942: volatile unsigned char SFR1C @0x01C;
+[; ;pic16f685.h: 943: volatile unsigned char SFR1D @0x01D;
+[; ;pic16f685.h: 946: volatile unsigned char SFR80 @0x080;
+[; ;pic16f685.h: 947: volatile unsigned char SFR81 @0x081;
+[; ;pic16f685.h: 948: volatile unsigned char SFR82 @0x082;
+[; ;pic16f685.h: 949: volatile unsigned char SFR83 @0x083;
+[; ;pic16f685.h: 950: volatile unsigned char SFR84 @0x084;
+[; ;pic16f685.h: 951: volatile unsigned char SFR85 @0x085;
+[; ;pic16f685.h: 952: volatile unsigned char SFR86 @0x086;
+[; ;pic16f685.h: 953: volatile unsigned char SFR87 @0x087;
+[; ;pic16f685.h: 954: volatile unsigned char SFR88 @0x088;
+[; ;pic16f685.h: 955: volatile unsigned char SFR89 @0x089;
+[; ;pic16f685.h: 956: volatile unsigned char SFR8A @0x08A;
+[; ;pic16f685.h: 957: volatile unsigned char SFR8B @0x08B;
+[; ;pic16f685.h: 958: volatile unsigned char SFR8C @0x08C;
+[; ;pic16f685.h: 959: volatile unsigned char SFR8D @0x08D;
+[; ;pic16f685.h: 960: volatile unsigned char SFR8E @0x08E;
+[; ;pic16f685.h: 961: volatile unsigned char SFR8F @0x08F;
+[; ;pic16f685.h: 963: volatile unsigned char SFR90 @0x090;
+[; ;pic16f685.h: 964: volatile unsigned char SFR91 @0x091;
+[; ;pic16f685.h: 965: volatile unsigned char SFR92 @0x092;
+[; ;pic16f685.h: 966: volatile unsigned char SFR93 @0x093;
+[; ;pic16f685.h: 967: volatile unsigned char SFR94 @0x094;
+[; ;pic16f685.h: 968: volatile unsigned char SFR95 @0x095;
+[; ;pic16f685.h: 969: volatile unsigned char SFR96 @0x096;
+[; ;pic16f685.h: 970: volatile unsigned char SFR97 @0x097;
+[; ;pic16f685.h: 971: volatile unsigned char SFR98 @0x098;
+[; ;pic16f685.h: 972: volatile unsigned char SFR9A @0x09A;
+[; ;pic16f685.h: 973: volatile unsigned char SFR9B @0x09B;
+[; ;pic16f685.h: 974: volatile unsigned char SFR9C @0x09C;
+[; ;pic16f685.h: 975: volatile unsigned char SFR9D @0x09D;
+[; ;pic16f685.h: 977: volatile unsigned char SFR100 @0x100;
+[; ;pic16f685.h: 978: volatile unsigned char SFR101 @0x101;
+[; ;pic16f685.h: 979: volatile unsigned char SFR102 @0x102;
+[; ;pic16f685.h: 980: volatile unsigned char SFR103 @0x103;
+[; ;pic16f685.h: 981: volatile unsigned char SFR104 @0x104;
+[; ;pic16f685.h: 982: volatile unsigned char SFR105 @0x105;
+[; ;pic16f685.h: 983: volatile unsigned char SFR106 @0x106;
+[; ;pic16f685.h: 984: volatile unsigned char SFR107 @0x107;
+[; ;pic16f685.h: 985: volatile unsigned char SFR10A @0x10A;
+[; ;pic16f685.h: 986: volatile unsigned char SFR10B @0x10B;
+[; ;pic16f685.h: 987: volatile unsigned char SFR10C @0x10C;
+[; ;pic16f685.h: 988: volatile unsigned char SFR10D @0x10D;
+[; ;pic16f685.h: 989: volatile unsigned char SFR10E @0x10E;
+[; ;pic16f685.h: 990: volatile unsigned char SFR10F @0x10F;
+[; ;SYSCFG.h: 28: extern void _nop(void);
+[; ;SYSCFG.h: 80: extern unsigned int flash_read(unsigned short addr);
+[; ;eeprom_routines.h: 41: extern unsigned char eeprom_write(unsigned char addr, unsigned char value);
+[; ;eeprom_routines.h: 42: extern unsigned char eeprom_read(unsigned char addr);
+[; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
+[; ;eeprom_routines.h: 44: extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
+[; ;SYSCFG.h: 154: extern void _delay(unsigned long);
+[; ;main.h: 4: ;
+[; ;MS82Fxx02.h: 915: volatile unsigned char SFR00 @0x000;
+[; ;MS82Fxx02.h: 916: volatile unsigned char SFR01 @0x001;
+[; ;MS82Fxx02.h: 917: volatile unsigned char SFR02 @0x002;
+[; ;MS82Fxx02.h: 918: volatile unsigned char SFR03 @0x003;
+[; ;MS82Fxx02.h: 919: volatile unsigned char SFR04 @0x004;
+[; ;MS82Fxx02.h: 920: volatile unsigned char SFR05 @0x005;
+[; ;MS82Fxx02.h: 921: volatile unsigned char SFR06 @0x006;
+[; ;MS82Fxx02.h: 922: volatile unsigned char SFR07 @0x007;
+[; ;MS82Fxx02.h: 923: volatile unsigned char SFR08 @0x008;
+[; ;MS82Fxx02.h: 924: volatile unsigned char SFR09 @0x009;
+[; ;MS82Fxx02.h: 925: volatile unsigned char SFR0A @0x00A;
+[; ;MS82Fxx02.h: 926: volatile unsigned char SFR0B @0x00B;
+[; ;MS82Fxx02.h: 927: volatile unsigned char SFR0C @0x00C;
+[; ;MS82Fxx02.h: 928: volatile unsigned char SFR0D @0x00D;
+[; ;MS82Fxx02.h: 929: volatile unsigned char SFR0E @0x00E;
+[; ;MS82Fxx02.h: 930: volatile unsigned char SFR0F @0x00F;
+[; ;MS82Fxx02.h: 932: volatile unsigned char SFR10 @0x010;
+[; ;MS82Fxx02.h: 933: volatile unsigned char SFR11 @0x011;
+[; ;MS82Fxx02.h: 934: volatile unsigned char SFR12 @0x012;
+[; ;MS82Fxx02.h: 935: volatile unsigned char SFR13 @0x013;
+[; ;MS82Fxx02.h: 936: volatile unsigned char SFR14 @0x014;
+[; ;MS82Fxx02.h: 937: volatile unsigned char SFR15 @0x015;
+[; ;MS82Fxx02.h: 938: volatile unsigned char SFR16 @0x016;
+[; ;MS82Fxx02.h: 939: volatile unsigned char SFR17 @0x017;
+[; ;MS82Fxx02.h: 940: volatile unsigned char SFR18 @0x018;
+[; ;MS82Fxx02.h: 941: volatile unsigned char SFR1B @0x01B;
+[; ;MS82Fxx02.h: 942: volatile unsigned char SFR1C @0x01C;
+[; ;MS82Fxx02.h: 943: volatile unsigned char SFR1D @0x01D;
+[; ;MS82Fxx02.h: 946: volatile unsigned char SFR80 @0x080;
+[; ;MS82Fxx02.h: 947: volatile unsigned char SFR81 @0x081;
+[; ;MS82Fxx02.h: 948: volatile unsigned char SFR82 @0x082;
+[; ;MS82Fxx02.h: 949: volatile unsigned char SFR83 @0x083;
+[; ;MS82Fxx02.h: 950: volatile unsigned char SFR84 @0x084;
+[; ;MS82Fxx02.h: 951: volatile unsigned char SFR85 @0x085;
+[; ;MS82Fxx02.h: 952: volatile unsigned char SFR86 @0x086;
+[; ;MS82Fxx02.h: 953: volatile unsigned char SFR87 @0x087;
+[; ;MS82Fxx02.h: 954: volatile unsigned char SFR88 @0x088;
+[; ;MS82Fxx02.h: 955: volatile unsigned char SFR89 @0x089;
+[; ;MS82Fxx02.h: 956: volatile unsigned char SFR8A @0x08A;
+[; ;MS82Fxx02.h: 957: volatile unsigned char SFR8B @0x08B;
+[; ;MS82Fxx02.h: 958: volatile unsigned char SFR8C @0x08C;
+[; ;MS82Fxx02.h: 959: volatile unsigned char SFR8D @0x08D;
+[; ;MS82Fxx02.h: 960: volatile unsigned char SFR8E @0x08E;
+[; ;MS82Fxx02.h: 961: volatile unsigned char SFR8F @0x08F;
+[; ;MS82Fxx02.h: 963: volatile unsigned char SFR90 @0x090;
+[; ;MS82Fxx02.h: 964: volatile unsigned char SFR91 @0x091;
+[; ;MS82Fxx02.h: 965: volatile unsigned char SFR92 @0x092;
+[; ;MS82Fxx02.h: 966: volatile unsigned char SFR93 @0x093;
+[; ;MS82Fxx02.h: 967: volatile unsigned char SFR94 @0x094;
+[; ;MS82Fxx02.h: 968: volatile unsigned char SFR95 @0x095;
+[; ;MS82Fxx02.h: 969: volatile unsigned char SFR96 @0x096;
+[; ;MS82Fxx02.h: 970: volatile unsigned char SFR97 @0x097;
+[; ;MS82Fxx02.h: 971: volatile unsigned char SFR98 @0x098;
+[; ;MS82Fxx02.h: 972: volatile unsigned char SFR9A @0x09A;
+[; ;MS82Fxx02.h: 973: volatile unsigned char SFR9B @0x09B;
+[; ;MS82Fxx02.h: 974: volatile unsigned char SFR9C @0x09C;
+[; ;MS82Fxx02.h: 975: volatile unsigned char SFR9D @0x09D;
+[; ;MS82Fxx02.h: 977: volatile unsigned char SFR100 @0x100;
+[; ;MS82Fxx02.h: 978: volatile unsigned char SFR101 @0x101;
+[; ;MS82Fxx02.h: 979: volatile unsigned char SFR102 @0x102;
+[; ;MS82Fxx02.h: 980: volatile unsigned char SFR103 @0x103;
+[; ;MS82Fxx02.h: 981: volatile unsigned char SFR104 @0x104;
+[; ;MS82Fxx02.h: 982: volatile unsigned char SFR105 @0x105;
+[; ;MS82Fxx02.h: 983: volatile unsigned char SFR106 @0x106;
+[; ;MS82Fxx02.h: 984: volatile unsigned char SFR107 @0x107;
+[; ;MS82Fxx02.h: 985: volatile unsigned char SFR10A @0x10A;
+[; ;MS82Fxx02.h: 986: volatile unsigned char SFR10B @0x10B;
+[; ;MS82Fxx02.h: 987: volatile unsigned char SFR10C @0x10C;
+[; ;MS82Fxx02.h: 988: volatile unsigned char SFR10D @0x10D;
+[; ;MS82Fxx02.h: 989: volatile unsigned char SFR10E @0x10E;
+[; ;MS82Fxx02.h: 990: volatile unsigned char SFR10F @0x10F;
+[; ;main.h: 5: ;
+[; ;main.h: 6: ;
+[; ;SWI2C.h: 25: void swI2C_Init(void);
+[; ;SWI2C.h: 26: void swI2C_Start(void);
+[; ;SWI2C.h: 27: void swI2C_Stop(void);
+[; ;SWI2C.h: 28: unsigned char swI2C_WriteByte(unsigned char dat);
+[; ;SWI2C.h: 29: unsigned char swI2C_ReadByte(unsigned char Ack);
+[; ;main.h: 7: ;
+[; ;MPU6X.h: 7: unsigned char AccWrite(unsigned char rAdd,unsigned char *dat, unsigned char len);
+[; ;MPU6X.h: 8: unsigned char AccRead(unsigned char rAdd,unsigned char *dat, unsigned char len);
+[; ;main.h: 8: ;
+[; ;swuart.h: 15: void swUartInit(void);
+[; ;swuart.h: 16: void swUartSendByte(unsigned char dat);
+[; ;swuart.h: 17: void swUartSendString(char *str);
+[; ;swuart.h: 18: void SendNum(unsigned char num);
+[; ;SWUART.C: 1: ;
+"5 SWUART.C
+[v _SendNum `(v  1 ef1`uc ]
+{
+[; ;SWUART.C: 5: void SendNum(unsigned char num){
+[e :U _SendNum ]
+[v _num `uc  1 r1 ]
+[f ]
+"6
+[v _nib `uc  1 a ]
+[; ;SWUART.C: 6: unsigned char nib = num>>4;
+[e = _nib -> >> -> _num `i -> 4 `i `uc ]
+[; ;SWUART.C: 7: swUartSendByte(nib <10 ? (nib+'0') :(nib+'A'-10));
+"7
+[e ( _swUartSendByte (1 -> ? < -> _nib `i -> 10 `i : + -> _nib `ui -> 48 `ui - + -> _nib `ui -> 65 `ui -> -> 10 `i `ui `uc ]
+[; ;SWUART.C: 8: nib = num&0x0f;
+"8
+[e = _nib -> & -> _num `i -> 15 `i `uc ]
+[; ;SWUART.C: 9: swUartSendByte(nib <10 ? (nib+'0') :(nib+'A'-10));
+"9
+[e ( _swUartSendByte (1 -> ? < -> _nib `i -> 10 `i : + -> _nib `ui -> 48 `ui - + -> _nib `ui -> 65 `ui -> -> 10 `i `ui `uc ]
+[; ;SWUART.C: 10: }
+"10
+[e :UE 75 ]
+}
+"12
+[v _swUartDelay `(v  1 ef1`ui ]
+{
+[; ;SWUART.C: 12: void swUartDelay(unsigned int t){
+[e :U _swUartDelay ]
+[v _t `ui  1 r1 ]
+[f ]
+[; ;SWUART.C: 14: }
+"14
+[e :UE 76 ]
+}
+"16
+[v _swUartInit `(v  1 ef ]
+{
+[; ;SWUART.C: 16: void swUartInit(void){
+[e :U _swUartInit ]
+[f ]
+[; ;SWUART.C: 18: }
+"18
+[e :UE 77 ]
+}
+"20
+[v _swUartSendByte `(v  1 ef1`uc ]
+{
+[; ;SWUART.C: 20: void swUartSendByte(unsigned char dat){
+[e :U _swUartSendByte ]
+[v _dat `uc  1 r1 ]
+[f ]
+"21
+[v _i `uc  1 a ]
+[; ;SWUART.C: 21: unsigned char i;
+[; ;SWUART.C: 23: RC0 = 0;
+"23
+[e = _RC0 -> -> 0 `i `b ]
+[; ;SWUART.C: 25: _delay((unsigned long)((202)*(4000000/4000000.0)));
+"25
+[e ( __delay (1 -> * -> -> 202 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+[; ;SWUART.C: 26: for(i=0;i<8;i++){
+"26
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 79  ]
+[e $U 80  ]
+[e :U 79 ]
+{
+[; ;SWUART.C: 27: RC0 = (dat&1);
+"27
+[e = _RC0 -> & -> _dat `i -> 1 `i `b ]
+[; ;SWUART.C: 28: dat=dat>>1;
+"28
+[e = _dat -> >> -> _dat `i -> 1 `i `uc ]
+[; ;SWUART.C: 30: _delay((unsigned long)((202)*(4000000/4000000.0)));
+"30
+[e ( __delay (1 -> * -> -> 202 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"31
+}
+"26
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 79  ]
+[e :U 80 ]
+"31
+}
+[; ;SWUART.C: 31: }
+[; ;SWUART.C: 36: RC0 = 1;
+"36
+[e = _RC0 -> -> 1 `i `b ]
+[; ;SWUART.C: 38: _delay((unsigned long)((202)*(4000000/4000000.0)));
+"38
+[e ( __delay (1 -> * -> -> 202 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+[; ;SWUART.C: 40: }
+"40
+[e :UE 78 ]
+}
+"42
+[v _swUartSendString `(v  1 ef1`*uc ]
+{
+[; ;SWUART.C: 42: void swUartSendString(char *str){
+[e :U _swUartSendString ]
+[v _str `*uc  1 r1 ]
+[f ]
+[; ;SWUART.C: 43: while(*str){
+"43
+[e $U 83  ]
+[e :U 84 ]
+{
+[; ;SWUART.C: 44: swUartSendByte((char)*str);
+"44
+[e ( _swUartSendByte (1 *U _str ]
+[; ;SWUART.C: 45: str++;
+"45
+[e ++ _str * -> -> 1 `i `x -> -> # *U _str `i `x ]
+"46
+}
+[e :U 83 ]
+"43
+[e $ != -> *U _str `i -> -> -> 0 `i `uc `i 84  ]
+[e :U 85 ]
+[; ;SWUART.C: 46: }
+[; ;SWUART.C: 47: }
+"47
+[e :UE 82 ]
+}
