@@ -49,8 +49,7 @@ void interrupt ISR(void)
 //PortA Interrup --> keyfob detect   
 	if(PAIE&&PAIF){
 		
-		
-tmp = PORTA;		//
+		tmp = PORTA;		//
 		PAIF = 0;          //clear flag       
 		//righting egde
 		if(keyDetect){
@@ -66,29 +65,32 @@ tmp = PORTA;		//
 		} //falling edge
         else{
         	cntOff = 0;
-        	// init timer
-          			
+        	// init timer          			
 		}   
 
 	}
- /*
+ 
 //====================
 if(INTE&&INTF){
-    
+    unsigned char tmp;
 		INTF = 0;
         
-        if( mtState ==_Ide &&  RC1==0){//(RegStatus & keyUpd)==0 &&
-            //tmp = READ_EEPROM(0x39);
-            //if(tmp==0xff) {
-			//		tmp=0;
-            //        WRITE_EEPROM(0x39,tmp);
-			//}
-            WRITE_EEPROM(0x40,timeTick>>8);
-            WRITE_EEPROM(0x41,timeTick);
-            //WRITE_EEPROM(0x39,tmp+1);
+        if( RC1==0){//(RegStatus & keyUpd)==0 && mtState ==_Ide && 
+                     
+            if(timeTick <0x20){
+                tmp = READ_EEPROM(0x40);
+                WRITE_EEPROM(0x40,tmp+1);
+                
+                
+			}//timeTick =0;
+            //WRITE_EEPROM(0x40,timeTick>>8);
+            //WRITE_EEPROM(0x41,timeTick);
+            
+			//timeTick =0;
+            while(1);
 		} 
         
-    }*/
+    }
 //====================
 // Timer1 Interrup 
 	if(TMR1IE&&TMR1IF){
@@ -180,10 +182,7 @@ void beepOn(){
     TRISA &= 0xef;
 }
 void beep(unsigned char delay,unsigned char rep){
-
-
-    {	
-        
+    {	       
 		while(rep--){
             TMR2ON = 1;
 			PR2 = 12; //12
@@ -254,7 +253,7 @@ void main(void)
 	MOVWF		0x19			//
 #endasm
 
-unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0;
+unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0,accSet=0;
 unsigned int isWait =0;
 signed int  acYsum=0,acXsum=0;
 unsigned int tmp16=0;
@@ -287,7 +286,7 @@ signed char buf[6];
     //RegStatus |= (bitSwMain);
 	   
      __delay_ms(200);
-    
+ //timeTick = 0;   
 tmp8= READ_EEPROM(add_Alert);
     if(tmp8==0xff) {WRITE_EEPROM(add_Alert,0);__delay_ms(2);}
     
@@ -299,14 +298,45 @@ tmp8= READ_EEPROM(add_Alert);
 		PR2 =12;
 		beepOn();
     } else {
-		setState(_rCheck,400);// 
+		setState(_rCheck,400);// timout 4s cho thoi gian mo may, check tin hieu chia
 
 		mtOldState = _Ide;
 		 /* RegStatus |=(bitPwOn);
 			setState(_Open,tOut_Open);mtOldState = _Open;
 		  */
 	}
-    
+
+ 
+tmp8    = READ_EEPROM(0x40);
+if(tmp8==8){
+    tmp8= READ_EEPROM(0x41);
+    beep(25,1);
+    if(tmp8){
+        WRITE_EEPROM(0x41,0);
+    }
+    else {
+        WRITE_EEPROM(0x41,0x1);
+
+    } 
+   WRITE_EEPROM(0x40,0);
+    tmp8=0;
+    __delay_ms(100);
+} 
+
+// if(tmp8>10){
+//    WRITE_EEPROM(0x40,0);
+//}
+  
+tmp8    = READ_EEPROM(0x41);
+ if(tmp8){
+		 swMainOut =1;swMainOut2 =1;
+        while(1){
+            __delay_ms(1000);
+            if(timeTick >300)  WRITE_EEPROM(0x40,0);
+		}
+}
+
+
 //swUartSendString("\nPowerOn ");
 /*
     buf[0] =0x7;buf[1] =0;buf[2] =0;buf[3] =0;
@@ -332,13 +362,15 @@ if(mpuOk)
     //SendNum(AccWrite(0x6b,(unsigned char *)buf,1));
    __delay_ms(100);
 }
-if(mpuOk ==0){beep(10,2);}
+if(mpuOk ==0){beep(10,2);}// bao loi giao tiep mpu
  
-// bao loi giao tiep mpu
 
-	if(swStand && mpuOk ==1)   
+// Luu gia tri goc nghieng vao eeprom
+//
+tmp8= READ_EEPROM(0x40);
+	if(tmp8==6 && mpuOk ==1)   
 	{
-		tmp8=0;  
+		tmp8=0; beep(10,3); 
 		while((swStand )&&(tmp8<11))
 		 {
 				if(AccRead(0x3b,(unsigned char)buf,6)==0){
@@ -372,8 +404,10 @@ if(mpuOk ==0){beep(10,2);}
 		}else{
 			beep(10,2);
 		}
+       WRITE_EEPROM(0x40,0);
+       tmp8=0; 
 	}
-
+     
 	acXsum = (signed char)READ_EEPROM(0x10);
     acYsum  = (signed char)READ_EEPROM(0x11);
    
@@ -382,7 +416,7 @@ timeTick = 0;
 //=================
 	while(1){
 
-swTx =keyDetect;
+//swTx =keyDetect;
  
   
 /// keyfob update  ===============    
@@ -432,6 +466,7 @@ swTx =keyDetect;
                             else if((mtOldState == _Ide)||(mtOldState == _rAlert)){
 								RegStatus |=(bitPwOn);
 								setState(_Open,tOut_Open);
+                                 if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
                                 tmp16 = timeTick+40;
                                 beep(10,1);
                             }
@@ -449,6 +484,7 @@ swTx =keyDetect;
 								if(READ_EEPROM(add_Alert)==0xcc) WRITE_EEPROM(add_Alert,0);
                                 RegStatus |=(bitPwOn);		                         
 								setState(_Open,tOut_Open);
+                                
                                 tmp16 = timeTick+40;
                             }
                             //timeTick =0;
@@ -556,6 +592,9 @@ swTx =keyDetect;
                             beep(10,5);
                             RegStatus |=(bitPwOn); 
 							//setState(_Norl,tOut_Norl);
+                            
+                            if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
+                            
                             setState(_Open,tOut_Open);
                             tmp16 = timeTick+40;
                             

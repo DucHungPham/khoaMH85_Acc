@@ -81,7 +81,7 @@ void int_init(void){
 // cha INT
     INTEDG = 0;		
 	INTF = 0;
-	INTE = 0;
+	INTE = 1;
  //Timer2   
 	TMR2IF = 0;
 	TMR2IE = 1;

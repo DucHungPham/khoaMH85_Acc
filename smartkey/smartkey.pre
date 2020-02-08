@@ -1048,7 +1048,6 @@ unsigned char tmp=0;
 
 if(PAIE&&PAIF){
 
-
 tmp = PORTA;
 PAIF = 0;
 
@@ -1066,12 +1065,33 @@ mode_chek = 1;
 else{
 cntOff = 0;
 
-
 }
 
 }
 
-# 94
+
+if(INTE&&INTF){
+unsigned char tmp;
+INTF = 0;
+
+if( RC1==0){
+
+if(timeTick <0x20){
+tmp = READ_EEPROM(0x40);
+WRITE_EEPROM(0x40,tmp+1);
+
+
+}
+
+
+
+
+while(1);
+}
+
+}
+
+
 if(TMR1IE&&TMR1IF){
 
 TMR1IF = 0;
@@ -1079,7 +1099,7 @@ TMR1IF = 0;
 TMR1H = -5000>>8;
 TMR1L = -5000;
 
-# 105
+# 107
 if( mode_chek == 1){
 
 cntCyc++;
@@ -1105,7 +1125,7 @@ RegStatus |= 0x80;
 
 }
 
-# 138
+# 140
 }
 
 
@@ -1151,10 +1171,7 @@ TMR2ON = 1;
 TRISA &= 0xef;
 }
 void beep(unsigned char delay,unsigned char rep){
-
-
 {
-
 while(rep--){
 TMR2ON = 1;
 PR2 = 12;
@@ -1221,13 +1238,13 @@ void main(void)
 {
 
 
-# 252
+# 251
 #asm
  MOVLW 0x07
  MOVWF 0x19
 #endasm 
 
-unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0;
+unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0,accSet=0;
 unsigned int isWait =0;
 signed int acYsum=0,acXsum=0;
 unsigned int tmp16=0;
@@ -1276,10 +1293,37 @@ setState(2,400);
 
 mtOldState = 0;
 
-# 308
+# 307
 }
 
-# 327
+
+tmp8 = READ_EEPROM(0x40);
+if(tmp8==8){
+tmp8= READ_EEPROM(0x41);
+beep(25,1);
+if(tmp8){
+WRITE_EEPROM(0x41,0);
+}
+else {
+WRITE_EEPROM(0x41,0x1);
+
+}
+WRITE_EEPROM(0x40,0);
+tmp8=0;
+_delay((unsigned long)((100)*(4000000/4000.0)));
+}
+
+# 330
+tmp8 = READ_EEPROM(0x41);
+if(tmp8){
+RC4 =1;RC2 =1;
+while(1){
+_delay((unsigned long)((1000)*(4000000/4000.0)));
+if(timeTick >300) WRITE_EEPROM(0x40,0);
+}
+}
+
+# 357
 {
 buf[0] = 0x28;
 buf[1] = 0x87;
@@ -1292,9 +1336,11 @@ if(mpuOk ==0){beep(10,2);}
 
 
 
-if(RC1 && mpuOk ==1)
+
+tmp8= READ_EEPROM(0x40);
+if(tmp8==6 && mpuOk ==1)
 {
-tmp8=0;
+tmp8=0; beep(10,3);
 while((RC1 )&&(tmp8<11))
 {
 if(AccRead(0x3b,(unsigned char)buf,6)==0){
@@ -1328,6 +1374,8 @@ _delay((unsigned long)((100)*(4000000/4000.0)));
 }else{
 beep(10,2);
 }
+WRITE_EEPROM(0x40,0);
+tmp8=0;
 }
 
 acXsum = (signed char)READ_EEPROM(0x10);
@@ -1338,10 +1386,7 @@ timeTick = 0;
 
 while(1){
 
-RC0 =RA6;
-
-
-
+# 423
 if(mode_chek == 0)
 {
 
@@ -1352,7 +1397,7 @@ PAIE = 0;
 
 RegStatus &= (~0x80);
 
-# 409
+# 443
 {
 
 if ((RegStatus & 0x40) !=0){
@@ -1379,6 +1424,7 @@ if(reAlertOn)reAlertOn =0;
 else if((mtOldState == 0)||(mtOldState == 4)){
 RegStatus |=(0x20);
 setState(1,3500);
+if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
 tmp16 = timeTick+40;
 beep(10,1);
 }
@@ -1396,6 +1442,7 @@ beepOff();
 if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
 RegStatus |=(0x20);
 setState(1,3500);
+
 tmp16 = timeTick+40;
 }
 
@@ -1502,6 +1549,9 @@ beepOn();
 
 beep(10,5);
 RegStatus |=(0x20);
+
+
+if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
 
 setState(1,3500);
 tmp16 = timeTick+40;

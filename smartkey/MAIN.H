@@ -56,6 +56,28 @@
 #define _Norl		6
 #define tOut_Norl	0
 
+#define _Set		7
+/**
+---------------
+Menu Set (7)
+---------------
+1| ---...-------
+---------------
+2| ---...-------
+---------------
+...
+---------------
+6| Setup ACC
+---------------
+8| Skip All feature
+---------------
+*/
+#define _sAcc		8
+#define _isAcc		6 //id in menu set
+
+#define _sSkp		9
+#define _isSkp		8 //id in menu set
+
 #define True		!False
 #define False		0
 

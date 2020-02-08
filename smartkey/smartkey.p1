@@ -813,6 +813,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _mtOldState `uc  1 e ]
 "20 smartkey.C
 [v _RegStatus `uc  1 e ]
+"22 smartkey.C
+[v _READ_EEPROM `(uc  0 ef1`uc ]
+"23 smartkey.C
+[v _WRITE_EEPROM `(v  0 ef2`uc`uc ]
 [p mainexit ]
 "6 sysInit.H
 [v _sys_init `(v  0 ef ]
@@ -1674,250 +1678,292 @@ Version 3.2 HI-TECH Software Intermediate Code
 "50
 [e $ ! && _PAIE _PAIF 76  ]
 {
-[; ;smartkey.C: 53: tmp = PORTA;
-"53
+[; ;smartkey.C: 52: tmp = PORTA;
+"52
 [e = _tmp _PORTA ]
-[; ;smartkey.C: 54: PAIF = 0;
-"54
+[; ;smartkey.C: 53: PAIF = 0;
+"53
 [e = _PAIF -> -> 0 `i `b ]
-[; ;smartkey.C: 56: if(RA6){
-"56
+[; ;smartkey.C: 55: if(RA6){
+"55
 [e $ ! _RA6 77  ]
 {
-[; ;smartkey.C: 58: if(mode_chek == 0){
-"58
+[; ;smartkey.C: 57: if(mode_chek == 0){
+"57
 [e $ ! == -> _mode_chek `i -> 0 `i 78  ]
 {
-[; ;smartkey.C: 59: cntCyc = 0;
-"59
+[; ;smartkey.C: 58: cntCyc = 0;
+"58
 [e = _cntCyc -> -> 0 `i `uc ]
-[; ;smartkey.C: 60: cntOff = 0;
-"60
+[; ;smartkey.C: 59: cntOff = 0;
+"59
 [e = _cntOff -> -> 0 `i `uc ]
-[; ;smartkey.C: 62: mode_chek = 1;
-"62
+[; ;smartkey.C: 61: mode_chek = 1;
+"61
 [e = _mode_chek -> -> 1 `i `uc ]
-"64
+"63
 }
 [e :U 78 ]
-"66
+"65
 }
-[; ;smartkey.C: 64: }
-[; ;smartkey.C: 66: }
+[; ;smartkey.C: 63: }
+[; ;smartkey.C: 65: }
 [e $U 79  ]
-"67
+"66
 [e :U 77 ]
-[; ;smartkey.C: 67: else{
+[; ;smartkey.C: 66: else{
 {
-[; ;smartkey.C: 68: cntOff = 0;
-"68
+[; ;smartkey.C: 67: cntOff = 0;
+"67
 [e = _cntOff -> -> 0 `i `uc ]
-"71
+"69
 }
 [e :U 79 ]
-"73
+"71
 }
 [e :U 76 ]
+[; ;smartkey.C: 69: }
 [; ;smartkey.C: 71: }
-[; ;smartkey.C: 73: }
-[; ;smartkey.C: 94: if(TMR1IE&&TMR1IF){
-"94
-[e $ ! && _TMR1IE _TMR1IF 80  ]
+[; ;smartkey.C: 74: if(INTE&&INTF){
+"74
+[e $ ! && _INTE _INTF 80  ]
 {
-[; ;smartkey.C: 96: TMR1IF = 0;
-"96
-[e = _TMR1IF -> -> 0 `i `b ]
-[; ;smartkey.C: 98: TMR1H = -5000>>8;
-"98
-[e = _TMR1H -> >> -U -> 5000 `i -> 8 `i `uc ]
-[; ;smartkey.C: 99: TMR1L = -5000;
-"99
-[e = _TMR1L -> -U -> 5000 `i `uc ]
-[; ;smartkey.C: 105: if( mode_chek == 1){
-"105
-[e $ ! == -> _mode_chek `i -> 1 `i 81  ]
+"75
+[v _tmp `uc  1 a ]
+[; ;smartkey.C: 75: unsigned char tmp;
+[; ;smartkey.C: 76: INTF = 0;
+"76
+[e = _INTF -> -> 0 `i `b ]
+[; ;smartkey.C: 78: if( RC1==0){
+"78
+[e $ ! == -> _RC1 `i -> 0 `i 81  ]
 {
-[; ;smartkey.C: 107: cntCyc++;
-"107
-[e ++ _cntCyc -> -> 1 `i `uc ]
-[; ;smartkey.C: 109: if(RA6==0){
-"109
-[e $ ! == -> _RA6 `i -> 0 `i 82  ]
+[; ;smartkey.C: 80: if(timeTick <0x20){
+"80
+[e $ ! < _timeTick -> -> 32 `i `ui 82  ]
 {
-[; ;smartkey.C: 111: cntOff++;
-"111
-[e ++ _cntOff -> -> 1 `i `uc ]
-[; ;smartkey.C: 114: if(cntOff > 15){
-"114
-[e $ ! > -> _cntOff `i -> 15 `i 83  ]
-{
-[; ;smartkey.C: 116: mode_chek = 0;
-"116
-[e = _mode_chek -> -> 0 `i `uc ]
-[; ;smartkey.C: 118: if((cntCyc>15) &&(cntCyc<50)) {
-"118
-[e $ ! && > -> _cntCyc `i -> 15 `i < -> _cntCyc `i -> 50 `i 84  ]
-{
-[; ;smartkey.C: 119: RegStatus |= (0x40);
-"119
-[e =| _RegStatus -> -> 64 `i `uc ]
-"120
-}
-[; ;smartkey.C: 120: } else if (cntCyc>=50){
-[e $U 85  ]
-[e :U 84 ]
-[e $ ! >= -> _cntCyc `i -> 50 `i 86  ]
-{
-[; ;smartkey.C: 121: RegStatus &= ~(0x40);
-"121
-[e =& _RegStatus -> ~ -> 64 `i `uc ]
-"122
-}
-[e :U 86 ]
-"125
-[e :U 85 ]
-[; ;smartkey.C: 122: }
-[; ;smartkey.C: 125: RegStatus |= 0x80;
-[e =| _RegStatus -> -> 128 `i `uc ]
-"126
-}
-[e :U 83 ]
-"128
+[; ;smartkey.C: 81: tmp = READ_EEPROM(0x40);
+"81
+[e = _tmp ( _READ_EEPROM (1 -> -> 64 `i `uc ]
+[; ;smartkey.C: 82: WRITE_EEPROM(0x40,tmp+1);
+"82
+[e ( _WRITE_EEPROM (2 , -> -> 64 `i `uc -> + -> _tmp `i -> 1 `i `uc ]
+"85
 }
 [e :U 82 ]
-"138
+[; ;smartkey.C: 85: }
+[; ;smartkey.C: 90: while(1);
+"90
+[e :U 84 ]
+[e :U 83 ]
+[e $U 84  ]
+[e :U 85 ]
+"91
 }
 [e :U 81 ]
-[; ;smartkey.C: 126: }
-[; ;smartkey.C: 128: }
-[; ;smartkey.C: 138: }
-[; ;smartkey.C: 141: timeTick++;
-"141
-[e ++ _timeTick -> -> 1 `i `ui ]
-[; ;smartkey.C: 143: if((mtState == 4)||(mtState == 3)){
-"143
-[e $ ! || == -> _mtState `i -> 4 `i == -> _mtState `i -> 3 `i 87  ]
-{
-[; ;smartkey.C: 145: if(timeTick > cntTmp){
-"145
-[e $ ! > _timeTick _cntTmp 88  ]
-{
-[; ;smartkey.C: 146: cntTmp = timeTick+40;
-"146
-[e = _cntTmp + _timeTick -> -> 40 `i `ui ]
-[; ;smartkey.C: 147: if(cntTmp<=timeOut)
-"147
-[e $ ! <= _cntTmp _timeOut 89  ]
-[; ;smartkey.C: 148: {
-"148
-{
-[; ;smartkey.C: 149: if(PR2 == 11)
-"149
-[e $ ! == -> _PR2 `i -> 11 `i 90  ]
-[; ;smartkey.C: 150: PR2 = 30;
-"150
-[e = _PR2 -> -> 30 `i `uc ]
-[e $U 91  ]
-"151
-[e :U 90 ]
-[; ;smartkey.C: 151: else
-[; ;smartkey.C: 152: PR2 = 11;
-"152
-[e = _PR2 -> -> 11 `i `uc ]
-[e :U 91 ]
-"153
-}
-[e :U 89 ]
-"154
-}
-[e :U 88 ]
-"155
-}
-[e :U 87 ]
-"158
+"93
 }
 [e :U 80 ]
-[; ;smartkey.C: 153: }
-[; ;smartkey.C: 154: }
-[; ;smartkey.C: 155: }
-[; ;smartkey.C: 158: }
-[; ;smartkey.C: 161: if(TMR2IE&&TMR2IF)
-"161
-[e $ ! && _TMR2IE _TMR2IF 92  ]
-[; ;smartkey.C: 162: {
-"162
+[; ;smartkey.C: 91: }
+[; ;smartkey.C: 93: }
+[; ;smartkey.C: 96: if(TMR1IE&&TMR1IF){
+"96
+[e $ ! && _TMR1IE _TMR1IF 86  ]
 {
-[; ;smartkey.C: 163: TMR2IF = 0;
-"163
-[e = _TMR2IF -> -> 0 `i `b ]
-[; ;smartkey.C: 164: RA4 =~ RA4;
-"164
-[e = _RA4 ! _RA4 ]
-"165
+[; ;smartkey.C: 98: TMR1IF = 0;
+"98
+[e = _TMR1IF -> -> 0 `i `b ]
+[; ;smartkey.C: 100: TMR1H = -5000>>8;
+"100
+[e = _TMR1H -> >> -U -> 5000 `i -> 8 `i `uc ]
+[; ;smartkey.C: 101: TMR1L = -5000;
+"101
+[e = _TMR1L -> -U -> 5000 `i `uc ]
+[; ;smartkey.C: 107: if( mode_chek == 1){
+"107
+[e $ ! == -> _mode_chek `i -> 1 `i 87  ]
+{
+[; ;smartkey.C: 109: cntCyc++;
+"109
+[e ++ _cntCyc -> -> 1 `i `uc ]
+[; ;smartkey.C: 111: if(RA6==0){
+"111
+[e $ ! == -> _RA6 `i -> 0 `i 88  ]
+{
+[; ;smartkey.C: 113: cntOff++;
+"113
+[e ++ _cntOff -> -> 1 `i `uc ]
+[; ;smartkey.C: 116: if(cntOff > 15){
+"116
+[e $ ! > -> _cntOff `i -> 15 `i 89  ]
+{
+[; ;smartkey.C: 118: mode_chek = 0;
+"118
+[e = _mode_chek -> -> 0 `i `uc ]
+[; ;smartkey.C: 120: if((cntCyc>15) &&(cntCyc<50)) {
+"120
+[e $ ! && > -> _cntCyc `i -> 15 `i < -> _cntCyc `i -> 50 `i 90  ]
+{
+[; ;smartkey.C: 121: RegStatus |= (0x40);
+"121
+[e =| _RegStatus -> -> 64 `i `uc ]
+"122
+}
+[; ;smartkey.C: 122: } else if (cntCyc>=50){
+[e $U 91  ]
+[e :U 90 ]
+[e $ ! >= -> _cntCyc `i -> 50 `i 92  ]
+{
+[; ;smartkey.C: 123: RegStatus &= ~(0x40);
+"123
+[e =& _RegStatus -> ~ -> 64 `i `uc ]
+"124
 }
 [e :U 92 ]
-[; ;smartkey.C: 165: }
-[; ;smartkey.C: 167: }
+"127
+[e :U 91 ]
+[; ;smartkey.C: 124: }
+[; ;smartkey.C: 127: RegStatus |= 0x80;
+[e =| _RegStatus -> -> 128 `i `uc ]
+"128
+}
+[e :U 89 ]
+"130
+}
+[e :U 88 ]
+"140
+}
+[e :U 87 ]
+[; ;smartkey.C: 128: }
+[; ;smartkey.C: 130: }
+[; ;smartkey.C: 140: }
+[; ;smartkey.C: 143: timeTick++;
+"143
+[e ++ _timeTick -> -> 1 `i `ui ]
+[; ;smartkey.C: 145: if((mtState == 4)||(mtState == 3)){
+"145
+[e $ ! || == -> _mtState `i -> 4 `i == -> _mtState `i -> 3 `i 93  ]
+{
+[; ;smartkey.C: 147: if(timeTick > cntTmp){
+"147
+[e $ ! > _timeTick _cntTmp 94  ]
+{
+[; ;smartkey.C: 148: cntTmp = timeTick+40;
+"148
+[e = _cntTmp + _timeTick -> -> 40 `i `ui ]
+[; ;smartkey.C: 149: if(cntTmp<=timeOut)
+"149
+[e $ ! <= _cntTmp _timeOut 95  ]
+[; ;smartkey.C: 150: {
+"150
+{
+[; ;smartkey.C: 151: if(PR2 == 11)
+"151
+[e $ ! == -> _PR2 `i -> 11 `i 96  ]
+[; ;smartkey.C: 152: PR2 = 30;
+"152
+[e = _PR2 -> -> 30 `i `uc ]
+[e $U 97  ]
+"153
+[e :U 96 ]
+[; ;smartkey.C: 153: else
+[; ;smartkey.C: 154: PR2 = 11;
+"154
+[e = _PR2 -> -> 11 `i `uc ]
+[e :U 97 ]
+"155
+}
+[e :U 95 ]
+"156
+}
+[e :U 94 ]
+"157
+}
+[e :U 93 ]
+"160
+}
+[e :U 86 ]
+[; ;smartkey.C: 155: }
+[; ;smartkey.C: 156: }
+[; ;smartkey.C: 157: }
+[; ;smartkey.C: 160: }
+[; ;smartkey.C: 163: if(TMR2IE&&TMR2IF)
+"163
+[e $ ! && _TMR2IE _TMR2IF 98  ]
+[; ;smartkey.C: 164: {
+"164
+{
+[; ;smartkey.C: 165: TMR2IF = 0;
+"165
+[e = _TMR2IF -> -> 0 `i `b ]
+[; ;smartkey.C: 166: RA4 =~ RA4;
+"166
+[e = _RA4 ! _RA4 ]
 "167
+}
+[e :U 98 ]
+[; ;smartkey.C: 167: }
+[; ;smartkey.C: 169: }
+"169
 [e :UE 75 ]
 }
-"170
+"172
 [v _delay_x10ms `(v  1 ef1`ui ]
 {
-[; ;smartkey.C: 170: void delay_x10ms(unsigned int t){
+[; ;smartkey.C: 172: void delay_x10ms(unsigned int t){
 [e :U _delay_x10ms ]
 [v _t `ui  1 r1 ]
 [f ]
-"171
-[v _set `ui  1 a ]
-[; ;smartkey.C: 171: unsigned int set = t + timeTick;
-[e = _set + _t _timeTick ]
-[; ;smartkey.C: 172: while(timeTick < set);
-"172
-[e $U 94  ]
-[e :U 95 ]
-[e :U 94 ]
-[e $ < _timeTick _set 95  ]
-[e :U 96 ]
-[; ;smartkey.C: 173: }
 "173
-[e :UE 93 ]
-}
+[v _set `ui  1 a ]
+[; ;smartkey.C: 173: unsigned int set = t + timeTick;
+[e = _set + _t _timeTick ]
+[; ;smartkey.C: 174: while(timeTick < set);
+"174
+[e $U 100  ]
+[e :U 101 ]
+[e :U 100 ]
+[e $ < _timeTick _set 101  ]
+[e :U 102 ]
+[; ;smartkey.C: 175: }
 "175
+[e :UE 99 ]
+}
+"177
 [v _beepOff `(v  1 ef ]
 {
-[; ;smartkey.C: 175: void beepOff(){
+[; ;smartkey.C: 177: void beepOff(){
 [e :U _beepOff ]
 [f ]
-[; ;smartkey.C: 176: TMR2ON = 0;RA4 =0;TRISA |= 0x10;
-"176
+[; ;smartkey.C: 178: TMR2ON = 0;RA4 =0;TRISA |= 0x10;
+"178
 [e = _TMR2ON -> -> 0 `i `b ]
 [e = _RA4 -> -> 0 `i `b ]
 [e =| _TRISA -> -> 16 `i `uc ]
-[; ;smartkey.C: 177: }
-"177
-[e :UE 97 ]
+[; ;smartkey.C: 179: }
+"179
+[e :UE 103 ]
 }
-"178
+"180
 [v _beepOn `(v  1 ef ]
 {
-[; ;smartkey.C: 178: void beepOn(){
+[; ;smartkey.C: 180: void beepOn(){
 [e :U _beepOn ]
 [f ]
-[; ;smartkey.C: 179: TMR2ON = 1;
-"179
-[e = _TMR2ON -> -> 1 `i `b ]
-[; ;smartkey.C: 180: TRISA &= 0xef;
-"180
-[e =& _TRISA -> -> 239 `i `uc ]
-[; ;smartkey.C: 181: }
+[; ;smartkey.C: 181: TMR2ON = 1;
 "181
-[e :UE 98 ]
-}
+[e = _TMR2ON -> -> 1 `i `b ]
+[; ;smartkey.C: 182: TRISA &= 0xef;
 "182
+[e =& _TRISA -> -> 239 `i `uc ]
+[; ;smartkey.C: 183: }
+"183
+[e :UE 104 ]
+}
+"184
 [v _beep `(v  1 ef2`uc`uc ]
 {
-[; ;smartkey.C: 182: void beep(unsigned char delay,unsigned char rep){
+[; ;smartkey.C: 184: void beep(unsigned char delay,unsigned char rep){
 [e :U _beep ]
 [v _delay `uc  1 r1 ]
 [v _rep `uc  1 r2 ]
@@ -1925,233 +1971,233 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;smartkey.C: 185: {
 "185
 {
-[; ;smartkey.C: 187: while(rep--){
-"187
-[e $U 100  ]
-[e :U 101 ]
+[; ;smartkey.C: 186: while(rep--){
+"186
+[e $U 106  ]
+[e :U 107 ]
 {
-[; ;smartkey.C: 188: TMR2ON = 1;
-"188
+[; ;smartkey.C: 187: TMR2ON = 1;
+"187
 [e = _TMR2ON -> -> 1 `i `b ]
-[; ;smartkey.C: 189: PR2 = 12;
-"189
+[; ;smartkey.C: 188: PR2 = 12;
+"188
 [e = _PR2 -> -> 12 `i `uc ]
-[; ;smartkey.C: 190: delay_x10ms(delay);
-"190
+[; ;smartkey.C: 189: delay_x10ms(delay);
+"189
 [e ( _delay_x10ms (1 -> _delay `ui ]
-[; ;smartkey.C: 191: TMR2ON = 0;RA4 =0;
-"191
+[; ;smartkey.C: 190: TMR2ON = 0;RA4 =0;
+"190
 [e = _TMR2ON -> -> 0 `i `b ]
 [e = _RA4 -> -> 0 `i `b ]
-[; ;smartkey.C: 192: delay_x10ms(20);
-"192
+[; ;smartkey.C: 191: delay_x10ms(20);
+"191
 [e ( _delay_x10ms (1 -> -> 20 `i `ui ]
+"192
+}
+[e :U 106 ]
+"186
+[e $ != -> -- _rep -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 107  ]
+[e :U 108 ]
 "193
 }
-[e :U 100 ]
-"187
-[e $ != -> -- _rep -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 101  ]
-[e :U 102 ]
-"194
-}
+[; ;smartkey.C: 192: }
 [; ;smartkey.C: 193: }
-[; ;smartkey.C: 194: }
-[; ;smartkey.C: 196: }
-"196
-[e :UE 99 ]
+[; ;smartkey.C: 195: }
+"195
+[e :UE 105 ]
 }
-"201
+"200
 [v _READ_EEPROM `(uc  1 ef1`uc ]
 {
-[; ;smartkey.C: 200: unsigned char READ_EEPROM(unsigned char EEAddr)
-[; ;smartkey.C: 201: {
+[; ;smartkey.C: 199: unsigned char READ_EEPROM(unsigned char EEAddr)
+[; ;smartkey.C: 200: {
 [e :U _READ_EEPROM ]
 [v _EEAddr `uc  1 r1 ]
 [f ]
-"202
+"201
 [v _ReEepromData `uc  1 a ]
-[; ;smartkey.C: 202: unsigned char ReEepromData;
-[; ;smartkey.C: 204: EEADR = EEAddr;
-"204
+[; ;smartkey.C: 201: unsigned char ReEepromData;
+[; ;smartkey.C: 203: EEADR = EEAddr;
+"203
 [e = _EEADR _EEAddr ]
-[; ;smartkey.C: 205: RD = 1;
-"205
+[; ;smartkey.C: 204: RD = 1;
+"204
 [e = _RD -> -> 1 `i `b ]
-[; ;smartkey.C: 206: ReEepromData = EEDAT;
-"206
+[; ;smartkey.C: 205: ReEepromData = EEDAT;
+"205
 [e = _ReEepromData _EEDAT ]
-[; ;smartkey.C: 207: RD = 0;
-"207
+[; ;smartkey.C: 206: RD = 0;
+"206
 [e = _RD -> -> 0 `i `b ]
-[; ;smartkey.C: 208: return ReEepromData;
-"208
+[; ;smartkey.C: 207: return ReEepromData;
+"207
 [e ) _ReEepromData ]
-[e $UE 103  ]
-[; ;smartkey.C: 209: }
-"209
-[e :UE 103 ]
+[e $UE 109  ]
+[; ;smartkey.C: 208: }
+"208
+[e :UE 109 ]
 }
-"212
+"211
 [v _WRITE_EEPROM `(v  1 ef2`uc`uc ]
 {
-[; ;smartkey.C: 211: void WRITE_EEPROM(unsigned char EEAddr,unsigned char EEData)
-[; ;smartkey.C: 212: {
+[; ;smartkey.C: 210: void WRITE_EEPROM(unsigned char EEAddr,unsigned char EEData)
+[; ;smartkey.C: 211: {
 [e :U _WRITE_EEPROM ]
 [v _EEAddr `uc  1 r1 ]
 [v _EEData `uc  1 r2 ]
 [f ]
-[; ;smartkey.C: 213: GIE = 0;
-"213
+[; ;smartkey.C: 212: GIE = 0;
+"212
 [e = _GIE -> -> 0 `i `b ]
-[; ;smartkey.C: 214: while(GIE) asm("clrwdt");
+[; ;smartkey.C: 213: while(GIE) asm("clrwdt");
+"213
+[e $U 111  ]
+[e :U 112 ]
+[; clrwdt ;#
+[e :U 111 ]
+[e $ _GIE 112  ]
+[e :U 113 ]
+[; ;smartkey.C: 214: EEADR = EEAddr;
 "214
-[e $U 105  ]
-[e :U 106 ]
-[; clrwdt ;#
-[e :U 105 ]
-[e $ _GIE 106  ]
-[e :U 107 ]
-[; ;smartkey.C: 215: EEADR = EEAddr;
-"215
 [e = _EEADR _EEAddr ]
-[; ;smartkey.C: 216: EEDAT = EEData;
-"216
+[; ;smartkey.C: 215: EEDAT = EEData;
+"215
 [e = _EEDAT _EEData ]
-[; ;smartkey.C: 217: EEIF = 0;
-"217
+[; ;smartkey.C: 216: EEIF = 0;
+"216
 [e = _EEIF -> -> 0 `i `b ]
-[; ;smartkey.C: 218: EECON1 = 0x34;
-"218
+[; ;smartkey.C: 217: EECON1 = 0x34;
+"217
 [e = _EECON1 -> -> 52 `i `uc ]
-[; ;smartkey.C: 219: WR = 1;
-"219
+[; ;smartkey.C: 218: WR = 1;
+"218
 [e = _WR -> -> 1 `i `b ]
-[; ;smartkey.C: 220: while(WR) asm("clrwdt");
-"220
-[e $U 108  ]
-[e :U 109 ]
+[; ;smartkey.C: 219: while(WR) asm("clrwdt");
+"219
+[e $U 114  ]
+[e :U 115 ]
 [; clrwdt ;#
-[e :U 108 ]
-[e $ _WR 109  ]
-[e :U 110 ]
-[; ;smartkey.C: 222: GIE = 1;
-"222
+[e :U 114 ]
+[e $ _WR 115  ]
+[e :U 116 ]
+[; ;smartkey.C: 221: GIE = 1;
+"221
 [e = _GIE -> -> 1 `i `b ]
-[; ;smartkey.C: 223: }
-"223
-[e :UE 104 ]
+[; ;smartkey.C: 222: }
+"222
+[e :UE 110 ]
 }
-"227
+"226
 [v _setState `(v  1 ef2`uc`ui ]
 {
-[; ;smartkey.C: 227: void setState(unsigned char stt, unsigned int _tOut){
+[; ;smartkey.C: 226: void setState(unsigned char stt, unsigned int _tOut){
 [e :U _setState ]
 [v _stt `uc  1 r1 ]
 [v __tOut `ui  1 r2 ]
 [f ]
-[; ;smartkey.C: 228: mtOldState = mtState;
-"228
+[; ;smartkey.C: 227: mtOldState = mtState;
+"227
 [e = _mtOldState _mtState ]
-[; ;smartkey.C: 229: mtState = stt;
-"229
+[; ;smartkey.C: 228: mtState = stt;
+"228
 [e = _mtState _stt ]
-[; ;smartkey.C: 230: timeTick =0;
-"230
+[; ;smartkey.C: 229: timeTick =0;
+"229
 [e = _timeTick -> -> 0 `i `ui ]
-[; ;smartkey.C: 231: timeOut = _tOut;
-"231
+[; ;smartkey.C: 230: timeOut = _tOut;
+"230
 [e = _timeOut __tOut ]
-[; ;smartkey.C: 232: }
-"232
-[e :UE 111 ]
+[; ;smartkey.C: 231: }
+"231
+[e :UE 117 ]
 }
-"233
+"232
 [v _compe `(uc  1 ef3`c`c`c ]
 {
-[; ;smartkey.C: 233: unsigned char compe(signed char a,signed char b, signed char dt){
+[; ;smartkey.C: 232: unsigned char compe(signed char a,signed char b, signed char dt){
 [e :U _compe ]
 [v _a `c  1 r1 ]
 [v _b `c  1 r2 ]
 [v _dt `c  1 r3 ]
 [f ]
-[; ;smartkey.C: 235: if(a>b){
+[; ;smartkey.C: 234: if(a>b){
+"234
+[e $ ! > -> _a `i -> _b `i 119  ]
+{
+[; ;smartkey.C: 235: if((a-b)<=dt) return 1;
 "235
-[e $ ! > -> _a `i -> _b `i 113  ]
-{
-[; ;smartkey.C: 236: if((a-b)<=dt) return 1;
+[e $ ! <= - -> _a `i -> _b `i -> _dt `i 120  ]
+[e ) -> -> 1 `i `uc ]
+[e $UE 118  ]
+[e $U 121  ]
 "236
-[e $ ! <= - -> _a `i -> _b `i -> _dt `i 114  ]
-[e ) -> -> 1 `i `uc ]
-[e $UE 112  ]
-[e $U 115  ]
-"237
-[e :U 114 ]
-[; ;smartkey.C: 237: else return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 112  ]
-[e :U 115 ]
-"238
-}
-[; ;smartkey.C: 238: }
-[e $U 116  ]
-"239
-[e :U 113 ]
-[; ;smartkey.C: 239: else if(a<b){
-[e $ ! < -> _a `i -> _b `i 117  ]
-{
-[; ;smartkey.C: 240: if((b-a)<=dt) return 1;
-"240
-[e $ ! <= - -> _b `i -> _a `i -> _dt `i 118  ]
-[e ) -> -> 1 `i `uc ]
-[e $UE 112  ]
-[e $U 119  ]
-"241
-[e :U 118 ]
-[; ;smartkey.C: 241: else return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 112  ]
-[e :U 119 ]
-"242
-}
-[; ;smartkey.C: 242: }
-[e $U 120  ]
-"243
-[e :U 117 ]
-[; ;smartkey.C: 243: else if(a==b){
-[e $ ! == -> _a `i -> _b `i 121  ]
-{
-[; ;smartkey.C: 244: return 1;
-"244
-[e ) -> -> 1 `i `uc ]
-[e $UE 112  ]
-"245
-}
-[e :U 121 ]
-"246
 [e :U 120 ]
-[e :U 116 ]
-[; ;smartkey.C: 245: }
-[; ;smartkey.C: 246: return 0;
+[; ;smartkey.C: 236: else return 0;
 [e ) -> -> 0 `i `uc ]
-[e $UE 112  ]
-[; ;smartkey.C: 247: }
-"247
-[e :UE 112 ]
+[e $UE 118  ]
+[e :U 121 ]
+"237
 }
-"250
+[; ;smartkey.C: 237: }
+[e $U 122  ]
+"238
+[e :U 119 ]
+[; ;smartkey.C: 238: else if(a<b){
+[e $ ! < -> _a `i -> _b `i 123  ]
+{
+[; ;smartkey.C: 239: if((b-a)<=dt) return 1;
+"239
+[e $ ! <= - -> _b `i -> _a `i -> _dt `i 124  ]
+[e ) -> -> 1 `i `uc ]
+[e $UE 118  ]
+[e $U 125  ]
+"240
+[e :U 124 ]
+[; ;smartkey.C: 240: else return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 118  ]
+[e :U 125 ]
+"241
+}
+[; ;smartkey.C: 241: }
+[e $U 126  ]
+"242
+[e :U 123 ]
+[; ;smartkey.C: 242: else if(a==b){
+[e $ ! == -> _a `i -> _b `i 127  ]
+{
+[; ;smartkey.C: 243: return 1;
+"243
+[e ) -> -> 1 `i `uc ]
+[e $UE 118  ]
+"244
+}
+[e :U 127 ]
+"245
+[e :U 126 ]
+[e :U 122 ]
+[; ;smartkey.C: 244: }
+[; ;smartkey.C: 245: return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 118  ]
+[; ;smartkey.C: 246: }
+"246
+[e :UE 118 ]
+}
+"249
 [v _main `(v  1 ef ]
 {
-[; ;smartkey.C: 249: void main(void)
-[; ;smartkey.C: 250: {
+[; ;smartkey.C: 248: void main(void)
+[; ;smartkey.C: 249: {
 [e :U _main ]
 [f ]
-"253
+"252
 [;  MOVLW 0x07 ;#
-"254
+"253
 [;  MOVWF 0x19 ;#
-"257
+"256
 [v _reAlertOn `uc  1 a ]
-[; ;smartkey.C: 257: unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0;
+[; ;smartkey.C: 256: unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0,accSet=0;
 [e = _reAlertOn -> -> 0 `i `uc ]
 [v _tmp8 `uc  1 a ]
 [v _isSw `uc  1 a ]
@@ -2162,1046 +2208,1147 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _mpuOk -> -> 0 `i `uc ]
 [v _vibrateOn `uc  1 a ]
 [e = _vibrateOn -> -> 0 `i `uc ]
-"258
+[v _accSet `uc  1 a ]
+[e = _accSet -> -> 0 `i `uc ]
+"257
 [v _isWait `ui  1 a ]
-[; ;smartkey.C: 258: unsigned int isWait =0;
+[; ;smartkey.C: 257: unsigned int isWait =0;
 [e = _isWait -> -> 0 `i `ui ]
-"259
+"258
 [v _acYsum `i  1 a ]
-[; ;smartkey.C: 259: signed int acYsum=0,acXsum=0;
+[; ;smartkey.C: 258: signed int acYsum=0,acXsum=0;
 [e = _acYsum -> 0 `i ]
 [v _acXsum `i  1 a ]
 [e = _acXsum -> 0 `i ]
-"260
+"259
 [v _tmp16 `ui  1 a ]
-[; ;smartkey.C: 260: unsigned int tmp16=0;
+[; ;smartkey.C: 259: unsigned int tmp16=0;
 [e = _tmp16 -> -> 0 `i `ui ]
-"261
+"260
 [v _acYOld `c  1 a ]
 [v _acXOld `c  1 a ]
-"262
+"261
 [v _buf `c  -> 6 `i a ]
-[; ;smartkey.C: 261: signed char acYOld,acXOld;
-[; ;smartkey.C: 262: signed char buf[6];
-[; ;smartkey.C: 264: asm("clrwdt");
-"264
+[; ;smartkey.C: 260: signed char acYOld,acXOld;
+[; ;smartkey.C: 261: signed char buf[6];
+[; ;smartkey.C: 263: asm("clrwdt");
+"263
 [; clrwdt ;#
-[; ;smartkey.C: 266: sys_init();
-"266
+[; ;smartkey.C: 265: sys_init();
+"265
 [e ( _sys_init ..  ]
-[; ;smartkey.C: 267: gpio_init();
-"267
+[; ;smartkey.C: 266: gpio_init();
+"266
 [e ( _gpio_init ..  ]
-[; ;smartkey.C: 268: int_init();
-"268
+[; ;smartkey.C: 267: int_init();
+"267
 [e ( _int_init ..  ]
-[; ;smartkey.C: 269: timer_init();
-"269
+[; ;smartkey.C: 268: timer_init();
+"268
 [e ( _timer_init ..  ]
-[; ;smartkey.C: 271: _delay((unsigned long)((100)*(4000000/4000.0)));
+[; ;smartkey.C: 270: _delay((unsigned long)((100)*(4000000/4000.0)));
+"270
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;smartkey.C: 271: RA7 =1;
 "271
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;smartkey.C: 272: RA7 =1;
-"272
 [e = _RA7 -> -> 1 `i `b ]
-[; ;smartkey.C: 273: _delay((unsigned long)((100)*(4000000/4000.0)));
-"273
+[; ;smartkey.C: 272: _delay((unsigned long)((100)*(4000000/4000.0)));
+"272
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;smartkey.C: 275: PAIE = 1;
-"275
+[; ;smartkey.C: 274: PAIE = 1;
+"274
 [e = _PAIE -> -> 1 `i `b ]
-[; ;smartkey.C: 277: RegStatus = 0;
-"277
+[; ;smartkey.C: 276: RegStatus = 0;
+"276
 [e = _RegStatus -> -> 0 `i `uc ]
-[; ;smartkey.C: 279: swI2C_Init();
-"279
+[; ;smartkey.C: 278: swI2C_Init();
+"278
 [e ( _swI2C_Init ..  ]
-[; ;smartkey.C: 282: setState(0,0);
-"282
+[; ;smartkey.C: 281: setState(0,0);
+"281
 [e ( _setState (2 , -> -> 0 `i `uc -> -> 0 `i `ui ]
+[; ;smartkey.C: 283: WRITE_EEPROM(0x7F,0xAA);
+"283
+[e ( _WRITE_EEPROM (2 , -> -> 127 `i `uc -> -> 170 `i `uc ]
 [; ;smartkey.C: 284: WRITE_EEPROM(0x7F,0xAA);
 "284
 [e ( _WRITE_EEPROM (2 , -> -> 127 `i `uc -> -> 170 `i `uc ]
-[; ;smartkey.C: 285: WRITE_EEPROM(0x7F,0xAA);
-"285
-[e ( _WRITE_EEPROM (2 , -> -> 127 `i `uc -> -> 170 `i `uc ]
-[; ;smartkey.C: 289: _delay((unsigned long)((200)*(4000000/4000.0)));
-"289
+[; ;smartkey.C: 288: _delay((unsigned long)((200)*(4000000/4000.0)));
+"288
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;smartkey.C: 291: tmp8= READ_EEPROM(0x08);
-"291
+[; ;smartkey.C: 290: tmp8= READ_EEPROM(0x08);
+"290
 [e = _tmp8 ( _READ_EEPROM (1 -> -> 8 `i `uc ]
-[; ;smartkey.C: 292: if(tmp8==0xff) {WRITE_EEPROM(0x08,0);_delay((unsigned long)((2)*(4000000/4000.0)));}
-"292
-[e $ ! == -> _tmp8 `i -> 255 `i 123  ]
+[; ;smartkey.C: 291: if(tmp8==0xff) {WRITE_EEPROM(0x08,0);_delay((unsigned long)((2)*(4000000/4000.0)));}
+"291
+[e $ ! == -> _tmp8 `i -> 255 `i 129  ]
 {
 [e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
 [e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 }
-[e :U 123 ]
-[; ;smartkey.C: 294: if(tmp8==0xcc){
+[e :U 129 ]
+[; ;smartkey.C: 293: if(tmp8==0xcc){
+"293
+[e $ ! == -> _tmp8 `i -> 204 `i 130  ]
+{
+[; ;smartkey.C: 294: RegStatus &=~(0x20);
 "294
-[e $ ! == -> _tmp8 `i -> 204 `i 124  ]
-{
-[; ;smartkey.C: 295: RegStatus &=~(0x20);
-"295
 [e =& _RegStatus -> ~ -> 32 `i `uc ]
-[; ;smartkey.C: 296: setState(3,1800);
-"296
+[; ;smartkey.C: 295: setState(3,1800);
+"295
 [e ( _setState (2 , -> -> 3 `i `uc -> -> 1800 `i `ui ]
-[; ;smartkey.C: 297: mtOldState = 1;
-"297
+[; ;smartkey.C: 296: mtOldState = 1;
+"296
 [e = _mtOldState -> -> 1 `i `uc ]
-[; ;smartkey.C: 298: cntTmp = timeTick+50;
-"298
+[; ;smartkey.C: 297: cntTmp = timeTick+50;
+"297
 [e = _cntTmp + _timeTick -> -> 50 `i `ui ]
-[; ;smartkey.C: 299: PR2 =12;
-"299
+[; ;smartkey.C: 298: PR2 =12;
+"298
 [e = _PR2 -> -> 12 `i `uc ]
-[; ;smartkey.C: 300: beepOn();
-"300
+[; ;smartkey.C: 299: beepOn();
+"299
 [e ( _beepOn ..  ]
-"301
+"300
 }
-[; ;smartkey.C: 301: } else {
-[e $U 125  ]
-[e :U 124 ]
-{
-[; ;smartkey.C: 302: setState(2,400);
-"302
-[e ( _setState (2 , -> -> 2 `i `uc -> -> 400 `i `ui ]
-[; ;smartkey.C: 304: mtOldState = 0;
-"304
-[e = _mtOldState -> -> 0 `i `uc ]
-"308
-}
-[e :U 125 ]
-[; ;smartkey.C: 308: }
-[; ;smartkey.C: 327: {
-"327
-{
-[; ;smartkey.C: 328: buf[0] = 0x28;
-"328
-[e = *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> -> 40 `i `c ]
-[; ;smartkey.C: 329: buf[1] = 0x87;
-"329
-[e = *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux -> -> 135 `i `c ]
-[; ;smartkey.C: 330: if(AccWrite(0x6b,(unsigned char)buf,2)==0) mpuOk =1;
-"330
-[e $ ! == -> ( _AccWrite (3 , , -> -> 107 `i `uc -> -> &U _buf `uc `*uc -> -> 2 `i `uc `i -> 0 `i 126  ]
-[e = _mpuOk -> -> 1 `i `uc ]
-[e $U 127  ]
-"331
-[e :U 126 ]
-[; ;smartkey.C: 331: else mpuOk =0;
-[e = _mpuOk -> -> 0 `i `uc ]
-[e :U 127 ]
-[; ;smartkey.C: 333: _delay((unsigned long)((100)*(4000000/4000.0)));
-"333
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"334
-}
-[; ;smartkey.C: 334: }
-[; ;smartkey.C: 335: if(mpuOk ==0){beep(10,2);}
-"335
-[e $ ! == -> _mpuOk `i -> 0 `i 128  ]
-{
-[e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
-}
-[e :U 128 ]
-[; ;smartkey.C: 339: if(RC1 && mpuOk ==1)
-"339
-[e $ ! && _RC1 == -> _mpuOk `i -> 1 `i 129  ]
-[; ;smartkey.C: 340: {
-"340
-{
-[; ;smartkey.C: 341: tmp8=0;
-"341
-[e = _tmp8 -> -> 0 `i `uc ]
-[; ;smartkey.C: 342: while((RC1 )&&(tmp8<11))
-"342
-[e $U 130  ]
-[e :U 131 ]
-[; ;smartkey.C: 343: {
-"343
-{
-[; ;smartkey.C: 344: if(AccRead(0x3b,(unsigned char)buf,6)==0){
-"344
-[e $ ! == -> ( _AccRead (3 , , -> -> 59 `i `uc -> -> &U _buf `uc `*uc -> -> 6 `i `uc `i -> 0 `i 133  ]
-{
-[; ;smartkey.C: 346: acXsum += buf[0];
-"346
-[e =+ _acXsum -> *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux `i ]
-[; ;smartkey.C: 347: acYsum += buf[2];
-"347
-[e =+ _acYsum -> *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux `i ]
-[; ;smartkey.C: 348: tmp16 = (signed int)tmp16 + buf[4];
-"348
-[e = _tmp16 -> + -> _tmp16 `i -> *U + &U _buf * -> -> -> 4 `i `ui `ux -> -> # *U &U _buf `ui `ux `i `ui ]
-[; ;smartkey.C: 349: tmp8++;
-"349
-[e ++ _tmp8 -> -> 1 `i `uc ]
-"350
-}
-[e :U 133 ]
-[; ;smartkey.C: 350: }
-[; ;smartkey.C: 351: _delay((unsigned long)((500)*(4000000/4000.0)));
-"351
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"353
-}
+[; ;smartkey.C: 300: } else {
+[e $U 131  ]
 [e :U 130 ]
-"342
-[e $ && _RC1 < -> _tmp8 `i -> 11 `i 131  ]
-[e :U 132 ]
-[; ;smartkey.C: 353: }
-[; ;smartkey.C: 355: if(tmp8==11){
-"355
-[e $ ! == -> _tmp8 `i -> 11 `i 134  ]
 {
-[; ;smartkey.C: 356: acXsum =acXsum/10;
-"356
-[e = _acXsum / _acXsum -> 10 `i ]
-[; ;smartkey.C: 357: acYsum = acYsum/10;
-"357
-[e = _acYsum / _acYsum -> 10 `i ]
-[; ;smartkey.C: 358: tmp16 = (signed int)tmp16/10;
-"358
-[e = _tmp16 -> / -> _tmp16 `i -> 10 `i `ui ]
-[; ;smartkey.C: 360: if(((signed int)tmp16 > (-31)) && ((signed int)tmp16 < 31)){
-"360
-[e $ ! && > -> _tmp16 `i -U -> 31 `i < -> _tmp16 `i -> 31 `i 135  ]
-{
-[; ;smartkey.C: 361: beep(10,2);
-"361
-[e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
-"362
+[; ;smartkey.C: 301: setState(2,400);
+"301
+[e ( _setState (2 , -> -> 2 `i `uc -> -> 400 `i `ui ]
+[; ;smartkey.C: 303: mtOldState = 0;
+"303
+[e = _mtOldState -> -> 0 `i `uc ]
+"307
 }
-[; ;smartkey.C: 362: }
-[e $U 136  ]
-"363
-[e :U 135 ]
-[; ;smartkey.C: 363: else
-[; ;smartkey.C: 365: {
-"365
+[e :U 131 ]
+[; ;smartkey.C: 307: }
+[; ;smartkey.C: 310: tmp8 = READ_EEPROM(0x40);
+"310
+[e = _tmp8 ( _READ_EEPROM (1 -> -> 64 `i `uc ]
+[; ;smartkey.C: 311: if(tmp8==8){
+"311
+[e $ ! == -> _tmp8 `i -> 8 `i 132  ]
 {
-[; ;smartkey.C: 366: beep(10,3);
-"366
-[e ( _beep (2 , -> -> 10 `i `uc -> -> 3 `i `uc ]
-[; ;smartkey.C: 367: WRITE_EEPROM(0x10,(unsigned char)acXsum);
-"367
-[e ( _WRITE_EEPROM (2 , -> -> 16 `i `uc -> _acXsum `uc ]
-[; ;smartkey.C: 368: WRITE_EEPROM(0x11,(unsigned char)acYsum);
-"368
-[e ( _WRITE_EEPROM (2 , -> -> 17 `i `uc -> _acYsum `uc ]
-[; ;smartkey.C: 369: _delay((unsigned long)((100)*(4000000/4000.0)));
-"369
+[; ;smartkey.C: 312: tmp8= READ_EEPROM(0x41);
+"312
+[e = _tmp8 ( _READ_EEPROM (1 -> -> 65 `i `uc ]
+[; ;smartkey.C: 313: beep(25,1);
+"313
+[e ( _beep (2 , -> -> 25 `i `uc -> -> 1 `i `uc ]
+[; ;smartkey.C: 314: if(tmp8){
+"314
+[e $ ! != -> _tmp8 `i -> -> -> 0 `i `uc `i 133  ]
+{
+[; ;smartkey.C: 315: WRITE_EEPROM(0x41,0);
+"315
+[e ( _WRITE_EEPROM (2 , -> -> 65 `i `uc -> -> 0 `i `uc ]
+"316
+}
+[; ;smartkey.C: 316: }
+[e $U 134  ]
+"317
+[e :U 133 ]
+[; ;smartkey.C: 317: else {
+{
+[; ;smartkey.C: 318: WRITE_EEPROM(0x41,0x1);
+"318
+[e ( _WRITE_EEPROM (2 , -> -> 65 `i `uc -> -> 1 `i `uc ]
+"320
+}
+[e :U 134 ]
+[; ;smartkey.C: 320: }
+[; ;smartkey.C: 321: WRITE_EEPROM(0x40,0);
+"321
+[e ( _WRITE_EEPROM (2 , -> -> 64 `i `uc -> -> 0 `i `uc ]
+[; ;smartkey.C: 322: tmp8=0;
+"322
+[e = _tmp8 -> -> 0 `i `uc ]
+[; ;smartkey.C: 323: _delay((unsigned long)((100)*(4000000/4000.0)));
+"323
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"370
+"324
+}
+[e :U 132 ]
+[; ;smartkey.C: 324: }
+[; ;smartkey.C: 330: tmp8 = READ_EEPROM(0x41);
+"330
+[e = _tmp8 ( _READ_EEPROM (1 -> -> 65 `i `uc ]
+[; ;smartkey.C: 331: if(tmp8){
+"331
+[e $ ! != -> _tmp8 `i -> -> -> 0 `i `uc `i 135  ]
+{
+[; ;smartkey.C: 332: RC4 =1;RC2 =1;
+"332
+[e = _RC4 -> -> 1 `i `b ]
+[e = _RC2 -> -> 1 `i `b ]
+[; ;smartkey.C: 333: while(1){
+"333
+[e :U 137 ]
+{
+[; ;smartkey.C: 334: _delay((unsigned long)((1000)*(4000000/4000.0)));
+"334
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;smartkey.C: 335: if(timeTick >300) WRITE_EEPROM(0x40,0);
+"335
+[e $ ! > _timeTick -> -> 300 `i `ui 139  ]
+[e ( _WRITE_EEPROM (2 , -> -> 64 `i `uc -> -> 0 `i `uc ]
+[e :U 139 ]
+"336
 }
 [e :U 136 ]
-"372
-}
-[; ;smartkey.C: 370: }
-[; ;smartkey.C: 372: }else{
+"333
 [e $U 137  ]
-[e :U 134 ]
+[e :U 138 ]
+"337
+}
+[e :U 135 ]
+[; ;smartkey.C: 336: }
+[; ;smartkey.C: 337: }
+[; ;smartkey.C: 357: {
+"357
 {
-[; ;smartkey.C: 373: beep(10,2);
-"373
+[; ;smartkey.C: 358: buf[0] = 0x28;
+"358
+[e = *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> -> 40 `i `c ]
+[; ;smartkey.C: 359: buf[1] = 0x87;
+"359
+[e = *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux -> -> 135 `i `c ]
+[; ;smartkey.C: 360: if(AccWrite(0x6b,(unsigned char)buf,2)==0) mpuOk =1;
+"360
+[e $ ! == -> ( _AccWrite (3 , , -> -> 107 `i `uc -> -> &U _buf `uc `*uc -> -> 2 `i `uc `i -> 0 `i 140  ]
+[e = _mpuOk -> -> 1 `i `uc ]
+[e $U 141  ]
+"361
+[e :U 140 ]
+[; ;smartkey.C: 361: else mpuOk =0;
+[e = _mpuOk -> -> 0 `i `uc ]
+[e :U 141 ]
+[; ;smartkey.C: 363: _delay((unsigned long)((100)*(4000000/4000.0)));
+"363
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"364
+}
+[; ;smartkey.C: 364: }
+[; ;smartkey.C: 365: if(mpuOk ==0){beep(10,2);}
+"365
+[e $ ! == -> _mpuOk `i -> 0 `i 142  ]
+{
 [e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
-"374
-}
-[e :U 137 ]
-"375
-}
-[e :U 129 ]
-[; ;smartkey.C: 374: }
-[; ;smartkey.C: 375: }
-[; ;smartkey.C: 377: acXsum = (signed char)READ_EEPROM(0x10);
-"377
-[e = _acXsum -> -> ( _READ_EEPROM (1 -> -> 16 `i `uc `c `i ]
-[; ;smartkey.C: 378: acYsum = (signed char)READ_EEPROM(0x11);
-"378
-[e = _acYsum -> -> ( _READ_EEPROM (1 -> -> 17 `i `uc `c `i ]
-[; ;smartkey.C: 380: timeTick = 0;
-"380
-[e = _timeTick -> -> 0 `i `ui ]
-[; ;smartkey.C: 383: while(1){
-"383
-[e :U 139 ]
-{
-[; ;smartkey.C: 385: RC0 =RA6;
-"385
-[e = _RC0 _RA6 ]
-[; ;smartkey.C: 389: if(mode_chek == 0)
-"389
-[e $ ! == -> _mode_chek `i -> 0 `i 141  ]
-[; ;smartkey.C: 390: {
-"390
-{
-[; ;smartkey.C: 392: if(RegStatus & 0x80)
-"392
-[e $ ! != & -> _RegStatus `i -> 128 `i -> 0 `i 142  ]
-[; ;smartkey.C: 393: {
-"393
-{
-[; ;smartkey.C: 394: PAIE = 0;
-"394
-[e = _PAIE -> -> 0 `i `b ]
-[; ;smartkey.C: 397: RegStatus &= (~0x80);
-"397
-[e =& _RegStatus -> ~ -> 128 `i `uc ]
-[; ;smartkey.C: 409: {
-"409
-{
-[; ;smartkey.C: 411: if ((RegStatus & 0x40) !=0){
-"411
-[e $ ! != & -> _RegStatus `i -> 64 `i -> 0 `i 143  ]
-{
-[; ;smartkey.C: 414: switch (mtState){
-"414
-[e $U 145  ]
-{
-[; ;smartkey.C: 415: case 1:
-"415
-[e :U 146 ]
-[; ;smartkey.C: 417: lostDetect =0;
-"417
-[e = _lostDetect -> -> 0 `i `uc ]
-[; ;smartkey.C: 418: timeTick =0;
-"418
-[e = _timeTick -> -> 0 `i `ui ]
-[; ;smartkey.C: 419: tmp16 = 40;
-"419
-[e = _tmp16 -> -> 40 `i `ui ]
-[; ;smartkey.C: 420: break;
-"420
-[e $U 144  ]
-[; ;smartkey.C: 422: case 2:
-"422
-[e :U 147 ]
-[; ;smartkey.C: 423: if(timeTick >30){
-"423
-[e $ ! > _timeTick -> -> 30 `i `ui 148  ]
-{
-[; ;smartkey.C: 424: timeTick =0;
-"424
-[e = _timeTick -> -> 0 `i `ui ]
-[; ;smartkey.C: 426: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
-"426
-[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 149  ]
-[e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
-[e :U 149 ]
-[; ;smartkey.C: 428: if((mtOldState == 3)){
-"428
-[e $ ! == -> _mtOldState `i -> 3 `i 150  ]
-{
-[; ;smartkey.C: 429: beepOn();TMR2ON = 0; beep(10,1);
-"429
-[e ( _beepOn ..  ]
-[e = _TMR2ON -> -> 0 `i `b ]
-[e ( _beep (2 , -> -> 10 `i `uc -> -> 1 `i `uc ]
-[; ;smartkey.C: 430: if(reAlertOn)reAlertOn =0;
-"430
-[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 151  ]
-[e = _reAlertOn -> -> 0 `i `uc ]
-[e :U 151 ]
-"431
-}
-[; ;smartkey.C: 431: }
-[e $U 152  ]
-"432
-[e :U 150 ]
-[; ;smartkey.C: 432: else if((mtOldState == 0)||(mtOldState == 4)){
-[e $ ! || == -> _mtOldState `i -> 0 `i == -> _mtOldState `i -> 4 `i 153  ]
-{
-[; ;smartkey.C: 433: RegStatus |=(0x20);
-"433
-[e =| _RegStatus -> -> 32 `i `uc ]
-[; ;smartkey.C: 434: setState(1,3500);
-"434
-[e ( _setState (2 , -> -> 1 `i `uc -> -> 3500 `i `ui ]
-[; ;smartkey.C: 435: tmp16 = timeTick+40;
-"435
-[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
-[; ;smartkey.C: 436: beep(10,1);
-"436
-[e ( _beep (2 , -> -> 10 `i `uc -> -> 1 `i `uc ]
-"437
-}
-[; ;smartkey.C: 437: }
-[e $U 154  ]
-"438
-[e :U 153 ]
-[; ;smartkey.C: 438: else if((mtOldState == 1)){
-[e $ ! == -> _mtOldState `i -> 1 `i 155  ]
-{
-[; ;smartkey.C: 440: if(reAlertOn)reAlertOn =0;
-"440
-[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 156  ]
-[e = _reAlertOn -> -> 0 `i `uc ]
-[e :U 156 ]
-"441
-}
-[e :U 155 ]
-"442
-[e :U 154 ]
-[e :U 152 ]
-}
-[e :U 148 ]
-[; ;smartkey.C: 441: }
-[; ;smartkey.C: 442: }
-[; ;smartkey.C: 443: break;
-"443
-[e $U 144  ]
-[; ;smartkey.C: 445: case 3:
-"445
-[e :U 157 ]
-[; ;smartkey.C: 446: if(timeTick > 200)
-"446
-[e $ ! > _timeTick -> -> 200 `i `ui 158  ]
-[; ;smartkey.C: 447: {
-"447
-{
-[; ;smartkey.C: 448: beepOff();
-"448
-[e ( _beepOff ..  ]
-[; ;smartkey.C: 449: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
-"449
-[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 159  ]
-[e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
-[e :U 159 ]
-[; ;smartkey.C: 450: RegStatus |=(0x20);
-"450
-[e =| _RegStatus -> -> 32 `i `uc ]
-[; ;smartkey.C: 451: setState(1,3500);
-"451
-[e ( _setState (2 , -> -> 1 `i `uc -> -> 3500 `i `ui ]
-[; ;smartkey.C: 452: tmp16 = timeTick+40;
-"452
-[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
-"453
-}
-[e :U 158 ]
-[; ;smartkey.C: 453: }
-[; ;smartkey.C: 455: break;
-"455
-[e $U 144  ]
-[; ;smartkey.C: 457: case 4:
-"457
-[e :U 160 ]
-[; ;smartkey.C: 458: beepOff();
-"458
-[e ( _beepOff ..  ]
-[; ;smartkey.C: 459: setState(2,300);
-"459
-[e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
-[; ;smartkey.C: 460: break;
-"460
-[e $U 144  ]
-[; ;smartkey.C: 461: case 0:
-"461
-[e :U 161 ]
-[; ;smartkey.C: 464: break;
-"464
-[e $U 144  ]
-"466
-}
-[; ;smartkey.C: 466: }
-[e $U 144  ]
-"414
-[e :U 145 ]
-[e [\ _mtState , $ -> -> 1 `i `uc 146
- , $ -> -> 2 `i `uc 147
- , $ -> -> 3 `i `uc 157
- , $ -> -> 4 `i `uc 160
- , $ -> -> 0 `i `uc 161
- 144 ]
-"466
-[e :U 144 ]
-"468
-}
-[; ;smartkey.C: 468: }
-[e $U 162  ]
-"470
-[e :U 143 ]
-[; ;smartkey.C: 470: else{
-{
-[; ;smartkey.C: 472: switch (mtState){
-"472
-[e $U 164  ]
-{
-[; ;smartkey.C: 474: case 1:
-"474
-[e :U 165 ]
-[; ;smartkey.C: 477: {
-"477
-{
-[; ;smartkey.C: 479: if(lostDetect==1 && timeTick< 1500)
-"479
-[e $ ! && == -> _lostDetect `i -> 1 `i < _timeTick -> -> 1500 `i `ui 166  ]
-[; ;smartkey.C: 480: {
-"480
-{
-[; ;smartkey.C: 481: if(READ_EEPROM(0x08)==0x00) WRITE_EEPROM(0x08,0xcc);
-"481
-[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 0 `i 167  ]
-[e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 204 `i `uc ]
-[e :U 167 ]
-[; ;smartkey.C: 483: setState(3,1800);
-"483
-[e ( _setState (2 , -> -> 3 `i `uc -> -> 1800 `i `ui ]
-[; ;smartkey.C: 484: cntTmp = timeTick+40;
-"484
-[e = _cntTmp + _timeTick -> -> 40 `i `ui ]
-[; ;smartkey.C: 485: PR2 =11;
-"485
-[e = _PR2 -> -> 11 `i `uc ]
-[; ;smartkey.C: 486: beepOn();
-"486
-[e ( _beepOn ..  ]
-[; ;smartkey.C: 487: lostDetect =0;
-"487
-[e = _lostDetect -> -> 0 `i `uc ]
-"488
-}
-[; ;smartkey.C: 488: }
-[e $U 168  ]
-"489
-[e :U 166 ]
-[; ;smartkey.C: 489: else {
-{
-[; ;smartkey.C: 490: lostDetect =1;
-"490
-[e = _lostDetect -> -> 1 `i `uc ]
-"493
-}
-[e :U 168 ]
-[; ;smartkey.C: 493: }
-[; ;smartkey.C: 494: timeTick =0;
-"494
-[e = _timeTick -> -> 0 `i `ui ]
-[; ;smartkey.C: 495: tmp16 = 40;
-"495
-[e = _tmp16 -> -> 40 `i `ui ]
-"496
-}
-[; ;smartkey.C: 496: }
-[; ;smartkey.C: 497: break;
-"497
-[e $U 163  ]
-[; ;smartkey.C: 498: case 2:
-"498
-[e :U 169 ]
-[; ;smartkey.C: 500: {
-"500
-{
-[; ;smartkey.C: 501: timeTick =0;
-"501
-[e = _timeTick -> -> 0 `i `ui ]
-[; ;smartkey.C: 502: beepOn();TMR2ON = 0;
-"502
-[e ( _beepOn ..  ]
-[e = _TMR2ON -> -> 0 `i `b ]
-[; ;smartkey.C: 503: beep(10,2);
-"503
-[e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
-[; ;smartkey.C: 504: if(mtOldState == 3){reAlertOn =1;}
-"504
-[e $ ! == -> _mtOldState `i -> 3 `i 170  ]
-{
-[e = _reAlertOn -> -> 1 `i `uc ]
-}
-[e :U 170 ]
-"505
-}
-[; ;smartkey.C: 505: }
-[; ;smartkey.C: 506: break;
-"506
-[e $U 163  ]
-"507
-}
-[; ;smartkey.C: 507: }
-[e $U 163  ]
-"472
-[e :U 164 ]
-[e [\ _mtState , $ -> -> 1 `i `uc 165
- , $ -> -> 2 `i `uc 169
- 163 ]
-"507
-[e :U 163 ]
-"508
-}
-[e :U 162 ]
-"510
-}
-[; ;smartkey.C: 508: }
-[; ;smartkey.C: 510: }
-[; ;smartkey.C: 512: PAIE = 1;
-"512
-[e = _PAIE -> -> 1 `i `b ]
-"513
 }
 [e :U 142 ]
-"515
+[; ;smartkey.C: 370: tmp8= READ_EEPROM(0x40);
+"370
+[e = _tmp8 ( _READ_EEPROM (1 -> -> 64 `i `uc ]
+[; ;smartkey.C: 371: if(tmp8==6 && mpuOk ==1)
+"371
+[e $ ! && == -> _tmp8 `i -> 6 `i == -> _mpuOk `i -> 1 `i 143  ]
+[; ;smartkey.C: 372: {
+"372
+{
+[; ;smartkey.C: 373: tmp8=0; beep(10,3);
+"373
+[e = _tmp8 -> -> 0 `i `uc ]
+[e ( _beep (2 , -> -> 10 `i `uc -> -> 3 `i `uc ]
+[; ;smartkey.C: 374: while((RC1 )&&(tmp8<11))
+"374
+[e $U 144  ]
+[e :U 145 ]
+[; ;smartkey.C: 375: {
+"375
+{
+[; ;smartkey.C: 376: if(AccRead(0x3b,(unsigned char)buf,6)==0){
+"376
+[e $ ! == -> ( _AccRead (3 , , -> -> 59 `i `uc -> -> &U _buf `uc `*uc -> -> 6 `i `uc `i -> 0 `i 147  ]
+{
+[; ;smartkey.C: 378: acXsum += buf[0];
+"378
+[e =+ _acXsum -> *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux `i ]
+[; ;smartkey.C: 379: acYsum += buf[2];
+"379
+[e =+ _acYsum -> *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux `i ]
+[; ;smartkey.C: 380: tmp16 = (signed int)tmp16 + buf[4];
+"380
+[e = _tmp16 -> + -> _tmp16 `i -> *U + &U _buf * -> -> -> 4 `i `ui `ux -> -> # *U &U _buf `ui `ux `i `ui ]
+[; ;smartkey.C: 381: tmp8++;
+"381
+[e ++ _tmp8 -> -> 1 `i `uc ]
+"382
 }
-[e :U 141 ]
-[; ;smartkey.C: 513: }
-[; ;smartkey.C: 515: }
-[; ;smartkey.C: 519: {
-"519
+[e :U 147 ]
+[; ;smartkey.C: 382: }
+[; ;smartkey.C: 383: _delay((unsigned long)((500)*(4000000/4000.0)));
+"383
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"385
+}
+[e :U 144 ]
+"374
+[e $ && _RC1 < -> _tmp8 `i -> 11 `i 145  ]
+[e :U 146 ]
+[; ;smartkey.C: 385: }
+[; ;smartkey.C: 387: if(tmp8==11){
+"387
+[e $ ! == -> _tmp8 `i -> 11 `i 148  ]
 {
-[; ;smartkey.C: 520: if((timeOut!=0)&&( timeTick >timeOut)){
-"520
-[e $ ! && != _timeOut -> -> 0 `i `ui > _timeTick _timeOut 171  ]
+[; ;smartkey.C: 388: acXsum =acXsum/10;
+"388
+[e = _acXsum / _acXsum -> 10 `i ]
+[; ;smartkey.C: 389: acYsum = acYsum/10;
+"389
+[e = _acYsum / _acYsum -> 10 `i ]
+[; ;smartkey.C: 390: tmp16 = (signed int)tmp16/10;
+"390
+[e = _tmp16 -> / -> _tmp16 `i -> 10 `i `ui ]
+[; ;smartkey.C: 392: if(((signed int)tmp16 > (-31)) && ((signed int)tmp16 < 31)){
+"392
+[e $ ! && > -> _tmp16 `i -U -> 31 `i < -> _tmp16 `i -> 31 `i 149  ]
 {
-[; ;smartkey.C: 522: switch (mtState){
-"522
-[e $U 173  ]
+[; ;smartkey.C: 393: beep(10,2);
+"393
+[e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
+"394
+}
+[; ;smartkey.C: 394: }
+[e $U 150  ]
+"395
+[e :U 149 ]
+[; ;smartkey.C: 395: else
+[; ;smartkey.C: 397: {
+"397
 {
-[; ;smartkey.C: 524: case 1:
-"524
+[; ;smartkey.C: 398: beep(10,3);
+"398
+[e ( _beep (2 , -> -> 10 `i `uc -> -> 3 `i `uc ]
+[; ;smartkey.C: 399: WRITE_EEPROM(0x10,(unsigned char)acXsum);
+"399
+[e ( _WRITE_EEPROM (2 , -> -> 16 `i `uc -> _acXsum `uc ]
+[; ;smartkey.C: 400: WRITE_EEPROM(0x11,(unsigned char)acYsum);
+"400
+[e ( _WRITE_EEPROM (2 , -> -> 17 `i `uc -> _acYsum `uc ]
+[; ;smartkey.C: 401: _delay((unsigned long)((100)*(4000000/4000.0)));
+"401
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"402
+}
+[e :U 150 ]
+"404
+}
+[; ;smartkey.C: 402: }
+[; ;smartkey.C: 404: }else{
+[e $U 151  ]
+[e :U 148 ]
+{
+[; ;smartkey.C: 405: beep(10,2);
+"405
+[e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
+"406
+}
+[e :U 151 ]
+[; ;smartkey.C: 406: }
+[; ;smartkey.C: 407: WRITE_EEPROM(0x40,0);
+"407
+[e ( _WRITE_EEPROM (2 , -> -> 64 `i `uc -> -> 0 `i `uc ]
+[; ;smartkey.C: 408: tmp8=0;
+"408
+[e = _tmp8 -> -> 0 `i `uc ]
+"409
+}
+[e :U 143 ]
+[; ;smartkey.C: 409: }
+[; ;smartkey.C: 411: acXsum = (signed char)READ_EEPROM(0x10);
+"411
+[e = _acXsum -> -> ( _READ_EEPROM (1 -> -> 16 `i `uc `c `i ]
+[; ;smartkey.C: 412: acYsum = (signed char)READ_EEPROM(0x11);
+"412
+[e = _acYsum -> -> ( _READ_EEPROM (1 -> -> 17 `i `uc `c `i ]
+[; ;smartkey.C: 414: timeTick = 0;
+"414
+[e = _timeTick -> -> 0 `i `ui ]
+[; ;smartkey.C: 417: while(1){
+"417
+[e :U 153 ]
+{
+[; ;smartkey.C: 423: if(mode_chek == 0)
+"423
+[e $ ! == -> _mode_chek `i -> 0 `i 155  ]
+[; ;smartkey.C: 424: {
+"424
+{
+[; ;smartkey.C: 426: if(RegStatus & 0x80)
+"426
+[e $ ! != & -> _RegStatus `i -> 128 `i -> 0 `i 156  ]
+[; ;smartkey.C: 427: {
+"427
+{
+[; ;smartkey.C: 428: PAIE = 0;
+"428
+[e = _PAIE -> -> 0 `i `b ]
+[; ;smartkey.C: 431: RegStatus &= (~0x80);
+"431
+[e =& _RegStatus -> ~ -> 128 `i `uc ]
+[; ;smartkey.C: 443: {
+"443
+{
+[; ;smartkey.C: 445: if ((RegStatus & 0x40) !=0){
+"445
+[e $ ! != & -> _RegStatus `i -> 64 `i -> 0 `i 157  ]
+{
+[; ;smartkey.C: 448: switch (mtState){
+"448
+[e $U 159  ]
+{
+[; ;smartkey.C: 449: case 1:
+"449
+[e :U 160 ]
+[; ;smartkey.C: 451: lostDetect =0;
+"451
+[e = _lostDetect -> -> 0 `i `uc ]
+[; ;smartkey.C: 452: timeTick =0;
+"452
+[e = _timeTick -> -> 0 `i `ui ]
+[; ;smartkey.C: 453: tmp16 = 40;
+"453
+[e = _tmp16 -> -> 40 `i `ui ]
+[; ;smartkey.C: 454: break;
+"454
+[e $U 158  ]
+[; ;smartkey.C: 456: case 2:
+"456
+[e :U 161 ]
+[; ;smartkey.C: 457: if(timeTick >30){
+"457
+[e $ ! > _timeTick -> -> 30 `i `ui 162  ]
+{
+[; ;smartkey.C: 458: timeTick =0;
+"458
+[e = _timeTick -> -> 0 `i `ui ]
+[; ;smartkey.C: 460: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
+"460
+[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 163  ]
+[e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
+[e :U 163 ]
+[; ;smartkey.C: 462: if((mtOldState == 3)){
+"462
+[e $ ! == -> _mtOldState `i -> 3 `i 164  ]
+{
+[; ;smartkey.C: 463: beepOn();TMR2ON = 0; beep(10,1);
+"463
+[e ( _beepOn ..  ]
+[e = _TMR2ON -> -> 0 `i `b ]
+[e ( _beep (2 , -> -> 10 `i `uc -> -> 1 `i `uc ]
+[; ;smartkey.C: 464: if(reAlertOn)reAlertOn =0;
+"464
+[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 165  ]
+[e = _reAlertOn -> -> 0 `i `uc ]
+[e :U 165 ]
+"465
+}
+[; ;smartkey.C: 465: }
+[e $U 166  ]
+"466
+[e :U 164 ]
+[; ;smartkey.C: 466: else if((mtOldState == 0)||(mtOldState == 4)){
+[e $ ! || == -> _mtOldState `i -> 0 `i == -> _mtOldState `i -> 4 `i 167  ]
+{
+[; ;smartkey.C: 467: RegStatus |=(0x20);
+"467
+[e =| _RegStatus -> -> 32 `i `uc ]
+[; ;smartkey.C: 468: setState(1,3500);
+"468
+[e ( _setState (2 , -> -> 1 `i `uc -> -> 3500 `i `ui ]
+[; ;smartkey.C: 469: if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
+"469
+[e $ ! != -> ( _READ_EEPROM (1 -> -> 64 `i `uc `i -> -> -> 0 `i `uc `i 168  ]
+[e ( _WRITE_EEPROM (2 , -> -> 64 `i `uc -> -> 0 `i `uc ]
+[e :U 168 ]
+[; ;smartkey.C: 470: tmp16 = timeTick+40;
+"470
+[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
+[; ;smartkey.C: 471: beep(10,1);
+"471
+[e ( _beep (2 , -> -> 10 `i `uc -> -> 1 `i `uc ]
+"472
+}
+[; ;smartkey.C: 472: }
+[e $U 169  ]
+"473
+[e :U 167 ]
+[; ;smartkey.C: 473: else if((mtOldState == 1)){
+[e $ ! == -> _mtOldState `i -> 1 `i 170  ]
+{
+[; ;smartkey.C: 475: if(reAlertOn)reAlertOn =0;
+"475
+[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 171  ]
+[e = _reAlertOn -> -> 0 `i `uc ]
+[e :U 171 ]
+"476
+}
+[e :U 170 ]
+"477
+[e :U 169 ]
+[e :U 166 ]
+}
+[e :U 162 ]
+[; ;smartkey.C: 476: }
+[; ;smartkey.C: 477: }
+[; ;smartkey.C: 478: break;
+"478
+[e $U 158  ]
+[; ;smartkey.C: 480: case 3:
+"480
+[e :U 172 ]
+[; ;smartkey.C: 481: if(timeTick > 200)
+"481
+[e $ ! > _timeTick -> -> 200 `i `ui 173  ]
+[; ;smartkey.C: 482: {
+"482
+{
+[; ;smartkey.C: 483: beepOff();
+"483
+[e ( _beepOff ..  ]
+[; ;smartkey.C: 484: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
+"484
+[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 174  ]
+[e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
 [e :U 174 ]
-[; ;smartkey.C: 529: break;
-"529
-[e $U 172  ]
-[; ;smartkey.C: 530: case 3:
-"530
+[; ;smartkey.C: 485: RegStatus |=(0x20);
+"485
+[e =| _RegStatus -> -> 32 `i `uc ]
+[; ;smartkey.C: 486: setState(1,3500);
+"486
+[e ( _setState (2 , -> -> 1 `i `uc -> -> 3500 `i `ui ]
+[; ;smartkey.C: 488: tmp16 = timeTick+40;
+"488
+[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
+"489
+}
+[e :U 173 ]
+[; ;smartkey.C: 489: }
+[; ;smartkey.C: 491: break;
+"491
+[e $U 158  ]
+[; ;smartkey.C: 493: case 4:
+"493
 [e :U 175 ]
-[; ;smartkey.C: 531: beepOff();
-"531
+[; ;smartkey.C: 494: beepOff();
+"494
 [e ( _beepOff ..  ]
-[; ;smartkey.C: 532: RegStatus &=(~0x20);
-"532
-[e =& _RegStatus -> ~ -> 32 `i `uc ]
-[; ;smartkey.C: 533: setState(2,300);
-"533
+[; ;smartkey.C: 495: setState(2,300);
+"495
 [e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
-[; ;smartkey.C: 534: break;
-"534
-[e $U 172  ]
-[; ;smartkey.C: 535: case 4:
-"535
+[; ;smartkey.C: 496: break;
+"496
+[e $U 158  ]
+[; ;smartkey.C: 497: case 0:
+"497
 [e :U 176 ]
-[; ;smartkey.C: 536: beepOff();
+[; ;smartkey.C: 500: break;
+"500
+[e $U 158  ]
+"502
+}
+[; ;smartkey.C: 502: }
+[e $U 158  ]
+"448
+[e :U 159 ]
+[e [\ _mtState , $ -> -> 1 `i `uc 160
+ , $ -> -> 2 `i `uc 161
+ , $ -> -> 3 `i `uc 172
+ , $ -> -> 4 `i `uc 175
+ , $ -> -> 0 `i `uc 176
+ 158 ]
+"502
+[e :U 158 ]
+"504
+}
+[; ;smartkey.C: 504: }
+[e $U 177  ]
+"506
+[e :U 157 ]
+[; ;smartkey.C: 506: else{
+{
+[; ;smartkey.C: 508: switch (mtState){
+"508
+[e $U 179  ]
+{
+[; ;smartkey.C: 510: case 1:
+"510
+[e :U 180 ]
+[; ;smartkey.C: 513: {
+"513
+{
+[; ;smartkey.C: 515: if(lostDetect==1 && timeTick< 1500)
+"515
+[e $ ! && == -> _lostDetect `i -> 1 `i < _timeTick -> -> 1500 `i `ui 181  ]
+[; ;smartkey.C: 516: {
+"516
+{
+[; ;smartkey.C: 517: if(READ_EEPROM(0x08)==0x00) WRITE_EEPROM(0x08,0xcc);
+"517
+[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 0 `i 182  ]
+[e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 204 `i `uc ]
+[e :U 182 ]
+[; ;smartkey.C: 519: setState(3,1800);
+"519
+[e ( _setState (2 , -> -> 3 `i `uc -> -> 1800 `i `ui ]
+[; ;smartkey.C: 520: cntTmp = timeTick+40;
+"520
+[e = _cntTmp + _timeTick -> -> 40 `i `ui ]
+[; ;smartkey.C: 521: PR2 =11;
+"521
+[e = _PR2 -> -> 11 `i `uc ]
+[; ;smartkey.C: 522: beepOn();
+"522
+[e ( _beepOn ..  ]
+[; ;smartkey.C: 523: lostDetect =0;
+"523
+[e = _lostDetect -> -> 0 `i `uc ]
+"524
+}
+[; ;smartkey.C: 524: }
+[e $U 183  ]
+"525
+[e :U 181 ]
+[; ;smartkey.C: 525: else {
+{
+[; ;smartkey.C: 526: lostDetect =1;
+"526
+[e = _lostDetect -> -> 1 `i `uc ]
+"529
+}
+[e :U 183 ]
+[; ;smartkey.C: 529: }
+[; ;smartkey.C: 530: timeTick =0;
+"530
+[e = _timeTick -> -> 0 `i `ui ]
+[; ;smartkey.C: 531: tmp16 = 40;
+"531
+[e = _tmp16 -> -> 40 `i `ui ]
+"532
+}
+[; ;smartkey.C: 532: }
+[; ;smartkey.C: 533: break;
+"533
+[e $U 178  ]
+[; ;smartkey.C: 534: case 2:
+"534
+[e :U 184 ]
+[; ;smartkey.C: 536: {
 "536
-[e ( _beepOff ..  ]
-[; ;smartkey.C: 537: delay_x10ms(20);
+{
+[; ;smartkey.C: 537: timeTick =0;
 "537
-[e ( _delay_x10ms (1 -> -> 20 `i `ui ]
-[; ;smartkey.C: 538: beepOn();TMR2ON = 0;reAlertOn =0;
+[e = _timeTick -> -> 0 `i `ui ]
+[; ;smartkey.C: 538: beepOn();TMR2ON = 0;
 "538
 [e ( _beepOn ..  ]
 [e = _TMR2ON -> -> 0 `i `b ]
-[e = _reAlertOn -> -> 0 `i `uc ]
-[; ;smartkey.C: 539: beep(30,1);
+[; ;smartkey.C: 539: beep(10,2);
 "539
-[e ( _beep (2 , -> -> 30 `i `uc -> -> 1 `i `uc ]
-[; ;smartkey.C: 540: setState(0,0);
+[e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
+[; ;smartkey.C: 540: if(mtOldState == 3){reAlertOn =1;}
 "540
-[e ( _setState (2 , -> -> 0 `i `uc -> -> 0 `i `ui ]
-[; ;smartkey.C: 541: RA7 =0;
+[e $ ! == -> _mtOldState `i -> 3 `i 185  ]
+{
+[e = _reAlertOn -> -> 1 `i `uc ]
+}
+[e :U 185 ]
 "541
-[e = _RA7 -> -> 0 `i `b ]
-[; ;smartkey.C: 542: tmp16 = timeTick+40;
+}
+[; ;smartkey.C: 541: }
+[; ;smartkey.C: 542: break;
 "542
-[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
-[; ;smartkey.C: 543: break;
+[e $U 178  ]
 "543
-[e $U 172  ]
-[; ;smartkey.C: 544: case 2:
-"544
-[e :U 177 ]
-[; ;smartkey.C: 546: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
-"546
-[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 178  ]
-[e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
-[e :U 178 ]
-[; ;smartkey.C: 548: if(reAlertOn){
-"548
-[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 179  ]
-{
-[; ;smartkey.C: 549: setState(4,6000);
-"549
-[e ( _setState (2 , -> -> 4 `i `uc -> -> 6000 `i `ui ]
-[; ;smartkey.C: 550: cntTmp = timeTick+40;
-"550
-[e = _cntTmp + _timeTick -> -> 40 `i `ui ]
-[; ;smartkey.C: 551: PR2 =11;
-"551
-[e = _PR2 -> -> 11 `i `uc ]
-[; ;smartkey.C: 552: beepOn();
-"552
-[e ( _beepOn ..  ]
-"554
 }
-[; ;smartkey.C: 554: }else if(mtOldState == 0){
-[e $U 180  ]
+[; ;smartkey.C: 543: }
+[e $U 178  ]
+"508
 [e :U 179 ]
-[e $ ! == -> _mtOldState `i -> 0 `i 181  ]
+[e [\ _mtState , $ -> -> 1 `i `uc 180
+ , $ -> -> 2 `i `uc 184
+ 178 ]
+"543
+[e :U 178 ]
+"544
+}
+[e :U 177 ]
+"546
+}
+[; ;smartkey.C: 544: }
+[; ;smartkey.C: 546: }
+[; ;smartkey.C: 548: PAIE = 1;
+"548
+[e = _PAIE -> -> 1 `i `b ]
+"549
+}
+[e :U 156 ]
+"551
+}
+[e :U 155 ]
+[; ;smartkey.C: 549: }
+[; ;smartkey.C: 551: }
+[; ;smartkey.C: 555: {
+"555
 {
-[; ;smartkey.C: 556: beep(10,5);
+[; ;smartkey.C: 556: if((timeOut!=0)&&( timeTick >timeOut)){
 "556
-[e ( _beep (2 , -> -> 10 `i `uc -> -> 5 `i `uc ]
-[; ;smartkey.C: 557: RegStatus |=(0x20);
-"557
-[e =| _RegStatus -> -> 32 `i `uc ]
-[; ;smartkey.C: 559: setState(1,3500);
-"559
-[e ( _setState (2 , -> -> 1 `i `uc -> -> 3500 `i `ui ]
-[; ;smartkey.C: 560: tmp16 = timeTick+40;
-"560
-[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
-"562
-}
-[; ;smartkey.C: 562: }else{
-[e $U 182  ]
-[e :U 181 ]
+[e $ ! && != _timeOut -> -> 0 `i `ui > _timeTick _timeOut 186  ]
 {
-[; ;smartkey.C: 563: beepOn();TMR2ON = 0;
-"563
-[e ( _beepOn ..  ]
-[e = _TMR2ON -> -> 0 `i `b ]
-[; ;smartkey.C: 564: reAlertOn =0;
-"564
-[e = _reAlertOn -> -> 0 `i `uc ]
-[; ;smartkey.C: 565: beep(30,1);
+[; ;smartkey.C: 558: switch (mtState){
+"558
+[e $U 188  ]
+{
+[; ;smartkey.C: 560: case 1:
+"560
+[e :U 189 ]
+[; ;smartkey.C: 565: break;
 "565
-[e ( _beep (2 , -> -> 30 `i `uc -> -> 1 `i `uc ]
-[; ;smartkey.C: 566: setState(0,0);
+[e $U 187  ]
+[; ;smartkey.C: 566: case 3:
 "566
-[e ( _setState (2 , -> -> 0 `i `uc -> -> 0 `i `ui ]
-[; ;smartkey.C: 567: RA7 =0;
+[e :U 190 ]
+[; ;smartkey.C: 567: beepOff();
 "567
-[e = _RA7 -> -> 0 `i `b ]
-[; ;smartkey.C: 568: tmp16 = timeTick+40;
+[e ( _beepOff ..  ]
+[; ;smartkey.C: 568: RegStatus &=(~0x20);
 "568
-[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
+[e =& _RegStatus -> ~ -> 32 `i `uc ]
+[; ;smartkey.C: 569: setState(2,300);
 "569
-}
-[e :U 182 ]
-[e :U 180 ]
-[; ;smartkey.C: 569: }
+[e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
 [; ;smartkey.C: 570: break;
 "570
-[e $U 172  ]
-"571
-}
-[; ;smartkey.C: 571: }
-[e $U 172  ]
-"522
-[e :U 173 ]
-[e [\ _mtState , $ -> -> 1 `i `uc 174
- , $ -> -> 3 `i `uc 175
- , $ -> -> 4 `i `uc 176
- , $ -> -> 2 `i `uc 177
- 172 ]
-"571
-[e :U 172 ]
-"572
-}
-[e :U 171 ]
-"574
-}
-[; ;smartkey.C: 572: }
-[; ;smartkey.C: 574: }
-[; ;smartkey.C: 576: if((timeTick>tmp16) && (mtState == 1) && mpuOk ==1){
-"576
-[e $ ! && && > _timeTick _tmp16 == -> _mtState `i -> 1 `i == -> _mpuOk `i -> 1 `i 183  ]
-{
-[; ;smartkey.C: 577: tmp16 = timeTick+40;
-"577
-[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
-[; ;smartkey.C: 578: if(AccRead(0x3b,buf,6)==0){
-"578
-[e $ ! == -> ( _AccRead (3 , , -> -> 59 `i `uc -> &U _buf `*uc -> -> 6 `i `uc `i -> 0 `i 184  ]
-{
-[; ;smartkey.C: 580: if(compe(buf[0], (signed char)acXsum,5) && compe(buf[2], (signed char)acYsum,5)){
-"580
-[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acXsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acYsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i 185  ]
-{
-[; ;smartkey.C: 582: isSw++;
-"582
-[e ++ _isSw -> -> 1 `i `uc ]
-[; ;smartkey.C: 583: if(isSw >44){
-"583
-[e $ ! > -> _isSw `i -> 44 `i 186  ]
-{
-[; ;smartkey.C: 584: isSw =0;
-"584
-[e = _isSw -> -> 0 `i `uc ]
-[; ;smartkey.C: 585: vibrateOn=2;
-"585
-[e = _vibrateOn -> -> 2 `i `uc ]
-[; ;smartkey.C: 586: RegStatus &=(~0x20);
-"586
-[e =& _RegStatus -> ~ -> 32 `i `uc ]
-[; ;smartkey.C: 587: setState(2,300);
-"587
-[e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
-"588
-}
-[; ;smartkey.C: 588: }
 [e $U 187  ]
-"589
-[e :U 186 ]
-[; ;smartkey.C: 589: else if(isSw > 25){
-[e $ ! > -> _isSw `i -> 25 `i 188  ]
+[; ;smartkey.C: 571: case 4:
+"571
+[e :U 191 ]
+[; ;smartkey.C: 572: beepOff();
+"572
+[e ( _beepOff ..  ]
+[; ;smartkey.C: 573: delay_x10ms(20);
+"573
+[e ( _delay_x10ms (1 -> -> 20 `i `ui ]
+[; ;smartkey.C: 574: beepOn();TMR2ON = 0;reAlertOn =0;
+"574
+[e ( _beepOn ..  ]
+[e = _TMR2ON -> -> 0 `i `b ]
+[e = _reAlertOn -> -> 0 `i `uc ]
+[; ;smartkey.C: 575: beep(30,1);
+"575
+[e ( _beep (2 , -> -> 30 `i `uc -> -> 1 `i `uc ]
+[; ;smartkey.C: 576: setState(0,0);
+"576
+[e ( _setState (2 , -> -> 0 `i `uc -> -> 0 `i `ui ]
+[; ;smartkey.C: 577: RA7 =0;
+"577
+[e = _RA7 -> -> 0 `i `b ]
+[; ;smartkey.C: 578: tmp16 = timeTick+40;
+"578
+[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
+[; ;smartkey.C: 579: break;
+"579
+[e $U 187  ]
+[; ;smartkey.C: 580: case 2:
+"580
+[e :U 192 ]
+[; ;smartkey.C: 582: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
+"582
+[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 193  ]
+[e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
+[e :U 193 ]
+[; ;smartkey.C: 584: if(reAlertOn){
+"584
+[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 194  ]
 {
-[; ;smartkey.C: 590: if(isSw%2==0){
+[; ;smartkey.C: 585: setState(4,6000);
+"585
+[e ( _setState (2 , -> -> 4 `i `uc -> -> 6000 `i `ui ]
+[; ;smartkey.C: 586: cntTmp = timeTick+40;
+"586
+[e = _cntTmp + _timeTick -> -> 40 `i `ui ]
+[; ;smartkey.C: 587: PR2 =11;
+"587
+[e = _PR2 -> -> 11 `i `uc ]
+[; ;smartkey.C: 588: beepOn();
+"588
+[e ( _beepOn ..  ]
 "590
-[e $ ! == % -> _isSw `i -> 2 `i -> 0 `i 189  ]
+}
+[; ;smartkey.C: 590: }else if(mtOldState == 0){
+[e $U 195  ]
+[e :U 194 ]
+[e $ ! == -> _mtOldState `i -> 0 `i 196  ]
 {
-[; ;smartkey.C: 591: beepOn();TMR2ON = 0; beep(7,1);
-"591
+[; ;smartkey.C: 592: beep(10,5);
+"592
+[e ( _beep (2 , -> -> 10 `i `uc -> -> 5 `i `uc ]
+[; ;smartkey.C: 593: RegStatus |=(0x20);
+"593
+[e =| _RegStatus -> -> 32 `i `uc ]
+[; ;smartkey.C: 596: if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
+"596
+[e $ ! != -> ( _READ_EEPROM (1 -> -> 64 `i `uc `i -> -> -> 0 `i `uc `i 197  ]
+[e ( _WRITE_EEPROM (2 , -> -> 64 `i `uc -> -> 0 `i `uc ]
+[e :U 197 ]
+[; ;smartkey.C: 598: setState(1,3500);
+"598
+[e ( _setState (2 , -> -> 1 `i `uc -> -> 3500 `i `ui ]
+[; ;smartkey.C: 599: tmp16 = timeTick+40;
+"599
+[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
+"601
+}
+[; ;smartkey.C: 601: }else{
+[e $U 198  ]
+[e :U 196 ]
+{
+[; ;smartkey.C: 602: beepOn();TMR2ON = 0;
+"602
+[e ( _beepOn ..  ]
+[e = _TMR2ON -> -> 0 `i `b ]
+[; ;smartkey.C: 603: reAlertOn =0;
+"603
+[e = _reAlertOn -> -> 0 `i `uc ]
+[; ;smartkey.C: 604: beep(30,1);
+"604
+[e ( _beep (2 , -> -> 30 `i `uc -> -> 1 `i `uc ]
+[; ;smartkey.C: 605: setState(0,0);
+"605
+[e ( _setState (2 , -> -> 0 `i `uc -> -> 0 `i `ui ]
+[; ;smartkey.C: 606: RA7 =0;
+"606
+[e = _RA7 -> -> 0 `i `b ]
+[; ;smartkey.C: 607: tmp16 = timeTick+40;
+"607
+[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
+"608
+}
+[e :U 198 ]
+[e :U 195 ]
+[; ;smartkey.C: 608: }
+[; ;smartkey.C: 609: break;
+"609
+[e $U 187  ]
+"610
+}
+[; ;smartkey.C: 610: }
+[e $U 187  ]
+"558
+[e :U 188 ]
+[e [\ _mtState , $ -> -> 1 `i `uc 189
+ , $ -> -> 3 `i `uc 190
+ , $ -> -> 4 `i `uc 191
+ , $ -> -> 2 `i `uc 192
+ 187 ]
+"610
+[e :U 187 ]
+"611
+}
+[e :U 186 ]
+"613
+}
+[; ;smartkey.C: 611: }
+[; ;smartkey.C: 613: }
+[; ;smartkey.C: 615: if((timeTick>tmp16) && (mtState == 1) && mpuOk ==1){
+"615
+[e $ ! && && > _timeTick _tmp16 == -> _mtState `i -> 1 `i == -> _mpuOk `i -> 1 `i 199  ]
+{
+[; ;smartkey.C: 616: tmp16 = timeTick+40;
+"616
+[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
+[; ;smartkey.C: 617: if(AccRead(0x3b,buf,6)==0){
+"617
+[e $ ! == -> ( _AccRead (3 , , -> -> 59 `i `uc -> &U _buf `*uc -> -> 6 `i `uc `i -> 0 `i 200  ]
+{
+[; ;smartkey.C: 619: if(compe(buf[0], (signed char)acXsum,5) && compe(buf[2], (signed char)acYsum,5)){
+"619
+[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acXsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acYsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i 201  ]
+{
+[; ;smartkey.C: 621: isSw++;
+"621
+[e ++ _isSw -> -> 1 `i `uc ]
+[; ;smartkey.C: 622: if(isSw >44){
+"622
+[e $ ! > -> _isSw `i -> 44 `i 202  ]
+{
+[; ;smartkey.C: 623: isSw =0;
+"623
+[e = _isSw -> -> 0 `i `uc ]
+[; ;smartkey.C: 624: vibrateOn=2;
+"624
+[e = _vibrateOn -> -> 2 `i `uc ]
+[; ;smartkey.C: 625: RegStatus &=(~0x20);
+"625
+[e =& _RegStatus -> ~ -> 32 `i `uc ]
+[; ;smartkey.C: 626: setState(2,300);
+"626
+[e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
+"627
+}
+[; ;smartkey.C: 627: }
+[e $U 203  ]
+"628
+[e :U 202 ]
+[; ;smartkey.C: 628: else if(isSw > 25){
+[e $ ! > -> _isSw `i -> 25 `i 204  ]
+{
+[; ;smartkey.C: 629: if(isSw%2==0){
+"629
+[e $ ! == % -> _isSw `i -> 2 `i -> 0 `i 205  ]
+{
+[; ;smartkey.C: 630: beepOn();TMR2ON = 0; beep(7,1);
+"630
 [e ( _beepOn ..  ]
 [e = _TMR2ON -> -> 0 `i `b ]
 [e ( _beep (2 , -> -> 7 `i `uc -> -> 1 `i `uc ]
-"592
-}
-[e :U 189 ]
-"593
-}
-[e :U 188 ]
-"595
-[e :U 187 ]
-}
-[; ;smartkey.C: 592: }
-[; ;smartkey.C: 593: }
-[; ;smartkey.C: 595: }
-[e $U 190  ]
-"596
-[e :U 185 ]
-[; ;smartkey.C: 596: else{
-{
-[; ;smartkey.C: 597: isSw =0;
-"597
-[e = _isSw -> -> 0 `i `uc ]
-[; ;smartkey.C: 600: if(compe(buf[0], acXOld,2) && compe(buf[2], acYOld,2)){
-"600
-[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i 191  ]
-{
-[; ;smartkey.C: 601: isWait++;
-"601
-[e ++ _isWait -> -> 1 `i `ui ]
-[; ;smartkey.C: 602: if(isWait==450){
-"602
-[e $ ! == _isWait -> -> 450 `i `ui 192  ]
-{
-[; ;smartkey.C: 603: isWait = 0;
-"603
-[e = _isWait -> -> 0 `i `ui ]
-[; ;smartkey.C: 604: beep(7,2);
-"604
-[e ( _beep (2 , -> -> 7 `i `uc -> -> 2 `i `uc ]
-[; ;smartkey.C: 605: vibrateOn=1;
-"605
-[e = _vibrateOn -> -> 1 `i `uc ]
-[; ;smartkey.C: 606: RegStatus &=(~0x20);
-"606
-[e =& _RegStatus -> ~ -> 32 `i `uc ]
-[; ;smartkey.C: 607: setState(2,300);
-"607
-[e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
-"608
-}
-[e :U 192 ]
-"609
-}
-[e :U 191 ]
-"611
-}
-[e :U 190 ]
-[; ;smartkey.C: 608: }
-[; ;smartkey.C: 609: }
-[; ;smartkey.C: 611: }
-[; ;smartkey.C: 613: if( (buf[4] > -31) && (buf[4] < 31)) {
-"613
-[e $ ! && > -> *U + &U _buf * -> -> -> 4 `i `ui `ux -> -> # *U &U _buf `ui `ux `i -U -> 31 `i < -> *U + &U _buf * -> -> -> 4 `i `ui `ux -> -> # *U &U _buf `ui `ux `i -> 31 `i 193  ]
-{
-[; ;smartkey.C: 614: isFall++;
-"614
-[e ++ _isFall -> -> 1 `i `uc ]
-[; ;smartkey.C: 615: if(isFall >4){
-"615
-[e $ ! > -> _isFall `i -> 4 `i 194  ]
-{
-[; ;smartkey.C: 616: isFall =0;
-"616
-[e = _isFall -> -> 0 `i `uc ]
-[; ;smartkey.C: 617: beep(7,2);
-"617
-[e ( _beep (2 , -> -> 7 `i `uc -> -> 2 `i `uc ]
-[; ;smartkey.C: 618: RegStatus &=(~0x20);
-"618
-[e =& _RegStatus -> ~ -> 32 `i `uc ]
-[; ;smartkey.C: 619: setState(2,300);
-"619
-[e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
-"620
-}
-[e :U 194 ]
-"621
-}
-[; ;smartkey.C: 620: }
-[; ;smartkey.C: 621: }
-[e $U 195  ]
-"622
-[e :U 193 ]
-[; ;smartkey.C: 622: else{
-{
-[; ;smartkey.C: 623: isFall=0;
-"623
-[e = _isFall -> -> 0 `i `uc ]
-"624
-}
-[e :U 195 ]
-[; ;smartkey.C: 624: }
-[; ;smartkey.C: 626: acYOld = buf[2];acXOld = buf[0];
-"626
-[e = _acYOld *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
-[e = _acXOld *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
-"627
-}
-[e :U 184 ]
-"629
-}
-[e :U 183 ]
-[; ;smartkey.C: 627: }
-[; ;smartkey.C: 629: }
-[; ;smartkey.C: 632: if((timeTick>tmp16) && (mtState == 0 ) && mpuOk ==1){
-"632
-[e $ ! && && > _timeTick _tmp16 == -> _mtState `i -> 0 `i == -> _mpuOk `i -> 1 `i 196  ]
-{
-[; ;smartkey.C: 634: if(timeTick >65000) timeTick =0;
-"634
-[e $ ! > -> _timeTick `l -> 65000 `l 197  ]
-[e = _timeTick -> -> 0 `i `ui ]
-[e :U 197 ]
-[; ;smartkey.C: 635: tmp16 = timeTick+40;
-"635
-[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
-[; ;smartkey.C: 637: if(AccRead(0x3b,buf,6)==0){
-"637
-[e $ ! == -> ( _AccRead (3 , , -> -> 59 `i `uc -> &U _buf `*uc -> -> 6 `i `uc `i -> 0 `i 198  ]
-{
-[; ;smartkey.C: 638: if(vibrateOn==1){
-"638
-[e $ ! == -> _vibrateOn `i -> 1 `i 199  ]
-{
-[; ;smartkey.C: 639: if(compe(buf[0],acXOld ,2) && compe(buf[2],acYOld ,2)){
-"639
-[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i 200  ]
-{
-[; ;smartkey.C: 641: isSw=0;
-"641
-[e = _isSw -> -> 0 `i `uc ]
-"644
-}
-[; ;smartkey.C: 644: }
-[e $U 201  ]
-"645
-[e :U 200 ]
-[; ;smartkey.C: 645: else{
-{
-[; ;smartkey.C: 646: isSw++;
-"646
-[e ++ _isSw -> -> 1 `i `uc ]
-[; ;smartkey.C: 649: {
-"649
-{
-[; ;smartkey.C: 650: beepOn();TMR2ON = 0; beep(7,3);
-"650
-[e ( _beepOn ..  ]
-[e = _TMR2ON -> -> 0 `i `b ]
-[e ( _beep (2 , -> -> 7 `i `uc -> -> 3 `i `uc ]
-"651
-}
-"652
-}
-[e :U 201 ]
-"653
-}
-[; ;smartkey.C: 651: }
-[; ;smartkey.C: 652: }
-[; ;smartkey.C: 653: }
-[e $U 202  ]
-"654
-[e :U 199 ]
-[; ;smartkey.C: 654: else if(vibrateOn==2){
-[e $ ! == -> _vibrateOn `i -> 2 `i 203  ]
-{
-[; ;smartkey.C: 655: if(compe(buf[0],(signed char)acXsum ,5) && compe(buf[2],(signed char)acYsum ,5)){
-"655
-[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acXsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acYsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i 204  ]
-{
-[; ;smartkey.C: 657: isSw=0;
-"657
-[e = _isSw -> -> 0 `i `uc ]
-"660
-}
-[; ;smartkey.C: 660: }
-[e $U 205  ]
-"661
-[e :U 204 ]
-[; ;smartkey.C: 661: else{
-{
-[; ;smartkey.C: 662: isSw++;
-"662
-[e ++ _isSw -> -> 1 `i `uc ]
-[; ;smartkey.C: 665: {
-"665
-{
-[; ;smartkey.C: 666: beepOn();TMR2ON = 0; beep(7,3);
-"666
-[e ( _beepOn ..  ]
-[e = _TMR2ON -> -> 0 `i `b ]
-[e ( _beep (2 , -> -> 7 `i `uc -> -> 3 `i `uc ]
-"667
-}
-"668
+"631
 }
 [e :U 205 ]
-"669
+"632
 }
+[e :U 204 ]
+"634
 [e :U 203 ]
-"671
-[e :U 202 ]
 }
-[e :U 198 ]
-"674
+[; ;smartkey.C: 631: }
+[; ;smartkey.C: 632: }
+[; ;smartkey.C: 634: }
+[e $U 206  ]
+"635
+[e :U 201 ]
+[; ;smartkey.C: 635: else{
+{
+[; ;smartkey.C: 636: isSw =0;
+"636
+[e = _isSw -> -> 0 `i `uc ]
+[; ;smartkey.C: 639: if(compe(buf[0], acXOld,2) && compe(buf[2], acYOld,2)){
+"639
+[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i 207  ]
+{
+[; ;smartkey.C: 640: isWait++;
+"640
+[e ++ _isWait -> -> 1 `i `ui ]
+[; ;smartkey.C: 641: if(isWait==450){
+"641
+[e $ ! == _isWait -> -> 450 `i `ui 208  ]
+{
+[; ;smartkey.C: 642: isWait = 0;
+"642
+[e = _isWait -> -> 0 `i `ui ]
+[; ;smartkey.C: 643: beep(7,2);
+"643
+[e ( _beep (2 , -> -> 7 `i `uc -> -> 2 `i `uc ]
+[; ;smartkey.C: 644: vibrateOn=1;
+"644
+[e = _vibrateOn -> -> 1 `i `uc ]
+[; ;smartkey.C: 645: RegStatus &=(~0x20);
+"645
+[e =& _RegStatus -> ~ -> 32 `i `uc ]
+[; ;smartkey.C: 646: setState(2,300);
+"646
+[e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
+"647
 }
-[e :U 196 ]
-[; ;smartkey.C: 667: }
+[e :U 208 ]
+"648
+}
+[e :U 207 ]
+"650
+}
+[e :U 206 ]
+[; ;smartkey.C: 647: }
+[; ;smartkey.C: 648: }
+[; ;smartkey.C: 650: }
+[; ;smartkey.C: 652: if( (buf[4] > -31) && (buf[4] < 31)) {
+"652
+[e $ ! && > -> *U + &U _buf * -> -> -> 4 `i `ui `ux -> -> # *U &U _buf `ui `ux `i -U -> 31 `i < -> *U + &U _buf * -> -> -> 4 `i `ui `ux -> -> # *U &U _buf `ui `ux `i -> 31 `i 209  ]
+{
+[; ;smartkey.C: 653: isFall++;
+"653
+[e ++ _isFall -> -> 1 `i `uc ]
+[; ;smartkey.C: 654: if(isFall >4){
+"654
+[e $ ! > -> _isFall `i -> 4 `i 210  ]
+{
+[; ;smartkey.C: 655: isFall =0;
+"655
+[e = _isFall -> -> 0 `i `uc ]
+[; ;smartkey.C: 656: beep(7,2);
+"656
+[e ( _beep (2 , -> -> 7 `i `uc -> -> 2 `i `uc ]
+[; ;smartkey.C: 657: RegStatus &=(~0x20);
+"657
+[e =& _RegStatus -> ~ -> 32 `i `uc ]
+[; ;smartkey.C: 658: setState(2,300);
+"658
+[e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
+"659
+}
+[e :U 210 ]
+"660
+}
+[; ;smartkey.C: 659: }
+[; ;smartkey.C: 660: }
+[e $U 211  ]
+"661
+[e :U 209 ]
+[; ;smartkey.C: 661: else{
+{
+[; ;smartkey.C: 662: isFall=0;
+"662
+[e = _isFall -> -> 0 `i `uc ]
+"663
+}
+[e :U 211 ]
+[; ;smartkey.C: 663: }
+[; ;smartkey.C: 665: acYOld = buf[2];acXOld = buf[0];
+"665
+[e = _acYOld *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
+[e = _acXOld *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
+"666
+}
+[e :U 200 ]
+"668
+}
+[e :U 199 ]
+[; ;smartkey.C: 666: }
 [; ;smartkey.C: 668: }
-[; ;smartkey.C: 669: }
-[; ;smartkey.C: 671: }
-[; ;smartkey.C: 674: }
-[; ;smartkey.C: 676: if(RegStatus & 0x20) {RC4 =1;RC2 =1;}
+[; ;smartkey.C: 671: if((timeTick>tmp16) && (mtState == 0 ) && mpuOk ==1){
+"671
+[e $ ! && && > _timeTick _tmp16 == -> _mtState `i -> 0 `i == -> _mpuOk `i -> 1 `i 212  ]
+{
+[; ;smartkey.C: 673: if(timeTick >65000) timeTick =0;
+"673
+[e $ ! > -> _timeTick `l -> 65000 `l 213  ]
+[e = _timeTick -> -> 0 `i `ui ]
+[e :U 213 ]
+[; ;smartkey.C: 674: tmp16 = timeTick+40;
+"674
+[e = _tmp16 + _timeTick -> -> 40 `i `ui ]
+[; ;smartkey.C: 676: if(AccRead(0x3b,buf,6)==0){
 "676
-[e $ ! != & -> _RegStatus `i -> 32 `i -> 0 `i 206  ]
+[e $ ! == -> ( _AccRead (3 , , -> -> 59 `i `uc -> &U _buf `*uc -> -> 6 `i `uc `i -> 0 `i 214  ]
+{
+[; ;smartkey.C: 677: if(vibrateOn==1){
+"677
+[e $ ! == -> _vibrateOn `i -> 1 `i 215  ]
+{
+[; ;smartkey.C: 678: if(compe(buf[0],acXOld ,2) && compe(buf[2],acYOld ,2)){
+"678
+[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i 216  ]
+{
+[; ;smartkey.C: 680: isSw=0;
+"680
+[e = _isSw -> -> 0 `i `uc ]
+"683
+}
+[; ;smartkey.C: 683: }
+[e $U 217  ]
+"684
+[e :U 216 ]
+[; ;smartkey.C: 684: else{
+{
+[; ;smartkey.C: 685: isSw++;
+"685
+[e ++ _isSw -> -> 1 `i `uc ]
+[; ;smartkey.C: 688: {
+"688
+{
+[; ;smartkey.C: 689: beepOn();TMR2ON = 0; beep(7,3);
+"689
+[e ( _beepOn ..  ]
+[e = _TMR2ON -> -> 0 `i `b ]
+[e ( _beep (2 , -> -> 7 `i `uc -> -> 3 `i `uc ]
+"690
+}
+"691
+}
+[e :U 217 ]
+"692
+}
+[; ;smartkey.C: 690: }
+[; ;smartkey.C: 691: }
+[; ;smartkey.C: 692: }
+[e $U 218  ]
+"693
+[e :U 215 ]
+[; ;smartkey.C: 693: else if(vibrateOn==2){
+[e $ ! == -> _vibrateOn `i -> 2 `i 219  ]
+{
+[; ;smartkey.C: 694: if(compe(buf[0],(signed char)acXsum ,5) && compe(buf[2],(signed char)acYsum ,5)){
+"694
+[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acXsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acYsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i 220  ]
+{
+[; ;smartkey.C: 696: isSw=0;
+"696
+[e = _isSw -> -> 0 `i `uc ]
+"699
+}
+[; ;smartkey.C: 699: }
+[e $U 221  ]
+"700
+[e :U 220 ]
+[; ;smartkey.C: 700: else{
+{
+[; ;smartkey.C: 701: isSw++;
+"701
+[e ++ _isSw -> -> 1 `i `uc ]
+[; ;smartkey.C: 704: {
+"704
+{
+[; ;smartkey.C: 705: beepOn();TMR2ON = 0; beep(7,3);
+"705
+[e ( _beepOn ..  ]
+[e = _TMR2ON -> -> 0 `i `b ]
+[e ( _beep (2 , -> -> 7 `i `uc -> -> 3 `i `uc ]
+"706
+}
+"707
+}
+[e :U 221 ]
+"708
+}
+[e :U 219 ]
+"710
+[e :U 218 ]
+}
+[e :U 214 ]
+"713
+}
+[e :U 212 ]
+[; ;smartkey.C: 706: }
+[; ;smartkey.C: 707: }
+[; ;smartkey.C: 708: }
+[; ;smartkey.C: 710: }
+[; ;smartkey.C: 713: }
+[; ;smartkey.C: 715: if(RegStatus & 0x20) {RC4 =1;RC2 =1;}
+"715
+[e $ ! != & -> _RegStatus `i -> 32 `i -> 0 `i 222  ]
 {
 [e = _RC4 -> -> 1 `i `b ]
 [e = _RC2 -> -> 1 `i `b ]
 }
-[e $U 207  ]
-"677
-[e :U 206 ]
-[; ;smartkey.C: 677: else {RC4 =0;RC2 =0;}
+[e $U 223  ]
+"716
+[e :U 222 ]
+[; ;smartkey.C: 716: else {RC4 =0;RC2 =0;}
 {
 [e = _RC4 -> -> 0 `i `b ]
 [e = _RC2 -> -> 0 `i `b ]
 }
-[e :U 207 ]
-"680
+[e :U 223 ]
+"719
 }
-[e :U 138 ]
-"383
-[e $U 139  ]
-[e :U 140 ]
-[; ;smartkey.C: 680: }
-[; ;smartkey.C: 682: }
-"682
-[e :UE 122 ]
+[e :U 152 ]
+"417
+[e $U 153  ]
+[e :U 154 ]
+[; ;smartkey.C: 719: }
+[; ;smartkey.C: 721: }
+"721
+[e :UE 128 ]
 }

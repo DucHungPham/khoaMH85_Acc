@@ -1700,9 +1700,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sysinit.c: 83: INTF = 0;
 "83
 [e = _INTF -> -> 0 `i `b ]
-[; ;sysinit.c: 84: INTE = 0;
+[; ;sysinit.c: 84: INTE = 1;
 "84
-[e = _INTE -> -> 0 `i `b ]
+[e = _INTE -> -> 1 `i `b ]
 [; ;sysinit.c: 86: TMR2IF = 0;
 "86
 [e = _TMR2IF -> -> 0 `i `b ]
