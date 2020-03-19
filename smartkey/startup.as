@@ -71,13 +71,11 @@ _exit
 
 psect bank0,class=BANK0,space=1
 psect bank1,class=BANK1,space=1
-psect bank2,class=BANK2,space=1
 psect ram,class=RAM,space=1
 psect abs1,class=ABS1,space=1
 psect common,class=COMMON,space=1
 psect sfr0,class=SFR0,space=1
 psect sfr1,class=SFR1,space=1
-psect sfr2,class=SFR2,space=1
 
 
 	end	start

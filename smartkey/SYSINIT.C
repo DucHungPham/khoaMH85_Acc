@@ -32,13 +32,19 @@ void sys_init(void){
 void gpio_init(void){
 
 	PORTA = 0B00000000;
-	TRISA = 0B01101110;  //RA7 RA4 -out
-	WPUA = 0B10000000;   //
+	TRISA =  0B00110111;  //RA7 RA4 -out
+	WPUA =  0B11000000;   //
     
 	PORTC = 0B00000000;
-	TRISC = 0B11101011;  //RC0 RC4 -out
-	WPUC = 0B00000000;   //
-	
+	TRISC =  0B11111100;  //RC0 RC4 -out
+	WPUC =  0B00000000;   //
+    
+	PSRCA  = 0B11111111;	
+	PSRCC  = 0B11111111;
+	PSINKA = 0B11111111;	
+	PSINKC = 0B11111111;
+    
+	MSCON  = 0B00110000;//?
 }
 
 
@@ -51,16 +57,26 @@ void timer_init(void){
     //PSA = 0;//select clock for timer0
     //PS2 = 0;PS2 = 0;PS2 = 1; // chia tan 256=> 4M/256=1M -> Ftimer0  
 	//T2CON = 0b00000011;
-
-	TMR2 = 0;
-	PR2 = 0;
-	T2CON = 0B00101001;
+	T0CON0 = 0B00000000;
+	OPTION = 0B00000111;            //Bit4=0 TIMER0 MODE,PS=001=1:4 TIMER0 RATE
+	TMR0 = 179;
+    
+	TMR2H = 0;
+    TMR2L = 0;
+	PR2H = 0;
+    PR2L =0;
+	T2CON0 = 0B00101001;
+	//TMR2 = 0;
+	//PR2 = 0;
+	//T2CON = 0B00101001;
     
 	// Timer1
+    /*
 	TMR1H = _Timer1>>8;
     TMR1L = _Timer1;                  //Timer1 = 0x3CAF=15535
 	T1CON = 0B00100001;	//  01=1/4 =>Tcnt = (2*4)/Fosc=2us Timer1 interrup = Fosc/2/4 * 50000 = 100ms 
 	TMR1ON = 1;
+    */
 }
 
 
@@ -73,7 +89,7 @@ void int_init(void){
 	PIE1 = 0B00000000;
 	PIR1 = 0B00000000;
 // PortA
-	IOCA6 = 1; //
+	IOCA5 = 1; //
 	tmp = PORTA;	//
 	PAIF = 0;
 	PAIE = 0;
@@ -87,10 +103,14 @@ void int_init(void){
 	TMR2IE = 1;
 	TMR2ON = 0;
  //Timer1   
-	TMR1IF = 0;                      
-	TMR1IE = 1;                       
+//	TMR1IF = 0;                      
+//	TMR1IE = 1;                       
   
-  
+//Timer0
+	T0IF = 0;                       
+	T0IE = 1;                      
+	T0ON = 1;	
+      
     PEIE = 1;	// Peripharal Interrupt Enable 
     
 	GIE = 1;	// Global Interrupt Enable

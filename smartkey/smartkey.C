@@ -1,16 +1,8 @@
-//Project: smartkey.prj
-// Device: MS82Fxx02
-// Memory: Flash 2KX14b, EEPROM 128X8b, SRAM 128X8b
-// Author: 
-//Company: 
-//Version:
-//   Date: 
-//===========================================================
-//===========================================================
-
 #include 	"main.h";
 #include 	"sysInit.H"
 
+#define voice1	20
+#define voice2	25
 
 unsigned char mode_chek = md_ckIDE ;
 unsigned int timeOut =0,timeTick=0,cntTmp=0;
@@ -75,7 +67,7 @@ if(INTE&&INTF){
     unsigned char tmp;
 		INTF = 0;
         
-        if( RC1==0){//(RegStatus & keyUpd)==0 && mtState ==_Ide && 
+        if( swPwOn==0){//(RegStatus & keyUpd)==0 && mtState ==_Ide && 
                      
             if(timeTick <0x20){
                 tmp = READ_EEPROM(0x40);
@@ -92,13 +84,10 @@ if(INTE&&INTF){
         
     }
 //====================
-// Timer1 Interrup 
-	if(TMR1IE&&TMR1IF){
-        
-        TMR1IF = 0;
-        // init timer
-    	TMR1H = _Timer1>>8;
-		TMR1L = _Timer1;
+//Timer0 Interrup
+	if (T0IE && T0IF) {
+		T0IF = 0;
+		TMR0 = 179;
         
         // time out 10ms
         // 'Verify' : 20ms <'0'< 50ms -> 'F' -> 'Busy' -> 'IDE'
@@ -141,17 +130,20 @@ if(INTE&&INTF){
         
         //
 		timeTick++;
-		
+        
 		if((mtState == _rAlert)||(mtState == _Alert)){
 
 			if(timeTick > cntTmp){
-	            cntTmp = timeTick+40;
+	            cntTmp = timeTick+45;
 	            if(cntTmp<=timeOut)
 				{
-					if(PR2 == 11)
-						PR2 = 30; 
+					 TMR2IE = 0;                           
+                      
+					if (PR2L == voice1)
+						PR2L = voice2;//30 35
 					else
-						PR2 = 11;
+						PR2L = voice1;//11 30
+					TMR2IE = 1;
 				}
             }
 		}
@@ -175,20 +167,22 @@ unsigned int set = t + timeTick;
 }
 
 void beepOff(){
-    TMR2ON = 0;buzzer =0;TRISA |= 0x10;
+    TMR2ON = 0;buzzer =0;TRISA |= 0x08;
 }
 void beepOn(){
     TMR2ON = 1;
-    TRISA &= 0xef;
+    TRISA &= 0xf7;
 }
 void beep(unsigned char delay,unsigned char rep){
     {	       
 		while(rep--){
             TMR2ON = 1;
-			PR2 = 12; //12
+			PR2L = 12; //12
 			delay_x10ms(delay);
+            //__delay_ms(400);
             TMR2ON = 0;buzzer =0;
             delay_x10ms(20);
+            //__delay_ms(400);
         }
     }
 
@@ -248,11 +242,12 @@ unsigned char compe(signed char a,signed char b, signed char dt){
 void main(void)
 {
 	// clear WDT
+    /*
 #asm
 	MOVLW		0x07			//
 	MOVWF		0x19			//
 #endasm
-
+*/
 unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0,accSet=0;
 unsigned int isWait =0;
 signed int  acYsum=0,acXsum=0;
@@ -264,12 +259,13 @@ signed char buf[6];
     
 	sys_init();
 	gpio_init();
-     int_init();   
     timer_init();
+     int_init();   
+    
 
     __delay_ms(100); 
- 	enaDetect =1;
-    __delay_ms(100);
+ 	//enaDetect =1;
+    //__delay_ms(100);
     
 	PAIE = 1;    
 	
@@ -280,10 +276,9 @@ signed char buf[6];
   
     setState(_Ide,0);
  //================= 
-	WRITE_EEPROM(0x7F,0xAA);			//
-	WRITE_EEPROM(0x7F,0xAA);			//
+	WRITE_EEPROM(0xFF,0xAA);			//
+	WRITE_EEPROM(0xFF,0xAA);			//
  //=================   
-    //RegStatus |= (bitSwMain);
 	   
      __delay_ms(200);
  //timeTick = 0;   
@@ -295,23 +290,21 @@ tmp8= READ_EEPROM(add_Alert);
 		setState(_Alert,tOut_Alert);
 		mtOldState = _Open;
 		cntTmp = timeTick+50;
-		PR2 =12;
+		PR2L =12;
 		beepOn();
     } else {
 		setState(_rCheck,400);// timout 4s cho thoi gian mo may, check tin hieu chia
 
 		mtOldState = _Ide;
-		 /* RegStatus |=(bitPwOn);
-			setState(_Open,tOut_Open);mtOldState = _Open;
-		  */
+		
 	}
 
  
-tmp8    = READ_EEPROM(0x40);
+tmp8    = READ_EEPROM(0x40);// dia chi luu gia tri so lan on/off
 if(tmp8==8){
-    tmp8= READ_EEPROM(0x41);
+    tmp8= READ_EEPROM(0x41);// che do? bo qua chuc nang bo^. khoa
     beep(25,1);
-    if(tmp8){
+    if((tmp8==1)||(tmp8==0xff)){
         WRITE_EEPROM(0x41,0);
     }
     else {
@@ -321,14 +314,11 @@ if(tmp8==8){
    WRITE_EEPROM(0x40,0);
     tmp8=0;
     __delay_ms(100);
-} 
-
-// if(tmp8>10){
-//    WRITE_EEPROM(0x40,0);
-//}
+} else if(tmp8==0xff) WRITE_EEPROM(0x40,0);
+	
   
 tmp8    = READ_EEPROM(0x41);
- if(tmp8){
+ if(tmp8==1){
 		 swMainOut =1;swMainOut2 =1;
         while(1){
             __delay_ms(1000);
@@ -337,41 +327,26 @@ tmp8    = READ_EEPROM(0x41);
 }
 
 
-//swUartSendString("\nPowerOn ");
-/*
-    buf[0] =0x7;buf[1] =0;buf[2] =0;buf[3] =0;
-    if(AccWrite(0x19,(unsigned char)buf,4) ==0) mpuOk =1;
-    else mpuOk =0;
-    
-    //SendNum(AccWrite(0x19,(unsigned char *)buf,4));
-    __delay_ms(100); */
-//===========
-/*
-if(AccRead(0x75,(unsigned char)buf, 1)==0)
-	if(buf[0]==0x68) mpuOk =1;
-    else mpuOk =0;
-else mpuOk =0;
-
-if(mpuOk)
-*/
-{
     buf[0] = 0x28; //Acc only
     buf[1] = 0x87;
-    if(AccWrite(0x6b,(unsigned char)buf,2)==0) mpuOk =1;
-    else mpuOk =0;
+    if(AccWrite(0x6b,(unsigned char)buf,2)==0) 
+		mpuOk =1;
+    else 
+    mpuOk =0;
     //SendNum(AccWrite(0x6b,(unsigned char *)buf,1));
    __delay_ms(100);
-}
+
 if(mpuOk ==0){beep(10,2);}// bao loi giao tiep mpu
- 
+
+
 
 // Luu gia tri goc nghieng vao eeprom
 //
-tmp8= READ_EEPROM(0x40);
+tmp8= READ_EEPROM(0x40);//che do? bo qua chuc nang bo^. khoa
 	if(tmp8==6 && mpuOk ==1)   
 	{
 		tmp8=0; beep(10,3); 
-		while((swStand )&&(tmp8<11))
+		while((swPwOn )&&(tmp8<11))
 		 {
 				if(AccRead(0x3b,(unsigned char)buf,6)==0){
 			
@@ -518,7 +493,7 @@ timeTick = 0;
                                         
 										setState(_Alert,tOut_Alert);
 	                                    cntTmp = timeTick+40;// kiem tra lai 
-										PR2 =11;
+										PR2L =voice1;
 										beepOn();
 	                                    lostDetect =0;
                                     }
@@ -574,7 +549,7 @@ timeTick = 0;
                     beepOn();TMR2ON = 0;reAlertOn =0;         
                     beep(30,1);
 					setState(_Ide,tOut_Ide);
-                    enaDetect =0;
+                    //enaDetect =0;
                     tmp16 = timeTick+40;
                     break;
 				case _rCheck:
@@ -584,7 +559,7 @@ timeTick = 0;
 					if(reAlertOn){	///???reAlertOn						
 							setState(_rAlert,tOut_rAlert);
 							cntTmp = timeTick+40;
-							PR2 =11;
+							PR2L =voice1;
 							beepOn();
                             
                     }else if(mtOldState == _Ide){							
@@ -603,7 +578,7 @@ timeTick = 0;
                             reAlertOn =0;          
 							beep(30,1);						
 							setState(_Ide,tOut_Ide);
-                            enaDetect =0;
+                            //enaDetect =0;
                             tmp16 = timeTick+40;
 						}
 				break;
@@ -618,12 +593,16 @@ timeTick = 0;
 
 				if(compe(buf[0], (signed char)acXsum,5) && compe(buf[2], (signed char)acYsum,5)){
 				//beep(10,1);
+                // phat hien da chong
 					isSw++;
 					if(isSw >44){
 						isSw =0;
-                        vibrateOn=2;
+                        vibrateOn=2; // bat che do chong rung 2
+                        // lay vi tri chinh xac tai thoi diem da chong, truoc khi chuyen sang che do chong rung
+                        //==========> accOld
 						RegStatus &=(~bitPwOn);
 						setState(_rCheck,tOut_rCheck);
+                        //
 					}
 					else if(isSw > 25){ //0.4*20=8s
 						if(isSw%2==0){					 
@@ -641,7 +620,7 @@ timeTick = 0;
                             if(isWait==450){
                                 isWait = 0;
 								beep(7,2);
-                                vibrateOn=1;
+                                vibrateOn=1; // bat che do chong rung (1)
 								RegStatus &=(~bitPwOn);
 								setState(_rCheck,tOut_rCheck);
                             }
@@ -674,6 +653,7 @@ if((timeTick>tmp16) && (mtState == _Ide ) && mpuOk ==1){//|| mtState == _rCheck
 			tmp16 = timeTick+40;
            
 			if(AccRead(0x3b,buf,6)==0){
+                //So sanh vi tri truoc khi chuyen sang che do chong rung
 				if(vibrateOn==1){
 					if(compe(buf[0],acXOld ,2) && compe(buf[2],acYOld ,2)){//(signed char)acXsum  (signed char)acYsum
 					//beep(10,1);

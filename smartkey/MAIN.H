@@ -2,7 +2,7 @@
 #define main_h
 
 #include	"SYSCFG.h";
-#include 	"MS82Fxx02.h";
+#include 	"MS86Fxx02.h";
 #include	"SWUART.h";
 #include	"SWI2C.h";
 #include	"MPU6X.h";
@@ -22,18 +22,13 @@
 #define sysTime		100
 
 // GPIO
-#define swMainOut		RC4
-#define swMainIn		RC3
-#define swMainOut2		RC2
+#define swMainOut		RC0
+#define swMainOut2		RC1
 
-#define swStand		RC1 //RC2
+#define swPwOn		RA2
 
-//#define swStartIn		RC1
-#define swStartOut		RC0
-
-#define buzzer			RA4
-#define keyDetect		RA6
-#define enaDetect		RA7
+#define buzzer			RA3
+#define keyDetect		RA5
 
 // Status
 #define _Open	1
