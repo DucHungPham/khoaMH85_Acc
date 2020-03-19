@@ -2495,9 +2495,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;smartkey.C: 305: tmp8= READ_EEPROM(0x41);
 "305
 [e = _tmp8 ( _READ_EEPROM (1 -> -> 65 `i `uc ]
-[; ;smartkey.C: 306: beep(25,1);
+[; ;smartkey.C: 306: beep(30,1);
 "306
-[e ( _beep (2 , -> -> 25 `i `uc -> -> 1 `i `uc ]
+[e ( _beep (2 , -> -> 30 `i `uc -> -> 1 `i `uc ]
 [; ;smartkey.C: 307: if((tmp8==1)||(tmp8==0xff)){
 "307
 [e $ ! || == -> _tmp8 `i -> 1 `i == -> _tmp8 `i -> 255 `i 144  ]
@@ -2572,42 +2572,43 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 148 ]
 [; ;smartkey.C: 326: }
 [; ;smartkey.C: 327: }
-[; ;smartkey.C: 330: buf[0] = 0x28;
+[; ;smartkey.C: 330: buf[0] = 0x08;
 "330
-[e = *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> -> 40 `i `c ]
-[; ;smartkey.C: 331: buf[1] = 0x87;
+[e = *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> -> 8 `i `c ]
+[; ;smartkey.C: 331: buf[1] = 0x4d;
 "331
-[e = *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux -> -> 135 `i `c ]
-[; ;smartkey.C: 332: if(AccWrite(0x6b,(unsigned char)buf,2)==0)
-"332
-[e $ ! == -> ( _AccWrite (3 , , -> -> 107 `i `uc -> -> &U _buf `uc `*uc -> -> 2 `i `uc `i -> 0 `i 153  ]
-[; ;smartkey.C: 333: mpuOk =1;
+[e = *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux -> -> 77 `i `c ]
+[; ;smartkey.C: 333: if(AccWrite(0x10,(unsigned char)buf,2)==0) {
 "333
-[e = _mpuOk -> -> 1 `i `uc ]
-[e $U 154  ]
-"334
-[e :U 153 ]
-[; ;smartkey.C: 334: else
-[; ;smartkey.C: 335: mpuOk =0;
-"335
-[e = _mpuOk -> -> 0 `i `uc ]
-[e :U 154 ]
-[; ;smartkey.C: 337: _delay((unsigned long)((100)*(4000000/4000.0)));
-"337
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;smartkey.C: 339: if(mpuOk ==0){beep(10,2);}
-"339
-[e $ ! == -> _mpuOk `i -> 0 `i 155  ]
+[e $ ! == -> ( _AccWrite (3 , , -> -> 16 `i `uc -> -> &U _buf `uc `*uc -> -> 2 `i `uc `i -> 0 `i 153  ]
 {
-[e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
+[; ;smartkey.C: 334: mpuOk =1;
+"334
+[e = _mpuOk -> -> 1 `i `uc ]
+"335
 }
-[e :U 155 ]
+[; ;smartkey.C: 335: }
+[e $U 154  ]
+"336
+[e :U 153 ]
+[; ;smartkey.C: 336: else {
+{
+[; ;smartkey.C: 337: mpuOk =0;
+"337
+[e = _mpuOk -> -> 0 `i `uc ]
+[; ;smartkey.C: 338: beep(10,2);
+"338
+[e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
+"339
+}
+[e :U 154 ]
+[; ;smartkey.C: 339: }
 [; ;smartkey.C: 345: tmp8= READ_EEPROM(0x40);
 "345
 [e = _tmp8 ( _READ_EEPROM (1 -> -> 64 `i `uc ]
 [; ;smartkey.C: 346: if(tmp8==6 && mpuOk ==1)
 "346
-[e $ ! && == -> _tmp8 `i -> 6 `i == -> _mpuOk `i -> 1 `i 156  ]
+[e $ ! && == -> _tmp8 `i -> 6 `i == -> _mpuOk `i -> 1 `i 155  ]
 [; ;smartkey.C: 347: {
 "347
 {
@@ -2617,44 +2618,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _beep (2 , -> -> 10 `i `uc -> -> 3 `i `uc ]
 [; ;smartkey.C: 349: while((RA2 )&&(tmp8<11))
 "349
-[e $U 157  ]
-[e :U 158 ]
+[e $U 156  ]
+[e :U 157 ]
 [; ;smartkey.C: 350: {
 "350
 {
-[; ;smartkey.C: 351: if(AccRead(0x3b,(unsigned char)buf,6)==0){
+[; ;smartkey.C: 351: if(AccRead(0x02,(unsigned char)buf,6)==0){
 "351
-[e $ ! == -> ( _AccRead (3 , , -> -> 59 `i `uc -> -> &U _buf `uc `*uc -> -> 6 `i `uc `i -> 0 `i 160  ]
+[e $ ! == -> ( _AccRead (3 , , -> -> 2 `i `uc -> -> &U _buf `uc `*uc -> -> 6 `i `uc `i -> 0 `i 159  ]
 {
-[; ;smartkey.C: 353: acXsum += buf[0];
+[; ;smartkey.C: 353: acXsum += buf[1];
 "353
-[e =+ _acXsum -> *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux `i ]
-[; ;smartkey.C: 354: acYsum += buf[2];
+[e =+ _acXsum -> *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux `i ]
+[; ;smartkey.C: 354: acYsum += buf[3];
 "354
-[e =+ _acYsum -> *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux `i ]
-[; ;smartkey.C: 355: tmp16 = (signed int)tmp16 + buf[4];
+[e =+ _acYsum -> *U + &U _buf * -> -> -> 3 `i `ui `ux -> -> # *U &U _buf `ui `ux `i ]
+[; ;smartkey.C: 355: tmp16 = (signed int)tmp16 + buf[5];
 "355
-[e = _tmp16 -> + -> _tmp16 `i -> *U + &U _buf * -> -> -> 4 `i `ui `ux -> -> # *U &U _buf `ui `ux `i `ui ]
+[e = _tmp16 -> + -> _tmp16 `i -> *U + &U _buf * -> -> -> 5 `i `ui `ux -> -> # *U &U _buf `ui `ux `i `ui ]
 [; ;smartkey.C: 356: tmp8++;
 "356
 [e ++ _tmp8 -> -> 1 `i `uc ]
 "357
 }
-[e :U 160 ]
+[e :U 159 ]
 [; ;smartkey.C: 357: }
 [; ;smartkey.C: 358: _delay((unsigned long)((500)*(4000000/4000.0)));
 "358
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "360
 }
-[e :U 157 ]
+[e :U 156 ]
 "349
-[e $ && _RA2 < -> _tmp8 `i -> 11 `i 158  ]
-[e :U 159 ]
+[e $ && _RA2 < -> _tmp8 `i -> 11 `i 157  ]
+[e :U 158 ]
 [; ;smartkey.C: 360: }
 [; ;smartkey.C: 362: if(tmp8==11){
 "362
-[e $ ! == -> _tmp8 `i -> 11 `i 161  ]
+[e $ ! == -> _tmp8 `i -> 11 `i 160  ]
 {
 [; ;smartkey.C: 363: acXsum =acXsum/10;
 "363
@@ -2667,7 +2668,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _tmp16 -> / -> _tmp16 `i -> 10 `i `ui ]
 [; ;smartkey.C: 367: if(((signed int)tmp16 > (-31)) && ((signed int)tmp16 < 31)){
 "367
-[e $ ! && > -> _tmp16 `i -U -> 31 `i < -> _tmp16 `i -> 31 `i 162  ]
+[e $ ! && > -> _tmp16 `i -U -> 31 `i < -> _tmp16 `i -> 31 `i 161  ]
 {
 [; ;smartkey.C: 368: beep(10,2);
 "368
@@ -2675,9 +2676,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "369
 }
 [; ;smartkey.C: 369: }
-[e $U 163  ]
+[e $U 162  ]
 "370
-[e :U 162 ]
+[e :U 161 ]
 [; ;smartkey.C: 370: else
 [; ;smartkey.C: 372: {
 "372
@@ -2696,20 +2697,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "377
 }
-[e :U 163 ]
+[e :U 162 ]
 "379
 }
 [; ;smartkey.C: 377: }
 [; ;smartkey.C: 379: }else{
-[e $U 164  ]
-[e :U 161 ]
+[e $U 163  ]
+[e :U 160 ]
 {
 [; ;smartkey.C: 380: beep(10,2);
 "380
 [e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
 "381
 }
-[e :U 164 ]
+[e :U 163 ]
 [; ;smartkey.C: 381: }
 [; ;smartkey.C: 382: WRITE_EEPROM(0x40,0);
 "382
@@ -2719,7 +2720,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _tmp8 -> -> 0 `i `uc ]
 "384
 }
-[e :U 156 ]
+[e :U 155 ]
 [; ;smartkey.C: 384: }
 [; ;smartkey.C: 386: acXsum = (signed char)READ_EEPROM(0x10);
 "386
@@ -2732,17 +2733,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _timeTick -> -> 0 `i `ui ]
 [; ;smartkey.C: 392: while(1){
 "392
-[e :U 166 ]
+[e :U 165 ]
 {
 [; ;smartkey.C: 398: if(mode_chek == 0)
 "398
-[e $ ! == -> _mode_chek `i -> 0 `i 168  ]
+[e $ ! == -> _mode_chek `i -> 0 `i 167  ]
 [; ;smartkey.C: 399: {
 "399
 {
 [; ;smartkey.C: 401: if(RegStatus & 0x80)
 "401
-[e $ ! != & -> _RegStatus `i -> 128 `i -> 0 `i 169  ]
+[e $ ! != & -> _RegStatus `i -> 128 `i -> 0 `i 168  ]
 [; ;smartkey.C: 402: {
 "402
 {
@@ -2757,15 +2758,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;smartkey.C: 420: if ((RegStatus & 0x40) !=0){
 "420
-[e $ ! != & -> _RegStatus `i -> 64 `i -> 0 `i 170  ]
+[e $ ! != & -> _RegStatus `i -> 64 `i -> 0 `i 169  ]
 {
 [; ;smartkey.C: 423: switch (mtState){
 "423
-[e $U 172  ]
+[e $U 171  ]
 {
 [; ;smartkey.C: 424: case 1:
 "424
-[e :U 173 ]
+[e :U 172 ]
 [; ;smartkey.C: 426: lostDetect =0;
 "426
 [e = _lostDetect -> -> 0 `i `uc ]
@@ -2777,25 +2778,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _tmp16 -> -> 40 `i `ui ]
 [; ;smartkey.C: 429: break;
 "429
-[e $U 171  ]
+[e $U 170  ]
 [; ;smartkey.C: 431: case 2:
 "431
-[e :U 174 ]
+[e :U 173 ]
 [; ;smartkey.C: 432: if(timeTick >30){
 "432
-[e $ ! > _timeTick -> -> 30 `i `ui 175  ]
+[e $ ! > _timeTick -> -> 30 `i `ui 174  ]
 {
 [; ;smartkey.C: 433: timeTick =0;
 "433
 [e = _timeTick -> -> 0 `i `ui ]
 [; ;smartkey.C: 435: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
 "435
-[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 176  ]
+[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 175  ]
 [e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
-[e :U 176 ]
+[e :U 175 ]
 [; ;smartkey.C: 437: if((mtOldState == 3)){
 "437
-[e $ ! == -> _mtOldState `i -> 3 `i 177  ]
+[e $ ! == -> _mtOldState `i -> 3 `i 176  ]
 {
 [; ;smartkey.C: 438: beepOn();TMR2ON = 0; beep(10,1);
 "438
@@ -2804,17 +2805,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _beep (2 , -> -> 10 `i `uc -> -> 1 `i `uc ]
 [; ;smartkey.C: 439: if(reAlertOn)reAlertOn =0;
 "439
-[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 178  ]
+[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 177  ]
 [e = _reAlertOn -> -> 0 `i `uc ]
-[e :U 178 ]
+[e :U 177 ]
 "440
 }
 [; ;smartkey.C: 440: }
-[e $U 179  ]
+[e $U 178  ]
 "441
-[e :U 177 ]
+[e :U 176 ]
 [; ;smartkey.C: 441: else if((mtOldState == 0)||(mtOldState == 4)){
-[e $ ! || == -> _mtOldState `i -> 0 `i == -> _mtOldState `i -> 4 `i 180  ]
+[e $ ! || == -> _mtOldState `i -> 0 `i == -> _mtOldState `i -> 4 `i 179  ]
 {
 [; ;smartkey.C: 442: RegStatus |=(0x20);
 "442
@@ -2824,9 +2825,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _setState (2 , -> -> 1 `i `uc -> -> 3500 `i `ui ]
 [; ;smartkey.C: 444: if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
 "444
-[e $ ! != -> ( _READ_EEPROM (1 -> -> 64 `i `uc `i -> -> -> 0 `i `uc `i 181  ]
+[e $ ! != -> ( _READ_EEPROM (1 -> -> 64 `i `uc `i -> -> -> 0 `i `uc `i 180  ]
 [e ( _WRITE_EEPROM (2 , -> -> 64 `i `uc -> -> 0 `i `uc ]
-[e :U 181 ]
+[e :U 180 ]
 [; ;smartkey.C: 445: tmp16 = timeTick+40;
 "445
 [e = _tmp16 + _timeTick -> -> 40 `i `ui ]
@@ -2836,36 +2837,36 @@ Version 3.2 HI-TECH Software Intermediate Code
 "447
 }
 [; ;smartkey.C: 447: }
-[e $U 182  ]
+[e $U 181  ]
 "448
-[e :U 180 ]
+[e :U 179 ]
 [; ;smartkey.C: 448: else if((mtOldState == 1)){
-[e $ ! == -> _mtOldState `i -> 1 `i 183  ]
+[e $ ! == -> _mtOldState `i -> 1 `i 182  ]
 {
 [; ;smartkey.C: 450: if(reAlertOn)reAlertOn =0;
 "450
-[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 184  ]
+[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 183  ]
 [e = _reAlertOn -> -> 0 `i `uc ]
-[e :U 184 ]
+[e :U 183 ]
 "451
 }
-[e :U 183 ]
-"452
 [e :U 182 ]
-[e :U 179 ]
+"452
+[e :U 181 ]
+[e :U 178 ]
 }
-[e :U 175 ]
+[e :U 174 ]
 [; ;smartkey.C: 451: }
 [; ;smartkey.C: 452: }
 [; ;smartkey.C: 453: break;
 "453
-[e $U 171  ]
+[e $U 170  ]
 [; ;smartkey.C: 455: case 3:
 "455
-[e :U 185 ]
+[e :U 184 ]
 [; ;smartkey.C: 456: if(timeTick > 200)
 "456
-[e $ ! > _timeTick -> -> 200 `i `ui 186  ]
+[e $ ! > _timeTick -> -> 200 `i `ui 185  ]
 [; ;smartkey.C: 457: {
 "457
 {
@@ -2874,9 +2875,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _beepOff ..  ]
 [; ;smartkey.C: 459: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
 "459
-[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 187  ]
+[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 186  ]
 [e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
-[e :U 187 ]
+[e :U 186 ]
 [; ;smartkey.C: 460: RegStatus |=(0x20);
 "460
 [e =| _RegStatus -> -> 32 `i `uc ]
@@ -2888,14 +2889,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _tmp16 + _timeTick -> -> 40 `i `ui ]
 "464
 }
-[e :U 186 ]
+[e :U 185 ]
 [; ;smartkey.C: 464: }
 [; ;smartkey.C: 466: break;
 "466
-[e $U 171  ]
+[e $U 170  ]
 [; ;smartkey.C: 468: case 4:
 "468
-[e :U 188 ]
+[e :U 187 ]
 [; ;smartkey.C: 469: beepOff();
 "469
 [e ( _beepOff ..  ]
@@ -2904,56 +2905,56 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
 [; ;smartkey.C: 471: break;
 "471
-[e $U 171  ]
+[e $U 170  ]
 [; ;smartkey.C: 472: case 0:
 "472
-[e :U 189 ]
+[e :U 188 ]
 [; ;smartkey.C: 475: break;
 "475
-[e $U 171  ]
+[e $U 170  ]
 "477
 }
 [; ;smartkey.C: 477: }
-[e $U 171  ]
+[e $U 170  ]
 "423
-[e :U 172 ]
-[e [\ _mtState , $ -> -> 1 `i `uc 173
- , $ -> -> 2 `i `uc 174
- , $ -> -> 3 `i `uc 185
- , $ -> -> 4 `i `uc 188
- , $ -> -> 0 `i `uc 189
- 171 ]
-"477
 [e :U 171 ]
+[e [\ _mtState , $ -> -> 1 `i `uc 172
+ , $ -> -> 2 `i `uc 173
+ , $ -> -> 3 `i `uc 184
+ , $ -> -> 4 `i `uc 187
+ , $ -> -> 0 `i `uc 188
+ 170 ]
+"477
+[e :U 170 ]
 "479
 }
 [; ;smartkey.C: 479: }
-[e $U 190  ]
+[e $U 189  ]
 "481
-[e :U 170 ]
+[e :U 169 ]
 [; ;smartkey.C: 481: else{
 {
 [; ;smartkey.C: 483: switch (mtState){
 "483
-[e $U 192  ]
+[e $U 191  ]
 {
 [; ;smartkey.C: 485: case 1:
 "485
-[e :U 193 ]
+[e :U 192 ]
 [; ;smartkey.C: 488: {
 "488
 {
 [; ;smartkey.C: 490: if(lostDetect==1 && timeTick< 1500)
 "490
-[e $ ! && == -> _lostDetect `i -> 1 `i < _timeTick -> -> 1500 `i `ui 194  ]
+[e $ ! && == -> _lostDetect `i -> 1 `i < _timeTick -> -> 1500 `i `ui 193  ]
 [; ;smartkey.C: 491: {
 "491
 {
 [; ;smartkey.C: 492: if(READ_EEPROM(0x08)==0x00) WRITE_EEPROM(0x08,0xcc);
 "492
-[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 0 `i 195  ]
+[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 0 `i 194  ]
 [e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 204 `i `uc ]
-[e :U 195 ]
+[e :U 194 ]
 [; ;smartkey.C: 494: setState(3,1800);
 "494
 [e ( _setState (2 , -> -> 3 `i `uc -> -> 1800 `i `ui ]
@@ -2972,9 +2973,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "499
 }
 [; ;smartkey.C: 499: }
-[e $U 196  ]
+[e $U 195  ]
 "500
-[e :U 194 ]
+[e :U 193 ]
 [; ;smartkey.C: 500: else {
 {
 [; ;smartkey.C: 501: lostDetect =1;
@@ -2982,7 +2983,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _lostDetect -> -> 1 `i `uc ]
 "504
 }
-[e :U 196 ]
+[e :U 195 ]
 [; ;smartkey.C: 504: }
 [; ;smartkey.C: 505: timeTick =0;
 "505
@@ -2995,10 +2996,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;smartkey.C: 507: }
 [; ;smartkey.C: 508: break;
 "508
-[e $U 191  ]
+[e $U 190  ]
 [; ;smartkey.C: 509: case 2:
 "509
-[e :U 197 ]
+[e :U 196 ]
 [; ;smartkey.C: 511: {
 "511
 {
@@ -3014,31 +3015,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _beep (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
 [; ;smartkey.C: 515: if(mtOldState == 3){reAlertOn =1;}
 "515
-[e $ ! == -> _mtOldState `i -> 3 `i 198  ]
+[e $ ! == -> _mtOldState `i -> 3 `i 197  ]
 {
 [e = _reAlertOn -> -> 1 `i `uc ]
 }
-[e :U 198 ]
+[e :U 197 ]
 "516
 }
 [; ;smartkey.C: 516: }
 [; ;smartkey.C: 517: break;
 "517
-[e $U 191  ]
+[e $U 190  ]
 "518
 }
 [; ;smartkey.C: 518: }
-[e $U 191  ]
+[e $U 190  ]
 "483
-[e :U 192 ]
-[e [\ _mtState , $ -> -> 1 `i `uc 193
- , $ -> -> 2 `i `uc 197
- 191 ]
-"518
 [e :U 191 ]
+[e [\ _mtState , $ -> -> 1 `i `uc 192
+ , $ -> -> 2 `i `uc 196
+ 190 ]
+"518
+[e :U 190 ]
 "519
 }
-[e :U 190 ]
+[e :U 189 ]
 "521
 }
 [; ;smartkey.C: 519: }
@@ -3048,10 +3049,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _PAIE -> -> 1 `i `b ]
 "524
 }
-[e :U 169 ]
+[e :U 168 ]
 "526
 }
-[e :U 168 ]
+[e :U 167 ]
 [; ;smartkey.C: 524: }
 [; ;smartkey.C: 526: }
 [; ;smartkey.C: 530: {
@@ -3059,21 +3060,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;smartkey.C: 531: if((timeOut!=0)&&( timeTick >timeOut)){
 "531
-[e $ ! && != _timeOut -> -> 0 `i `ui > _timeTick _timeOut 199  ]
+[e $ ! && != _timeOut -> -> 0 `i `ui > _timeTick _timeOut 198  ]
 {
 [; ;smartkey.C: 533: switch (mtState){
 "533
-[e $U 201  ]
+[e $U 200  ]
 {
 [; ;smartkey.C: 535: case 1:
 "535
-[e :U 202 ]
+[e :U 201 ]
 [; ;smartkey.C: 540: break;
 "540
-[e $U 200  ]
+[e $U 199  ]
 [; ;smartkey.C: 541: case 3:
 "541
-[e :U 203 ]
+[e :U 202 ]
 [; ;smartkey.C: 542: beepOff();
 "542
 [e ( _beepOff ..  ]
@@ -3085,10 +3086,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
 [; ;smartkey.C: 545: break;
 "545
-[e $U 200  ]
+[e $U 199  ]
 [; ;smartkey.C: 546: case 4:
 "546
-[e :U 204 ]
+[e :U 203 ]
 [; ;smartkey.C: 547: beepOff();
 "547
 [e ( _beepOff ..  ]
@@ -3111,18 +3112,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _tmp16 + _timeTick -> -> 40 `i `ui ]
 [; ;smartkey.C: 554: break;
 "554
-[e $U 200  ]
+[e $U 199  ]
 [; ;smartkey.C: 555: case 2:
 "555
-[e :U 205 ]
+[e :U 204 ]
 [; ;smartkey.C: 557: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
 "557
-[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 206  ]
+[e $ ! == -> ( _READ_EEPROM (1 -> -> 8 `i `uc `i -> 204 `i 205  ]
 [e ( _WRITE_EEPROM (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
-[e :U 206 ]
+[e :U 205 ]
 [; ;smartkey.C: 559: if(reAlertOn){
 "559
-[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 207  ]
+[e $ ! != -> _reAlertOn `i -> -> -> 0 `i `uc `i 206  ]
 {
 [; ;smartkey.C: 560: setState(4,6000);
 "560
@@ -3139,9 +3140,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "565
 }
 [; ;smartkey.C: 565: }else if(mtOldState == 0){
-[e $U 208  ]
-[e :U 207 ]
-[e $ ! == -> _mtOldState `i -> 0 `i 209  ]
+[e $U 207  ]
+[e :U 206 ]
+[e $ ! == -> _mtOldState `i -> 0 `i 208  ]
 {
 [; ;smartkey.C: 567: beep(10,5);
 "567
@@ -3151,9 +3152,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e =| _RegStatus -> -> 32 `i `uc ]
 [; ;smartkey.C: 571: if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
 "571
-[e $ ! != -> ( _READ_EEPROM (1 -> -> 64 `i `uc `i -> -> -> 0 `i `uc `i 210  ]
+[e $ ! != -> ( _READ_EEPROM (1 -> -> 64 `i `uc `i -> -> -> 0 `i `uc `i 209  ]
 [e ( _WRITE_EEPROM (2 , -> -> 64 `i `uc -> -> 0 `i `uc ]
-[e :U 210 ]
+[e :U 209 ]
 [; ;smartkey.C: 573: setState(1,3500);
 "573
 [e ( _setState (2 , -> -> 1 `i `uc -> -> 3500 `i `ui ]
@@ -3163,8 +3164,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "576
 }
 [; ;smartkey.C: 576: }else{
-[e $U 211  ]
-[e :U 209 ]
+[e $U 210  ]
+[e :U 208 ]
 {
 [; ;smartkey.C: 577: beepOn();TMR2ON = 0;
 "577
@@ -3184,53 +3185,53 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _tmp16 + _timeTick -> -> 40 `i `ui ]
 "583
 }
-[e :U 211 ]
-[e :U 208 ]
+[e :U 210 ]
+[e :U 207 ]
 [; ;smartkey.C: 583: }
 [; ;smartkey.C: 584: break;
 "584
-[e $U 200  ]
+[e $U 199  ]
 "585
 }
 [; ;smartkey.C: 585: }
-[e $U 200  ]
+[e $U 199  ]
 "533
-[e :U 201 ]
-[e [\ _mtState , $ -> -> 1 `i `uc 202
- , $ -> -> 3 `i `uc 203
- , $ -> -> 4 `i `uc 204
- , $ -> -> 2 `i `uc 205
- 200 ]
-"585
 [e :U 200 ]
+[e [\ _mtState , $ -> -> 1 `i `uc 201
+ , $ -> -> 3 `i `uc 202
+ , $ -> -> 4 `i `uc 203
+ , $ -> -> 2 `i `uc 204
+ 199 ]
+"585
+[e :U 199 ]
 "586
 }
-[e :U 199 ]
+[e :U 198 ]
 "588
 }
 [; ;smartkey.C: 586: }
 [; ;smartkey.C: 588: }
 [; ;smartkey.C: 590: if((timeTick>tmp16) && (mtState == 1) && mpuOk ==1){
 "590
-[e $ ! && && > _timeTick _tmp16 == -> _mtState `i -> 1 `i == -> _mpuOk `i -> 1 `i 212  ]
+[e $ ! && && > _timeTick _tmp16 == -> _mtState `i -> 1 `i == -> _mpuOk `i -> 1 `i 211  ]
 {
 [; ;smartkey.C: 591: tmp16 = timeTick+40;
 "591
 [e = _tmp16 + _timeTick -> -> 40 `i `ui ]
-[; ;smartkey.C: 592: if(AccRead(0x3b,buf,6)==0){
+[; ;smartkey.C: 592: if(AccRead(0x02,buf,6)==0){
 "592
-[e $ ! == -> ( _AccRead (3 , , -> -> 59 `i `uc -> &U _buf `*uc -> -> 6 `i `uc `i -> 0 `i 213  ]
+[e $ ! == -> ( _AccRead (3 , , -> -> 2 `i `uc -> &U _buf `*uc -> -> 6 `i `uc `i -> 0 `i 212  ]
 {
-[; ;smartkey.C: 594: if(compe(buf[0], (signed char)acXsum,5) && compe(buf[2], (signed char)acYsum,5)){
+[; ;smartkey.C: 594: if(compe(buf[1], (signed char)acXsum,5) && compe(buf[3], (signed char)acYsum,5)){
 "594
-[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acXsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acYsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i 214  ]
+[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acXsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 3 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acYsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i 213  ]
 {
 [; ;smartkey.C: 597: isSw++;
 "597
 [e ++ _isSw -> -> 1 `i `uc ]
 [; ;smartkey.C: 598: if(isSw >44){
 "598
-[e $ ! > -> _isSw `i -> 44 `i 215  ]
+[e $ ! > -> _isSw `i -> 44 `i 214  ]
 {
 [; ;smartkey.C: 599: isSw =0;
 "599
@@ -3238,10 +3239,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;smartkey.C: 600: vibrateOn=1;
 "600
 [e = _vibrateOn -> -> 1 `i `uc ]
-[; ;smartkey.C: 602: acYOld = buf[2];acXOld = buf[0];
+[; ;smartkey.C: 602: acYOld = buf[3];acXOld = buf[1];
 "602
-[e = _acYOld *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
-[e = _acXOld *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
+[e = _acYOld *U + &U _buf * -> -> -> 3 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
+[e = _acXOld *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
 [; ;smartkey.C: 603: RegStatus &=(~0x20);
 "603
 [e =& _RegStatus -> ~ -> 32 `i `uc ]
@@ -3251,15 +3252,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 "606
 }
 [; ;smartkey.C: 606: }
-[e $U 216  ]
+[e $U 215  ]
 "607
-[e :U 215 ]
+[e :U 214 ]
 [; ;smartkey.C: 607: else if(isSw > 25){
-[e $ ! > -> _isSw `i -> 25 `i 217  ]
+[e $ ! > -> _isSw `i -> 25 `i 216  ]
 {
 [; ;smartkey.C: 608: if(isSw%2==0){
 "608
-[e $ ! == % -> _isSw `i -> 2 `i -> 0 `i 218  ]
+[e $ ! == % -> _isSw `i -> 2 `i -> 0 `i 217  ]
 {
 [; ;smartkey.C: 609: beepOn();TMR2ON = 0; beep(7,1);
 "609
@@ -3268,34 +3269,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _beep (2 , -> -> 7 `i `uc -> -> 1 `i `uc ]
 "610
 }
-[e :U 218 ]
+[e :U 217 ]
 "611
 }
-[e :U 217 ]
-"613
 [e :U 216 ]
+"613
+[e :U 215 ]
 }
 [; ;smartkey.C: 610: }
 [; ;smartkey.C: 611: }
 [; ;smartkey.C: 613: }
-[e $U 219  ]
+[e $U 218  ]
 "614
-[e :U 214 ]
+[e :U 213 ]
 [; ;smartkey.C: 614: else{
 {
 [; ;smartkey.C: 615: isSw =0;
 "615
 [e = _isSw -> -> 0 `i `uc ]
-[; ;smartkey.C: 618: if(compe(buf[0], acXOld,2) && compe(buf[2], acYOld,2)){
+[; ;smartkey.C: 618: if(compe(buf[1], acXOld,2) && compe(buf[3], acYOld,2)){
 "618
-[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i 220  ]
+[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 3 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i 219  ]
 {
 [; ;smartkey.C: 619: isWait++;
 "619
 [e ++ _isWait -> -> 1 `i `ui ]
 [; ;smartkey.C: 620: if(isWait==450){
 "620
-[e $ ! == _isWait -> -> 450 `i `ui 221  ]
+[e $ ! == _isWait -> -> 450 `i `ui 220  ]
 {
 [; ;smartkey.C: 621: isWait = 0;
 "621
@@ -3314,26 +3315,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
 "626
 }
-[e :U 221 ]
+[e :U 220 ]
 "627
 }
-[e :U 220 ]
+[e :U 219 ]
 "629
 }
-[e :U 219 ]
+[e :U 218 ]
 [; ;smartkey.C: 626: }
 [; ;smartkey.C: 627: }
 [; ;smartkey.C: 629: }
-[; ;smartkey.C: 631: if( (buf[4] > -31) && (buf[4] < 31)) {
+[; ;smartkey.C: 631: if( (buf[5] > -31) && (buf[5] < 31)) {
 "631
-[e $ ! && > -> *U + &U _buf * -> -> -> 4 `i `ui `ux -> -> # *U &U _buf `ui `ux `i -U -> 31 `i < -> *U + &U _buf * -> -> -> 4 `i `ui `ux -> -> # *U &U _buf `ui `ux `i -> 31 `i 222  ]
+[e $ ! && > -> *U + &U _buf * -> -> -> 5 `i `ui `ux -> -> # *U &U _buf `ui `ux `i -U -> 31 `i < -> *U + &U _buf * -> -> -> 5 `i `ui `ux -> -> # *U &U _buf `ui `ux `i -> 31 `i 221  ]
 {
 [; ;smartkey.C: 632: isFall++;
 "632
 [e ++ _isFall -> -> 1 `i `uc ]
 [; ;smartkey.C: 633: if(isFall >4){
 "633
-[e $ ! > -> _isFall `i -> 4 `i 223  ]
+[e $ ! > -> _isFall `i -> 4 `i 222  ]
 {
 [; ;smartkey.C: 634: isFall =0;
 "634
@@ -3349,14 +3350,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _setState (2 , -> -> 2 `i `uc -> -> 300 `i `ui ]
 "638
 }
-[e :U 223 ]
+[e :U 222 ]
 "639
 }
 [; ;smartkey.C: 638: }
 [; ;smartkey.C: 639: }
-[e $U 224  ]
+[e $U 223  ]
 "640
-[e :U 222 ]
+[e :U 221 ]
 [; ;smartkey.C: 640: else{
 {
 [; ;smartkey.C: 641: isFall=0;
@@ -3364,43 +3365,43 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _isFall -> -> 0 `i `uc ]
 "642
 }
-[e :U 224 ]
+[e :U 223 ]
 [; ;smartkey.C: 642: }
-[; ;smartkey.C: 644: acYOld = buf[2];acXOld = buf[0];
+[; ;smartkey.C: 644: acYOld = buf[3];acXOld = buf[1];
 "644
-[e = _acYOld *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
-[e = _acXOld *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
+[e = _acYOld *U + &U _buf * -> -> -> 3 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
+[e = _acXOld *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
 "645
 }
-[e :U 213 ]
+[e :U 212 ]
 "647
 }
-[e :U 212 ]
+[e :U 211 ]
 [; ;smartkey.C: 645: }
 [; ;smartkey.C: 647: }
 [; ;smartkey.C: 650: if((timeTick>tmp16) && (mtState == 0 ) && mpuOk ==1){
 "650
-[e $ ! && && > _timeTick _tmp16 == -> _mtState `i -> 0 `i == -> _mpuOk `i -> 1 `i 225  ]
+[e $ ! && && > _timeTick _tmp16 == -> _mtState `i -> 0 `i == -> _mpuOk `i -> 1 `i 224  ]
 {
 [; ;smartkey.C: 652: if(timeTick >65000) timeTick =0;
 "652
-[e $ ! > -> _timeTick `l -> 65000 `l 226  ]
+[e $ ! > -> _timeTick `l -> 65000 `l 225  ]
 [e = _timeTick -> -> 0 `i `ui ]
-[e :U 226 ]
+[e :U 225 ]
 [; ;smartkey.C: 653: tmp16 = timeTick+40;
 "653
 [e = _tmp16 + _timeTick -> -> 40 `i `ui ]
-[; ;smartkey.C: 655: if(AccRead(0x3b,buf,6)==0){
+[; ;smartkey.C: 655: if(AccRead(0x02,buf,6)==0){
 "655
-[e $ ! == -> ( _AccRead (3 , , -> -> 59 `i `uc -> &U _buf `*uc -> -> 6 `i `uc `i -> 0 `i 227  ]
+[e $ ! == -> ( _AccRead (3 , , -> -> 2 `i `uc -> &U _buf `*uc -> -> 6 `i `uc `i -> 0 `i 226  ]
 {
 [; ;smartkey.C: 657: if(vibrateOn==1){
 "657
-[e $ ! == -> _vibrateOn `i -> 1 `i 228  ]
+[e $ ! == -> _vibrateOn `i -> 1 `i 227  ]
 {
-[; ;smartkey.C: 658: if(compe(buf[0],acXOld ,3) && compe(buf[2],acYOld ,3)){
+[; ;smartkey.C: 658: if(compe(buf[1],acXOld ,3) && compe(buf[3],acYOld ,3)){
 "658
-[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 3 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 3 `i `c `i -> -> -> 0 `i `uc `i 229  ]
+[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 3 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 3 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 3 `i `c `i -> -> -> 0 `i `uc `i 228  ]
 {
 [; ;smartkey.C: 660: isSw=0;
 "660
@@ -3408,9 +3409,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "663
 }
 [; ;smartkey.C: 663: }
-[e $U 230  ]
+[e $U 229  ]
 "664
-[e :U 229 ]
+[e :U 228 ]
 [; ;smartkey.C: 664: else{
 {
 [; ;smartkey.C: 665: isSw++;
@@ -3428,16 +3429,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "671
 }
-[e :U 230 ]
+[e :U 229 ]
 "672
 }
-[e :U 228 ]
+[e :U 227 ]
 "674
 }
-[e :U 227 ]
+[e :U 226 ]
 "677
 }
-[e :U 225 ]
+[e :U 224 ]
 [; ;smartkey.C: 670: }
 [; ;smartkey.C: 671: }
 [; ;smartkey.C: 672: }
@@ -3445,26 +3446,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;smartkey.C: 677: }
 [; ;smartkey.C: 679: if(RegStatus & 0x20) {RC0 =1;RC1 =1;}
 "679
-[e $ ! != & -> _RegStatus `i -> 32 `i -> 0 `i 231  ]
+[e $ ! != & -> _RegStatus `i -> 32 `i -> 0 `i 230  ]
 {
 [e = _RC0 -> -> 1 `i `b ]
 [e = _RC1 -> -> 1 `i `b ]
 }
-[e $U 232  ]
+[e $U 231  ]
 "680
-[e :U 231 ]
+[e :U 230 ]
 [; ;smartkey.C: 680: else {RC0 =0;RC1 =0;}
 {
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC1 -> -> 0 `i `b ]
 }
-[e :U 232 ]
+[e :U 231 ]
 "683
 }
-[e :U 165 ]
+[e :U 164 ]
 "392
-[e $U 166  ]
-[e :U 167 ]
+[e $U 165  ]
+[e :U 166 ]
 [; ;smartkey.C: 683: }
 [; ;smartkey.C: 685: }
 "685

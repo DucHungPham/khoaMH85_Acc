@@ -303,7 +303,7 @@ tmp8= READ_EEPROM(add_Alert);
 tmp8    = READ_EEPROM(0x40);// dia chi luu gia tri so lan on/off
 if(tmp8==8){
     tmp8= READ_EEPROM(0x41);// che do? bo qua chuc nang bo^. khoa
-    beep(25,1);
+    beep(30,1);
     if((tmp8==1)||(tmp8==0xff)){
         WRITE_EEPROM(0x41,0);
     }
@@ -327,18 +327,18 @@ tmp8    = READ_EEPROM(0x41);
 }
 
 
-    buf[0] = 0x28; //Acc only
-    buf[1] = 0x87;
-    if(AccWrite(0x6b,(unsigned char)buf,2)==0) 
+	buf[0] = 0x08; //BMA 
+    buf[1] = 0x4d;
+    
+    if(AccWrite(0x10,(unsigned char)buf,2)==0) {
 		mpuOk =1;
-    else 
+    }
+    else {
     mpuOk =0;
+    beep(10,2);// bao loi giao tiep mpu
+    }
     //SendNum(AccWrite(0x6b,(unsigned char *)buf,1));
-   __delay_ms(100);
-
-if(mpuOk ==0){beep(10,2);}// bao loi giao tiep mpu
-
-
+   //__delay_ms(100);
 
 // Luu gia tri goc nghieng vao eeprom
 //
@@ -348,11 +348,11 @@ tmp8= READ_EEPROM(0x40);//che do? bo qua chuc nang bo^. khoa
 		tmp8=0; beep(10,3); 
 		while((swPwOn )&&(tmp8<11))
 		 {
-				if(AccRead(0x3b,(unsigned char)buf,6)==0){
+				if(AccRead(0x02,(unsigned char)buf,6)==0){
 			
-		acXsum += buf[0];
-		acYsum += buf[2];
-        tmp16 = (signed int)tmp16 + buf[4];
+		acXsum += buf[1];
+		acYsum += buf[3];
+        tmp16 = (signed int)tmp16 + buf[5];
 		tmp8++;
 			 }
 		__delay_ms(500);
@@ -388,7 +388,7 @@ tmp8= READ_EEPROM(0x40);//che do? bo qua chuc nang bo^. khoa
    
 timeTick = 0;
 
-//=================
+//================
 	while(1){
 
 //swTx =keyDetect;
@@ -589,9 +589,9 @@ timeTick = 0;
      
 		if((timeTick>tmp16) && (mtState == _Open) && mpuOk ==1){
 			tmp16 = timeTick+40;
-			if(AccRead(0x3b,buf,6)==0){
+			if(AccRead(0x02,buf,6)==0){
 
-				if(compe(buf[0], (signed char)acXsum,5) && compe(buf[2], (signed char)acYsum,5)){
+				if(compe(buf[1], (signed char)acXsum,5) && compe(buf[3], (signed char)acYsum,5)){
 				//beep(10,1);
                 // phat hien da chong
 					isSw++;
@@ -599,7 +599,7 @@ timeTick = 0;
 						isSw =0;
                         vibrateOn=1; // bat che do chong rung
                         // lay vi tri chinh xac tai thoi diem da chong, truoc khi chuyen sang che do chong rung
-                        acYOld = buf[2];acXOld = buf[0];
+                        acYOld = buf[3];acXOld = buf[1];
 						RegStatus &=(~bitPwOn);
 						setState(_rCheck,tOut_rCheck);
                         //
@@ -615,7 +615,7 @@ timeTick = 0;
 						isSw =0;
                          // khi xe khong chuyen dong, o trang thai tinh lien tuc 3m => dua ve che do bao ve
                          
-                        if(compe(buf[0], acXOld,2) && compe(buf[2], acYOld,2)){
+                        if(compe(buf[1], acXOld,2) && compe(buf[3], acYOld,2)){
                             isWait++;
                             if(isWait==450){
                                 isWait = 0;
@@ -628,7 +628,7 @@ timeTick = 0;
 						     
 				}
                 
-				if( (buf[4] > -31) && (buf[4] < 31)) {
+				if( (buf[5] > -31) && (buf[5] < 31)) {
                     isFall++;
                     if(isFall >4){
 						isFall =0;
@@ -641,21 +641,21 @@ timeTick = 0;
 						isFall=0;
 				}
                 
-				acYOld = buf[2];acXOld = buf[0];
+				acYOld = buf[3];acXOld = buf[1];
             }	
             
 		}  		
 ///     
- // chong rung, chong dat 
+ // chong rung, chong dat khi may nghi
 if((timeTick>tmp16) && (mtState == _Ide ) && mpuOk ==1){//|| mtState == _rCheck
 			
 			if(timeTick >65000) timeTick =0;
 			tmp16 = timeTick+40;
            
-			if(AccRead(0x3b,buf,6)==0){
+			if(AccRead(0x02,buf,6)==0){
                 
 				if(vibrateOn==1){
-					if(compe(buf[0],acXOld ,3) && compe(buf[2],acYOld ,3)){//(signed char)acXsum  (signed char)acYsum
+					if(compe(buf[1],acXOld ,3) && compe(buf[3],acYOld ,3)){//(signed char)acXsum  (signed char)acYsum
 					//beep(10,1);
 						isSw=0;
 						

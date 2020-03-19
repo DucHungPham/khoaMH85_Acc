@@ -1059,7 +1059,7 @@ unsigned char AccWrite(unsigned char rAdd,unsigned char *dat, unsigned char len)
 unsigned char i;
 swI2C_Start();
 
-if(swI2C_WriteByte(0x68<<1)== 0 )
+if(swI2C_WriteByte(0x18<<1)== 0 )
 {
 if(swI2C_WriteByte(rAdd)==0 )
 {
@@ -1087,12 +1087,12 @@ unsigned char i;
 
 swI2C_Start();
 
-if(swI2C_WriteByte(0x68<<1)== 0 )
+if(swI2C_WriteByte(0x18<<1)== 0 )
 {
 if(swI2C_WriteByte(rAdd)==0 )
 {
 swI2C_Start();
-if(swI2C_WriteByte((0x68<<1)|1)== 0 ){
+if(swI2C_WriteByte((0x18<<1)|1)== 0 ){
 
 for(i=0; i<(len-1);i++){
 dat[i]=swI2C_ReadByte(1);

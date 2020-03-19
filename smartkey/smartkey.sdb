@@ -2737,19 +2737,19 @@
 [v _main `(v  1 e 0 0 ]
 {
 "256
-[v main@buf `[6]c  1 a 6 21 ]
+[v main@buf `[6]c  1 a 6 26 ]
 "254
 [v main@tmp16 `ui  1 a 2 34 ]
 "253
-[v main@acXsum `i  1 a 2 29 ]
-[v main@acYsum `i  1 a 2 27 ]
+[v main@acXsum `i  1 a 2 24 ]
+[v main@acYsum `i  1 a 2 22 ]
 "252
 [v main@isWait `ui  1 a 2 15 ]
 "251
 [v main@tmp8 `uc  1 a 1 36 ]
-[v main@mpuOk `uc  1 a 1 33 ]
-[v main@isSw `uc  1 a 1 32 ]
-[v main@reAlertOn `uc  1 a 1 31 ]
+[v main@isSw `uc  1 a 1 33 ]
+[v main@reAlertOn `uc  1 a 1 32 ]
+[v main@mpuOk `uc  1 a 1 21 ]
 "255
 [v main@acXOld `c  1 a 1 20 ]
 [v main@acYOld `c  1 a 1 19 ]

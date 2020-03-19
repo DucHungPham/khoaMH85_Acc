@@ -1764,9 +1764,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mpu6x.c: 6: swI2C_Start();
 "6
 [e ( _swI2C_Start ..  ]
-[; ;mpu6x.c: 8: if(swI2C_WriteByte(0x68<<1)== 0 )
+[; ;mpu6x.c: 8: if(swI2C_WriteByte(0x18<<1)== 0 )
 "8
-[e $ ! == -> ( _swI2C_WriteByte (1 -> << -> 104 `i -> 1 `i `uc `i -> 0 `i 87  ]
+[e $ ! == -> ( _swI2C_WriteByte (1 -> << -> 24 `i -> 1 `i `uc `i -> 0 `i 87  ]
 [; ;mpu6x.c: 9: {
 "9
 {
@@ -1859,9 +1859,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mpu6x.c: 34: swI2C_Start();
 "34
 [e ( _swI2C_Start ..  ]
-[; ;mpu6x.c: 36: if(swI2C_WriteByte(0x68<<1)== 0 )
+[; ;mpu6x.c: 36: if(swI2C_WriteByte(0x18<<1)== 0 )
 "36
-[e $ ! == -> ( _swI2C_WriteByte (1 -> << -> 104 `i -> 1 `i `uc `i -> 0 `i 97  ]
+[e $ ! == -> ( _swI2C_WriteByte (1 -> << -> 24 `i -> 1 `i `uc `i -> 0 `i 97  ]
 [; ;mpu6x.c: 37: {
 "37
 {
@@ -1874,9 +1874,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mpu6x.c: 40: swI2C_Start();
 "40
 [e ( _swI2C_Start ..  ]
-[; ;mpu6x.c: 41: if(swI2C_WriteByte((0x68<<1)|1)== 0 ){
+[; ;mpu6x.c: 41: if(swI2C_WriteByte((0x18<<1)|1)== 0 ){
 "41
-[e $ ! == -> ( _swI2C_WriteByte (1 -> | << -> 104 `i -> 1 `i -> 1 `i `uc `i -> 0 `i 99  ]
+[e $ ! == -> ( _swI2C_WriteByte (1 -> | << -> 24 `i -> 1 `i -> 1 `i `uc `i -> 0 `i 99  ]
 {
 [; ;mpu6x.c: 43: for(i=0; i<(len-1);i++){
 "43
