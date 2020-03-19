@@ -3235,9 +3235,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;smartkey.C: 599: isSw =0;
 "599
 [e = _isSw -> -> 0 `i `uc ]
-[; ;smartkey.C: 600: vibrateOn=2;
+[; ;smartkey.C: 600: vibrateOn=1;
 "600
-[e = _vibrateOn -> -> 2 `i `uc ]
+[e = _vibrateOn -> -> 1 `i `uc ]
+[; ;smartkey.C: 602: acYOld = buf[2];acXOld = buf[0];
+"602
+[e = _acYOld *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
+[e = _acXOld *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux ]
 [; ;smartkey.C: 603: RegStatus &=(~0x20);
 "603
 [e =& _RegStatus -> ~ -> 32 `i `uc ]
@@ -3394,9 +3398,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "657
 [e $ ! == -> _vibrateOn `i -> 1 `i 228  ]
 {
-[; ;smartkey.C: 658: if(compe(buf[0],acXOld ,2) && compe(buf[2],acYOld ,2)){
+[; ;smartkey.C: 658: if(compe(buf[0],acXOld ,3) && compe(buf[2],acYOld ,3)){
 "658
-[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 2 `i `c `i -> -> -> 0 `i `uc `i 229  ]
+[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux _acXOld -> -> 3 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux _acYOld -> -> 3 `i `c `i -> -> -> 0 `i `uc `i 229  ]
 {
 [; ;smartkey.C: 660: isSw=0;
 "660
@@ -3427,85 +3431,42 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 230 ]
 "672
 }
+[e :U 228 ]
+"674
+}
+[e :U 227 ]
+"677
+}
+[e :U 225 ]
 [; ;smartkey.C: 670: }
 [; ;smartkey.C: 671: }
 [; ;smartkey.C: 672: }
-[e $U 231  ]
-"673
-[e :U 228 ]
-[; ;smartkey.C: 673: else if(vibrateOn==2){
-[e $ ! == -> _vibrateOn `i -> 2 `i 232  ]
-{
-[; ;smartkey.C: 674: if(compe(buf[0],(signed char)acXsum ,5) && compe(buf[2],(signed char)acYsum ,5)){
-"674
-[e $ ! && != -> ( _compe (3 , , *U + &U _buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acXsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i != -> ( _compe (3 , , *U + &U _buf * -> -> -> 2 `i `ui `ux -> -> # *U &U _buf `ui `ux -> _acYsum `c -> -> 5 `i `c `i -> -> -> 0 `i `uc `i 233  ]
-{
-[; ;smartkey.C: 676: isSw=0;
-"676
-[e = _isSw -> -> 0 `i `uc ]
+[; ;smartkey.C: 674: }
+[; ;smartkey.C: 677: }
+[; ;smartkey.C: 679: if(RegStatus & 0x20) {RC0 =1;RC1 =1;}
 "679
-}
-[; ;smartkey.C: 679: }
-[e $U 234  ]
-"680
-[e :U 233 ]
-[; ;smartkey.C: 680: else{
-{
-[; ;smartkey.C: 681: isSw++;
-"681
-[e ++ _isSw -> -> 1 `i `uc ]
-[; ;smartkey.C: 684: {
-"684
-{
-[; ;smartkey.C: 685: beepOn();TMR2ON = 0; beep(7,3);
-"685
-[e ( _beepOn ..  ]
-[e = _TMR2ON -> -> 0 `i `b ]
-[e ( _beep (2 , -> -> 7 `i `uc -> -> 3 `i `uc ]
-"686
-}
-"687
-}
-[e :U 234 ]
-"688
-}
-[e :U 232 ]
-"690
-[e :U 231 ]
-}
-[e :U 227 ]
-"693
-}
-[e :U 225 ]
-[; ;smartkey.C: 686: }
-[; ;smartkey.C: 687: }
-[; ;smartkey.C: 688: }
-[; ;smartkey.C: 690: }
-[; ;smartkey.C: 693: }
-[; ;smartkey.C: 695: if(RegStatus & 0x20) {RC0 =1;RC1 =1;}
-"695
-[e $ ! != & -> _RegStatus `i -> 32 `i -> 0 `i 235  ]
+[e $ ! != & -> _RegStatus `i -> 32 `i -> 0 `i 231  ]
 {
 [e = _RC0 -> -> 1 `i `b ]
 [e = _RC1 -> -> 1 `i `b ]
 }
-[e $U 236  ]
-"696
-[e :U 235 ]
-[; ;smartkey.C: 696: else {RC0 =0;RC1 =0;}
+[e $U 232  ]
+"680
+[e :U 231 ]
+[; ;smartkey.C: 680: else {RC0 =0;RC1 =0;}
 {
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC1 -> -> 0 `i `b ]
 }
-[e :U 236 ]
-"699
+[e :U 232 ]
+"683
 }
 [e :U 165 ]
 "392
 [e $U 166  ]
 [e :U 167 ]
-[; ;smartkey.C: 699: }
-[; ;smartkey.C: 701: }
-"701
+[; ;smartkey.C: 683: }
+[; ;smartkey.C: 685: }
+"685
 [e :UE 139 ]
 }

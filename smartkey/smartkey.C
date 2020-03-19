@@ -597,9 +597,9 @@ timeTick = 0;
 					isSw++;
 					if(isSw >44){
 						isSw =0;
-                        vibrateOn=2; // bat che do chong rung 2
+                        vibrateOn=1; // bat che do chong rung
                         // lay vi tri chinh xac tai thoi diem da chong, truoc khi chuyen sang che do chong rung
-                        //==========> accOld
+                        acYOld = buf[2];acXOld = buf[0];
 						RegStatus &=(~bitPwOn);
 						setState(_rCheck,tOut_rCheck);
                         //
@@ -653,9 +653,9 @@ if((timeTick>tmp16) && (mtState == _Ide ) && mpuOk ==1){//|| mtState == _rCheck
 			tmp16 = timeTick+40;
            
 			if(AccRead(0x3b,buf,6)==0){
-                //So sanh vi tri truoc khi chuyen sang che do chong rung
+                
 				if(vibrateOn==1){
-					if(compe(buf[0],acXOld ,2) && compe(buf[2],acYOld ,2)){//(signed char)acXsum  (signed char)acYsum
+					if(compe(buf[0],acXOld ,3) && compe(buf[2],acYOld ,3)){//(signed char)acXsum  (signed char)acYsum
 					//beep(10,1);
 						isSw=0;
 						
@@ -670,22 +670,6 @@ if((timeTick>tmp16) && (mtState == _Ide ) && mpuOk ==1){//|| mtState == _rCheck
 							}	
 					}
                 }
-                else if(vibrateOn==2){
-                    if(compe(buf[0],(signed char)acXsum ,5) && compe(buf[2],(signed char)acYsum ,5)){//  (signed char)acYsum
-					//beep(10,1);
-						isSw=0;
-						
-
-					}
-					else{ 
-							isSw++;    
-						   
-							//if(isSw%2==0)
-							{					 
-									 beepOn();TMR2ON = 0; beep(7,3);
-							}	
-					}
-				}
 				
             }	
             
