@@ -726,12 +726,12 @@ AccRead@i:	; 1 bytes @ 0xB
 	global	??_main
 ??_main:	; 0 bytes @ 0xC
 	ds	3
-	global	main@isWait
-main@isWait:	; 2 bytes @ 0xF
-	ds	2
 	global	main@vibrateOn
-main@vibrateOn:	; 1 bytes @ 0x11
+main@vibrateOn:	; 1 bytes @ 0xF
 	ds	1
+	global	main@isWait
+main@isWait:	; 2 bytes @ 0x10
+	ds	2
 	global	main@isFall
 main@isFall:	; 1 bytes @ 0x12
 	ds	1
@@ -823,7 +823,7 @@ main@tmp8:	; 1 bytes @ 0x24
 ;; ---------------------------------------------------------------------------------
 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;; ---------------------------------------------------------------------------------
-;; (0) _main                                                26    26      0    4071
+;; (0) _main                                                26    26      0    4074
 ;;                                             12 BANK0     25    25      0
 ;;                           _sys_init
 ;;                          _gpio_init
@@ -990,7 +990,7 @@ __pmaintext:
 ;;  tmp16           2   34[BANK0 ] unsigned int 
 ;;  acXsum          2   24[BANK0 ] int 
 ;;  acYsum          2   22[BANK0 ] int 
-;;  isWait          2   15[BANK0 ] unsigned int 
+;;  isWait          2   16[BANK0 ] unsigned int 
 ;;  tmp8            1   36[BANK0 ] unsigned char 
 ;;  isSw            1   33[BANK0 ] unsigned char 
 ;;  reAlertOn       1   32[BANK0 ] unsigned char 
@@ -998,7 +998,7 @@ __pmaintext:
 ;;  acXOld          1   20[BANK0 ] char 
 ;;  acYOld          1   19[BANK0 ] char 
 ;;  isFall          1   18[BANK0 ] unsigned char 
-;;  vibrateOn       1   17[BANK0 ] unsigned char 
+;;  vibrateOn       1   15[BANK0 ] unsigned char 
 ;;  accSet          1    0        unsigned char 
 ;; Return value:  Size  Location     Type
 ;;		None               void
@@ -1047,7 +1047,7 @@ _main:
 ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
 	line	251
 	
-l6663:	
+l6668:	
 ;smartkey.C: 251: unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0,accSet=0;
 	clrf	(main@reAlertOn)
 	clrf	(main@isSw)
@@ -1069,33 +1069,33 @@ l6663:
 	clrf	(main@tmp16+1)
 	line	258
 	
-l6665:	
+l6670:	
 # 258 "smartkey.C"
 clrwdt ;#
 psect	maintext
 	line	260
 	
-l6667:	
+l6672:	
 ;smartkey.C: 260: sys_init();
 	fcall	_sys_init
 	line	261
 	
-l6669:	
+l6674:	
 ;smartkey.C: 261: gpio_init();
 	fcall	_gpio_init
 	line	262
 	
-l6671:	
+l6676:	
 ;smartkey.C: 262: timer_init();
 	fcall	_timer_init
 	line	263
 	
-l6673:	
+l6678:	
 ;smartkey.C: 263: int_init();
 	fcall	_int_init
 	line	266
 	
-l6675:	
+l6680:	
 ;smartkey.C: 266: _delay((unsigned long)((100)*(4000000/4000.0)));
 	opt asmopt_off
 movlw	130
@@ -1112,23 +1112,23 @@ opt asmopt_on
 
 	line	270
 	
-l6677:	
+l6682:	
 ;smartkey.C: 270: PAIE = 1;
 	bsf	(91/8),(91)&7
 	line	272
 	
-l6679:	
+l6684:	
 ;smartkey.C: 272: RegStatus = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(_RegStatus)
 	line	274
 	
-l6681:	
+l6686:	
 ;smartkey.C: 274: swI2C_Init();
 	fcall	_swI2C_Init
 	line	277
 	
-l6683:	
+l6688:	
 ;smartkey.C: 277: setState(0,0);
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(?_setState)
@@ -1137,7 +1137,7 @@ l6683:
 	fcall	_setState
 	line	279
 	
-l6685:	
+l6690:	
 ;smartkey.C: 279: WRITE_EEPROM(0xFF,0xAA);
 	movlw	(0AAh)
 	movwf	(?_WRITE_EEPROM)
@@ -1145,7 +1145,7 @@ l6685:
 	fcall	_WRITE_EEPROM
 	line	280
 	
-l6687:	
+l6692:	
 ;smartkey.C: 280: WRITE_EEPROM(0xFF,0xAA);
 	movlw	(0AAh)
 	bcf	status, 5	;RP0=0, select bank0
@@ -1174,14 +1174,14 @@ opt asmopt_on
 
 	line	285
 	
-l6689:	
+l6694:	
 ;smartkey.C: 285: tmp8= READ_EEPROM(0x08);
 	movlw	(08h)
 	fcall	_READ_EEPROM
 	movwf	(main@tmp8)
 	line	286
 	
-l6691:	
+l6696:	
 ;smartkey.C: 286: if(tmp8==0xff) {WRITE_EEPROM(0x08,0);_delay((unsigned long)((2)*(4000000/4000.0)));}
 	movf	(main@tmp8),w
 	xorlw	0FFh
@@ -1189,15 +1189,15 @@ l6691:
 	goto	u2821
 	goto	u2820
 u2821:
-	goto	l6697
+	goto	l6702
 u2820:
 	
-l6693:	
+l6698:	
 	clrf	(?_WRITE_EEPROM)
 	movlw	(08h)
 	fcall	_WRITE_EEPROM
 	
-l6695:	
+l6700:	
 	opt asmopt_off
 movlw	3
 	bcf	status, 5	;RP0=0, select bank0
@@ -1214,7 +1214,7 @@ opt asmopt_on
 
 	line	288
 	
-l6697:	
+l6702:	
 ;smartkey.C: 288: if(tmp8==0xcc){
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(main@tmp8),w
@@ -1223,16 +1223,16 @@ l6697:
 	goto	u2831
 	goto	u2830
 u2831:
-	goto	l6711
+	goto	l6716
 u2830:
 	line	289
 	
-l6699:	
+l6704:	
 ;smartkey.C: 289: RegStatus &=~(0x20);
 	bcf	(_RegStatus)+(5/8),(5)&7
 	line	290
 	
-l6701:	
+l6706:	
 ;smartkey.C: 290: setState(3,1800);
 	movlw	low(0708h)
 	movwf	(?_setState)
@@ -1242,27 +1242,27 @@ l6701:
 	fcall	_setState
 	line	291
 	
-l6703:	
+l6708:	
 ;smartkey.C: 291: mtOldState = 1;
 	clrf	(_mtOldState)
 	incf	(_mtOldState),f
 	line	292
 	
-l6705:	
+l6710:	
 ;smartkey.C: 292: cntTmp = timeTick+50;
 	movf	(_timeTick+1),w
 	movwf	(_cntTmp+1)
 	movf	(_timeTick),w
 	movwf	(_cntTmp)
 	
-l6707:	
+l6712:	
 	movlw	032h
 	addwf	(_cntTmp),f
 	skipnc
 	incf	(_cntTmp+1),f
 	line	293
 	
-l6709:	
+l6714:	
 ;smartkey.C: 293: PR2L =12;
 	movlw	(0Ch)
 	bsf	status, 5	;RP0=1, select bank1
@@ -1272,10 +1272,10 @@ l6709:
 	fcall	_beepOn
 	line	295
 ;smartkey.C: 295: } else {
-	goto	l6715
+	goto	l6720
 	line	296
 	
-l6711:	
+l6716:	
 ;smartkey.C: 296: setState(2,400);
 	movlw	low(0190h)
 	movwf	(?_setState)
@@ -1285,12 +1285,12 @@ l6711:
 	fcall	_setState
 	line	298
 	
-l6713:	
+l6718:	
 ;smartkey.C: 298: mtOldState = 0;
 	clrf	(_mtOldState)
 	line	303
 	
-l6715:	
+l6720:	
 ;smartkey.C: 300: }
 ;smartkey.C: 303: tmp8 = READ_EEPROM(0x40);
 	movlw	(040h)
@@ -1298,7 +1298,7 @@ l6715:
 	movwf	(main@tmp8)
 	line	304
 	
-l6717:	
+l6722:	
 ;smartkey.C: 304: if(tmp8==8){
 	movf	(main@tmp8),w
 	xorlw	08h
@@ -1306,18 +1306,18 @@ l6717:
 	goto	u2841
 	goto	u2840
 u2841:
-	goto	l6735
+	goto	l6740
 u2840:
 	line	305
 	
-l6719:	
+l6724:	
 ;smartkey.C: 305: tmp8= READ_EEPROM(0x41);
 	movlw	(041h)
 	fcall	_READ_EEPROM
 	movwf	(main@tmp8)
 	line	306
 	
-l6721:	
+l6726:	
 ;smartkey.C: 306: beep(30,1);
 	clrf	(?_beep)
 	incf	(?_beep),f
@@ -1325,28 +1325,28 @@ l6721:
 	fcall	_beep
 	line	307
 	
-l6723:	
+l6728:	
 ;smartkey.C: 307: if((tmp8==1)||(tmp8==0xff)){
 	decf	(main@tmp8),w
 	skipnz
 	goto	u2851
 	goto	u2850
 u2851:
-	goto	l6727
+	goto	l6732
 u2850:
 	
-l6725:	
+l6730:	
 	movf	(main@tmp8),w
 	xorlw	0FFh
 	skipz
 	goto	u2861
 	goto	u2860
 u2861:
-	goto	l6729
+	goto	l6734
 u2860:
 	line	308
 	
-l6727:	
+l6732:	
 ;smartkey.C: 308: WRITE_EEPROM(0x41,0);
 	clrf	(?_WRITE_EEPROM)
 	movlw	(041h)
@@ -1356,7 +1356,7 @@ l6727:
 	goto	l905
 	line	311
 	
-l6729:	
+l6734:	
 ;smartkey.C: 310: else {
 ;smartkey.C: 311: WRITE_EEPROM(0x41,0x1);
 	clrf	(?_WRITE_EEPROM)
@@ -1375,10 +1375,10 @@ l905:
 	fcall	_WRITE_EEPROM
 	line	315
 	
-l6731:	
+l6736:	
 	line	316
 	
-l6733:	
+l6738:	
 ;smartkey.C: 316: _delay((unsigned long)((100)*(4000000/4000.0)));
 	opt asmopt_off
 movlw	130
@@ -1396,49 +1396,49 @@ opt asmopt_on
 
 	line	317
 ;smartkey.C: 317: } else if(tmp8==0xff) WRITE_EEPROM(0x40,0);
-	goto	l6739
+	goto	l6744
 	
-l6735:	
+l6740:	
 	movf	(main@tmp8),w
 	xorlw	0FFh
 	skipz
 	goto	u2871
 	goto	u2870
 u2871:
-	goto	l6739
+	goto	l6744
 u2870:
 	
-l6737:	
+l6742:	
 	clrf	(?_WRITE_EEPROM)
 	movlw	(040h)
 	fcall	_WRITE_EEPROM
 	line	320
 	
-l6739:	
+l6744:	
 ;smartkey.C: 320: tmp8 = READ_EEPROM(0x41);
 	movlw	(041h)
 	fcall	_READ_EEPROM
 	movwf	(main@tmp8)
 	line	321
 	
-l6741:	
+l6746:	
 ;smartkey.C: 321: if(tmp8==1){
 	decf	(main@tmp8),w
 	skipz
 	goto	u2881
 	goto	u2880
 u2881:
-	goto	l6749
+	goto	l6754
 u2880:
 	line	322
 	
-l6743:	
+l6748:	
 ;smartkey.C: 322: RC0 =1;RC1 =1;
 	bsf	(56/8),(56)&7
 	bsf	(57/8),(57)&7
 	line	324
 	
-l6745:	
+l6750:	
 ;smartkey.C: 324: _delay((unsigned long)((1000)*(4000000/4000.0)));
 	opt asmopt_off
 movlw  6
@@ -1469,18 +1469,18 @@ opt asmopt_on
 	goto	u2891
 	goto	u2890
 u2891:
-	goto	l6745
+	goto	l6750
 u2890:
 	
-l6747:	
+l6752:	
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(?_WRITE_EEPROM)
 	movlw	(040h)
 	fcall	_WRITE_EEPROM
-	goto	l6745
+	goto	l6750
 	line	330
 	
-l6749:	
+l6754:	
 ;smartkey.C: 326: }
 ;smartkey.C: 327: }
 ;smartkey.C: 330: buf[0] = 0x08;
@@ -1492,7 +1492,7 @@ l6749:
 	movwf	0+(main@buf)+01h
 	line	333
 	
-l6751:	
+l6756:	
 ;smartkey.C: 333: if(AccWrite(0x10,(unsigned char)buf,2)==0) {
 	movlw	(main@buf)&0ffh
 	movwf	(??_main+0)+0
@@ -1511,28 +1511,28 @@ l6751:
 	goto	u2901
 	goto	u2900
 u2901:
-	goto	l6755
+	goto	l6760
 u2900:
 	line	334
 	
-l6753:	
+l6758:	
 ;smartkey.C: 334: mpuOk =1;
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(main@mpuOk)
 	incf	(main@mpuOk),f
 	line	335
 ;smartkey.C: 335: }
-	goto	l6759
+	goto	l6764
 	line	337
 	
-l6755:	
+l6760:	
 ;smartkey.C: 336: else {
 ;smartkey.C: 337: mpuOk =0;
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(main@mpuOk)
 	line	338
 	
-l6757:	
+l6762:	
 ;smartkey.C: 338: beep(10,2);
 	movlw	(02h)
 	movwf	(?_beep)
@@ -1540,7 +1540,7 @@ l6757:
 	fcall	_beep
 	line	345
 	
-l6759:	
+l6764:	
 ;smartkey.C: 339: }
 ;smartkey.C: 345: tmp8= READ_EEPROM(0x40);
 	movlw	(040h)
@@ -1548,7 +1548,7 @@ l6759:
 	movwf	(main@tmp8)
 	line	346
 	
-l6761:	
+l6766:	
 ;smartkey.C: 346: if(tmp8==6 && mpuOk ==1)
 	movf	(main@tmp8),w
 	xorlw	06h
@@ -1556,35 +1556,35 @@ l6761:
 	goto	u2911
 	goto	u2910
 u2911:
-	goto	l6799
+	goto	l6804
 u2910:
 	
-l6763:	
+l6768:	
 	decf	(main@mpuOk),w
 	skipz
 	goto	u2921
 	goto	u2920
 u2921:
-	goto	l6799
+	goto	l6804
 u2920:
 	line	348
 	
-l6765:	
+l6770:	
 ;smartkey.C: 347: {
 ;smartkey.C: 348: tmp8=0; beep(10,3);
 	clrf	(main@tmp8)
 	
-l6767:	
+l6772:	
 	movlw	(03h)
 	movwf	(?_beep)
 	movlw	(0Ah)
 	fcall	_beep
 	line	349
 ;smartkey.C: 349: while((RA2 )&&(tmp8<11))
-	goto	l6777
+	goto	l6782
 	line	351
 	
-l6769:	
+l6774:	
 ;smartkey.C: 350: {
 ;smartkey.C: 351: if(AccRead(0x02,(unsigned char)buf,6)==0){
 	movlw	(main@buf)&0ffh
@@ -1604,11 +1604,11 @@ l6769:
 	goto	u2931
 	goto	u2930
 u2931:
-	goto	l6775
+	goto	l6780
 u2930:
 	line	353
 	
-l6771:	
+l6776:	
 ;smartkey.C: 353: acXsum += buf[1];
 	bcf	status, 5	;RP0=0, select bank0
 	movf	0+(main@buf)+01h,w
@@ -1650,12 +1650,12 @@ l6771:
 	addwf	(main@tmp16+1),f
 	line	356
 	
-l6773:	
+l6778:	
 ;smartkey.C: 356: tmp8++;
 	incf	(main@tmp8),f
 	line	358
 	
-l6775:	
+l6780:	
 ;smartkey.C: 357: }
 ;smartkey.C: 358: _delay((unsigned long)((500)*(4000000/4000.0)));
 	opt asmopt_off
@@ -1678,27 +1678,27 @@ opt asmopt_on
 
 	line	349
 	
-l6777:	
+l6782:	
 	bcf	status, 5	;RP0=0, select bank0
 	btfss	(42/8),(42)&7
 	goto	u2941
 	goto	u2940
 u2941:
-	goto	l6781
+	goto	l6786
 u2940:
 	
-l6779:	
+l6784:	
 	movlw	(0Bh)
 	subwf	(main@tmp8),w
 	skipc
 	goto	u2951
 	goto	u2950
 u2951:
-	goto	l6769
+	goto	l6774
 u2950:
 	line	362
 	
-l6781:	
+l6786:	
 ;smartkey.C: 360: }
 ;smartkey.C: 362: if(tmp8==11){
 	movf	(main@tmp8),w
@@ -1707,11 +1707,11 @@ l6781:
 	goto	u2961
 	goto	u2960
 u2961:
-	goto	l6795
+	goto	l6800
 u2960:
 	line	363
 	
-l6783:	
+l6788:	
 ;smartkey.C: 363: acXsum =acXsum/10;
 	movlw	0Ah
 	movwf	(?___awdiv)
@@ -1755,7 +1755,7 @@ l6783:
 	movwf	(main@tmp16)
 	line	367
 	
-l6785:	
+l6790:	
 ;smartkey.C: 367: if(((signed int)tmp16 > (-31)) && ((signed int)tmp16 < 31)){
 	movf	(main@tmp16+1),w
 	xorlw	80h
@@ -1772,10 +1772,10 @@ u2975:
 	goto	u2971
 	goto	u2970
 u2971:
-	goto	l6791
+	goto	l6796
 u2970:
 	
-l6787:	
+l6792:	
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(main@tmp16+1),w
 	xorlw	80h
@@ -1792,11 +1792,11 @@ u2985:
 	goto	u2981
 	goto	u2980
 u2981:
-	goto	l6791
+	goto	l6796
 u2980:
 	line	368
 	
-l6789:	
+l6794:	
 ;smartkey.C: 368: beep(10,2);
 	movlw	(02h)
 	bcf	status, 5	;RP0=0, select bank0
@@ -1808,7 +1808,7 @@ l6789:
 	goto	l925
 	line	373
 	
-l6791:	
+l6796:	
 ;smartkey.C: 370: else
 ;smartkey.C: 372: {
 ;smartkey.C: 373: beep(10,3);
@@ -1832,7 +1832,7 @@ l6791:
 	fcall	_WRITE_EEPROM
 	line	376
 	
-l6793:	
+l6798:	
 ;smartkey.C: 376: _delay((unsigned long)((100)*(4000000/4000.0)));
 	opt asmopt_off
 movlw	130
@@ -1851,7 +1851,7 @@ opt asmopt_on
 	goto	l925
 	line	380
 	
-l6795:	
+l6800:	
 ;smartkey.C: 380: beep(10,2);
 	movlw	(02h)
 	movwf	(?_beep)
@@ -1869,10 +1869,10 @@ l925:
 	fcall	_WRITE_EEPROM
 	line	383
 	
-l6797:	
+l6802:	
 	line	386
 	
-l6799:	
+l6804:	
 ;smartkey.C: 384: }
 ;smartkey.C: 386: acXsum = (signed char)READ_EEPROM(0x10);
 	movlw	(010h)
@@ -1883,7 +1883,7 @@ l6799:
 	decf	(main@acXsum+1),f
 	line	387
 	
-l6801:	
+l6806:	
 ;smartkey.C: 387: acYsum = (signed char)READ_EEPROM(0x11);
 	movlw	(011h)
 	fcall	_READ_EEPROM
@@ -1893,35 +1893,35 @@ l6801:
 	decf	(main@acYsum+1),f
 	line	389
 	
-l6803:	
+l6808:	
 ;smartkey.C: 389: timeTick = 0;
 	clrf	(_timeTick)
 	clrf	(_timeTick+1)
 	line	398
 	
-l6805:	
+l6810:	
 ;smartkey.C: 398: if(mode_chek == 0)
 	movf	(_mode_chek),f
 	skipz
 	goto	u2991
 	goto	u2990
 u2991:
-	goto	l6913
+	goto	l6918
 u2990:
 	line	401
 	
-l6807:	
+l6812:	
 ;smartkey.C: 399: {
 ;smartkey.C: 401: if(RegStatus & 0x80)
 	btfss	(_RegStatus),(7)&7
 	goto	u3001
 	goto	u3000
 u3001:
-	goto	l6913
+	goto	l6918
 u3000:
 	line	403
 	
-l6809:	
+l6814:	
 ;smartkey.C: 402: {
 ;smartkey.C: 403: PAIE = 0;
 	bcf	(91/8),(91)&7
@@ -1935,12 +1935,12 @@ l6809:
 	goto	u3011
 	goto	u3010
 u3011:
-	goto	l6911
+	goto	l6916
 u3010:
-	goto	l6875
+	goto	l6880
 	line	426
 	
-l6813:	
+l6818:	
 ;smartkey.C: 426: lostDetect =0;
 	clrf	(_lostDetect)
 	line	427
@@ -1949,7 +1949,7 @@ l6813:
 	clrf	(_timeTick+1)
 	line	428
 	
-l6815:	
+l6820:	
 ;smartkey.C: 428: tmp16 = 40;
 	movlw	028h
 	movwf	(main@tmp16)
@@ -1959,7 +1959,7 @@ l6815:
 	goto	l951
 	line	432
 	
-l6817:	
+l6822:	
 ;smartkey.C: 432: if(timeTick >30){
 	movlw	high(01Fh)
 	subwf	(_timeTick+1),w
@@ -1974,13 +1974,13 @@ u3021:
 u3020:
 	line	433
 	
-l6819:	
+l6824:	
 ;smartkey.C: 433: timeTick =0;
 	clrf	(_timeTick)
 	clrf	(_timeTick+1)
 	line	435
 	
-l6821:	
+l6826:	
 ;smartkey.C: 435: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
 	movlw	(08h)
 	fcall	_READ_EEPROM
@@ -1989,16 +1989,16 @@ l6821:
 	goto	u3031
 	goto	u3030
 u3031:
-	goto	l6825
+	goto	l6830
 u3030:
 	
-l6823:	
+l6828:	
 	clrf	(?_WRITE_EEPROM)
 	movlw	(08h)
 	fcall	_WRITE_EEPROM
 	line	437
 	
-l6825:	
+l6830:	
 ;smartkey.C: 437: if((mtOldState == 3)){
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(_mtOldState),w
@@ -2007,19 +2007,19 @@ l6825:
 	goto	u3041
 	goto	u3040
 u3041:
-	goto	l6835
+	goto	l6840
 u3040:
 	line	438
 	
-l6827:	
+l6832:	
 ;smartkey.C: 438: beepOn();TMR2ON = 0; beep(10,1);
 	fcall	_beepOn
 	
-l6829:	
+l6834:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(146/8),(146)&7
 	
-l6831:	
+l6836:	
 	clrf	(?_beep)
 	incf	(?_beep),f
 	movlw	(0Ah)
@@ -2032,12 +2032,12 @@ l6831:
 	goto	l951
 u3050:
 	
-l6833:	
+l6838:	
 	clrf	(main@reAlertOn)
 	goto	l951
 	line	441
 	
-l6835:	
+l6840:	
 ;smartkey.C: 441: else if((mtOldState == 0)||(mtOldState == 4)){
 	movf	(_mtOldState),w
 	skipz
@@ -2045,14 +2045,14 @@ l6835:
 	goto	l941
 u3060:
 	
-l6837:	
+l6842:	
 	movf	(_mtOldState),w
 	xorlw	04h
 	skipz
 	goto	u3071
 	goto	u3070
 u3071:
-	goto	l6849
+	goto	l6854
 u3070:
 	
 l941:	
@@ -2061,7 +2061,7 @@ l941:
 	bsf	(_RegStatus)+(5/8),(5)&7
 	line	443
 	
-l6839:	
+l6844:	
 ;smartkey.C: 443: setState(1,3500);
 	movlw	low(0DACh)
 	movwf	(?_setState)
@@ -2071,7 +2071,7 @@ l6839:
 	fcall	_setState
 	line	444
 	
-l6841:	
+l6846:	
 ;smartkey.C: 444: if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
 	movlw	(040h)
 	fcall	_READ_EEPROM
@@ -2080,16 +2080,16 @@ l6841:
 	goto	u3081
 	goto	u3080
 u3081:
-	goto	l6845
+	goto	l6850
 u3080:
 	
-l6843:	
+l6848:	
 	clrf	(?_WRITE_EEPROM)
 	movlw	(040h)
 	fcall	_WRITE_EEPROM
 	line	445
 	
-l6845:	
+l6850:	
 ;smartkey.C: 445: tmp16 = timeTick+40;
 	movf	(_timeTick+1),w
 	bcf	status, 5	;RP0=0, select bank0
@@ -2097,7 +2097,7 @@ l6845:
 	movf	(_timeTick),w
 	movwf	(main@tmp16)
 	
-l6847:	
+l6852:	
 	movlw	028h
 	addwf	(main@tmp16),f
 	skipnc
@@ -2113,7 +2113,7 @@ l6847:
 	goto	l951
 	line	448
 	
-l6849:	
+l6854:	
 ;smartkey.C: 448: else if((mtOldState == 1)){
 	decf	(_mtOldState),w
 	skipz
@@ -2124,14 +2124,14 @@ u3091:
 u3090:
 	line	450
 	
-l6851:	
+l6856:	
 ;smartkey.C: 450: if(reAlertOn)reAlertOn =0;
 	movf	(main@reAlertOn),w
 	skipz
 	goto	u3100
 	goto	l934
 u3100:
-	goto	l6833
+	goto	l6838
 	line	452
 	
 l934:	
@@ -2142,7 +2142,7 @@ l934:
 	goto	l951
 	line	456
 	
-l6855:	
+l6860:	
 ;smartkey.C: 456: if(timeTick > 200)
 	movlw	high(0C9h)
 	subwf	(_timeTick+1),w
@@ -2157,13 +2157,13 @@ u3111:
 u3110:
 	line	458
 	
-l6857:	
+l6862:	
 ;smartkey.C: 457: {
 ;smartkey.C: 458: beepOff();
 	fcall	_beepOff
 	line	459
 	
-l6859:	
+l6864:	
 ;smartkey.C: 459: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
 	movlw	(08h)
 	fcall	_READ_EEPROM
@@ -2172,16 +2172,16 @@ l6859:
 	goto	u3121
 	goto	u3120
 u3121:
-	goto	l6863
+	goto	l6868
 u3120:
 	
-l6861:	
+l6866:	
 	clrf	(?_WRITE_EEPROM)
 	movlw	(08h)
 	fcall	_WRITE_EEPROM
 	line	460
 	
-l6863:	
+l6868:	
 ;smartkey.C: 460: RegStatus |=(0x20);
 	bcf	status, 5	;RP0=0, select bank0
 	bsf	(_RegStatus)+(5/8),(5)&7
@@ -2195,14 +2195,14 @@ l6863:
 	fcall	_setState
 	line	463
 	
-l6865:	
+l6870:	
 ;smartkey.C: 463: tmp16 = timeTick+40;
 	movf	(_timeTick+1),w
 	movwf	(main@tmp16+1)
 	movf	(_timeTick),w
 	movwf	(main@tmp16)
 	
-l6867:	
+l6872:	
 	movlw	028h
 	addwf	(main@tmp16),f
 	skipnc
@@ -2210,12 +2210,12 @@ l6867:
 	goto	l951
 	line	469
 	
-l6869:	
+l6874:	
 ;smartkey.C: 469: beepOff();
 	fcall	_beepOff
 	line	470
 	
-l6871:	
+l6876:	
 ;smartkey.C: 470: setState(2,300);
 	movlw	low(012Ch)
 	bcf	status, 5	;RP0=0, select bank0
@@ -2229,7 +2229,7 @@ l6871:
 	goto	l951
 	line	423
 	
-l6875:	
+l6880:	
 	movf	(_mtState),w
 	; Switch size 1, requested type "space"
 ; Number of cases is 5, Range of values is 0 to 4
@@ -2248,25 +2248,25 @@ l6875:
 	subwf	fsr,w
 skipnc
 goto l951
-movlw high(S7143)
+movlw high(S7150)
 movwf pclath
-	movlw low(S7143)
+	movlw low(S7150)
 	addwf fsr,w
 	movwf pc
 psect	swtext1,local,class=CONST,delta=2
 global __pswtext1
 __pswtext1:
-S7143:
+S7150:
 	ljmp	l951
-	ljmp	l6813
-	ljmp	l6817
-	ljmp	l6855
-	ljmp	l6869
+	ljmp	l6818
+	ljmp	l6822
+	ljmp	l6860
+	ljmp	l6874
 psect	maintext
 
 	line	490
 	
-l6877:	
+l6882:	
 ;smartkey.C: 488: {
 ;smartkey.C: 490: if(lostDetect==1 && timeTick< 1500)
 	decf	(_lostDetect),w
@@ -2277,7 +2277,7 @@ u3131:
 	goto	l954
 u3130:
 	
-l6879:	
+l6884:	
 	movlw	high(05DCh)
 	subwf	(_timeTick+1),w
 	movlw	low(05DCh)
@@ -2291,7 +2291,7 @@ u3141:
 u3140:
 	line	492
 	
-l6881:	
+l6886:	
 ;smartkey.C: 491: {
 ;smartkey.C: 492: if(READ_EEPROM(0x08)==0x00) WRITE_EEPROM(0x08,0xcc);
 	movlw	(08h)
@@ -2304,7 +2304,7 @@ u3151:
 	goto	l955
 u3150:
 	
-l6883:	
+l6888:	
 	movlw	(0CCh)
 	movwf	(?_WRITE_EEPROM)
 	movlw	(08h)
@@ -2322,21 +2322,21 @@ l955:
 	fcall	_setState
 	line	495
 	
-l6885:	
+l6890:	
 ;smartkey.C: 495: cntTmp = timeTick+40;
 	movf	(_timeTick+1),w
 	movwf	(_cntTmp+1)
 	movf	(_timeTick),w
 	movwf	(_cntTmp)
 	
-l6887:	
+l6892:	
 	movlw	028h
 	addwf	(_cntTmp),f
 	skipnc
 	incf	(_cntTmp+1),f
 	line	496
 	
-l6889:	
+l6894:	
 ;smartkey.C: 496: PR2L =20;
 	movlw	(014h)
 	bsf	status, 5	;RP0=1, select bank1
@@ -2346,13 +2346,13 @@ l6889:
 	fcall	_beepOn
 	line	498
 	
-l6891:	
+l6896:	
 ;smartkey.C: 498: lostDetect =0;
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(_lostDetect)
 	line	499
 ;smartkey.C: 499: }
-	goto	l6893
+	goto	l6898
 	line	500
 	
 l954:	
@@ -2363,31 +2363,31 @@ l954:
 	incf	(_lostDetect),f
 	line	505
 	
-l6893:	
+l6898:	
 ;smartkey.C: 504: }
 ;smartkey.C: 505: timeTick =0;
 	clrf	(_timeTick)
 	clrf	(_timeTick+1)
-	goto	l6815
+	goto	l6820
 	line	512
 	
-l6897:	
+l6902:	
 ;smartkey.C: 511: {
 ;smartkey.C: 512: timeTick =0;
 	clrf	(_timeTick)
 	clrf	(_timeTick+1)
 	line	513
 	
-l6899:	
+l6904:	
 ;smartkey.C: 513: beepOn();TMR2ON = 0;
 	fcall	_beepOn
 	
-l6901:	
+l6906:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(146/8),(146)&7
 	line	514
 	
-l6903:	
+l6908:	
 ;smartkey.C: 514: beep(10,2);
 	movlw	(02h)
 	movwf	(?_beep)
@@ -2395,7 +2395,7 @@ l6903:
 	fcall	_beep
 	line	515
 	
-l6905:	
+l6910:	
 ;smartkey.C: 515: if(mtOldState == 3){reAlertOn =1;}
 	movf	(_mtOldState),w
 	xorlw	03h
@@ -2406,13 +2406,13 @@ u3161:
 	goto	l951
 u3160:
 	
-l6907:	
+l6912:	
 	clrf	(main@reAlertOn)
 	incf	(main@reAlertOn),f
 	goto	l951
 	line	483
 	
-l6911:	
+l6916:	
 	movf	(_mtState),w
 	; Switch size 1, requested type "space"
 ; Number of cases is 2, Range of values is 1 to 2
@@ -2426,10 +2426,10 @@ l6911:
 	opt asmopt_off
 	xorlw	1^0	; case 1
 	skipnz
-	goto	l6877
+	goto	l6882
 	xorlw	2^1	; case 2
 	skipnz
-	goto	l6897
+	goto	l6902
 	goto	l951
 	opt asmopt_on
 
@@ -2443,7 +2443,7 @@ l951:
 	bsf	(91/8),(91)&7
 	line	531
 	
-l6913:	
+l6918:	
 ;smartkey.C: 524: }
 ;smartkey.C: 526: }
 ;smartkey.C: 530: {
@@ -2454,10 +2454,10 @@ l6913:
 	goto	u3171
 	goto	u3170
 u3171:
-	goto	l6989
+	goto	l6994
 u3170:
 	
-l6915:	
+l6920:	
 	movf	(_timeTick+1),w
 	subwf	(_timeOut+1),w
 	skipz
@@ -2469,23 +2469,23 @@ u3185:
 	goto	u3181
 	goto	u3180
 u3181:
-	goto	l6989
+	goto	l6994
 u3180:
-	goto	l6987
+	goto	l6992
 	line	542
 	
-l6919:	
+l6924:	
 ;smartkey.C: 542: beepOff();
 	fcall	_beepOff
 	line	543
 	
-l6921:	
+l6926:	
 ;smartkey.C: 543: RegStatus &=(~0x20);
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(_RegStatus)+(5/8),(5)&7
 	line	544
 	
-l6923:	
+l6928:	
 ;smartkey.C: 544: setState(2,300);
 	movlw	low(012Ch)
 	movwf	(?_setState)
@@ -2495,15 +2495,15 @@ l6923:
 	fcall	_setState
 	line	545
 ;smartkey.C: 545: break;
-	goto	l6989
+	goto	l6994
 	line	547
 	
-l6925:	
+l6930:	
 ;smartkey.C: 547: beepOff();
 	fcall	_beepOff
 	line	548
 	
-l6927:	
+l6932:	
 ;smartkey.C: 548: delay_x10ms(20);
 	movlw	014h
 	bcf	status, 5	;RP0=0, select bank0
@@ -2512,19 +2512,19 @@ l6927:
 	fcall	_delay_x10ms
 	line	549
 	
-l6929:	
+l6934:	
 ;smartkey.C: 549: beepOn();TMR2ON = 0;reAlertOn =0;
 	fcall	_beepOn
 	
-l6931:	
+l6936:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(146/8),(146)&7
 	
-l6933:	
+l6938:	
 	clrf	(main@reAlertOn)
 	line	550
 	
-l6935:	
+l6940:	
 ;smartkey.C: 550: beep(30,1);
 	clrf	(?_beep)
 	incf	(?_beep),f
@@ -2532,7 +2532,7 @@ l6935:
 	fcall	_beep
 	line	551
 	
-l6937:	
+l6942:	
 ;smartkey.C: 551: setState(0,0);
 	clrf	(?_setState)
 	clrf	(?_setState+1)
@@ -2540,24 +2540,24 @@ l6937:
 	fcall	_setState
 	line	553
 	
-l6939:	
+l6944:	
 ;smartkey.C: 553: tmp16 = timeTick+40;
 	movf	(_timeTick+1),w
 	movwf	(main@tmp16+1)
 	movf	(_timeTick),w
 	movwf	(main@tmp16)
 	
-l6941:	
+l6946:	
 	movlw	028h
 	addwf	(main@tmp16),f
 	skipnc
 	incf	(main@tmp16+1),f
 	line	554
 ;smartkey.C: 554: break;
-	goto	l6989
+	goto	l6994
 	line	557
 	
-l6943:	
+l6948:	
 ;smartkey.C: 557: if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
 	movlw	(08h)
 	fcall	_READ_EEPROM
@@ -2566,26 +2566,26 @@ l6943:
 	goto	u3191
 	goto	u3190
 u3191:
-	goto	l6947
+	goto	l6952
 u3190:
 	
-l6945:	
+l6950:	
 	clrf	(?_WRITE_EEPROM)
 	movlw	(08h)
 	fcall	_WRITE_EEPROM
 	line	559
 	
-l6947:	
+l6952:	
 ;smartkey.C: 559: if(reAlertOn){
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(main@reAlertOn),w
 	skipz
 	goto	u3200
-	goto	l6957
+	goto	l6962
 u3200:
 	line	560
 	
-l6949:	
+l6954:	
 ;smartkey.C: 560: setState(4,6000);
 	movlw	low(01770h)
 	movwf	(?_setState)
@@ -2595,21 +2595,21 @@ l6949:
 	fcall	_setState
 	line	561
 	
-l6951:	
+l6956:	
 ;smartkey.C: 561: cntTmp = timeTick+40;
 	movf	(_timeTick+1),w
 	movwf	(_cntTmp+1)
 	movf	(_timeTick),w
 	movwf	(_cntTmp)
 	
-l6953:	
+l6958:	
 	movlw	028h
 	addwf	(_cntTmp),f
 	skipnc
 	incf	(_cntTmp+1),f
 	line	562
 	
-l6955:	
+l6960:	
 ;smartkey.C: 562: PR2L =20;
 	movlw	(014h)
 	bsf	status, 5	;RP0=1, select bank1
@@ -2619,19 +2619,19 @@ l6955:
 	fcall	_beepOn
 	line	565
 ;smartkey.C: 565: }else if(mtOldState == 0){
-	goto	l6989
+	goto	l6994
 	
-l6957:	
+l6962:	
 	movf	(_mtOldState),f
 	skipz
 	goto	u3211
 	goto	u3210
 u3211:
-	goto	l6971
+	goto	l6976
 u3210:
 	line	567
 	
-l6959:	
+l6964:	
 ;smartkey.C: 567: beep(10,5);
 	movlw	(05h)
 	movwf	(?_beep)
@@ -2639,12 +2639,12 @@ l6959:
 	fcall	_beep
 	line	568
 	
-l6961:	
+l6966:	
 ;smartkey.C: 568: RegStatus |=(0x20);
 	bsf	(_RegStatus)+(5/8),(5)&7
 	line	571
 	
-l6963:	
+l6968:	
 ;smartkey.C: 571: if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
 	movlw	(040h)
 	fcall	_READ_EEPROM
@@ -2656,7 +2656,7 @@ u3221:
 	goto	l971
 u3220:
 	
-l6965:	
+l6970:	
 	clrf	(?_WRITE_EEPROM)
 	movlw	(040h)
 	fcall	_WRITE_EEPROM
@@ -2671,24 +2671,24 @@ l971:
 	movwf	((?_setState))+1
 	movlw	(01h)
 	fcall	_setState
-	goto	l6939
+	goto	l6944
 	line	577
 	
-l6971:	
+l6976:	
 ;smartkey.C: 577: beepOn();TMR2ON = 0;
 	fcall	_beepOn
 	
-l6973:	
+l6978:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(146/8),(146)&7
 	line	578
 	
-l6975:	
+l6980:	
 ;smartkey.C: 578: reAlertOn =0;
 	clrf	(main@reAlertOn)
 	line	579
 	
-l6977:	
+l6982:	
 ;smartkey.C: 579: beep(30,1);
 	clrf	(?_beep)
 	incf	(?_beep),f
@@ -2696,16 +2696,16 @@ l6977:
 	fcall	_beep
 	line	580
 	
-l6979:	
+l6984:	
 ;smartkey.C: 580: setState(0,0);
 	clrf	(?_setState)
 	clrf	(?_setState+1)
 	movlw	(0)
 	fcall	_setState
-	goto	l6939
+	goto	l6944
 	line	533
 	
-l6987:	
+l6992:	
 	movf	(_mtState),w
 	; Switch size 1, requested type "space"
 ; Number of cases is 4, Range of values is 1 to 4
@@ -2719,22 +2719,22 @@ l6987:
 	opt asmopt_off
 	xorlw	1^0	; case 1
 	skipnz
-	goto	l6989
+	goto	l6994
 	xorlw	2^1	; case 2
 	skipnz
-	goto	l6943
+	goto	l6948
 	xorlw	3^2	; case 3
 	skipnz
-	goto	l6919
+	goto	l6924
 	xorlw	4^3	; case 4
 	skipnz
-	goto	l6925
-	goto	l6989
+	goto	l6930
+	goto	l6994
 	opt asmopt_on
 
 	line	590
 	
-l6989:	
+l6994:	
 ;smartkey.C: 586: }
 ;smartkey.C: 588: }
 ;smartkey.C: 590: if((timeTick>tmp16) && (mtState == 1) && mpuOk ==1){
@@ -2750,29 +2750,29 @@ u3235:
 	goto	u3231
 	goto	u3230
 u3231:
-	goto	l7071
+	goto	l7078
 u3230:
 	
-l6991:	
+l6996:	
 	decf	(_mtState),w
 	skipz
 	goto	u3241
 	goto	u3240
 u3241:
-	goto	l7071
+	goto	l7078
 u3240:
 	
-l6993:	
+l6998:	
 	decf	(main@mpuOk),w
 	skipz
 	goto	u3251
 	goto	u3250
 u3251:
-	goto	l7071
+	goto	l7078
 u3250:
 	line	591
 	
-l6995:	
+l7000:	
 ;smartkey.C: 591: tmp16 = timeTick+40;
 	movf	(_timeTick+1),w
 	movwf	(main@tmp16+1)
@@ -2784,7 +2784,7 @@ l6995:
 	incf	(main@tmp16+1),f
 	line	592
 	
-l6997:	
+l7002:	
 ;smartkey.C: 592: if(AccRead(0x02,buf,6)==0){
 	movlw	(main@buf&0ffh)
 	movwf	(?_AccRead)
@@ -2799,11 +2799,11 @@ l6997:
 	goto	u3261
 	goto	u3260
 u3261:
-	goto	l7071
+	goto	l7078
 u3260:
 	line	594
 	
-l6999:	
+l7004:	
 ;smartkey.C: 594: if(compe(buf[1], (signed char)acXsum,5) && compe(buf[3], (signed char)acYsum,5)){
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(main@acXsum),w
@@ -2817,10 +2817,10 @@ l6999:
 	goto	u3271
 	goto	u3270
 u3271:
-	goto	l7029
+	goto	l7034
 u3270:
 	
-l7001:	
+l7006:	
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(main@acYsum),w
 	movwf	(?_compe)
@@ -2833,17 +2833,17 @@ l7001:
 	goto	u3281
 	goto	u3280
 u3281:
-	goto	l7029
+	goto	l7034
 u3280:
 	line	597
 	
-l7003:	
+l7008:	
 ;smartkey.C: 597: isSw++;
 	bcf	status, 5	;RP0=0, select bank0
 	incf	(main@isSw),f
 	line	598
 	
-l7005:	
+l7010:	
 ;smartkey.C: 598: if(isSw >44){
 	movlw	(02Dh)
 	subwf	(main@isSw),w
@@ -2851,32 +2851,32 @@ l7005:
 	goto	u3291
 	goto	u3290
 u3291:
-	goto	l7019
+	goto	l7024
 u3290:
 	line	599
 	
-l7007:	
+l7012:	
 ;smartkey.C: 599: isSw =0;
 	clrf	(main@isSw)
 	line	600
 	
-l7009:	
+l7014:	
 ;smartkey.C: 600: vibrateOn=1;
 	clrf	(main@vibrateOn)
 	incf	(main@vibrateOn),f
 	line	602
 	
-l7011:	
+l7016:	
 	
-l7013:	
+l7018:	
 	line	603
 	
-l7015:	
+l7020:	
 ;smartkey.C: 603: RegStatus &=(~0x20);
 	bcf	(_RegStatus)+(5/8),(5)&7
 	line	604
 	
-l7017:	
+l7022:	
 ;smartkey.C: 604: setState(2,300);
 	movlw	low(012Ch)
 	movwf	(?_setState)
@@ -2886,10 +2886,10 @@ l7017:
 	fcall	_setState
 	line	606
 ;smartkey.C: 606: }
-	goto	l7049
+	goto	l7056
 	line	607
 	
-l7019:	
+l7024:	
 ;smartkey.C: 607: else if(isSw > 25){
 	movlw	(01Ah)
 	subwf	(main@isSw),w
@@ -2897,11 +2897,11 @@ l7019:
 	goto	u3301
 	goto	u3300
 u3301:
-	goto	l7049
+	goto	l7056
 u3300:
 	line	608
 	
-l7021:	
+l7026:	
 ;smartkey.C: 608: if(isSw%2==0){
 	btfsc	(main@isSw),(0)&7
 	goto	u3311
@@ -2911,42 +2911,42 @@ u3311:
 u3310:
 	line	609
 	
-l7023:	
+l7028:	
 ;smartkey.C: 609: beepOn();TMR2ON = 0; beep(7,1);
 	fcall	_beepOn
 	
-l7025:	
+l7030:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(146/8),(146)&7
 	
-l7027:	
+l7032:	
 	clrf	(?_beep)
 	incf	(?_beep),f
 	movlw	(07h)
 	fcall	_beep
-	goto	l7049
+	goto	l7056
 	line	613
 	
 l977:	
 ;smartkey.C: 610: }
 ;smartkey.C: 611: }
 ;smartkey.C: 613: }
-	goto	l7049
+	goto	l7056
 	line	615
 	
-l7029:	
+l7034:	
 ;smartkey.C: 614: else{
 ;smartkey.C: 615: isSw =0;
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(main@isSw)
 	line	618
 	
-l7031:	
-;smartkey.C: 618: if(compe(buf[1], acXOld,2) && compe(buf[3], acYOld,2)){
+l7036:	
+;smartkey.C: 618: if(compe(buf[1], acXOld,1) && compe(buf[3], acYOld,1)){
 	movf	(main@acXOld),w
 	movwf	(?_compe)
-	movlw	(02h)
-	movwf	0+(?_compe)+01h
+	clrf	0+(?_compe)+01h
+	incf	0+(?_compe)+01h,f
 	movf	0+(main@buf)+01h,w
 	fcall	_compe
 	xorlw	0
@@ -2954,15 +2954,15 @@ l7031:
 	goto	u3321
 	goto	u3320
 u3321:
-	goto	l7049
+	goto	l7054
 u3320:
 	
-l7033:	
+l7038:	
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(main@acYOld),w
 	movwf	(?_compe)
-	movlw	(02h)
-	movwf	0+(?_compe)+01h
+	clrf	0+(?_compe)+01h
+	incf	0+(?_compe)+01h,f
 	movf	0+(main@buf)+03h,w
 	fcall	_compe
 	xorlw	0
@@ -2970,11 +2970,11 @@ l7033:
 	goto	u3331
 	goto	u3330
 u3331:
-	goto	l7049
+	goto	l7054
 u3330:
 	line	619
 	
-l7035:	
+l7040:	
 ;smartkey.C: 619: isWait++;
 	bcf	status, 5	;RP0=0, select bank0
 	incf	(main@isWait),f
@@ -2982,7 +2982,7 @@ l7035:
 	incf	(main@isWait+1),f
 	line	620
 	
-l7037:	
+l7042:	
 ;smartkey.C: 620: if(isWait==450){
 	decf	(main@isWait+1),w
 	movlw	194
@@ -2993,17 +2993,17 @@ l7037:
 	goto	u3341
 	goto	u3340
 u3341:
-	goto	l7049
+	goto	l7056
 u3340:
 	line	621
 	
-l7039:	
+l7044:	
 ;smartkey.C: 621: isWait = 0;
 	clrf	(main@isWait)
 	clrf	(main@isWait+1)
 	line	622
 	
-l7041:	
+l7046:	
 ;smartkey.C: 622: beep(7,2);
 	movlw	(02h)
 	movwf	(?_beep)
@@ -3011,18 +3011,18 @@ l7041:
 	fcall	_beep
 	line	623
 	
-l7043:	
+l7048:	
 ;smartkey.C: 623: vibrateOn=1;
 	clrf	(main@vibrateOn)
 	incf	(main@vibrateOn),f
 	line	624
 	
-l7045:	
+l7050:	
 ;smartkey.C: 624: RegStatus &=(~0x20);
 	bcf	(_RegStatus)+(5/8),(5)&7
 	line	625
 	
-l7047:	
+l7052:	
 ;smartkey.C: 625: setState(2,300);
 	movlw	low(012Ch)
 	movwf	(?_setState)
@@ -3030,14 +3030,20 @@ l7047:
 	movwf	((?_setState))+1
 	movlw	(02h)
 	fcall	_setState
-	line	631
+	goto	l7056
+	line	629
 	
-l7049:	
-;smartkey.C: 626: }
-;smartkey.C: 627: }
-;smartkey.C: 629: }
-;smartkey.C: 631: if( (buf[5] > -31) && (buf[5] < 31)) {
+l7054:	
+;smartkey.C: 628: else
+;smartkey.C: 629: isWait=0;
 	bcf	status, 5	;RP0=0, select bank0
+	clrf	(main@isWait)
+	clrf	(main@isWait+1)
+	line	633
+	
+l7056:	
+;smartkey.C: 631: }
+;smartkey.C: 633: if( (buf[5] > -31) && (buf[5] < 31)) {
 	movf	0+(main@buf)+05h,w
 	xorlw	80h
 	addlw	-((-30)^80h)
@@ -3045,10 +3051,10 @@ l7049:
 	goto	u3351
 	goto	u3350
 u3351:
-	goto	l7065
+	goto	l7072
 u3350:
 	
-l7051:	
+l7058:	
 	movf	0+(main@buf)+05h,w
 	xorlw	80h
 	addlw	-((01Fh)^80h)
@@ -3056,77 +3062,77 @@ l7051:
 	goto	u3361
 	goto	u3360
 u3361:
-	goto	l7065
+	goto	l7072
 u3360:
-	line	632
+	line	634
 	
-l7053:	
-;smartkey.C: 632: isFall++;
+l7060:	
+;smartkey.C: 634: isFall++;
 	incf	(main@isFall),f
-	line	633
+	line	635
 	
-l7055:	
-;smartkey.C: 633: if(isFall >4){
+l7062:	
+;smartkey.C: 635: if(isFall >4){
 	movlw	(05h)
 	subwf	(main@isFall),w
 	skipc
 	goto	u3371
 	goto	u3370
 u3371:
-	goto	l7067
+	goto	l7074
 u3370:
-	line	634
+	line	636
 	
-l7057:	
-;smartkey.C: 634: isFall =0;
+l7064:	
+;smartkey.C: 636: isFall =0;
 	clrf	(main@isFall)
-	line	635
+	line	637
 	
-l7059:	
-;smartkey.C: 635: beep(7,2);
+l7066:	
+;smartkey.C: 637: beep(7,2);
 	movlw	(02h)
 	movwf	(?_beep)
 	movlw	(07h)
 	fcall	_beep
-	line	636
+	line	638
 	
-l7061:	
-;smartkey.C: 636: RegStatus &=(~0x20);
+l7068:	
+;smartkey.C: 638: RegStatus &=(~0x20);
 	bcf	(_RegStatus)+(5/8),(5)&7
-	line	637
+	line	639
 	
-l7063:	
-;smartkey.C: 637: setState(2,300);
+l7070:	
+;smartkey.C: 639: setState(2,300);
 	movlw	low(012Ch)
 	movwf	(?_setState)
 	movlw	high(012Ch)
 	movwf	((?_setState))+1
 	movlw	(02h)
 	fcall	_setState
-	goto	l7067
-	line	641
+	goto	l7074
+	line	643
 	
-l7065:	
-;smartkey.C: 640: else{
-;smartkey.C: 641: isFall=0;
+l7072:	
+;smartkey.C: 642: else{
+;smartkey.C: 643: isFall=0;
 	clrf	(main@isFall)
-	line	644
+	line	646
 	
-l7067:	
-;smartkey.C: 642: }
-;smartkey.C: 644: acYOld = buf[3];acXOld = buf[1];
+l7074:	
+;smartkey.C: 644: }
+;smartkey.C: 646: acYOld = buf[3];acXOld = buf[1];
 	movf	0+(main@buf)+03h,w
 	movwf	(main@acYOld)
 	
-l7069:	
+l7076:	
 	movf	0+(main@buf)+01h,w
 	movwf	(main@acXOld)
-	line	650
+	line	652
 	
-l7071:	
-;smartkey.C: 645: }
+l7078:	
 ;smartkey.C: 647: }
-;smartkey.C: 650: if((timeTick>tmp16) && (mtState == 0 ) && mpuOk ==1){
+;smartkey.C: 649: }
+;smartkey.C: 652: if((timeTick>tmp16) && (mtState == 0 ) && mpuOk ==1){
 	movf	(_timeTick+1),w
 	bcf	status, 5	;RP0=0, select bank0
 	subwf	(main@tmp16+1),w
@@ -3139,30 +3145,30 @@ u3385:
 	goto	u3381
 	goto	u3380
 u3381:
-	goto	l7103
+	goto	l7110
 u3380:
 	
-l7073:	
+l7080:	
 	movf	(_mtState),f
 	skipz
 	goto	u3391
 	goto	u3390
 u3391:
-	goto	l7103
+	goto	l7110
 u3390:
 	
-l7075:	
+l7082:	
 	decf	(main@mpuOk),w
 	skipz
 	goto	u3401
 	goto	u3400
 u3401:
-	goto	l7103
+	goto	l7110
 u3400:
-	line	652
+	line	654
 	
-l7077:	
-;smartkey.C: 652: if(timeTick >65000) timeTick =0;
+l7084:	
+;smartkey.C: 654: if(timeTick >65000) timeTick =0;
 	movlw	high(0FDE9h)
 	subwf	(_timeTick+1),w
 	movlw	low(0FDE9h)
@@ -3172,30 +3178,30 @@ l7077:
 	goto	u3411
 	goto	u3410
 u3411:
-	goto	l7081
+	goto	l7088
 u3410:
 	
-l7079:	
+l7086:	
 	clrf	(_timeTick)
 	clrf	(_timeTick+1)
-	line	653
+	line	655
 	
-l7081:	
-;smartkey.C: 653: tmp16 = timeTick+40;
+l7088:	
+;smartkey.C: 655: tmp16 = timeTick+40;
 	movf	(_timeTick+1),w
 	movwf	(main@tmp16+1)
 	movf	(_timeTick),w
 	movwf	(main@tmp16)
 	
-l7083:	
+l7090:	
 	movlw	028h
 	addwf	(main@tmp16),f
 	skipnc
 	incf	(main@tmp16+1),f
-	line	655
+	line	657
 	
-l7085:	
-;smartkey.C: 655: if(AccRead(0x02,buf,6)==0){
+l7092:	
+;smartkey.C: 657: if(AccRead(0x02,buf,6)==0){
 	movlw	(main@buf&0ffh)
 	movwf	(?_AccRead)
 	movlw	(0x0/2)
@@ -3209,24 +3215,24 @@ l7085:
 	goto	u3421
 	goto	u3420
 u3421:
-	goto	l7103
+	goto	l7110
 u3420:
-	line	657
+	line	659
 	
-l7087:	
-;smartkey.C: 657: if(vibrateOn==1){
+l7094:	
+;smartkey.C: 659: if(vibrateOn==1){
 	bcf	status, 5	;RP0=0, select bank0
 	decf	(main@vibrateOn),w
 	skipz
 	goto	u3431
 	goto	u3430
 u3431:
-	goto	l7103
+	goto	l7110
 u3430:
-	line	658
+	line	660
 	
-l7089:	
-;smartkey.C: 658: if(compe(buf[1],acXOld ,3) && compe(buf[3],acYOld ,3)){
+l7096:	
+;smartkey.C: 660: if(compe(buf[1],acXOld ,3) && compe(buf[3],acYOld ,3)){
 	movf	(main@acXOld),w
 	movwf	(?_compe)
 	movlw	(03h)
@@ -3238,10 +3244,10 @@ l7089:
 	goto	u3441
 	goto	u3440
 u3441:
-	goto	l7095
+	goto	l7102
 u3440:
 	
-l7091:	
+l7098:	
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(main@acYOld),w
 	movwf	(?_compe)
@@ -3254,73 +3260,73 @@ l7091:
 	goto	u3451
 	goto	u3450
 u3451:
-	goto	l7095
+	goto	l7102
 u3450:
-	line	660
+	line	662
 	
-l7093:	
-;smartkey.C: 660: isSw=0;
+l7100:	
+;smartkey.C: 662: isSw=0;
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(main@isSw)
-	line	663
-;smartkey.C: 663: }
-	goto	l7103
 	line	665
+;smartkey.C: 665: }
+	goto	l7110
+	line	667
 	
-l7095:	
-;smartkey.C: 664: else{
-;smartkey.C: 665: isSw++;
+l7102:	
+;smartkey.C: 666: else{
+;smartkey.C: 667: isSw++;
 	bcf	status, 5	;RP0=0, select bank0
 	incf	(main@isSw),f
-	line	669
+	line	671
 	
-l7097:	
-;smartkey.C: 668: {
-;smartkey.C: 669: beepOn();TMR2ON = 0; beep(7,3);
+l7104:	
+;smartkey.C: 670: {
+;smartkey.C: 671: beepOn();TMR2ON = 0; beep(7,3);
 	fcall	_beepOn
 	
-l7099:	
+l7106:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(146/8),(146)&7
 	
-l7101:	
+l7108:	
 	movlw	(03h)
 	movwf	(?_beep)
 	movlw	(07h)
 	fcall	_beep
-	line	679
+	line	681
 	
-l7103:	
-;smartkey.C: 670: }
-;smartkey.C: 671: }
+l7110:	
 ;smartkey.C: 672: }
+;smartkey.C: 673: }
 ;smartkey.C: 674: }
-;smartkey.C: 677: }
-;smartkey.C: 679: if(RegStatus & 0x20) {RC0 =1;RC1 =1;}
+;smartkey.C: 676: }
+;smartkey.C: 679: }
+;smartkey.C: 681: if(RegStatus & 0x20) {RC0 =1;RC1 =1;}
 	bcf	status, 5	;RP0=0, select bank0
 	btfss	(_RegStatus),(5)&7
 	goto	u3461
 	goto	u3460
 u3461:
-	goto	l992
+	goto	l993
 u3460:
 	
-l7105:	
+l7112:	
 	bsf	(56/8),(56)&7
 	bsf	(57/8),(57)&7
-	goto	l6805
-	line	680
+	goto	l6810
+	line	682
 	
-l992:	
-;smartkey.C: 680: else {RC0 =0;RC1 =0;}
+l993:	
+;smartkey.C: 682: else {RC0 =0;RC1 =0;}
 	bcf	(56/8),(56)&7
 	bcf	(57/8),(57)&7
-	goto	l6805
+	goto	l6810
 	global	start
 	ljmp	start
 	opt stack 0
 psect	maintext
-	line	685
+	line	687
 GLOBAL	__end_of_main
 	__end_of_main:
 ;; =============== function _main ends ============
@@ -3380,7 +3386,7 @@ _AccRead:
 	line	34
 	movwf	(AccRead@rAdd)
 	
-l6627:	
+l6632:	
 ;mpu6x.c: 32: unsigned char i;
 ;mpu6x.c: 34: swI2C_Start();
 	fcall	_swI2C_Start
@@ -3393,11 +3399,11 @@ l6627:
 	goto	u2781
 	goto	u2780
 u2781:
-	goto	l6651
+	goto	l6656
 u2780:
 	line	38
 	
-l6629:	
+l6634:	
 ;mpu6x.c: 37: {
 ;mpu6x.c: 38: if(swI2C_WriteByte(rAdd)==0 )
 	movf	(AccRead@rAdd),w
@@ -3407,11 +3413,11 @@ l6629:
 	goto	u2791
 	goto	u2790
 u2791:
-	goto	l6655
+	goto	l6660
 u2790:
 	line	40
 	
-l6631:	
+l6636:	
 ;mpu6x.c: 39: {
 ;mpu6x.c: 40: swI2C_Start();
 	fcall	_swI2C_Start
@@ -3424,17 +3430,17 @@ l6631:
 	goto	u2801
 	goto	u2800
 u2801:
-	goto	l6651
+	goto	l6656
 u2800:
 	line	43
 	
-l6633:	
+l6638:	
 ;mpu6x.c: 43: for(i=0; i<(len-1);i++){
 	clrf	(AccRead@i)
-	goto	l6639
+	goto	l6644
 	line	44
 	
-l6635:	
+l6640:	
 ;mpu6x.c: 44: dat[i]=swI2C_ReadByte(1);
 	movlw	(01h)
 	fcall	_swI2C_ReadByte
@@ -3456,10 +3462,10 @@ l6635:
 	movwf	indf
 	line	43
 	
-l6637:	
+l6642:	
 	incf	(AccRead@i),f
 	
-l6639:	
+l6644:	
 	movf	(AccRead@len),w
 	addlw	low(-1)
 	movwf	(??_AccRead+0)+0
@@ -3480,11 +3486,11 @@ u2815:
 	goto	u2811
 	goto	u2810
 u2811:
-	goto	l6635
+	goto	l6640
 u2810:
 	line	46
 	
-l6641:	
+l6646:	
 ;mpu6x.c: 45: }
 ;mpu6x.c: 46: dat[i]=swI2C_ReadByte(1);
 	movlw	(01h)
@@ -3507,31 +3513,31 @@ l6641:
 	movwf	indf
 	line	47
 	
-l6643:	
+l6648:	
 ;mpu6x.c: 47: swI2C_Stop();
 	fcall	_swI2C_Stop
 	line	48
 	
-l6645:	
+l6650:	
 ;mpu6x.c: 48: return 0;
 	movlw	(0)
-	goto	l3411
+	goto	l3412
 	line	52
 	
-l6651:	
+l6656:	
 ;mpu6x.c: 51: else
 ;mpu6x.c: 52: return 1;
 	movlw	(01h)
-	goto	l3411
+	goto	l3412
 	line	55
 	
-l6655:	
+l6660:	
 ;mpu6x.c: 54: else
 ;mpu6x.c: 55: return 2;
 	movlw	(02h)
 	line	59
 	
-l3411:	
+l3412:	
 	return
 	opt stack 0
 GLOBAL	__end_of_AccRead
@@ -3592,7 +3598,7 @@ _AccWrite:
 	line	6
 	movwf	(AccWrite@rAdd)
 	
-l6593:	
+l6598:	
 ;mpu6x.c: 5: unsigned char i;
 ;mpu6x.c: 6: swI2C_Start();
 	fcall	_swI2C_Start
@@ -3605,11 +3611,11 @@ l6593:
 	goto	u2741
 	goto	u2740
 u2741:
-	goto	l6623
+	goto	l6628
 u2740:
 	line	10
 	
-l6595:	
+l6600:	
 ;mpu6x.c: 9: {
 ;mpu6x.c: 10: if(swI2C_WriteByte(rAdd)==0 )
 	movf	(AccWrite@rAdd),w
@@ -3619,18 +3625,18 @@ l6595:
 	goto	u2751
 	goto	u2750
 u2751:
-	goto	l6619
+	goto	l6624
 u2750:
 	line	12
 	
-l6597:	
+l6602:	
 ;mpu6x.c: 11: {
 ;mpu6x.c: 12: for(i=0; i<len;i++){
 	clrf	(AccWrite@i)
-	goto	l6609
+	goto	l6614
 	line	13
 	
-l6599:	
+l6604:	
 ;mpu6x.c: 13: if(swI2C_WriteByte(dat[i])==1 ){
 	movf	(AccWrite@i),w
 	addwf	(AccWrite@dat),w
@@ -3651,62 +3657,62 @@ l6599:
 	goto	u2761
 	goto	u2760
 u2761:
-	goto	l6607
+	goto	l6612
 u2760:
 	line	14
 	
-l6601:	
+l6606:	
 ;mpu6x.c: 14: swI2C_Stop();
 	fcall	_swI2C_Stop
 	line	15
 	
-l6603:	
+l6608:	
 ;mpu6x.c: 15: return 3;
 	movlw	(03h)
-	goto	l3399
+	goto	l3400
 	line	12
 	
-l6607:	
+l6612:	
 	incf	(AccWrite@i),f
 	
-l6609:	
+l6614:	
 	movf	(AccWrite@len),w
 	subwf	(AccWrite@i),w
 	skipc
 	goto	u2771
 	goto	u2770
 u2771:
-	goto	l6599
+	goto	l6604
 u2770:
 	line	18
 	
-l6611:	
+l6616:	
 ;mpu6x.c: 16: }
 ;mpu6x.c: 17: }
 ;mpu6x.c: 18: swI2C_Stop();
 	fcall	_swI2C_Stop
 	line	19
 	
-l6613:	
+l6618:	
 ;mpu6x.c: 19: return 0;
 	movlw	(0)
-	goto	l3399
+	goto	l3400
 	line	22
 	
-l6619:	
+l6624:	
 ;mpu6x.c: 21: else
 ;mpu6x.c: 22: return 2;
 	movlw	(02h)
-	goto	l3399
+	goto	l3400
 	line	25
 	
-l6623:	
+l6628:	
 ;mpu6x.c: 24: else
 ;mpu6x.c: 25: return 1;
 	movlw	(01h)
 	line	27
 	
-l3399:	
+l3400:	
 	return
 	opt stack 0
 GLOBAL	__end_of_AccWrite
@@ -3764,22 +3770,22 @@ _swI2C_ReadByte:
 	bcf	status, 5	;RP0=0, select bank0
 	movwf	(swI2C_ReadByte@Ack)
 	
-l6565:	
+l6570:	
 	clrf	(swI2C_ReadByte@dat)
 	line	115
 	
-l6567:	
+l6572:	
 ;SWI2C.C: 115: RA7 = 0;
 	bcf	(47/8),(47)&7
 	line	116
 	
-l6569:	
+l6574:	
 ;SWI2C.C: 116: TRISA |=0x40;;
 	bsf	status, 5	;RP0=1, select bank1
 	bsf	(133)^080h+(6/8),(6)&7	;volatile
 	line	117
 	
-l6571:	
+l6576:	
 ;SWI2C.C: 117: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -3792,20 +3798,20 @@ opt asmopt_on
 
 	line	118
 	
-l6573:	
+l6578:	
 ;SWI2C.C: 118: for(i=0;i<8;i++)
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(swI2C_ReadByte@i)
 	line	119
 	
-l2599:	
+l2600:	
 	line	120
 ;SWI2C.C: 119: {
 ;SWI2C.C: 120: RA7 = 1;
 	bsf	(47/8),(47)&7
 	line	121
 	
-l6577:	
+l6582:	
 ;SWI2C.C: 121: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -3817,7 +3823,7 @@ opt asmopt_on
 
 	line	122
 	
-l6579:	
+l6584:	
 ;SWI2C.C: 122: dat = dat<<1 |(RA6 & 1 );
 	movlw	0
 	bcf	status, 5	;RP0=0, select bank0
@@ -3831,12 +3837,12 @@ l6579:
 	movwf	(swI2C_ReadByte@dat)
 	line	125
 	
-l6581:	
+l6586:	
 ;SWI2C.C: 125: RA7 = 0;
 	bcf	(47/8),(47)&7
 	line	126
 	
-l6583:	
+l6588:	
 ;SWI2C.C: 126: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -3848,7 +3854,7 @@ opt asmopt_on
 
 	line	118
 	
-l6585:	
+l6590:	
 	bcf	status, 5	;RP0=0, select bank0
 	incf	(swI2C_ReadByte@i),f
 	movlw	(08h)
@@ -3857,10 +3863,10 @@ l6585:
 	goto	u2711
 	goto	u2710
 u2711:
-	goto	l2599
+	goto	l2600
 u2710:
 	
-l2600:	
+l2601:	
 	line	129
 ;SWI2C.C: 127: }
 ;SWI2C.C: 129: TRISA &=0xbf;;
@@ -3887,7 +3893,7 @@ u2734:
 	bsf	(47/8),(47)&7
 	line	133
 	
-l6587:	
+l6592:	
 ;SWI2C.C: 133: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -3899,7 +3905,7 @@ opt asmopt_on
 
 	line	134
 	
-l6589:	
+l6594:	
 ;SWI2C.C: 134: RA7 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(47/8),(47)&7
@@ -3919,7 +3925,7 @@ opt asmopt_on
 	movf	(swI2C_ReadByte@dat),w
 	line	137
 	
-l2601:	
+l2602:	
 	return
 	opt stack 0
 GLOBAL	__end_of_swI2C_ReadByte
@@ -3977,16 +3983,16 @@ _swI2C_WriteByte:
 	movwf	(swI2C_WriteByte@dat)
 	line	87
 	
-l6537:	
+l6542:	
 	line	89
 	
-l6539:	
+l6544:	
 ;SWI2C.C: 89: TRISA &=0xbf;;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	(133)^080h+(6/8),(6)&7	;volatile
 	line	90
 	
-l6541:	
+l6546:	
 ;SWI2C.C: 90: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -3999,13 +4005,13 @@ opt asmopt_on
 
 	line	91
 	
-l6543:	
+l6548:	
 ;SWI2C.C: 91: for(i=0;i<8;i++)
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(swI2C_WriteByte@i)
 	line	92
 	
-l2594:	
+l2595:	
 	line	93
 ;SWI2C.C: 92: {
 ;SWI2C.C: 93: RA6 = (dat&0x80) ? 1:0;
@@ -4030,7 +4036,7 @@ u2694:
 	bsf	(47/8),(47)&7
 	line	96
 	
-l6547:	
+l6552:	
 ;SWI2C.C: 96: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -4042,7 +4048,7 @@ opt asmopt_on
 
 	line	97
 	
-l6549:	
+l6554:	
 ;SWI2C.C: 97: RA7 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(47/8),(47)&7
@@ -4058,21 +4064,21 @@ opt asmopt_on
 
 	line	91
 	
-l6551:	
+l6556:	
 	bcf	status, 5	;RP0=0, select bank0
 	incf	(swI2C_WriteByte@i),f
 	
-l6553:	
+l6558:	
 	movlw	(08h)
 	subwf	(swI2C_WriteByte@i),w
 	skipc
 	goto	u2701
 	goto	u2700
 u2701:
-	goto	l2594
+	goto	l2595
 u2700:
 	
-l2595:	
+l2596:	
 	line	101
 ;SWI2C.C: 99: }
 ;SWI2C.C: 101: TRISA |=0x40;;
@@ -4080,7 +4086,7 @@ l2595:
 	bsf	(133)^080h+(6/8),(6)&7	;volatile
 	line	102
 	
-l6555:	
+l6560:	
 ;SWI2C.C: 102: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -4093,7 +4099,7 @@ opt asmopt_on
 
 	line	103
 	
-l6557:	
+l6562:	
 ;SWI2C.C: 103: RA7 = 1;
 	bcf	status, 5	;RP0=0, select bank0
 	bsf	(47/8),(47)&7
@@ -4116,12 +4122,12 @@ opt asmopt_on
 	movwf	(swI2C_WriteByte@i)
 	line	106
 	
-l6559:	
+l6564:	
 ;SWI2C.C: 106: RA7 = 0;
 	bcf	(47/8),(47)&7
 	line	107
 	
-l6561:	
+l6566:	
 ;SWI2C.C: 107: TRISA &=0xbf;;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	(133)^080h+(6/8),(6)&7	;volatile
@@ -4131,7 +4137,7 @@ l6561:
 	movf	(swI2C_WriteByte@i),w
 	line	109
 	
-l2596:	
+l2597:	
 	return
 	opt stack 0
 GLOBAL	__end_of_swI2C_WriteByte
@@ -4185,7 +4191,7 @@ _swI2C_Stop:
 ; Regs used in _swI2C_Stop: [wreg]
 	line	37
 	
-l6531:	
+l6536:	
 ;SWI2C.C: 37: RA6 = 0;
 	bcf	(46/8),(46)&7
 	line	38
@@ -4193,7 +4199,7 @@ l6531:
 	bsf	(47/8),(47)&7
 	line	39
 	
-l6533:	
+l6538:	
 ;SWI2C.C: 39: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -4205,7 +4211,7 @@ opt asmopt_on
 
 	line	40
 	
-l6535:	
+l6540:	
 ;SWI2C.C: 40: RA6 = 1;
 	bcf	status, 5	;RP0=0, select bank0
 	bsf	(46/8),(46)&7
@@ -4221,7 +4227,7 @@ opt asmopt_on
 
 	line	42
 	
-l2588:	
+l2589:	
 	return
 	opt stack 0
 GLOBAL	__end_of_swI2C_Stop
@@ -4275,7 +4281,7 @@ _swI2C_Start:
 ; Regs used in _swI2C_Start: [wreg]
 	line	24
 	
-l6523:	
+l6528:	
 ;SWI2C.C: 24: RA7 = 1;
 	bsf	(47/8),(47)&7
 	line	26
@@ -4283,7 +4289,7 @@ l6523:
 	bsf	(46/8),(46)&7
 	line	27
 	
-l6525:	
+l6530:	
 ;SWI2C.C: 27: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -4295,7 +4301,7 @@ opt asmopt_on
 
 	line	28
 	
-l6527:	
+l6532:	
 ;SWI2C.C: 28: RA6 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(46/8),(46)&7
@@ -4311,7 +4317,7 @@ opt asmopt_on
 
 	line	30
 	
-l6529:	
+l6534:	
 ;SWI2C.C: 30: RA7 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(47/8),(47)&7
@@ -4327,7 +4333,7 @@ opt asmopt_on
 
 	line	32
 	
-l2585:	
+l2586:	
 	return
 	opt stack 0
 GLOBAL	__end_of_swI2C_Start
@@ -4380,7 +4386,7 @@ _swI2C_Init:
 ; Regs used in _swI2C_Init: [wreg]
 	line	10
 	
-l6515:	
+l6520:	
 ;SWI2C.C: 10: TRISA &=0xbf;;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	(133)^080h+(6/8),(6)&7	;volatile
@@ -4389,7 +4395,7 @@ l6515:
 	bcf	(133)^080h+(7/8),(7)&7	;volatile
 	line	12
 	
-l6517:	
+l6522:	
 ;SWI2C.C: 12: _delay((unsigned long)((16)*(4000000/4000000.0)));;
 	opt asmopt_off
 movlw	5
@@ -4402,13 +4408,13 @@ opt asmopt_on
 
 	line	13
 	
-l6519:	
+l6524:	
 ;SWI2C.C: 13: RA7 = 1;
 	bcf	status, 5	;RP0=0, select bank0
 	bsf	(47/8),(47)&7
 	line	14
 	
-l6521:	
+l6526:	
 ;SWI2C.C: 14: RA6 = 1;
 	bsf	(46/8),(46)&7
 	line	15
@@ -4456,7 +4462,7 @@ opt asmopt_on
 
 	line	19
 	
-l2582:	
+l2583:	
 	return
 	opt stack 0
 GLOBAL	__end_of_swI2C_Init
@@ -4509,30 +4515,30 @@ _sys_init:
 ; Regs used in _sys_init: [wreg]
 	line	21
 	
-l6511:	
+l6516:	
 ;sysinit.c: 21: OSCCON = 0B01010001;
 	movlw	(051h)
 	bsf	status, 5	;RP0=1, select bank1
 	movwf	(143)^080h	;volatile
 	line	22
 	
-l6513:	
+l6518:	
 ;sysinit.c: 22: _nop();
 	nop
 	line	28
 ;sysinit.c: 28: while(HTS==0);
 	
-l1783:	
+l1784:	
 	bsf	status, 5	;RP0=1, select bank1
 	btfss	(1146/8)^080h,(1146)&7
 	goto	u2671
 	goto	u2670
 u2671:
-	goto	l1783
+	goto	l1784
 u2670:
 	line	30
 	
-l1786:	
+l1787:	
 	return
 	opt stack 0
 GLOBAL	__end_of_sys_init
@@ -4588,10 +4594,10 @@ _beep:
 	movwf	(beep@delay)
 	line	178
 	
-l6497:	
+l6502:	
 ;smartkey.C: 177: {
 ;smartkey.C: 178: while(rep--){
-	goto	l6509
+	goto	l6514
 	
 l866:	
 	line	179
@@ -4599,14 +4605,14 @@ l866:
 	bsf	(146/8),(146)&7
 	line	180
 	
-l6499:	
+l6504:	
 ;smartkey.C: 180: PR2L = 12;
 	movlw	(0Ch)
 	bsf	status, 5	;RP0=1, select bank1
 	movwf	(145)^080h	;volatile
 	line	181
 	
-l6501:	
+l6506:	
 ;smartkey.C: 181: delay_x10ms(delay);
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(beep@delay),w
@@ -4615,15 +4621,15 @@ l6501:
 	fcall	_delay_x10ms
 	line	183
 	
-l6503:	
+l6508:	
 ;smartkey.C: 183: TMR2ON = 0;RA3 =0;
 	bcf	(146/8),(146)&7
 	
-l6505:	
+l6510:	
 	bcf	(43/8),(43)&7
 	line	184
 	
-l6507:	
+l6512:	
 ;smartkey.C: 184: delay_x10ms(20);
 	movlw	014h
 	movwf	(?_delay_x10ms)
@@ -4631,7 +4637,7 @@ l6507:
 	fcall	_delay_x10ms
 	line	178
 	
-l6509:	
+l6514:	
 	decf	(beep@rep),f
 	movf	((beep@rep)),w
 	xorlw	0FFh
@@ -4699,20 +4705,20 @@ ___awdiv:
 ; Regs used in ___awdiv: [wreg+status,2+status,0]
 	line	9
 	
-l6453:	
+l6458:	
 	clrf	(___awdiv@sign)
 	line	10
 	
-l6455:	
+l6460:	
 	btfss	(___awdiv@divisor+1),7
 	goto	u2591
 	goto	u2590
 u2591:
-	goto	l6461
+	goto	l6466
 u2590:
 	line	11
 	
-l6457:	
+l6462:	
 	comf	(___awdiv@divisor),f
 	comf	(___awdiv@divisor+1),f
 	incf	(___awdiv@divisor),f
@@ -4720,21 +4726,21 @@ l6457:
 	incf	(___awdiv@divisor+1),f
 	line	12
 	
-l6459:	
+l6464:	
 	clrf	(___awdiv@sign)
 	incf	(___awdiv@sign),f
 	line	14
 	
-l6461:	
+l6466:	
 	btfss	(___awdiv@dividend+1),7
 	goto	u2601
 	goto	u2600
 u2601:
-	goto	l6467
+	goto	l6472
 u2600:
 	line	15
 	
-l6463:	
+l6468:	
 	comf	(___awdiv@dividend),f
 	comf	(___awdiv@dividend+1),f
 	incf	(___awdiv@dividend),f
@@ -4742,35 +4748,35 @@ l6463:
 	incf	(___awdiv@dividend+1),f
 	line	16
 	
-l6465:	
+l6470:	
 	movlw	(01h)
 	xorwf	(___awdiv@sign),f
 	line	18
 	
-l6467:	
+l6472:	
 	clrf	(___awdiv@quotient)
 	clrf	(___awdiv@quotient+1)
 	line	19
 	
-l6469:	
+l6474:	
 	movf	(___awdiv@divisor+1),w
 	iorwf	(___awdiv@divisor),w
 	skipnz
 	goto	u2611
 	goto	u2610
 u2611:
-	goto	l6489
+	goto	l6494
 u2610:
 	line	20
 	
-l6471:	
+l6476:	
 	clrf	(___awdiv@counter)
 	incf	(___awdiv@counter),f
 	line	21
-	goto	l6475
+	goto	l6480
 	line	22
 	
-l6473:	
+l6478:	
 	clrc
 	rlf	(___awdiv@divisor),f
 	rlf	(___awdiv@divisor+1),f
@@ -4778,22 +4784,22 @@ l6473:
 	incf	(___awdiv@counter),f
 	line	21
 	
-l6475:	
+l6480:	
 	btfss	(___awdiv@divisor+1),(15)&7
 	goto	u2621
 	goto	u2620
 u2621:
-	goto	l6473
+	goto	l6478
 u2620:
 	line	26
 	
-l6477:	
+l6482:	
 	clrc
 	rlf	(___awdiv@quotient),f
 	rlf	(___awdiv@quotient+1),f
 	line	27
 	
-l6479:	
+l6484:	
 	movf	(___awdiv@divisor+1),w
 	subwf	(___awdiv@dividend+1),w
 	skipz
@@ -4805,11 +4811,11 @@ u2635:
 	goto	u2631
 	goto	u2630
 u2631:
-	goto	l6485
+	goto	l6490
 u2630:
 	line	28
 	
-l6481:	
+l6486:	
 	movf	(___awdiv@divisor),w
 	subwf	(___awdiv@dividend),f
 	movf	(___awdiv@divisor+1),w
@@ -4818,34 +4824,34 @@ l6481:
 	subwf	(___awdiv@dividend+1),f
 	line	29
 	
-l6483:	
+l6488:	
 	bsf	(___awdiv@quotient)+(0/8),(0)&7
 	line	31
 	
-l6485:	
+l6490:	
 	clrc
 	rrf	(___awdiv@divisor+1),f
 	rrf	(___awdiv@divisor),f
 	line	32
 	
-l6487:	
+l6492:	
 	decfsz	(___awdiv@counter),f
 	goto	u2641
 	goto	u2640
 u2641:
-	goto	l6477
+	goto	l6482
 u2640:
 	line	34
 	
-l6489:	
+l6494:	
 	movf	(___awdiv@sign),w
 	skipz
 	goto	u2650
-	goto	l6493
+	goto	l6498
 u2650:
 	line	35
 	
-l6491:	
+l6496:	
 	comf	(___awdiv@quotient),f
 	comf	(___awdiv@quotient+1),f
 	incf	(___awdiv@quotient),f
@@ -4853,14 +4859,14 @@ l6491:
 	incf	(___awdiv@quotient+1),f
 	line	36
 	
-l6493:	
+l6498:	
 	movf	(___awdiv@quotient+1),w
 	movwf	(?___awdiv+1)
 	movf	(___awdiv@quotient),w
 	movwf	(?___awdiv)
 	line	37
 	
-l4233:	
+l4234:	
 	return
 	opt stack 0
 GLOBAL	__end_of___awdiv
@@ -4913,7 +4919,7 @@ _int_init:
 ; Regs used in _int_init: [wreg+status,2]
 	line	88
 	
-l6421:	
+l6426:	
 ;sysinit.c: 88: INTCON = 0B00000000;
 	clrf	(11)	;volatile
 	line	89
@@ -4926,88 +4932,88 @@ l6421:
 	clrf	(12)	;volatile
 	line	92
 	
-l6423:	
+l6428:	
 ;sysinit.c: 92: IOCA5 = 1;
 	bsf	status, 5	;RP0=1, select bank1
 	bsf	(1205/8)^080h,(1205)&7
 	line	93
 	
-l6425:	
+l6430:	
 ;sysinit.c: 93: tmp = PORTA;
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(5),w	;volatile
 	line	94
 	
-l6427:	
+l6432:	
 ;sysinit.c: 94: PAIF = 0;
 	bcf	(88/8),(88)&7
 	line	95
 	
-l6429:	
+l6434:	
 ;sysinit.c: 95: PAIE = 0;
 	bcf	(91/8),(91)&7
 	line	98
 	
-l6431:	
+l6436:	
 ;sysinit.c: 98: INTEDG = 0;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	(1038/8)^080h,(1038)&7
 	line	99
 	
-l6433:	
+l6438:	
 ;sysinit.c: 99: INTF = 0;
 	bcf	(89/8),(89)&7
 	line	100
 	
-l6435:	
+l6440:	
 ;sysinit.c: 100: INTE = 1;
 	bsf	(92/8),(92)&7
 	line	102
 	
-l6437:	
+l6442:	
 ;sysinit.c: 102: TMR2IF = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(97/8),(97)&7
 	line	103
 	
-l6439:	
+l6444:	
 ;sysinit.c: 103: TMR2IE = 1;
 	bsf	status, 5	;RP0=1, select bank1
 	bsf	(1121/8)^080h,(1121)&7
 	line	104
 	
-l6441:	
+l6446:	
 ;sysinit.c: 104: TMR2ON = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(146/8),(146)&7
 	line	110
 	
-l6443:	
+l6448:	
 ;sysinit.c: 110: T0IF = 0;
 	bcf	(90/8),(90)&7
 	line	111
 	
-l6445:	
+l6450:	
 ;sysinit.c: 111: T0IE = 1;
 	bsf	(93/8),(93)&7
 	line	112
 	
-l6447:	
+l6452:	
 ;sysinit.c: 112: T0ON = 1;
 	bsf	(251/8),(251)&7
 	line	114
 	
-l6449:	
+l6454:	
 ;sysinit.c: 114: PEIE = 1;
 	bsf	(94/8),(94)&7
 	line	116
 	
-l6451:	
+l6456:	
 ;sysinit.c: 116: GIE = 1;
 	bsf	(95/8),(95)&7
 	line	117
 	
-l1795:	
+l1796:	
 	return
 	opt stack 0
 GLOBAL	__end_of_int_init
@@ -5060,19 +5066,19 @@ _timer_init:
 ; Regs used in _timer_init: [wreg+status,2]
 	line	60
 	
-l6413:	
+l6418:	
 ;sysinit.c: 60: T0CON0 = 0B00000000;
 	clrf	(31)	;volatile
 	line	61
 	
-l6415:	
+l6420:	
 ;sysinit.c: 61: OPTION = 0B00000111;
 	movlw	(07h)
 	bsf	status, 5	;RP0=1, select bank1
 	movwf	(129)^080h	;volatile
 	line	62
 	
-l6417:	
+l6422:	
 ;sysinit.c: 62: TMR0 = 179;
 	movlw	(0B3h)
 	bcf	status, 5	;RP0=0, select bank0
@@ -5092,14 +5098,14 @@ l6417:
 	clrf	(145)^080h	;volatile
 	line	68
 	
-l6419:	
+l6424:	
 ;sysinit.c: 68: T2CON0 = 0B00101001;
 	movlw	(029h)
 	bcf	status, 5	;RP0=0, select bank0
 	movwf	(18)	;volatile
 	line	80
 	
-l1792:	
+l1793:	
 	return
 	opt stack 0
 GLOBAL	__end_of_timer_init
@@ -5152,20 +5158,20 @@ _gpio_init:
 ; Regs used in _gpio_init: [wreg+status,2]
 	line	34
 	
-l6403:	
+l6408:	
 ;sysinit.c: 34: PORTA = 0B00000000;
 	bcf	status, 5	;RP0=0, select bank0
 	clrf	(5)	;volatile
 	line	35
 	
-l6405:	
+l6410:	
 ;sysinit.c: 35: TRISA = 0B00110111;
 	movlw	(037h)
 	bsf	status, 5	;RP0=1, select bank1
 	movwf	(133)^080h	;volatile
 	line	36
 	
-l6407:	
+l6412:	
 ;sysinit.c: 36: WPUA = 0B11000000;
 	movlw	(0C0h)
 	movwf	(149)^080h	;volatile
@@ -5175,14 +5181,14 @@ l6407:
 	clrf	(7)	;volatile
 	line	39
 	
-l6409:	
+l6414:	
 ;sysinit.c: 39: TRISC = 0B11111100;
 	movlw	(0FCh)
 	bsf	status, 5	;RP0=1, select bank1
 	movwf	(135)^080h	;volatile
 	line	40
 	
-l6411:	
+l6416:	
 ;sysinit.c: 40: WPUC = 0B00000000;
 	clrf	(147)^080h	;volatile
 	line	42
@@ -5208,7 +5214,7 @@ l6411:
 	movwf	(27)	;volatile
 	line	48
 	
-l1789:	
+l1790:	
 	return
 	opt stack 0
 GLOBAL	__end_of_gpio_init
@@ -5265,7 +5271,7 @@ _compe:
 	line	228
 	movwf	(compe@a)
 	
-l6365:	
+l6370:	
 ;smartkey.C: 228: if(a>b){
 	movf	(compe@b),w
 	xorlw	80h
@@ -5277,11 +5283,11 @@ l6365:
 	goto	u2521
 	goto	u2520
 u2521:
-	goto	l6379
+	goto	l6384
 u2520:
 	line	229
 	
-l6367:	
+l6372:	
 ;smartkey.C: 229: if((a-b)<=dt) return 1;
 	movf	(compe@b),w
 	subwf	(compe@a),w
@@ -5319,21 +5325,21 @@ u2545:
 	goto	u2541
 	goto	u2540
 u2541:
-	goto	l6375
+	goto	l6380
 u2540:
 	
-l6369:	
+l6374:	
 	movlw	(01h)
 	goto	l888
 	line	230
 	
-l6375:	
+l6380:	
 ;smartkey.C: 230: else return 0;
 	movlw	(0)
 	goto	l888
 	line	232
 	
-l6379:	
+l6384:	
 ;smartkey.C: 232: else if(a<b){
 	movf	(compe@a),w
 	xorlw	80h
@@ -5345,11 +5351,11 @@ l6379:
 	goto	u2551
 	goto	u2550
 u2551:
-	goto	l6393
+	goto	l6398
 u2550:
 	line	233
 	
-l6381:	
+l6386:	
 ;smartkey.C: 233: if((b-a)<=dt) return 1;
 	movf	(compe@a),w
 	subwf	(compe@b),w
@@ -5387,12 +5393,12 @@ u2575:
 	goto	u2571
 	goto	u2570
 u2571:
-	goto	l6375
+	goto	l6380
 u2570:
-	goto	l6369
+	goto	l6374
 	line	236
 	
-l6393:	
+l6398:	
 ;smartkey.C: 236: else if(a==b){
 	movf	(compe@a),w
 	xorwf	(compe@b),w
@@ -5400,9 +5406,9 @@ l6393:
 	goto	u2581
 	goto	u2580
 u2581:
-	goto	l6375
+	goto	l6380
 u2580:
-	goto	l6369
+	goto	l6374
 	line	240
 	
 l888:	
@@ -5461,7 +5467,7 @@ _setState:
 	movwf	(setState@stt)
 	line	221
 	
-l6359:	
+l6364:	
 ;smartkey.C: 221: mtOldState = mtState;
 	movf	(_mtState),w
 	movwf	(_mtOldState)
@@ -5471,13 +5477,13 @@ l6359:
 	movwf	(_mtState)
 	line	223
 	
-l6361:	
+l6366:	
 ;smartkey.C: 223: timeTick =0;
 	clrf	(_timeTick)
 	clrf	(_timeTick+1)
 	line	224
 	
-l6363:	
+l6368:	
 ;smartkey.C: 224: timeOut = _tOut;
 	movf	(setState@_tOut+1),w
 	movwf	(_timeOut+1)
@@ -5538,7 +5544,7 @@ _beepOn:
 ; Regs used in _beepOn: []
 	line	173
 	
-l6357:	
+l6362:	
 ;smartkey.C: 173: TMR2ON = 1;
 	bcf	status, 5	;RP0=0, select bank0
 	bsf	(146/8),(146)&7
@@ -5601,7 +5607,7 @@ _beepOff:
 ; Regs used in _beepOff: []
 	line	170
 	
-l6355:	
+l6360:	
 ;smartkey.C: 170: TMR2ON = 0;RA3 =0;TRISA |= 0x08;
 	bcf	(146/8),(146)&7
 	bcf	(43/8),(43)&7
@@ -5663,7 +5669,7 @@ _delay_x10ms:
 ; Regs used in _delay_x10ms: [wreg]
 	line	165
 	
-l6351:	
+l6356:	
 ;smartkey.C: 165: unsigned int set = t + timeTick;
 	movf	(delay_x10ms@t+1),w
 	movwf	(delay_x10ms@set+1)
@@ -5678,7 +5684,7 @@ l6351:
 	line	166
 ;smartkey.C: 166: while(timeTick < set);
 	
-l6353:	
+l6358:	
 	movf	(delay_x10ms@set+1),w
 	subwf	(_timeTick+1),w
 	skipz
@@ -5690,7 +5696,7 @@ u2515:
 	goto	u2511
 	goto	u2510
 u2511:
-	goto	l6353
+	goto	l6358
 u2510:
 	line	167
 	
@@ -5750,7 +5756,7 @@ _WRITE_EEPROM:
 	movwf	(WRITE_EEPROM@EEAddr)
 	line	206
 	
-l6343:	
+l6348:	
 ;smartkey.C: 206: GIE = 0;
 	bcf	(95/8),(95)&7
 	line	207
@@ -5771,7 +5777,7 @@ u2491:
 u2490:
 	line	208
 	
-l6345:	
+l6350:	
 ;smartkey.C: 208: EEADR = EEAddr;
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(WRITE_EEPROM@EEAddr),w
@@ -5785,7 +5791,7 @@ l6345:
 	movwf	(154)^080h	;volatile
 	line	210
 	
-l6347:	
+l6352:	
 ;smartkey.C: 210: EEIF = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(103/8),(103)&7
@@ -5796,7 +5802,7 @@ l6347:
 	movwf	(156)^080h	;volatile
 	line	212
 	
-l6349:	
+l6354:	
 ;smartkey.C: 212: WR = 1;
 	bsf	(1256/8)^080h,(1256)&7
 	line	213
@@ -5880,7 +5886,7 @@ _READ_EEPROM:
 	bcf	status, 5	;RP0=0, select bank0
 	movwf	(READ_EEPROM@EEAddr)
 	
-l6335:	
+l6340:	
 ;smartkey.C: 195: unsigned char ReEepromData;
 ;smartkey.C: 197: EEADR = EEAddr;
 	movf	(READ_EEPROM@EEAddr),w
@@ -5888,7 +5894,7 @@ l6335:
 	movwf	(155)^080h	;volatile
 	line	198
 	
-l6337:	
+l6342:	
 ;smartkey.C: 198: RD = 1;
 	bsf	(1248/8)^080h,(1248)&7
 	line	199
@@ -5898,7 +5904,7 @@ l6337:
 	movwf	(READ_EEPROM@ReEepromData)
 	line	200
 	
-l6339:	
+l6344:	
 ;smartkey.C: 200: RD = 0;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	(1248/8)^080h,(1248)&7
@@ -5977,57 +5983,57 @@ interrupt_function:
 psect	text881
 	line	42
 	
-i1l5421:	
+i1l5424:	
 ;smartkey.C: 42: if(PAIE&&PAIF){
 	btfss	(91/8),(91)&7
 	goto	u126_21
 	goto	u126_20
 u126_21:
-	goto	i1l5439
+	goto	i1l5442
 u126_20:
 	
-i1l5423:	
+i1l5426:	
 	btfss	(88/8),(88)&7
 	goto	u127_21
 	goto	u127_20
 u127_21:
-	goto	i1l5439
+	goto	i1l5442
 u127_20:
 	line	44
 	
-i1l5425:	
+i1l5428:	
 ;smartkey.C: 44: tmp = PORTA;
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(5),w	;volatile
 	line	45
 	
-i1l5427:	
+i1l5430:	
 ;smartkey.C: 45: PAIF = 0;
 	bcf	(88/8),(88)&7
 	line	47
 	
-i1l5429:	
+i1l5432:	
 ;smartkey.C: 47: if(RA5){
 	btfss	(45/8),(45)&7
 	goto	u128_21
 	goto	u128_20
 u128_21:
-	goto	i1l5437
+	goto	i1l5440
 u128_20:
 	line	49
 	
-i1l5431:	
+i1l5434:	
 ;smartkey.C: 49: if(mode_chek == 0){
 	movf	(_mode_chek),f
 	skipz
 	goto	u129_21
 	goto	u129_20
 u129_21:
-	goto	i1l5439
+	goto	i1l5442
 u129_20:
 	line	50
 	
-i1l5433:	
+i1l5436:	
 ;smartkey.C: 50: cntCyc = 0;
 	clrf	(_cntCyc)
 	line	51
@@ -6035,20 +6041,20 @@ i1l5433:
 	clrf	(_cntOff)
 	line	53
 	
-i1l5435:	
+i1l5438:	
 ;smartkey.C: 53: mode_chek = 1;
 	clrf	(_mode_chek)
 	incf	(_mode_chek),f
-	goto	i1l5439
+	goto	i1l5442
 	line	59
 	
-i1l5437:	
+i1l5440:	
 ;smartkey.C: 58: else{
 ;smartkey.C: 59: cntOff = 0;
 	clrf	(_cntOff)
 	line	66
 	
-i1l5439:	
+i1l5442:	
 ;smartkey.C: 61: }
 ;smartkey.C: 63: }
 ;smartkey.C: 66: if(INTE&&INTF){
@@ -6059,7 +6065,7 @@ u130_21:
 	goto	i1l829
 u130_20:
 	
-i1l5441:	
+i1l5444:	
 	btfss	(89/8),(89)&7
 	goto	u131_21
 	goto	u131_20
@@ -6068,7 +6074,7 @@ u131_21:
 u131_20:
 	line	68
 	
-i1l5443:	
+i1l5446:	
 ;smartkey.C: 67: unsigned char tmp;
 ;smartkey.C: 68: INTF = 0;
 	bcf	(89/8),(89)&7
@@ -6083,7 +6089,7 @@ u132_21:
 u132_20:
 	line	72
 	
-i1l5445:	
+i1l5448:	
 ;smartkey.C: 72: if(timeTick <0x20){
 	movlw	high(020h)
 	subwf	(_timeTick+1),w
@@ -6098,14 +6104,14 @@ u133_21:
 u133_20:
 	line	73
 	
-i1l5447:	
+i1l5450:	
 ;smartkey.C: 73: tmp = READ_EEPROM(0x40);
 	movlw	(040h)
 	fcall	i1_READ_EEPROM
 	movwf	(ISR@tmp_1138)
 	line	74
 	
-i1l5449:	
+i1l5452:	
 ;smartkey.C: 74: WRITE_EEPROM(0x40,tmp+1);
 	incf	(ISR@tmp_1138),w
 	movwf	(?i1_WRITE_EEPROM)
@@ -6126,24 +6132,24 @@ i1l829:
 	goto	u134_21
 	goto	u134_20
 u134_21:
-	goto	i1l5497
+	goto	i1l5500
 u134_20:
 	
-i1l5451:	
+i1l5454:	
 	btfss	(90/8),(90)&7
 	goto	u135_21
 	goto	u135_20
 u135_21:
-	goto	i1l5497
+	goto	i1l5500
 u135_20:
 	line	89
 	
-i1l5453:	
+i1l5456:	
 ;smartkey.C: 89: T0IF = 0;
 	bcf	(90/8),(90)&7
 	line	90
 	
-i1l5455:	
+i1l5458:	
 ;smartkey.C: 90: TMR0 = 179;
 	movlw	(0B3h)
 	bcf	status, 5	;RP0=0, select bank0
@@ -6155,31 +6161,31 @@ i1l5455:
 	goto	u136_21
 	goto	u136_20
 u136_21:
-	goto	i1l5477
+	goto	i1l5480
 u136_20:
 	line	98
 	
-i1l5457:	
+i1l5460:	
 ;smartkey.C: 98: cntCyc++;
 	incf	(_cntCyc),f
 	line	100
 	
-i1l5459:	
+i1l5462:	
 ;smartkey.C: 100: if(RA5==0){
 	btfsc	(45/8),(45)&7
 	goto	u137_21
 	goto	u137_20
 u137_21:
-	goto	i1l5477
+	goto	i1l5480
 u137_20:
 	line	102
 	
-i1l5461:	
+i1l5464:	
 ;smartkey.C: 102: cntOff++;
 	incf	(_cntOff),f
 	line	105
 	
-i1l5463:	
+i1l5466:	
 ;smartkey.C: 105: if(cntOff > 15){
 	movlw	(010h)
 	subwf	(_cntOff),w
@@ -6187,16 +6193,16 @@ i1l5463:
 	goto	u138_21
 	goto	u138_20
 u138_21:
-	goto	i1l5477
+	goto	i1l5480
 u138_20:
 	line	107
 	
-i1l5465:	
+i1l5468:	
 ;smartkey.C: 107: mode_chek = 0;
 	clrf	(_mode_chek)
 	line	109
 	
-i1l5467:	
+i1l5470:	
 ;smartkey.C: 109: if((cntCyc>15) &&(cntCyc<50)) {
 	movlw	(010h)
 	subwf	(_cntCyc),w
@@ -6204,28 +6210,28 @@ i1l5467:
 	goto	u139_21
 	goto	u139_20
 u139_21:
-	goto	i1l5473
+	goto	i1l5476
 u139_20:
 	
-i1l5469:	
+i1l5472:	
 	movlw	(032h)
 	subwf	(_cntCyc),w
 	skipnc
 	goto	u140_21
 	goto	u140_20
 u140_21:
-	goto	i1l5473
+	goto	i1l5476
 u140_20:
 	line	110
 	
-i1l5471:	
+i1l5474:	
 ;smartkey.C: 110: RegStatus |= (0x40);
 	bsf	(_RegStatus)+(6/8),(6)&7
 	line	111
 ;smartkey.C: 111: } else if (cntCyc>=50){
 	goto	i1l840
 	
-i1l5473:	
+i1l5476:	
 	movlw	(032h)
 	subwf	(_cntCyc),w
 	skipc
@@ -6236,7 +6242,7 @@ u141_21:
 u141_20:
 	line	112
 	
-i1l5475:	
+i1l5478:	
 ;smartkey.C: 112: RegStatus &= ~(0x40);
 	bcf	(_RegStatus)+(6/8),(6)&7
 	line	116
@@ -6247,7 +6253,7 @@ i1l840:
 	bsf	(_RegStatus)+(7/8),(7)&7
 	line	132
 	
-i1l5477:	
+i1l5480:	
 ;smartkey.C: 117: }
 ;smartkey.C: 119: }
 ;smartkey.C: 129: }
@@ -6257,7 +6263,7 @@ i1l5477:
 	incf	(_timeTick+1),f
 	line	134
 	
-i1l5479:	
+i1l5482:	
 ;smartkey.C: 134: if((mtState == 4)||(mtState == 3)){
 	movf	(_mtState),w
 	xorlw	04h
@@ -6265,21 +6271,21 @@ i1l5479:
 	goto	u142_21
 	goto	u142_20
 u142_21:
-	goto	i1l5483
+	goto	i1l5486
 u142_20:
 	
-i1l5481:	
+i1l5484:	
 	movf	(_mtState),w
 	xorlw	03h
 	skipz
 	goto	u143_21
 	goto	u143_20
 u143_21:
-	goto	i1l5497
+	goto	i1l5500
 u143_20:
 	line	136
 	
-i1l5483:	
+i1l5486:	
 ;smartkey.C: 136: if(timeTick > cntTmp){
 	movf	(_timeTick+1),w
 	subwf	(_cntTmp+1),w
@@ -6292,11 +6298,11 @@ u144_25:
 	goto	u144_21
 	goto	u144_20
 u144_21:
-	goto	i1l5497
+	goto	i1l5500
 u144_20:
 	line	137
 	
-i1l5485:	
+i1l5488:	
 ;smartkey.C: 137: cntTmp = timeTick+45;
 	movf	(_timeTick+1),w
 	movwf	(_cntTmp+1)
@@ -6323,14 +6329,14 @@ u145_21:
 u145_20:
 	line	140
 	
-i1l5487:	
+i1l5490:	
 ;smartkey.C: 139: {
 ;smartkey.C: 140: TMR2IE = 0;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	(1121/8)^080h,(1121)&7
 	line	142
 	
-i1l5489:	
+i1l5492:	
 ;smartkey.C: 142: if (PR2L == 20)
 	movf	(145)^080h,w	;volatile
 	xorlw	014h
@@ -6338,34 +6344,34 @@ i1l5489:
 	goto	u146_21
 	goto	u146_20
 u146_21:
-	goto	i1l5493
+	goto	i1l5496
 u146_20:
 	line	143
 	
-i1l5491:	
+i1l5494:	
 ;smartkey.C: 143: PR2L = 25;
 	movlw	(019h)
 	movwf	(145)^080h	;volatile
-	goto	i1l5495
+	goto	i1l5498
 	line	145
 	
-i1l5493:	
+i1l5496:	
 ;smartkey.C: 144: else
 ;smartkey.C: 145: PR2L = 20;
 	movlw	(014h)
 	movwf	(145)^080h	;volatile
 	line	146
 	
-i1l5495:	
+i1l5498:	
 ;smartkey.C: 146: TMR2IE = 1;
 	bsf	(1121/8)^080h,(1121)&7
-	goto	i1l5497
+	goto	i1l5500
 	line	149
 	
 i1l842:	
 	line	155
 	
-i1l5497:	
+i1l5500:	
 ;smartkey.C: 147: }
 ;smartkey.C: 148: }
 ;smartkey.C: 149: }
@@ -6379,7 +6385,7 @@ u147_21:
 	goto	i1l850
 u147_20:
 	
-i1l5499:	
+i1l5502:	
 	bcf	status, 5	;RP0=0, select bank0
 	btfss	(97/8),(97)&7
 	goto	u148_21
@@ -6389,13 +6395,13 @@ u148_21:
 u148_20:
 	line	157
 	
-i1l5501:	
+i1l5504:	
 ;smartkey.C: 156: {
 ;smartkey.C: 157: TMR2IF = 0;
 	bcf	(97/8),(97)&7
 	line	158
 	
-i1l5503:	
+i1l5506:	
 ;smartkey.C: 158: RA3 =~ RA3;
 	movlw	1<<((43)&7)
 	xorwf	((43)/8),f
@@ -6462,7 +6468,7 @@ i1_WRITE_EEPROM:
 	movwf	(i1WRITE_EEPROM@EEAddr)
 	line	206
 	
-i1l5675:	
+i1l5678:	
 ;smartkey.C: 206: GIE = 0;
 	bcf	(95/8),(95)&7
 	line	207
@@ -6483,7 +6489,7 @@ u166_21:
 u166_20:
 	line	208
 	
-i1l5677:	
+i1l5680:	
 ;smartkey.C: 208: EEADR = EEAddr;
 	movf	(i1WRITE_EEPROM@EEAddr),w
 	bsf	status, 5	;RP0=1, select bank1
@@ -6494,7 +6500,7 @@ i1l5677:
 	movwf	(154)^080h	;volatile
 	line	210
 	
-i1l5679:	
+i1l5682:	
 ;smartkey.C: 210: EEIF = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	(103/8),(103)&7
@@ -6505,7 +6511,7 @@ i1l5679:
 	movwf	(156)^080h	;volatile
 	line	212
 	
-i1l5681:	
+i1l5684:	
 ;smartkey.C: 212: WR = 1;
 	bsf	(1256/8)^080h,(1256)&7
 	line	213
@@ -6587,7 +6593,7 @@ i1_READ_EEPROM:
 	line	197
 	movwf	(i1READ_EEPROM@EEAddr)
 	
-i1l5667:	
+i1l5670:	
 ;smartkey.C: 195: unsigned char ReEepromData;
 ;smartkey.C: 197: EEADR = EEAddr;
 	movf	(i1READ_EEPROM@EEAddr),w
@@ -6595,7 +6601,7 @@ i1l5667:
 	movwf	(155)^080h	;volatile
 	line	198
 	
-i1l5669:	
+i1l5672:	
 ;smartkey.C: 198: RD = 1;
 	bsf	(1248/8)^080h,(1248)&7
 	line	199
@@ -6604,7 +6610,7 @@ i1l5669:
 	movwf	(i1READ_EEPROM@ReEepromData)
 	line	200
 	
-i1l5671:	
+i1l5674:	
 ;smartkey.C: 200: RD = 0;
 	bcf	(1248/8)^080h,(1248)&7
 	line	201

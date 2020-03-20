@@ -614,17 +614,19 @@ timeTick = 0;
             	else{ 
 						isSw =0;
                          // khi xe khong chuyen dong, o trang thai tinh lien tuc 3m => dua ve che do bao ve
-                         
-                        if(compe(buf[1], acXOld,2) && compe(buf[3], acYOld,2)){
+                         // >>>>test thuc te<<<<<<
+                        if(compe(buf[1], acXOld,1) && compe(buf[3], acYOld,1)){
                             isWait++;
-                            if(isWait==450){
+                            if(isWait==450){//3m
                                 isWait = 0;
 								beep(7,2);
                                 vibrateOn=1; // bat che do chong rung (1)
 								RegStatus &=(~bitPwOn);
 								setState(_rCheck,tOut_rCheck);
                             }
-                        }                                                 
+                        }
+                        else 
+                        	isWait=0;           ///                               
 						     
 				}
                 

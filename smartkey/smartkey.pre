@@ -1625,7 +1625,7 @@ else{
 isSw =0;
 
 
-if(compe(buf[1], acXOld,2) && compe(buf[3], acYOld,2)){
+if(compe(buf[1], acXOld,1) && compe(buf[3], acYOld,1)){
 isWait++;
 if(isWait==450){
 isWait = 0;
@@ -1635,6 +1635,8 @@ RegStatus &=(~0x20);
 setState(2,300);
 }
 }
+else
+isWait=0;
 
 }
 

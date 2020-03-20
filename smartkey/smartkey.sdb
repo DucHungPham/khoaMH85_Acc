@@ -2744,7 +2744,7 @@
 [v main@acXsum `i  1 a 2 24 ]
 [v main@acYsum `i  1 a 2 22 ]
 "252
-[v main@isWait `ui  1 a 2 15 ]
+[v main@isWait `ui  1 a 2 16 ]
 "251
 [v main@tmp8 `uc  1 a 1 36 ]
 [v main@isSw `uc  1 a 1 33 ]
@@ -2755,8 +2755,8 @@
 [v main@acYOld `c  1 a 1 19 ]
 "251
 [v main@isFall `uc  1 a 1 18 ]
-[v main@vibrateOn `uc  1 a 1 17 ]
-"685
+[v main@vibrateOn `uc  1 a 1 15 ]
+"687
 } 0
 "31 mpu6x.c
 [v _AccRead `(uc  1 e 1 0 ]
