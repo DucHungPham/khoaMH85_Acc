@@ -1,7 +1,7 @@
 
 
 HI-TECH Software PIC PRO Macro Assembler V9.83 build 10920 
-                                                                                               Fri Mar 20 07:48:13 2020
+                                                                                               Fri Mar 20 13:44:42 2020
 
 HI-TECH Software Omniscient Code Generator (PRO mode) build 10920
      1                           	processor	16F685
@@ -4437,12 +4437,12 @@ HI-TECH Software Omniscient Code Generator (PRO mode) build 10920
   4427  043F  1803               	skipnc
   4428  0440  2C5C               	goto	i1l5500
   4429                           
-  4430                           ;smartkey.C: 137: cntTmp = timeTick+45;
+  4430                           ;smartkey.C: 137: cntTmp = timeTick+38;
   4431  0441  0871               	movf	_timeTick+1,w
   4432  0442  00C6               	movwf	_cntTmp+1
   4433  0443  0870               	movf	_timeTick,w
   4434  0444  00C5               	movwf	_cntTmp
-  4435  0445  302D               	movlw	45
+  4435  0445  3026               	movlw	38
   4436  0446  07C5               	addwf	_cntTmp,f
   4437  0447  1803               	skipnc
   4438  0448  0AC6               	incf	_cntTmp+1,f
@@ -4681,7 +4681,7 @@ HI-TECH Software Omniscient Code Generator (PRO mode) build 10920
 
 
 HI-TECH Software PICC Macro Assembler V9.83 build 10920 
-Symbol Table                                                                                   Fri Mar 20 07:48:13 2020
+Symbol Table                                                                                   Fri Mar 20 13:44:42 2020
 
                         pc 0002                         _RD 04E0                         _WR 04E8  
              ___awdiv@sign 0025      __size_of_WRITE_EEPROM 001B                         fsr 0004  

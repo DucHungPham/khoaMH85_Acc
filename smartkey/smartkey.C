@@ -134,7 +134,7 @@ if(INTE&&INTF){
 		if((mtState == _rAlert)||(mtState == _Alert)){
 
 			if(timeTick > cntTmp){
-	            cntTmp = timeTick+45;
+	            cntTmp = timeTick+38;
 	            if(cntTmp<=timeOut)
 				{
 					 TMR2IE = 0;                           

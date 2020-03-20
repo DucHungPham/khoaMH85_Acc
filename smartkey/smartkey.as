@@ -6303,12 +6303,12 @@ u144_20:
 	line	137
 	
 i1l5488:	
-;smartkey.C: 137: cntTmp = timeTick+45;
+;smartkey.C: 137: cntTmp = timeTick+38;
 	movf	(_timeTick+1),w
 	movwf	(_cntTmp+1)
 	movf	(_timeTick),w
 	movwf	(_cntTmp)
-	movlw	02Dh
+	movlw	026h
 	addwf	(_cntTmp),f
 	skipnc
 	incf	(_cntTmp+1),f

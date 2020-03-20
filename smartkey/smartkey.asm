@@ -1748,13 +1748,13 @@
 		BTSC 	STATUS,0 		//043F 	1403
 		LJUMP 	45CH 			//0440 	3C5C
 
-		//;smartkey.C: 137: cntTmp = timeTick+45;
+		//;smartkey.C: 137: cntTmp = timeTick+38;
 		LDR 	71H,0 			//0441 	0871
 		STR 	46H 			//0442 	01C6
 		LDR 	70H,0 			//0443 	0870
 		ORG		0444H
 		STR 	45H 			//0444 	01C5
-		LDWI 	2DH 			//0445 	2A2D
+		LDWI 	26H 			//0445 	2A26
 		ADDWR 	45H,1 			//0446 	0BC5
 		BTSC 	STATUS,0 		//0447 	1403
 		INCR	46H,1 			//0448 	09C6

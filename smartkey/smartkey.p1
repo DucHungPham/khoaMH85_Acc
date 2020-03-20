@@ -2012,9 +2012,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "136
 [e $ ! > _timeTick _cntTmp 105  ]
 {
-[; ;smartkey.C: 137: cntTmp = timeTick+45;
+[; ;smartkey.C: 137: cntTmp = timeTick+38;
 "137
-[e = _cntTmp + _timeTick -> -> 45 `i `ui ]
+[e = _cntTmp + _timeTick -> -> 38 `i `ui ]
 [; ;smartkey.C: 138: if(cntTmp<=timeOut)
 "138
 [e $ ! <= _cntTmp _timeOut 106  ]
