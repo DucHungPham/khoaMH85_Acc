@@ -18,7 +18,7 @@ void WRITE_EEPROM(unsigned char EEAddr,unsigned char EEData);
 //===========================================================
 
 /*
-V1: Ðo mu'c 16ms < H < 80ms  và L > 130ms - trong truong hop khong co nhieu
+V1: Ðo mu'c 16ms < H < 80ms  và L > 130ms - trong truong hop khong co nhieu(N)
 Phat hien suon len trong trang thai nghi-> start-> do muc H
 Doi suon xuong, do muc L
 V2: Ðo độ rộng mức L kết hợp với suon len dau tien 
@@ -34,13 +34,11 @@ F    _____|	   |_____|     |____|    |_____|    |__________
 
 */
 
-void interrupt ISR(void)
-{
+void interrupt ISR(void){
 	unsigned char tmp=0;
 //=============
 //PortA Interrup --> keyfob detect   
-	if(PAIE&&PAIF){
-		
+	if(PAIE&&PAIF){		
 		tmp = PORTA;		//
 		PAIF = 0;          //clear flag       
 		//righting egde
@@ -59,12 +57,10 @@ void interrupt ISR(void)
         	cntOff = 0;
         	// init timer          			
 		}   
-
 	}
- 
 //====================
-if(INTE&&INTF){
-    unsigned char tmp;
+	if(INTE&&INTF){
+    	unsigned char tmp;
 		INTF = 0;
         
         if( swPwOn==0){//(RegStatus & keyUpd)==0 && mtState ==_Ide && 
@@ -99,8 +95,7 @@ if(INTE&&INTF){
             
 			if(keyDetect==0){
 				//cout dead time
-            cntOff++;
-                
+            	cntOff++;               
 				//time out 
 				if(cntOff > 15){ //110
 					//TMR2IE = 1;
@@ -111,11 +106,9 @@ if(INTE&&INTF){
                     } else if (cntCyc>=50){
                         RegStatus &= ~(keyfob);                       
                     }
-                    //swUartSendString("keyUpd\n");
-                    
+                    //swUartSendString("keyUpd\n");                   
 					RegStatus |= keyUpd;
-                }
-                
+                }                
 			}
            /* 
 			if( cntCyc==0){
@@ -124,15 +117,12 @@ if(INTE&&INTF){
 				RegStatus |= keyUpd;
 				test_t=1;
 			}
-            */
-            
-		}
-        
+            */     
+		}   
         //
 		timeTick++;
         
 		if((mtState == _rAlert)||(mtState == _Alert)){
-
 			if(timeTick > cntTmp){
 	            cntTmp = timeTick+38;
 	            if(cntTmp<=timeOut)
@@ -147,8 +137,6 @@ if(INTE&&INTF){
 				}
             }
 		}
-		
-
 	}
  //====================
 // Timer2 ->> buzzer   
@@ -156,10 +144,8 @@ if(INTE&&INTF){
 		{
 			TMR2IF = 0;
 			buzzer =~ buzzer;			//
-		}
-    
+		}   
 }
-
 
 void delay_x10ms(unsigned int t){
 unsigned int set = t + timeTick; 
@@ -187,8 +173,6 @@ void beep(unsigned char delay,unsigned char rep){
     }
 
 }
-
-
 /*====================================================*/
 unsigned char READ_EEPROM(unsigned char EEAddr)
 {
@@ -214,9 +198,7 @@ void WRITE_EEPROM(unsigned char EEAddr,unsigned char EEData)
                        
 	GIE = 1;
 }
-
 /*====================================================*/
-
 void setState(unsigned char stt, unsigned int _tOut){
     mtOldState = mtState;
 	mtState = stt;
@@ -225,22 +207,21 @@ void setState(unsigned char stt, unsigned int _tOut){
 }
 unsigned char compe(signed char a,signed char b, signed char dt){
 		
-        if(a>b){
-				if((a-b)<=dt) return 1;
-                else return 0;
-            }
-		else if(a<b){
-			if((b-a)<=dt) return 1;
-			else return 0;
-			}
-		else if(a==b){
-			return 1;
-			}
-			return 0;
+    if(a>b){
+			if((a-b)<=dt) return 1;
+            else return 0;
+        }
+	else if(a<b){
+		if((b-a)<=dt) return 1;
+		else return 0;
+		}
+	else if(a==b){
+		return 1;
+		}
+		return 0;
 }
 
-void main(void)
-{
+void main(void){
 	// clear WDT
     /*
 #asm
@@ -248,7 +229,7 @@ void main(void)
 	MOVWF		0x19			//
 #endasm
 */
-unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0,accSet=0;
+unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0,accSet=0,antenSkip=0;
 unsigned int isWait =0;
 signed int  acYsum=0,acXsum=0;
 unsigned int tmp16=0;
@@ -281,11 +262,11 @@ signed char buf[6];
  //=================   
 	   
      __delay_ms(200);
- //timeTick = 0;   
-tmp8= READ_EEPROM(add_Alert);
-    if(tmp8==0xff) {WRITE_EEPROM(add_Alert,0);__delay_ms(2);}
-    
-     if(tmp8==0xcc){		//
+ //timeTick = 0; 
+ //kiem tra trang thai canh bao khi bat nguon  
+	tmp8 = READ_EEPROM(add_Alert);
+    if(tmp8==0xff) {WRITE_EEPROM(add_Alert,0);__delay_ms(2);}   
+    if(tmp8==0xcc){		//
 		RegStatus &=~(bitPwOn);
 		setState(_Alert,tOut_Alert);
 		mtOldState = _Open;
@@ -294,69 +275,92 @@ tmp8= READ_EEPROM(add_Alert);
 		beepOn();
     } else {
 		setState(_rCheck,400);// timout 4s cho thoi gian mo may, check tin hieu chia
-
-		mtOldState = _Ide;
-		
+		mtOldState = _Ide;		
 	}
 
- 
-tmp8    = READ_EEPROM(0x40);// dia chi luu gia tri so lan on/off
-if(tmp8==8){
-    tmp8= READ_EEPROM(0x41);// che do? bo qua chuc nang bo^. khoa
-    beep(30,1);
-    if((tmp8==1)||(tmp8==0xff)){
-        WRITE_EEPROM(0x41,0);
-    }
-    else {
-        WRITE_EEPROM(0x41,0x1);
-
-    } 
-   WRITE_EEPROM(0x40,0);
-    tmp8=0;
-    __delay_ms(100);
-} else if(tmp8==0xff) WRITE_EEPROM(0x40,0);
+ //kiem tra gia tri nhap vao
+	tmp8 = READ_EEPROM(0x40);// dia chi luu gia tri so lan on/off
+	// Vao cai dat che do Huy tinh nang bo khoa
+	if(tmp8==8){
+	    tmp8= READ_EEPROM(0x41);// dia chi luu
+	    beep(30,1);
+	    if((tmp8==1)||(tmp8==0xff))
+	        WRITE_EEPROM(0x41,0);
+	    else 
+	        WRITE_EEPROM(0x41,0x1); 
+	   	WRITE_EEPROM(0x40,0);
+	    tmp8=0;
+	    __delay_ms(100);
+	} else if(tmp8==0xff) WRITE_EEPROM(0x40,0);
 	
-  
-tmp8    = READ_EEPROM(0x41);
- if(tmp8==1){
-		 swMainOut =1;swMainOut2 =1;
-        while(1){
-            __delay_ms(1000);
-            if(timeTick >300)  WRITE_EEPROM(0x40,0);
+// kiem tra che do Huy tinh nang bo khoa
+	tmp8 = READ_EEPROM(0x41);
+	 if(tmp8==1){
+		swMainOut =1;swMainOut2 =1;
+	    while(1){
+	        __delay_ms(1000);
+	        // timeout xoa gia tri nhap vao
+	        if(timeTick >300)  WRITE_EEPROM(0x40,0);
 		}
-}
+	}
 
+//kiem tra gia tri nhap vao
+	tmp8 = READ_EEPROM(0x40);// dia chi luu gia tri so lan on/off
+	// Vao cai dat che do Huy tinh nang anten
+	if(tmp8==5){
+	    tmp8= READ_EEPROM(0x42);// dia chi luu
+	    beep(30,2);
+	    if((tmp8==1)||(tmp8==0xff)){
+	        WRITE_EEPROM(0x42,0);
+	        antenSkip =0;
+	    }
+	    else{ 
+	        WRITE_EEPROM(0x42,0x1); 
+	        antenSkip =1;
+	    }
+	   	WRITE_EEPROM(0x40,0);
+	    tmp8=0;
+	    __delay_ms(100);
+	}
 
-	buf[0] = 0x08; //BMA 
-    buf[1] = 0x4d;
-    
+// kiem tra che do Huy tinh nang anten
+	tmp8 = READ_EEPROM(0x42);
+	if(tmp8==1){
+		antenSkip =1;
+		RegStatus |=(bitPwOn);
+		setState(_Open,tOut_Open);
+		mtOldState = _rCheck;
+        if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
+        tmp16 = timeTick+40;
+        beep(10,1);
+	}
+
+//BMA250 config
+	buf[0] = 0x08;  
+    buf[1] = 0x4d;  
     if(AccWrite(0x10,(unsigned char)buf,2)==0) {
 		mpuOk =1;
     }
     else {
-    mpuOk =0;
-    beep(10,2);// bao loi giao tiep mpu
+	    mpuOk =0;
+	    beep(10,2);// bao loi giao tiep mpu
     }
     //SendNum(AccWrite(0x6b,(unsigned char *)buf,1));
    //__delay_ms(100);
-
-// Luu gia tri goc nghieng vao eeprom
-//
-tmp8= READ_EEPROM(0x40);//che do? bo qua chuc nang bo^. khoa
-	if(tmp8==6 && mpuOk ==1)   
-	{
+ 
+ //kiem tra gia tri nhap vao
+	tmp8= READ_EEPROM(0x40);
+	// Vao cai dat che do luu goc nghieng
+	if(tmp8==6 && mpuOk ==1){
 		tmp8=0; beep(10,3); 
-		while((swPwOn )&&(tmp8<11))
-		 {
-				if(AccRead(0x02,(unsigned char)buf,6)==0){
-			
-		acXsum += buf[1];
-		acYsum += buf[3];
-        tmp16 = (signed int)tmp16 + buf[5];
-		tmp8++;
-			 }
-		__delay_ms(500);
-
+		while((swPwOn)&&(tmp8<11)){
+			if(AccRead(0x02,(unsigned char)buf,6)==0){			
+				acXsum += buf[1];
+				acYsum += buf[3];
+		        tmp16 = (signed int)tmp16 + buf[5];
+				tmp8++;
+			}
+			__delay_ms(500);
 		}
 
 		if(tmp8==11){
@@ -366,23 +370,21 @@ tmp8= READ_EEPROM(0x40);//che do? bo qua chuc nang bo^. khoa
         
 		if(((signed int)tmp16 > (-31)) && ((signed int)tmp16 < 31)){ 
 			beep(10,2);
-        }
-        else
-        
-        { 
+        }else{ 
 			beep(10,3);
+			// Luu gia tri goc nghieng vao eeprom
             WRITE_EEPROM(0x10,(unsigned char)acXsum);
             WRITE_EEPROM(0x11,(unsigned char)acYsum);
             __delay_ms(100);
 			}
-
 		}else{
 			beep(10,2);
 		}
        WRITE_EEPROM(0x40,0);
        tmp8=0; 
 	}
-     
+
+// Doc gia tri goc     
 	acXsum = (signed char)READ_EEPROM(0x10);
     acYsum  = (signed char)READ_EEPROM(0x11);
    
@@ -390,71 +392,53 @@ timeTick = 0;
 
 //================
 	while(1){
-
 //swTx =keyDetect;
- 
-  
 /// keyfob update  ===============    
-        if(mode_chek == md_ckIDE)
-        {
-        	
-			if(RegStatus & keyUpd)
-            {
-				PAIE = 0;
-                
+        if((mode_chek == md_ckIDE) && (antenSkip ==0){   	
+			if(RegStatus & keyUpd){
+
+				PAIE = 0;                
 				//indicator ? notifi				                
 				RegStatus &= (~keyUpd);
-              /*  			
-				if(test_t ){
-                    if(mtOldState == _Ide){
-                    //test_t=0;
-                    beep(10,3);
-					RegStatus |=(bitPwOn); 
-					setState(_Norl,tOut_Norl);
-                    }
-                    }
-                else
-                */
-                {
+
+                // test time out  chan detect 125khz?               
 	        	// co chia -> tao TimeOut
 				if ((RegStatus & keyfob) !=0){
-					//beep(10,1);	
-                    	
+					//beep(10,1);	                    	
 					switch (mtState){					                                                 
-                        case _Open:
-						
+                        case _Open:						
                             lostDetect =0;
                             timeTick =0;//open->open
-                            tmp16 = 40;
+                            tmp16 = 40;// thoi gian lay mau gia tri goc
 							break; 
                                                          
                         case _rCheck:
-                        if(timeTick >30){                         
-							timeTick =0;
-                            
-                            if(READ_EEPROM(add_Alert)==0xcc) WRITE_EEPROM(add_Alert,0);
-                            
-							if((mtOldState == _Alert)){
+	                        if(timeTick >30){                         
+								timeTick =0;
+								//Xoa trang thai canh bao khi ve reCheck                           
+	                            if(READ_EEPROM(add_Alert)==0xcc) WRITE_EEPROM(add_Alert,0);
+	                            
+								if((mtOldState == _Alert)){
 									beepOn();TMR2ON = 0; beep(10,1);
                                     if(reAlertOn)reAlertOn =0;
-							}                           
-                            else if((mtOldState == _Ide)||(mtOldState == _rAlert)){
-								RegStatus |=(bitPwOn);
-								setState(_Open,tOut_Open);
-                                 if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
-                                tmp16 = timeTick+40;
-                                beep(10,1);
-                            }
-                            else if((mtOldState == _Open)){
-									//beepOn();TMR2ON = 0; beep(10,1);// nhac quen chia
-                                    if(reAlertOn)reAlertOn =0;
-							}   	
-                        }			     				 
+								}                           
+	                            else if((mtOldState == _Ide)||(mtOldState == _rAlert)){
+									RegStatus |=(bitPwOn);
+									setState(_Open,tOut_Open);
+	                                 if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
+	                                tmp16 = timeTick+40;
+	                                beep(10,1);
+	                            }
+	                            else if((mtOldState == _Open)){
+										//beepOn();TMR2ON = 0; beep(10,1);// nhac quen chia
+	                                    if(reAlertOn)reAlertOn =0;
+								}   	
+	                        }			     				 
 							break;
                             
                         case _Alert:                   
-							if(timeTick > 200)
-                            {
+							if(timeTick > 200){
+								// xoa canh bao khi dang bao
 								beepOff();
 								if(READ_EEPROM(add_Alert)==0xcc) WRITE_EEPROM(add_Alert,0);
                                 RegStatus |=(bitPwOn);		                         
@@ -472,54 +456,44 @@ timeTick = 0;
 						case _Ide:
 							// Bo mo may nhanh
                             //setState(_rCheck,tOut_rCheck);
-							break; 
-                        
-					}
-                    
+							break;                        
+					}                    
 	        	}
                 // mat chia
                 else{
 					//beep(10,2);
-                     switch (mtState){
+                    switch (mtState){
 
-                            case _Open:
-                            /// Da chong canh, ? mat chia => uu tien ?
-
-                                 {
-								 	// vision moi lan nhan nut de, -> check chia
-                                    if(lostDetect==1 && timeTick< 1500) // check lan 2 <=> = 20 -> alert 20s -> den smart key sang!  =>      alert =18s                           
-                                    {
-										if(READ_EEPROM(add_Alert)==0x00) WRITE_EEPROM(add_Alert,0xcc);
-                                        
-										setState(_Alert,tOut_Alert);
-	                                    cntTmp = timeTick+40;// kiem tra lai 
-										PR2L =voice1;
-										beepOn();
-	                                    lostDetect =0;
-                                    }
-                                    else {
-										lostDetect =1;
-                                        //beepOn();TMR2ON = 0;
-										//beep(10,2);
-                                    }
-                                    timeTick =0;
-                                    tmp16 = 40;
-								 }                                               
-								break;
-                            case _rCheck:
-                             //if(timeTick >30)
-                             {
-								timeTick =0;
-                                beepOn();TMR2ON = 0;
-                                beep(10,2);
-                                if(mtOldState == _Alert){reAlertOn =1;}  
-                             }                            
-								break;
+                        case _Open:
+                        	/// Da chong canh, ? mat chia => uu tien ?
+						 	// vision moi lan nhan nut de, -> check chia
+	                        if((lostDetect==1) && (timeTick< 1500) &&(timeTick >700)) // check lan 2 <=> = 20 -> alert 20s -> den smart key sang!  =>      alert =18s                           
+	                        {
+								if(READ_EEPROM(add_Alert)==0x00) WRITE_EEPROM(add_Alert,0xcc);
+	                            
+								setState(_Alert,tOut_Alert);
+	                            cntTmp = timeTick+40;// kiem tra lai 
+								PR2L =voice1;
+								beepOn();
+	                            lostDetect =0;
+	                        }
+	                        else {
+								lostDetect =1;
+	                            //beepOn();TMR2ON = 0;
+								//beep(10,2);
+	                        }
+	                        timeTick =0;
+	                        tmp16 = 40;                                            
+							break;
+                        case _rCheck:
+		                     //if(timeTick >30){
+							timeTick =0;
+	                        beepOn();TMR2ON = 0;
+	                        beep(10,2);
+	                        if(mtOldState == _Alert){reAlertOn =1;}                         
+							break;
                      }  
-				}
-                
-                }// test time out  chan detect 125khz
-				
+				}	
 				PAIE = 1;
 			}
         	
@@ -527,7 +501,6 @@ timeTick = 0;
 	
 /// Time Out
  //if(mode_chek == md_ckIDE)
-{
 		if((timeOut!=0)&&( timeTick >timeOut)){
               		
 			switch (mtState){
@@ -557,10 +530,10 @@ timeTick = 0;
                     if(READ_EEPROM(add_Alert)==0xcc) WRITE_EEPROM(add_Alert,0);
                     
 					if(reAlertOn){	///???reAlertOn						
-							setState(_rAlert,tOut_rAlert);
-							cntTmp = timeTick+40;
-							PR2L =voice1;
-							beepOn();
+						setState(_rAlert,tOut_rAlert);
+						cntTmp = timeTick+40;
+						PR2L =voice1;
+						beepOn();
                             
                     }else if(mtOldState == _Ide){							
                             // bao anten hong
@@ -579,21 +552,20 @@ timeTick = 0;
 							beep(30,1);						
 							setState(_Ide,tOut_Ide);
                             //enaDetect =0;
+                            vibrateOn=1;// kiem tra 
                             tmp16 = timeTick+40;
 						}
-				break;
-			 }
+					break;
+			}
 		}
 
-} 
-     
+// Lay gia tri goc(gia toc)
 		if((timeTick>tmp16) && (mtState == _Open) && mpuOk ==1){
 			tmp16 = timeTick+40;
 			if(AccRead(0x02,buf,6)==0){
-
+ 				// kiem tra da chong
 				if(compe(buf[1], (signed char)acXsum,5) && compe(buf[3], (signed char)acYsum,5)){
-				//beep(10,1);
-                // phat hien da chong
+				//beep(10,1);               
 					isSw++;
 					if(isSw >44){
 						isSw =0;
@@ -611,13 +583,14 @@ timeTick = 0;
 					}
 
             	}
+            	// kiem tra trang thai tinh~
             	else{ 
 						isSw =0;
                          // khi xe khong chuyen dong, o trang thai tinh lien tuc 3m => dua ve che do bao ve
-                         // >>>>test thuc te<<<<<<
+                         // >>>>test thuc te ok <<<<<<
                         if(compe(buf[1], acXOld,1) && compe(buf[3], acYOld,1)){
                             isWait++;
-                            if(isWait==450){//3m
+                            if(isWait==450){//3min
                                 isWait = 0;
 								beep(7,2);
                                 vibrateOn=1; // bat che do chong rung (1)
@@ -626,10 +599,9 @@ timeTick = 0;
                             }
                         }
                         else 
-                        	isWait=0;           ///                               
-						     
+                        	isWait=0;           ///                               						     
 				}
-                
+                // kiem tra trang thai do xe (bo khoa vuong goc voi mat dat)
 				if( (buf[5] > -31) && (buf[5] < 31)) {
                     isFall++;
                     if(isFall >4){
@@ -642,14 +614,13 @@ timeTick = 0;
                 else{
 						isFall=0;
 				}
-                
+                // Luu gia tri goc
 				acYOld = buf[3];acXOld = buf[1];
-            }	
-            
+            }	          
 		}  		
-///     
- // chong rung, chong dat khi may nghi
-if((timeTick>tmp16) && (mtState == _Ide ) && mpuOk ==1){//|| mtState == _rCheck
+
+		 // chong rung, chong dat khi may nghi
+		if((timeTick>tmp16) && (mtState == _Ide ) && mpuOk ==1){//|| mtState == _rCheck
 			
 			if(timeTick >65000) timeTick =0;
 			tmp16 = timeTick+40;
@@ -659,30 +630,21 @@ if((timeTick>tmp16) && (mtState == _Ide ) && mpuOk ==1){//|| mtState == _rCheck
 				if(vibrateOn==1){
 					if(compe(buf[1],acXOld ,3) && compe(buf[3],acYOld ,3)){//(signed char)acXsum  (signed char)acYsum
 					//beep(10,1);
-						isSw=0;
-						
-
+						isSw=0;	
 					}
 					else{ 
-							isSw++;    
-						   
-							//if(isSw%2==0)
-							{					 
-									 beepOn();TMR2ON = 0; beep(7,3);
-							}	
+						isSw++;    						   
+						//if(isSw%2==0)
+						{					 
+							beepOn();TMR2ON = 0; beep(7,3);
+						}	
 					}
-                }
-				
+                }			
             }	
-            
-
 		}   		
-  ///      
+       // Thuc thi lenh dieu khien
 		if(RegStatus & bitPwOn) {swMainOut =1;swMainOut2 =1;}
-        else {swMainOut =0;swMainOut2 =0;}
-        
-
+		else {swMainOut =0;swMainOut2 =0;}       
 	}   
-
 }
 //===========================================================

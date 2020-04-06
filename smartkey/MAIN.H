@@ -98,6 +98,19 @@ Menu Set (7)
 #define md_ckStart	1
 #define md_ckBusy	2
 #define md_ckIDE	0
-
-	
+/*
+typedef union {
+   	unsigned char byte;
+   	struct{
+   	   	unsigned char b0 : 1;
+   	   	unsigned char b1 : 1;
+   	   	unsigned char b2 : 1;
+   	   	unsigned char b3 : 1;
+   	   	unsigned char b4 : 1;
+   	   	unsigned char b5 : 1;
+   	   	unsigned char b6 : 1;
+   	   	unsigned char b7 : 1;
+   	} bits;
+}regType;
+*/
 #endif
