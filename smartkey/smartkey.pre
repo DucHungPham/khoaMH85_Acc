@@ -1074,13 +1074,11 @@ unsigned char READ_EEPROM(unsigned char EEAddr);
 void WRITE_EEPROM(unsigned char EEAddr,unsigned char EEData);
 
 # 37
-void interrupt ISR(void)
-{
+void interrupt ISR(void){
 unsigned char tmp=0;
 
 
 if(PAIE&&PAIF){
-
 tmp = PORTA;
 PAIF = 0;
 
@@ -1099,9 +1097,7 @@ else{
 cntOff = 0;
 
 }
-
 }
-
 
 if(INTE&&INTF){
 unsigned char tmp;
@@ -1110,8 +1106,8 @@ INTF = 0;
 if( RA2==0){
 
 if(timeTick <0x20){
-tmp = READ_EEPROM(0x40);
-WRITE_EEPROM(0x40,tmp+1);
+tmp = READ_EEPROM(0x3F);
+WRITE_EEPROM(0x3F,tmp+1);
 
 
 }
@@ -1129,7 +1125,7 @@ if (T0IE && T0IF) {
 T0IF = 0;
 TMR0 = 179;
 
-# 96
+# 92
 if( mode_chek == 1){
 
 cntCyc++;
@@ -1137,7 +1133,6 @@ cntCyc++;
 if(RA5==0){
 
 cntOff++;
-
 
 if(cntOff > 15){
 
@@ -1149,20 +1144,16 @@ RegStatus |= (0x40);
 RegStatus &= ~(0x40);
 }
 
-
 RegStatus |= 0x80;
 }
-
 }
 
-# 129
+# 121
 }
-
 
 timeTick++;
 
 if((mtState == 4)||(mtState == 3)){
-
 if(timeTick > cntTmp){
 cntTmp = timeTick+38;
 if(cntTmp<=timeOut)
@@ -1177,8 +1168,6 @@ TMR2IE = 1;
 }
 }
 }
-
-
 }
 
 
@@ -1187,9 +1176,7 @@ if(TMR2IE&&TMR2IF)
 TMR2IF = 0;
 RA3 =~ RA3;
 }
-
 }
-
 
 void delay_x10ms(unsigned int t){
 unsigned int set = t + timeTick;
@@ -1218,8 +1205,6 @@ delay_x10ms(20);
 
 }
 
-
-
 unsigned char READ_EEPROM(unsigned char EEAddr)
 {
 unsigned char ReEepromData;
@@ -1245,8 +1230,6 @@ while(WR) asm("clrwdt");
 GIE = 1;
 }
 
-
-
 void setState(unsigned char stt, unsigned int _tOut){
 mtOldState = mtState;
 mtState = stt;
@@ -1269,11 +1252,10 @@ return 1;
 return 0;
 }
 
-void main(void)
-{
+void main(void){
 
-# 251
-unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,mpuOk=0,vibrateOn=0,accSet=0;
+# 232
+unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,accEna=1,vibrateOn=0,accSet=0,antenSkip=0;
 unsigned int isWait =0;
 signed int acYsum=0,acXsum=0;
 unsigned int tmp16=0;
@@ -1307,9 +1289,9 @@ WRITE_EEPROM(0xFF,0xAA);
 
 _delay((unsigned long)((200)*(4000000/4000.0)));
 
-tmp8= READ_EEPROM(0x08);
-if(tmp8==0xff) {WRITE_EEPROM(0x08,0);_delay((unsigned long)((2)*(4000000/4000.0)));}
 
+tmp8 = READ_EEPROM(0x08);
+if(tmp8==0xff) {WRITE_EEPROM(0x08,0);_delay((unsigned long)((2)*(4000000/4000.0)));}
 if(tmp8==0xcc){
 RegStatus &=~(0x20);
 setState(3,1800);
@@ -1319,23 +1301,33 @@ PR2L =12;
 beepOn();
 } else {
 setState(2,400);
-
 mtOldState = 0;
-
 }
 
+tmp8 = READ_EEPROM(0x3F);
+if(tmp8==6){
+tmp8 = READ_EEPROM(0x40);
+WRITE_EEPROM(0x3F,0);
+while( RA2){
+_delay((unsigned long)((1000)*(4000000/4000.0)));
+tmp8++;
+if( RA2){
+WRITE_EEPROM(0x40,tmp8);
+beep(10,1);
+}
+}
+_delay((unsigned long)((1000)*(4000000/4000.0)));
+}
 
 tmp8 = READ_EEPROM(0x40);
+
 if(tmp8==8){
 tmp8= READ_EEPROM(0x41);
-beep(30,1);
-if((tmp8==1)||(tmp8==0xff)){
+beep(50,1);
+if((tmp8==1)||(tmp8==0xff))
 WRITE_EEPROM(0x41,0);
-}
-else {
+else
 WRITE_EEPROM(0x41,0x1);
-
-}
 WRITE_EEPROM(0x40,0);
 tmp8=0;
 _delay((unsigned long)((100)*(4000000/4000.0)));
@@ -1344,41 +1336,71 @@ _delay((unsigned long)((100)*(4000000/4000.0)));
 
 tmp8 = READ_EEPROM(0x41);
 if(tmp8==1){
-RC0 =1;RC1 =1;
-while(1){
-_delay((unsigned long)((1000)*(4000000/4000.0)));
-if(timeTick >300) WRITE_EEPROM(0x40,0);
+RegStatus |=(0x20);
+setState(1,3500);
+mtOldState = 2;
+
+accEna =0;antenSkip =1;
+
 }
+
+
+tmp8 = READ_EEPROM(0x40);
+
+if(tmp8==5){
+tmp8= READ_EEPROM(0x42);
+beep(10,1);
+if((tmp8==1)||(tmp8==0xff)){
+WRITE_EEPROM(0x42,0);
+antenSkip =0;
+}
+else{
+WRITE_EEPROM(0x42,0x1);
+antenSkip =1;
+}
+WRITE_EEPROM(0x40,0);
+tmp8=0;
+_delay((unsigned long)((100)*(4000000/4000.0)));
+}
+
+
+tmp8 = READ_EEPROM(0x42);
+if(tmp8==1){
+antenSkip =1;
+RegStatus |=(0x20);
+setState(1,3500);
+mtOldState = 2;
+tmp16 = timeTick+40;
+beep(10,1);
 }
 
 
 buf[0] = 0x08;
 buf[1] = 0x4d;
+if((AccWrite(0x10,(unsigned char)buf,2)==0)) {
 
-if(AccWrite(0x10,(unsigned char)buf,2)==0) {
-mpuOk =1;
 }
 else {
-mpuOk =0;
+accEna =0;
 beep(10,2);
 }
 
-# 345
-tmp8= READ_EEPROM(0x40);
-if(tmp8==6 && mpuOk ==1)
-{
-tmp8=0; beep(10,3);
-while((RA2 )&&(tmp8<11))
-{
-if(AccRead(0x02,(unsigned char)buf,6)==0){
 
+
+
+tmp8= READ_EEPROM(0x40);
+
+if(tmp8==6){
+if(accEna ==1){
+tmp8=0; beep(10,3);
+while((RA2)&&(tmp8<11)){
+if(AccRead(0x02,(unsigned char)buf,6)==0){
 acXsum += buf[1];
 acYsum += buf[3];
 tmp16 = (signed int)tmp16 + buf[5];
 tmp8++;
 }
 _delay((unsigned long)((500)*(4000000/4000.0)));
-
 }
 
 if(tmp8==11){
@@ -1388,22 +1410,21 @@ tmp16 = (signed int)tmp16/10;
 
 if(((signed int)tmp16 > (-31)) && ((signed int)tmp16 < 31)){
 beep(10,2);
-}
-else
-
-{
+}else{
 beep(10,3);
+
 WRITE_EEPROM(0x10,(unsigned char)acXsum);
 WRITE_EEPROM(0x11,(unsigned char)acYsum);
 _delay((unsigned long)((100)*(4000000/4000.0)));
 }
-
 }else{
 beep(10,2);
+}
 }
 WRITE_EEPROM(0x40,0);
 tmp8=0;
 }
+
 
 acXsum = (signed char)READ_EEPROM(0x10);
 acYsum = (signed char)READ_EEPROM(0x11);
@@ -1413,26 +1434,20 @@ timeTick = 0;
 
 while(1){
 
-# 398
-if(mode_chek == 0)
-{
 
-if(RegStatus & 0x80)
-{
+if((mode_chek == 0) && (antenSkip ==0)){
+if(RegStatus & 0x80){
+
 PAIE = 0;
-
 
 RegStatus &= (~0x80);
 
-# 418
-{
+
 
 if ((RegStatus & 0x40) !=0){
 
-
 switch (mtState){
 case 1:
-
 lostDetect =0;
 timeTick =0;
 tmp16 = 40;
@@ -1463,8 +1478,8 @@ if(reAlertOn)reAlertOn =0;
 break;
 
 case 3:
-if(timeTick > 200)
-{
+if(timeTick > 200){
+
 beepOff();
 if(READ_EEPROM(0x08)==0xcc) WRITE_EEPROM(0x08,0);
 RegStatus |=(0x20);
@@ -1483,9 +1498,7 @@ case 0:
 
 
 break;
-
 }
-
 }
 
 else{
@@ -1495,9 +1508,7 @@ switch (mtState){
 case 1:
 
 
-{
-
-if(lostDetect==1 && timeTick< 1500)
+if((lostDetect==1) && (timeTick< 1500) &&(timeTick >700))
 {
 if(READ_EEPROM(0x08)==0x00) WRITE_EEPROM(0x08,0xcc);
 
@@ -1514,22 +1525,16 @@ lostDetect =1;
 }
 timeTick =0;
 tmp16 = 40;
-}
 break;
 case 2:
 
-{
 timeTick =0;
 beepOn();TMR2ON = 0;
 beep(10,2);
 if(mtOldState == 3){reAlertOn =1;}
-}
 break;
 }
 }
-
-}
-
 PAIE = 1;
 }
 
@@ -1537,7 +1542,6 @@ PAIE = 1;
 
 
 
-{
 if((timeOut!=0)&&( timeTick >timeOut)){
 
 switch (mtState){
@@ -1558,6 +1562,7 @@ beepOff();
 delay_x10ms(20);
 beepOn();TMR2ON = 0;reAlertOn =0;
 beep(30,1);
+vibrateOn=1;
 setState(0,0);
 
 tmp16 = timeTick+40;
@@ -1589,20 +1594,19 @@ reAlertOn =0;
 beep(30,1);
 setState(0,0);
 
+vibrateOn=1;
 tmp16 = timeTick+40;
 }
 break;
 }
 }
 
-}
 
-if((timeTick>tmp16) && (mtState == 1) && mpuOk ==1){
+if((timeTick>tmp16) && (mtState == 1) && (accEna ==1)){
 tmp16 = timeTick+40;
 if(AccRead(0x02,buf,6)==0){
 
 if(compe(buf[1], (signed char)acXsum,5) && compe(buf[3], (signed char)acYsum,5)){
-
 
 isSw++;
 if(isSw >44){
@@ -1621,6 +1625,7 @@ beepOn();TMR2ON = 0; beep(7,1);
 }
 
 }
+
 else{
 isSw =0;
 
@@ -1637,7 +1642,6 @@ setState(2,300);
 }
 else
 isWait=0;
-
 }
 
 if( (buf[5] > -31) && (buf[5] < 31)) {
@@ -1655,11 +1659,10 @@ isFall=0;
 
 acYOld = buf[3];acXOld = buf[1];
 }
-
 }
 
 
-if((timeTick>tmp16) && (mtState == 0 ) && mpuOk ==1){
+if((timeTick>tmp16) && (mtState == 0 ) && (accEna ==1)){
 
 if(timeTick >65000) timeTick =0;
 tmp16 = timeTick+40;
@@ -1670,29 +1673,24 @@ if(vibrateOn==1){
 if(compe(buf[1],acXOld ,3) && compe(buf[3],acYOld ,3)){
 
 isSw=0;
-
-
 }
 else{
 isSw++;
-
 
 {
 beepOn();TMR2ON = 0; beep(7,3);
 }
 }
 }
-
 }
-
-
 }
 
 if(RegStatus & 0x20) {RC0 =1;RC1 =1;}
 else {RC0 =0;RC1 =0;}
 
 
+if((timeTick >500)&&(READ_EEPROM(0x3F))) WRITE_EEPROM(0x3F,0);
+if((timeTick >500)&&(READ_EEPROM(0x40))) WRITE_EEPROM(0x40,0);
 }
-
 }
 
