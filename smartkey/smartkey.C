@@ -66,13 +66,13 @@ void interrupt ISR(void){
         if( swPwOn==0){//(RegStatus & keyUpd)==0 && mtState ==_Ide && 
                      
             if(timeTick <0x20){
-                tmp = READ_EEPROM(0x3F);
-                WRITE_EEPROM(0x3F,tmp+1);
+                tmp = READ_EEPROM(_adCt);
+                WRITE_EEPROM(_adCt,tmp+1);
                 
                 
 			}//timeTick =0;
-            //WRITE_EEPROM(0x40,timeTick>>8);
-            //WRITE_EEPROM(0x41,timeTick);
+            //WRITE_EEPROM(_adMd,timeTick>>8);
+            //WRITE_EEPROM(_adsAL,timeTick);
             
 			//timeTick =0;
             while(1);
@@ -229,7 +229,7 @@ void main(void){
 	MOVWF		0x19			//
 #endasm
 */
-unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,accEna=1,vibrateOn=0,accSet=0,antenSkip=0;
+unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,accEna=1,vibrateOn=0,antenSkip=0;
 unsigned int isWait =0;
 signed int  acYsum=0,acXsum=0;
 unsigned int tmp16=0;
@@ -245,8 +245,6 @@ signed char buf[6];
     
 
     __delay_ms(100); 
- 	//enaDetect =1;
-    //__delay_ms(100);
     
 	PAIE = 1;    
 	
@@ -260,8 +258,27 @@ signed char buf[6];
 	WRITE_EEPROM(0xFF,0xAA);			//
 	WRITE_EEPROM(0xFF,0xAA);			//
  //=================   
-	   
-     __delay_ms(200);
+	__delay_ms(100);
+//BMA250 config
+	buf[0] = 0x08;  
+    buf[1] = 0x4d;  
+    if((AccWrite(0x10,(unsigned char)buf,2)==0)) {
+		//accEna =1;
+    }
+    else {
+	    //accEna =0;
+	    beep(10,2);// bao loi giao tiep mpu
+    }
+       
+    // Doc gia tri goc     
+	acXsum = (signed char)READ_EEPROM(_adsX);
+    acYsum  = (signed char)READ_EEPROM(_adsY);
+    
+tmp8= READ_EEPROM(_adsAT); 
+if(tmp8>1) {WRITE_EEPROM(_adsAT,0);__delay_ms(2);} 
+tmp8= READ_EEPROM(_adsAL); 
+if(tmp8>1) {WRITE_EEPROM(_adsAL,0);__delay_ms(2);} 
+
  //timeTick = 0; 
  //kiem tra trang thai canh bao khi bat nguon  
 	tmp8 = READ_EEPROM(add_Alert);
@@ -278,137 +295,115 @@ signed char buf[6];
 		mtOldState = _Ide;		
 	}
 
-tmp8 = READ_EEPROM(0x3F);
-if(tmp8==6){
-   tmp8 = READ_EEPROM(0x40);
-   WRITE_EEPROM(0x3F,0);
+tmp8 = READ_EEPROM(_adCt);
+if(tmp8==_Set){
+   tmp8 = 0;
+   WRITE_EEPROM(_adCt,0);
    while( swPwOn){
-      __delay_ms(1000);
+      __delay_ms(1500);
      tmp8++;
-     if( swPwOn){      
-       WRITE_EEPROM(0x40,tmp8);
+     if(tmp8 >20){
+          __delay_ms(10000);
+          WRITE_EEPROM(_adMd,0);
+	}
+     else if( swPwOn){      
+       WRITE_EEPROM(_adMd,tmp8);
        beep(10,1);
      }
 	}
-  __delay_ms(1000);   
+    while(swPwOn==0){};// doi tu xa
+  //__delay_ms(200);   //
 }
+
  //kiem tra gia tri nhap vao
-	tmp8 = READ_EEPROM(0x40);// dia chi luu gia tri so lan on/off
-	// Vao cai dat che do Huy tinh nang bo khoa
-	if(tmp8==8){
-	    tmp8= READ_EEPROM(0x41);// dia chi luu
-	    beep(50,1);
-	    if((tmp8==1)||(tmp8==0xff))
-	        WRITE_EEPROM(0x41,0);
-	    else 
-	        WRITE_EEPROM(0x41,0x1); 
-	   	WRITE_EEPROM(0x40,0);
-	    tmp8=0;
-	    __delay_ms(100);
-	} else if(tmp8==0xff) WRITE_EEPROM(0x40,0);
-	
-// kiem tra che do Huy tinh nang bo khoa
-	tmp8 = READ_EEPROM(0x41);
-	 if(tmp8==1){
-		RegStatus |=(bitPwOn);
-		setState(_Open,tOut_Open);
-		mtOldState = _rCheck;
-        
-        accEna =0;antenSkip =1;
-	   
-	}
-
-//kiem tra gia tri nhap vao
-	tmp8 = READ_EEPROM(0x40);// dia chi luu gia tri so lan on/off
-	// Vao cai dat che do Huy tinh nang anten
-	if(tmp8==5){
-	    tmp8= READ_EEPROM(0x42);// dia chi luu
-	    beep(10,1);
-	    if((tmp8==1)||(tmp8==0xff)){
-	        WRITE_EEPROM(0x42,0);
-	        antenSkip =0;
-	    }
-	    else{ 
-	        WRITE_EEPROM(0x42,0x1); 
-	        antenSkip =1;
-	    }
-	   	WRITE_EEPROM(0x40,0);
-	    tmp8=0;
-	    __delay_ms(100);
-	}
-
-// kiem tra che do Huy tinh nang anten
-	tmp8 = READ_EEPROM(0x42);
-	if(tmp8==1){
-		antenSkip =1;
-		RegStatus |=(bitPwOn);
-		setState(_Open,tOut_Open);
-		mtOldState = _rCheck;
-        tmp16 = timeTick+40;
-        beep(10,1);
-	}
-
-//BMA250 config
-	buf[0] = 0x08;  
-    buf[1] = 0x4d;  
-    if((AccWrite(0x10,(unsigned char)buf,2)==0)) {
-		//accEna =1;
-    }
-    else {
-	    accEna =0;
-	    beep(10,2);// bao loi giao tiep mpu
-    }
-    //SendNum(AccWrite(0x6b,(unsigned char *)buf,1));
-   //__delay_ms(100);
- 
- //kiem tra gia tri nhap vao
-	tmp8= READ_EEPROM(0x40);
-	// Vao cai dat che do luu goc nghieng
-	if(tmp8==6){
-        if(accEna ==1){
+tmp8 = READ_EEPROM(_adMd);
+switch(tmp8){
+    // Vao cai dat che do luu goc nghieng
+    case _sAcc:
 		tmp8=0; beep(10,3); 
-		while((swPwOn)&&(tmp8<11)){
+		while((tmp8<11)){
 			if(AccRead(0x02,(unsigned char)buf,6)==0){			
 				acXsum += buf[1];
 				acYsum += buf[3];
 		        tmp16 = (signed int)tmp16 + buf[5];
 				tmp8++;
-			}
+			} else 
+				break;
 			__delay_ms(500);
 		}
 
 		if(tmp8==11){
-		acXsum =acXsum/10;
-		acYsum = acYsum/10;
-        tmp16 = (signed int)tmp16/10;
-        
-		if(((signed int)tmp16 > (-31)) && ((signed int)tmp16 < 31)){ 
-			beep(10,2);
-        }else{ 
-			beep(10,3);
-			// Luu gia tri goc nghieng vao eeprom
-            WRITE_EEPROM(0x10,(unsigned char)acXsum);
-            WRITE_EEPROM(0x11,(unsigned char)acYsum);
-            __delay_ms(100);
+			acXsum =acXsum/10;
+			acYsum = acYsum/10;
+			tmp16 = (signed int)tmp16/10;
+			
+			if(((signed int)tmp16 > (-31)) && ((signed int)tmp16 < 31)){ 
+				beep(10,4);
+			}else{ 			
+				// Luu gia tri goc nghieng vao eeprom
+				WRITE_EEPROM(_adsX,(unsigned char)acXsum);
+				WRITE_EEPROM(_adsY,(unsigned char)acYsum);
+				beep(10,3);
 			}
 		}else{
 			beep(10,2);
 		}
+
+    break;
+    
+// Vao cai dat che do Huy tinh nang anten
+     case _sAtn:
+      tmp8= READ_EEPROM(_adsAT);// dia chi luu	    
+	    if((tmp8==1)||(tmp8==0xff)){
+	        WRITE_EEPROM(_adsAT,0);
+	    }
+	    else{ 
+	        WRITE_EEPROM(_adsAT,0x1); 
+	    }
+	    beep(10,1);
+    break;
+    
+    // Vao cai dat che do Huy tinh nang bo khoa
+     case _sAll:
+     tmp8= READ_EEPROM(_adsAL);// dia chi luu    
+	    if(tmp8){
+	        WRITE_EEPROM(_adsAL,0);
         }
-       WRITE_EEPROM(0x40,0);
-       tmp8=0; 
+	    else {
+	        WRITE_EEPROM(_adsAL,0x1);
+        } 
+	beep(50,1);
+    break;
+}
+
+// kiem tra che do Huy tinh nang bo khoa
+	tmp8 = READ_EEPROM(_adsAL);
+	 if(tmp8==1){
+		RegStatus |=(bitPwOn);
+		setState(_Open,tOut_Open);
+		//mtOldState = _rCheck;
+        antenSkip =1;        
+        accEna =0;	   
 	}
 
-// Doc gia tri goc     
-	acXsum = (signed char)READ_EEPROM(0x10);
-    acYsum  = (signed char)READ_EEPROM(0x11);
+// kiem tra che do Huy tinh nang anten
+	tmp8 = READ_EEPROM(_adsAT);
+	if((tmp8==1)&&(antenSkip ==0)){		
+		RegStatus |=(bitPwOn);
+		setState(_Open,tOut_Open);
+		//mtOldState = _rCheck;
+        antenSkip =1;
+        tmp16 = timeTick+40;
+        beep(10,1);
+	}
    
 timeTick = 0;
 
 //================
 	while(1){
 //swTx =keyDetect;
-/// keyfob update  ===============    
+/// keyfob update  =============== 
+if( antenSkip ==0){   
         if((mode_chek == md_ckIDE) && (antenSkip ==0)){   	
 			if(RegStatus & keyUpd){
 
@@ -440,7 +435,7 @@ timeTick = 0;
 	                            else if((mtOldState == _Ide)||(mtOldState == _rAlert)){
 									RegStatus |=(bitPwOn);
 									setState(_Open,tOut_Open);
-	                                 if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
+	                                 if(READ_EEPROM(_adMd))WRITE_EEPROM(_adMd,0);
 	                                tmp16 = timeTick+40;
 	                                beep(10,1);
 	                            }
@@ -513,7 +508,7 @@ timeTick = 0;
 			}
         	
         }
-	
+}	
 /// Time Out
  //if(mode_chek == md_ckIDE)
 		if((timeOut!=0)&&( timeTick >timeOut)){
@@ -557,7 +552,7 @@ timeTick = 0;
                             RegStatus |=(bitPwOn); 
 							//setState(_Norl,tOut_Norl);
                             
-                            if(READ_EEPROM(0x40))WRITE_EEPROM(0x40,0);
+                            if(READ_EEPROM(_adMd))WRITE_EEPROM(_adMd,0);
                             
                             setState(_Open,tOut_Open);
                             tmp16 = timeTick+40;
@@ -574,9 +569,9 @@ timeTick = 0;
 					break;
 			}
 		}
-
 // Lay gia tri goc(gia toc)
-		if((timeTick>tmp16) && (mtState == _Open) && (accEna ==1)){
+if(accEna ==1){
+		if((timeTick>tmp16) && (mtState == _Open) ){
 			tmp16 = timeTick+40;
 			if(AccRead(0x02,buf,6)==0){
  				// kiem tra da chong
@@ -636,7 +631,7 @@ timeTick = 0;
 		}  		
 
 		 // chong rung, chong dat khi may nghi
-		if((timeTick>tmp16) && (mtState == _Ide ) && (accEna ==1)){//|| mtState == _rCheck
+		if((timeTick>tmp16) && (mtState == _Ide ) ){//|| mtState == _rCheck
 			
 			if(timeTick >65000) timeTick =0;
 			tmp16 = timeTick+40;
@@ -658,13 +653,15 @@ timeTick = 0;
                 }			
             }	
 		}   		
+        
+}
        // Thuc thi lenh dieu khien
 		if(RegStatus & bitPwOn) {swMainOut =1;swMainOut2 =1;}
 		else {swMainOut =0;swMainOut2 =0;}
         
 		// timeout xoa gia tri nhap vao sau 5s
-	    if((timeTick >500)&&(READ_EEPROM(0x3F))) WRITE_EEPROM(0x3F,0);
-         if((timeTick >500)&&(READ_EEPROM(0x40))) WRITE_EEPROM(0x40,0);
+	    if((timeTick >500)&&(READ_EEPROM(_adCt))) WRITE_EEPROM(_adCt,0);
+         if((timeTick >500)&&(READ_EEPROM(_adMd))) WRITE_EEPROM(_adMd,0);
 	}   
 }
 //===========================================================

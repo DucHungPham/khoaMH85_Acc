@@ -1255,7 +1255,7 @@ return 0;
 void main(void){
 
 # 232
-unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,accEna=1,vibrateOn=0,accSet=0,antenSkip=0;
+unsigned char reAlertOn=0,tmp8,isSw=0,isFall=0,accEna=1,vibrateOn=0,antenSkip=0;
 unsigned int isWait =0;
 signed int acYsum=0,acXsum=0;
 unsigned int tmp16=0;
@@ -1272,8 +1272,6 @@ int_init();
 
 _delay((unsigned long)((100)*(4000000/4000.0)));
 
-
-
 PAIE = 1;
 
 RegStatus = 0;
@@ -1286,8 +1284,27 @@ setState(0,0);
 WRITE_EEPROM(0xFF,0xAA);
 WRITE_EEPROM(0xFF,0xAA);
 
+_delay((unsigned long)((100)*(4000000/4000.0)));
 
-_delay((unsigned long)((200)*(4000000/4000.0)));
+buf[0] = 0x08;
+buf[1] = 0x4d;
+if((AccWrite(0x10,(unsigned char)buf,2)==0)) {
+
+}
+else {
+
+beep(10,2);
+}
+
+
+acXsum = (signed char)READ_EEPROM(0x10);
+acYsum = (signed char)READ_EEPROM(0x11);
+
+tmp8= READ_EEPROM(0x42);
+if(tmp8>1) {WRITE_EEPROM(0x42,0);_delay((unsigned long)((2)*(4000000/4000.0)));}
+tmp8= READ_EEPROM(0x41);
+if(tmp8>1) {WRITE_EEPROM(0x41,0);_delay((unsigned long)((2)*(4000000/4000.0)));}
+
 
 
 tmp8 = READ_EEPROM(0x08);
@@ -1305,101 +1322,39 @@ mtOldState = 0;
 }
 
 tmp8 = READ_EEPROM(0x3F);
-if(tmp8==6){
-tmp8 = READ_EEPROM(0x40);
+if(tmp8==5){
+tmp8 = 0;
 WRITE_EEPROM(0x3F,0);
 while( RA2){
-_delay((unsigned long)((1000)*(4000000/4000.0)));
+_delay((unsigned long)((1500)*(4000000/4000.0)));
 tmp8++;
-if( RA2){
+if(tmp8 >20){
+_delay((unsigned long)((10000)*(4000000/4000.0)));
+WRITE_EEPROM(0x40,0);
+}
+else if( RA2){
 WRITE_EEPROM(0x40,tmp8);
 beep(10,1);
 }
 }
-_delay((unsigned long)((1000)*(4000000/4000.0)));
-}
-
-tmp8 = READ_EEPROM(0x40);
-
-if(tmp8==8){
-tmp8= READ_EEPROM(0x41);
-beep(50,1);
-if((tmp8==1)||(tmp8==0xff))
-WRITE_EEPROM(0x41,0);
-else
-WRITE_EEPROM(0x41,0x1);
-WRITE_EEPROM(0x40,0);
-tmp8=0;
-_delay((unsigned long)((100)*(4000000/4000.0)));
-} else if(tmp8==0xff) WRITE_EEPROM(0x40,0);
-
-
-tmp8 = READ_EEPROM(0x41);
-if(tmp8==1){
-RegStatus |=(0x20);
-setState(1,3500);
-mtOldState = 2;
-
-accEna =0;antenSkip =1;
+while(RA2==0){};
 
 }
 
 
 tmp8 = READ_EEPROM(0x40);
+switch(tmp8){
 
-if(tmp8==5){
-tmp8= READ_EEPROM(0x42);
-beep(10,1);
-if((tmp8==1)||(tmp8==0xff)){
-WRITE_EEPROM(0x42,0);
-antenSkip =0;
-}
-else{
-WRITE_EEPROM(0x42,0x1);
-antenSkip =1;
-}
-WRITE_EEPROM(0x40,0);
-tmp8=0;
-_delay((unsigned long)((100)*(4000000/4000.0)));
-}
-
-
-tmp8 = READ_EEPROM(0x42);
-if(tmp8==1){
-antenSkip =1;
-RegStatus |=(0x20);
-setState(1,3500);
-mtOldState = 2;
-tmp16 = timeTick+40;
-beep(10,1);
-}
-
-
-buf[0] = 0x08;
-buf[1] = 0x4d;
-if((AccWrite(0x10,(unsigned char)buf,2)==0)) {
-
-}
-else {
-accEna =0;
-beep(10,2);
-}
-
-
-
-
-tmp8= READ_EEPROM(0x40);
-
-if(tmp8==6){
-if(accEna ==1){
+case 3:
 tmp8=0; beep(10,3);
-while((RA2)&&(tmp8<11)){
+while((tmp8<11)){
 if(AccRead(0x02,(unsigned char)buf,6)==0){
 acXsum += buf[1];
 acYsum += buf[3];
 tmp16 = (signed int)tmp16 + buf[5];
 tmp8++;
-}
+} else
+break;
 _delay((unsigned long)((500)*(4000000/4000.0)));
 }
 
@@ -1409,25 +1364,64 @@ acYsum = acYsum/10;
 tmp16 = (signed int)tmp16/10;
 
 if(((signed int)tmp16 > (-31)) && ((signed int)tmp16 < 31)){
-beep(10,2);
+beep(10,4);
 }else{
-beep(10,3);
 
 WRITE_EEPROM(0x10,(unsigned char)acXsum);
 WRITE_EEPROM(0x11,(unsigned char)acYsum);
-_delay((unsigned long)((100)*(4000000/4000.0)));
+beep(10,3);
 }
 }else{
 beep(10,2);
 }
+
+break;
+
+
+case 10:
+tmp8= READ_EEPROM(0x42);
+if((tmp8==1)||(tmp8==0xff)){
+WRITE_EEPROM(0x42,0);
 }
-WRITE_EEPROM(0x40,0);
-tmp8=0;
+else{
+WRITE_EEPROM(0x42,0x1);
+}
+beep(10,1);
+break;
+
+
+case 20:
+tmp8= READ_EEPROM(0x41);
+if(tmp8){
+WRITE_EEPROM(0x41,0);
+}
+else {
+WRITE_EEPROM(0x41,0x1);
+}
+beep(50,1);
+break;
 }
 
 
-acXsum = (signed char)READ_EEPROM(0x10);
-acYsum = (signed char)READ_EEPROM(0x11);
+tmp8 = READ_EEPROM(0x41);
+if(tmp8==1){
+RegStatus |=(0x20);
+setState(1,3500);
+
+antenSkip =1;
+accEna =0;
+}
+
+
+tmp8 = READ_EEPROM(0x42);
+if((tmp8==1)&&(antenSkip ==0)){
+RegStatus |=(0x20);
+setState(1,3500);
+
+antenSkip =1;
+tmp16 = timeTick+40;
+beep(10,1);
+}
 
 timeTick = 0;
 
@@ -1435,6 +1429,7 @@ timeTick = 0;
 while(1){
 
 
+if( antenSkip ==0){
 if((mode_chek == 0) && (antenSkip ==0)){
 if(RegStatus & 0x80){
 
@@ -1539,7 +1534,7 @@ PAIE = 1;
 }
 
 }
-
+}
 
 
 if((timeOut!=0)&&( timeTick >timeOut)){
@@ -1601,8 +1596,8 @@ break;
 }
 }
 
-
-if((timeTick>tmp16) && (mtState == 1) && (accEna ==1)){
+if(accEna ==1){
+if((timeTick>tmp16) && (mtState == 1) ){
 tmp16 = timeTick+40;
 if(AccRead(0x02,buf,6)==0){
 
@@ -1662,7 +1657,7 @@ acYOld = buf[3];acXOld = buf[1];
 }
 
 
-if((timeTick>tmp16) && (mtState == 0 ) && (accEna ==1)){
+if((timeTick>tmp16) && (mtState == 0 ) ){
 
 if(timeTick >65000) timeTick =0;
 tmp16 = timeTick+40;
@@ -1683,6 +1678,8 @@ beepOn();TMR2ON = 0; beep(7,3);
 }
 }
 }
+}
+
 }
 
 if(RegStatus & 0x20) {RC0 =1;RC1 =1;}

@@ -51,27 +51,19 @@
 #define _Norl		6
 #define tOut_Norl	0
 
-#define _Set		7
-/**
----------------
-Menu Set (7)
----------------
-1| ---...-------
----------------
-2| ---...-------
----------------
-...
----------------
-6| Setup ACC
----------------
-8| Skip All feature
----------------
-*/
-#define _sAcc		8
-#define _isAcc		6 //id in menu set
+#define _Set		5 // number of time on/off
 
-#define _sSkp		9
-#define _isSkp		8 //id in menu set
+#define _sAcc		3
+#define _sAtn		10
+#define _sAll			20
+
+#define _adCt 0x3F
+#define _adMd 0x40
+
+#define _adsAT	0x42// bo qua anttena
+#define _adsAL 0x41
+#define _adsX 0x10
+#define _adsY 0x11
 
 #define True		!False
 #define False		0
