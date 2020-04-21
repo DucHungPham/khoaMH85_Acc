@@ -47,10 +47,6 @@
 #define _rAlert		4
 #define tOut_rAlert	6000
 
-
-#define _Norl		6
-#define tOut_Norl	0
-
 #define _Set		5 // number of time on/off
 
 #define _sAcc		3
@@ -60,21 +56,20 @@
 #define _adCt 0x3F
 #define _adMd 0x40
 
-#define _adsAT	0x42// bo qua anttena
-#define _adsAL 0x41
+#define _adsSk 0x41
 #define _adsX 0x10
 #define _adsY 0x11
+
+#define SkipAll  2
+#define SkipAtena 1
 
 #define True		!False
 #define False		0
 
 // bit mark status
-#define bitIDE		0x10
-#define bitPwOn	0x20
+
 #define bitSwMain	0x01
 #define bitSwStand	0x04
-#define keyfob		0x40
-#define keyUpd		0x80
 
 #define swStart	0x02
 
@@ -88,9 +83,8 @@
 
 
 #define md_ckStart	1
-#define md_ckBusy	2
 #define md_ckIDE	0
-/*
+
 typedef union {
    	unsigned char byte;
    	struct{
@@ -104,5 +98,5 @@ typedef union {
    	   	unsigned char b7 : 1;
    	} bits;
 }regType;
-*/
+
 #endif

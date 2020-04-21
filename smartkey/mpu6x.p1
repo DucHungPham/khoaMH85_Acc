@@ -1741,6 +1741,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.h: 6: ;
 [; ;main.h: 7: ;
 [; ;main.h: 8: ;
+[; ;main.h: 88: typedef union {
+[; ;main.h: 89: unsigned char byte;
+[; ;main.h: 90: struct{
+[; ;main.h: 91: unsigned char b0 : 1;
+[; ;main.h: 92: unsigned char b1 : 1;
+[; ;main.h: 93: unsigned char b2 : 1;
+[; ;main.h: 94: unsigned char b3 : 1;
+[; ;main.h: 95: unsigned char b4 : 1;
+[; ;main.h: 96: unsigned char b5 : 1;
+[; ;main.h: 97: unsigned char b6 : 1;
+[; ;main.h: 98: unsigned char b7 : 1;
+[; ;main.h: 99: } bits;
+[; ;main.h: 100: }regType;
 [; ;swi2c.h: 25: void swI2C_Init(void);
 [; ;swi2c.h: 26: void swI2C_Start(void);
 [; ;swi2c.h: 27: void swI2C_Stop(void);
@@ -1766,13 +1779,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _swI2C_Start ..  ]
 [; ;mpu6x.c: 8: if(swI2C_WriteByte(0x18<<1)== 0 )
 "8
-[e $ ! == -> ( _swI2C_WriteByte (1 -> << -> 24 `i -> 1 `i `uc `i -> 0 `i 87  ]
+[e $ ! == -> ( _swI2C_WriteByte (1 -> << -> 24 `i -> 1 `i `uc `i -> 0 `i 89  ]
 [; ;mpu6x.c: 9: {
 "9
 {
 [; ;mpu6x.c: 10: if(swI2C_WriteByte(rAdd)==0 )
 "10
-[e $ ! == -> ( _swI2C_WriteByte (1 _rAdd `i -> 0 `i 88  ]
+[e $ ! == -> ( _swI2C_WriteByte (1 _rAdd `i -> 0 `i 90  ]
 [; ;mpu6x.c: 11: {
 "11
 {
@@ -1780,12 +1793,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "12
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 92  ]
-[e :U 89 ]
+[e $U 94  ]
+[e :U 91 ]
 {
 [; ;mpu6x.c: 13: if(swI2C_WriteByte(dat[i])==1 ){
 "13
-[e $ ! == -> ( _swI2C_WriteByte (1 *U + _dat * -> _i `ux -> -> # *U _dat `ui `ux `i -> 1 `i 93  ]
+[e $ ! == -> ( _swI2C_WriteByte (1 *U + _dat * -> _i `ux -> -> # *U _dat `ui `ux `i -> 1 `i 95  ]
 {
 [; ;mpu6x.c: 14: swI2C_Stop();
 "14
@@ -1793,17 +1806,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mpu6x.c: 15: return 3;
 "15
 [e ) -> -> 3 `i `uc ]
-[e $UE 86  ]
+[e $UE 88  ]
 "16
 }
-[e :U 93 ]
+[e :U 95 ]
 "17
 }
 "12
 [e ++ _i -> -> 1 `i `uc ]
+[e :U 94 ]
+[e $ < -> _i `i -> _len `i 91  ]
 [e :U 92 ]
-[e $ < -> _i `i -> _len `i 89  ]
-[e :U 90 ]
 "17
 }
 [; ;mpu6x.c: 16: }
@@ -1814,34 +1827,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mpu6x.c: 19: return 0;
 "19
 [e ) -> -> 0 `i `uc ]
-[e $UE 86  ]
+[e $UE 88  ]
 "20
 }
 [; ;mpu6x.c: 20: }
-[e $U 94  ]
+[e $U 96  ]
 "21
-[e :U 88 ]
+[e :U 90 ]
 [; ;mpu6x.c: 21: else
 [; ;mpu6x.c: 22: return 2;
 "22
 [e ) -> -> 2 `i `uc ]
-[e $UE 86  ]
-[e :U 94 ]
+[e $UE 88  ]
+[e :U 96 ]
 "23
 }
 [; ;mpu6x.c: 23: }
-[e $U 95  ]
+[e $U 97  ]
 "24
-[e :U 87 ]
+[e :U 89 ]
 [; ;mpu6x.c: 24: else
 [; ;mpu6x.c: 25: return 1;
 "25
 [e ) -> -> 1 `i `uc ]
-[e $UE 86  ]
-[e :U 95 ]
+[e $UE 88  ]
+[e :U 97 ]
 [; ;mpu6x.c: 27: }
 "27
-[e :UE 86 ]
+[e :UE 88 ]
 }
 "31
 [v _AccRead `(uc  1 ef3`uc`*uc`uc ]
@@ -1861,13 +1874,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _swI2C_Start ..  ]
 [; ;mpu6x.c: 36: if(swI2C_WriteByte(0x18<<1)== 0 )
 "36
-[e $ ! == -> ( _swI2C_WriteByte (1 -> << -> 24 `i -> 1 `i `uc `i -> 0 `i 97  ]
+[e $ ! == -> ( _swI2C_WriteByte (1 -> << -> 24 `i -> 1 `i `uc `i -> 0 `i 99  ]
 [; ;mpu6x.c: 37: {
 "37
 {
 [; ;mpu6x.c: 38: if(swI2C_WriteByte(rAdd)==0 )
 "38
-[e $ ! == -> ( _swI2C_WriteByte (1 _rAdd `i -> 0 `i 98  ]
+[e $ ! == -> ( _swI2C_WriteByte (1 _rAdd `i -> 0 `i 100  ]
 [; ;mpu6x.c: 39: {
 "39
 {
@@ -1876,14 +1889,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _swI2C_Start ..  ]
 [; ;mpu6x.c: 41: if(swI2C_WriteByte((0x18<<1)|1)== 0 ){
 "41
-[e $ ! == -> ( _swI2C_WriteByte (1 -> | << -> 24 `i -> 1 `i -> 1 `i `uc `i -> 0 `i 99  ]
+[e $ ! == -> ( _swI2C_WriteByte (1 -> | << -> 24 `i -> 1 `i -> 1 `i `uc `i -> 0 `i 101  ]
 {
 [; ;mpu6x.c: 43: for(i=0; i<(len-1);i++){
 "43
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 103  ]
-[e :U 100 ]
+[e $U 105  ]
+[e :U 102 ]
 {
 [; ;mpu6x.c: 44: dat[i]=swI2C_ReadByte(1);
 "44
@@ -1892,9 +1905,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "43
 [e ++ _i -> -> 1 `i `uc ]
+[e :U 105 ]
+[e $ < -> _i `i - -> _len `i -> 1 `i 102  ]
 [e :U 103 ]
-[e $ < -> _i `i - -> _len `i -> 1 `i 100  ]
-[e :U 101 ]
 "45
 }
 [; ;mpu6x.c: 45: }
@@ -1907,44 +1920,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mpu6x.c: 48: return 0;
 "48
 [e ) -> -> 0 `i `uc ]
-[e $UE 96  ]
+[e $UE 98  ]
 "50
 }
 [; ;mpu6x.c: 50: }
-[e $U 104  ]
+[e $U 106  ]
 "51
-[e :U 99 ]
+[e :U 101 ]
 [; ;mpu6x.c: 51: else
 [; ;mpu6x.c: 52: return 1;
 "52
 [e ) -> -> 1 `i `uc ]
-[e $UE 96  ]
-[e :U 104 ]
+[e $UE 98  ]
+[e :U 106 ]
 "53
 }
 [; ;mpu6x.c: 53: }
-[e $U 105  ]
+[e $U 107  ]
 "54
-[e :U 98 ]
+[e :U 100 ]
 [; ;mpu6x.c: 54: else
 [; ;mpu6x.c: 55: return 2;
 "55
 [e ) -> -> 2 `i `uc ]
-[e $UE 96  ]
-[e :U 105 ]
+[e $UE 98  ]
+[e :U 107 ]
 "56
 }
 [; ;mpu6x.c: 56: }
-[e $U 106  ]
+[e $U 108  ]
 "57
-[e :U 97 ]
+[e :U 99 ]
 [; ;mpu6x.c: 57: else
 [; ;mpu6x.c: 58: return 1;
 "58
 [e ) -> -> 1 `i `uc ]
-[e $UE 96  ]
-[e :U 106 ]
+[e $UE 98  ]
+[e :U 108 ]
 [; ;mpu6x.c: 59: }
 "59
-[e :UE 96 ]
+[e :UE 98 ]
 }

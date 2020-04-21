@@ -1738,6 +1738,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MPU6X.h: 7: unsigned char AccWrite(unsigned char rAdd,unsigned char *dat, unsigned char len);
 [; ;MPU6X.h: 8: unsigned char AccRead(unsigned char rAdd,unsigned char *dat, unsigned char len);
 [; ;main.h: 8: ;
+[; ;main.h: 88: typedef union {
+[; ;main.h: 89: unsigned char byte;
+[; ;main.h: 90: struct{
+[; ;main.h: 91: unsigned char b0 : 1;
+[; ;main.h: 92: unsigned char b1 : 1;
+[; ;main.h: 93: unsigned char b2 : 1;
+[; ;main.h: 94: unsigned char b3 : 1;
+[; ;main.h: 95: unsigned char b4 : 1;
+[; ;main.h: 96: unsigned char b5 : 1;
+[; ;main.h: 97: unsigned char b6 : 1;
+[; ;main.h: 98: unsigned char b7 : 1;
+[; ;main.h: 99: } bits;
+[; ;main.h: 100: }regType;
 [; ;swi2c.h: 25: void swI2C_Init(void);
 [; ;swi2c.h: 26: void swI2C_Start(void);
 [; ;swi2c.h: 27: void swI2C_Stop(void);
@@ -1778,7 +1791,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 16 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
 [; ;SWI2C.C: 19: }
 "19
-[e :UE 86 ]
+[e :UE 88 ]
 }
 "22
 [v _swI2C_Start `(v  1 ef ]
@@ -1810,7 +1823,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 16 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
 [; ;SWI2C.C: 32: }
 "32
-[e :UE 87 ]
+[e :UE 89 ]
 }
 "35
 [v _swI2C_Stop `(v  1 ef ]
@@ -1836,7 +1849,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 16 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
 [; ;SWI2C.C: 42: }
 "42
-[e :UE 88 ]
+[e :UE 90 ]
 }
 "45
 [v _swI2C_Scanner `(v  1 ef ]
@@ -1846,7 +1859,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;SWI2C.C: 83: }
 "83
-[e :UE 89 ]
+[e :UE 91 ]
 }
 "86
 [v _swI2C_WriteByte `(uc  1 ef1`uc ]
@@ -1870,10 +1883,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "91
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 8 `i 91  ]
-[e $U 92  ]
+[e $ < -> _i `i -> 8 `i 93  ]
+[e $U 94  ]
 "92
-[e :U 91 ]
+[e :U 93 ]
 [; ;SWI2C.C: 92: {
 {
 [; ;SWI2C.C: 93: RA6 = (dat&0x80) ? 1:0;
@@ -1898,8 +1911,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "91
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 8 `i 91  ]
-[e :U 92 ]
+[e $ < -> _i `i -> 8 `i 93  ]
+[e :U 94 ]
 "99
 }
 [; ;SWI2C.C: 99: }
@@ -1927,10 +1940,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SWI2C.C: 108: return i;
 "108
 [e ) _i ]
-[e $UE 90  ]
+[e $UE 92  ]
 [; ;SWI2C.C: 109: }
 "109
-[e :UE 90 ]
+[e :UE 92 ]
 }
 "112
 [v _swI2C_ReadByte `(uc  1 ef1`uc ]
@@ -1959,10 +1972,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "118
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 8 `i 95  ]
-[e $U 96  ]
+[e $ < -> _i `i -> 8 `i 97  ]
+[e $U 98  ]
 "119
-[e :U 95 ]
+[e :U 97 ]
 [; ;SWI2C.C: 119: {
 {
 [; ;SWI2C.C: 120: RA7 = 1;
@@ -1984,8 +1997,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "118
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 8 `i 95  ]
-[e :U 96 ]
+[e $ < -> _i `i -> 8 `i 97  ]
+[e :U 98 ]
 "127
 }
 [; ;SWI2C.C: 127: }
@@ -2010,8 +2023,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SWI2C.C: 136: return dat;
 "136
 [e ) _dat ]
-[e $UE 94  ]
+[e $UE 96  ]
 [; ;SWI2C.C: 137: }
 "137
-[e :UE 94 ]
+[e :UE 96 ]
 }

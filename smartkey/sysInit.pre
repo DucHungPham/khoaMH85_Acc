@@ -1053,6 +1053,21 @@ unsigned char AccRead(unsigned char rAdd,unsigned char *dat, unsigned char len);
 # 8 "main.h"
 ;
 
+# 88
+typedef union {
+unsigned char byte;
+struct{
+unsigned char b0 : 1;
+unsigned char b1 : 1;
+unsigned char b2 : 1;
+unsigned char b3 : 1;
+unsigned char b4 : 1;
+unsigned char b5 : 1;
+unsigned char b6 : 1;
+unsigned char b7 : 1;
+} bits;
+}regType;
+
 # 6 "sysInit.h"
 void sys_init(void);
 void gpio_init(void);

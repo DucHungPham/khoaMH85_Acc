@@ -1743,6 +1743,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MPU6X.h: 7: unsigned char AccWrite(unsigned char rAdd,unsigned char *dat, unsigned char len);
 [; ;MPU6X.h: 8: unsigned char AccRead(unsigned char rAdd,unsigned char *dat, unsigned char len);
 [; ;main.h: 8: ;
+[; ;main.h: 88: typedef union {
+[; ;main.h: 89: unsigned char byte;
+[; ;main.h: 90: struct{
+[; ;main.h: 91: unsigned char b0 : 1;
+[; ;main.h: 92: unsigned char b1 : 1;
+[; ;main.h: 93: unsigned char b2 : 1;
+[; ;main.h: 94: unsigned char b3 : 1;
+[; ;main.h: 95: unsigned char b4 : 1;
+[; ;main.h: 96: unsigned char b5 : 1;
+[; ;main.h: 97: unsigned char b6 : 1;
+[; ;main.h: 98: unsigned char b7 : 1;
+[; ;main.h: 99: } bits;
+[; ;main.h: 100: }regType;
 [; ;sysInit.h: 6: void sys_init(void);
 [; ;sysInit.h: 7: void gpio_init(void);
 [; ;sysInit.h: 8: void timer_init(void);
@@ -1762,14 +1775,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( __nop ..  ]
 [; ;sysinit.c: 28: while(HTS==0);
 "28
-[e $U 87  ]
-[e :U 88 ]
-[e :U 87 ]
-[e $ == -> _HTS `i -> 0 `i 88  ]
+[e $U 89  ]
+[e :U 90 ]
 [e :U 89 ]
+[e $ == -> _HTS `i -> 0 `i 90  ]
+[e :U 91 ]
 [; ;sysinit.c: 30: }
 "30
-[e :UE 86 ]
+[e :UE 88 ]
 }
 "32
 [v _gpio_init `(v  1 ef ]
@@ -1812,7 +1825,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _MSCON -> -> 48 `i `uc ]
 [; ;sysinit.c: 48: }
 "48
-[e :UE 90 ]
+[e :UE 92 ]
 }
 "51
 [v _timer_init `(v  1 ef ]
@@ -1846,7 +1859,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _T2CON0 -> -> 41 `i `uc ]
 [; ;sysinit.c: 80: }
 "80
-[e :UE 91 ]
+[e :UE 93 ]
 }
 "83
 [v _int_init `(v  1 ef ]
@@ -1914,5 +1927,5 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _GIE -> -> 1 `i `b ]
 [; ;sysinit.c: 117: }
 "117
-[e :UE 92 ]
+[e :UE 94 ]
 }

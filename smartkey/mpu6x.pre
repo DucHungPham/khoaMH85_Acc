@@ -1042,6 +1042,21 @@ void SendNum(unsigned char num);
 # 8
 ;
 
+# 88
+typedef union {
+unsigned char byte;
+struct{
+unsigned char b0 : 1;
+unsigned char b1 : 1;
+unsigned char b2 : 1;
+unsigned char b3 : 1;
+unsigned char b4 : 1;
+unsigned char b5 : 1;
+unsigned char b6 : 1;
+unsigned char b7 : 1;
+} bits;
+}regType;
+
 # 25 "swi2c.h"
 void swI2C_Init(void);
 void swI2C_Start(void);
