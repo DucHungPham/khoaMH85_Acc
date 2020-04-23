@@ -128,7 +128,7 @@ I2C_delay;
   
   swSDA_DDRO;
   
-  swSDA_O = (Ack) ? 0 : 1;
+  swSDA_O = (Ack) ? 1 : 0;
   swSCL = 1;
   I2C_delay;
   swSCL = 0;

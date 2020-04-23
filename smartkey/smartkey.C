@@ -18,7 +18,7 @@ unsigned char cntCyc = 0, cntOff = 0; //
 unsigned int timeOut = 0, timeTick = 0, cntTmp = 0;
 unsigned char  mtState = _Ide, mtOldState = _Ide; // che do trong qua trinh hoat dong cua xe
 
-regType RegStatus;
+volatile regType RegStatus;
 
 unsigned char READ_EEPROM(unsigned char EEAddr);
 void WRITE_EEPROM(unsigned char EEAddr, unsigned char EEData);
@@ -187,7 +187,7 @@ void setState(unsigned char stt, unsigned int _tOut) {
 	timeTick = 0;
 	timeOut = _tOut;
 }
-unsigned char compe(signed char a, signed char b, signed char dt) {
+unsigned char compe(signed char a, signed char b, unsigned char dt) {
 
 	if (a > b) {
 		if ((a - b) <= dt) return 1;
@@ -210,9 +210,9 @@ void main(void) {
 	signed int  acYsum = 0, acXsum = 0;
 	unsigned int tmp16 = 0;
 	signed char acYOld, acXOld;
-	signed char buf[6];
+	unsigned char buf[6];
     
-	Status =0;
+	Status =0x00;
 	accEna = 1;
 
 	CLRWDT();
@@ -235,20 +235,7 @@ void main(void) {
 	WRITE_EEPROM(0xFF, 0xAA);			//
 //=================
 	__delay_ms(100);
-//BMA250 config
-	buf[0] = 0x08;
-	buf[1] = 0x4d;
-	if ((AccWrite(0x10, (unsigned char)buf, 2) == 0)) {
-		//accEna =1;
-	}
-	else {
-		//accEna =0;
-		beep(10, 2); // bao loi giao tiep mpu
-	}
 
-	// Doc gia tri goc
-	acXsum = (signed char)READ_EEPROM(_adsX);
-	acYsum  = (signed char)READ_EEPROM(_adsY);
 
 	tmp8 = READ_EEPROM(_adsSk);
 	if (tmp8 > 3) {WRITE_EEPROM(_adsSk, 0); __delay_ms(2);}
@@ -268,6 +255,28 @@ void main(void) {
 		setState(_rCheck, 400); // timout 4s cho thoi gian mo may, check tin hieu chia
 		mtOldState = _Ide;
 	}
+
+
+//BMA250 config
+
+buf[0] = 0x03;
+if ((AccWrite(0x0f, buf, 1) == 0)) {
+		//accEna =1;
+	}
+	else {
+		//accEna =0;
+		beep(10, 2); // bao loi giao tiep mpu
+	}
+    
+	buf[0] = 0x08;
+	if ((AccWrite(0x10,buf, 1) == 0)) {// (unsigned char)
+		//accEna =1;
+	}
+	else {
+		//accEna =0;
+		beep(10, 2); // bao loi giao tiep mpu
+	}
+    
 
 // vao che do cai 
 	tmp8 = READ_EEPROM(_adCt);
@@ -296,10 +305,10 @@ void main(void) {
 	case _sAcc:
 		tmp8 = 0; beep(10, 3);
 		while ((tmp8 < 11)) {
-			if (AccRead(0x02, (unsigned char)buf, 6) == 0) {
-				acXsum += buf[1];
-				acYsum += buf[3];
-				tmp16 = (signed int)tmp16 + buf[5];
+			if (AccRead(0x02, buf, 6) == 0) {
+				acXsum += (signed char)buf[1];
+				acYsum += (signed char)buf[3];
+                if ( ((signed char)buf[5] > -15) && ((signed char)buf[5] <15))  break;
 				tmp8++;
 			} else
 				break;
@@ -308,17 +317,12 @@ void main(void) {
 
 		if (tmp8 == 11) {
 			acXsum = acXsum / 10;
-			acYsum = acYsum / 10;
-			tmp16 = (signed int)tmp16 / 10;
+			acYsum = acYsum / 10;  
+			// Luu gia tri goc nghieng vao eeprom
+			WRITE_EEPROM(_adsX, acXsum);//(unsigned char) - k can ep kieu - trinh dich tu gan byte thap
+			WRITE_EEPROM(_adsY, acYsum);//(unsigned char)
+			beep(10, 3);
 
-			if (((signed char)tmp16 > (-31)) && ((signed char)tmp16 < 31)) {//char or int ?
-				beep(10, 4);
-			} else {
-				// Luu gia tri goc nghieng vao eeprom
-				WRITE_EEPROM(_adsX, (unsigned char)acXsum);
-				WRITE_EEPROM(_adsY, (unsigned char)acYsum);
-				beep(10, 3);
-			}
 		} else {
 			beep(10, 2);
 		}
@@ -348,7 +352,7 @@ void main(void) {
             tmp8 |= SkipAtena;	
 		}
         WRITE_EEPROM(_adsSk, tmp8);
-		beep(10, 2);
+		beep(10, 1);
 		break;
 	}
 
@@ -367,6 +371,10 @@ void main(void) {
 			beep(10, 1);
 		}
 	}
+    
+	// Doc gia tri goc
+	acXsum = (signed int)READ_EEPROM(_adsX);// (signed char) ????
+	acYsum  = (signed int)READ_EEPROM(_adsY);
     
 	timeTick = 0;
 
@@ -485,6 +493,8 @@ void main(void) {
 
 			switch (mtState) {
 			case _Open:
+            //timeTick = 0; //open->open
+			//tmp16 = 40;// thoi gian lay mau gia tri goc
 				break;
 			case _Alert:
 				beepOff();
@@ -531,21 +541,26 @@ void main(void) {
 			}
 		}
 // Lay gia tri goc(gia toc)
-		if (accEna == 1) {
-			if ((timeTick > tmp16) && (mtState == _Open) ) {
-				tmp16 = timeTick + 40;
-				if (AccRead(0x02, buf, 6) == 0) {
+		if ((timeTick > tmp16) && (accEna == 1)) {
+			if (timeTick > 65000) timeTick = 0;//kiem tra
+			tmp16 = timeTick + 40;
+            
+			if (AccRead(0x02,buf, 6) == 0) {
+				//open
+				if((mtState == _Open) ){//||(mtState == _rCheck)
 					// kiem tra da chong
-					if (compe(buf[1], (signed char)acXsum, 5) && compe(buf[3], (signed char)acYsum, 5)) {
+                    
+					if (compe((signed char)buf[1], (signed char)acXsum, 4) && compe((signed char)buf[3], (signed char)acYsum, 4)) {
 						//beep(10,1);
 						isSw++;
 						if (isSw > 44) {
 							isSw = 0;
 							vibrateOn = 1; // bat che do chong rung
 							// lay vi tri chinh xac tai thoi diem da chong, truoc khi chuyen sang che do chong rung
-							acYOld = buf[3]; acXOld = buf[1];
+							//acYOld = (signed char)buf[3]; acXOld = (signed char)buf[1]; // co the bo vi o che do rCheck van lay gia tri
 							bitPwOn = 0;
 							setState(_rCheck, tOut_rCheck);
+                            tmp16 = timeTick + 40;///----
 						}
 						else if (isSw > 25) { //0.4*20=8s
 							if (isSw % 2 == 0) {
@@ -554,13 +569,15 @@ void main(void) {
 						}
 					}
 					// kiem tra trang thai tinh~
-					else {
+					else 
+                    
+                    {
 						isSw = 0;
 						// khi xe khong chuyen dong, o trang thai tinh lien tuc 3m => dua ve che do bao ve
 						// >>>>test thuc te ok <<<<<<
-						if (compe(buf[1], acXOld, 1) && compe(buf[3], acYOld, 1)) {
+						if (compe((signed char)buf[1],acXOld,1 ) && compe((signed char)buf[3],acYOld,1)) {
 							isWait++;
-							if (isWait == 450) { //3min
+							if (isWait == 450) { //3min 450
 								isWait = 0;
 								beep(7, 2);
 								vibrateOn = 1; // bat che do chong rung (1)
@@ -569,12 +586,13 @@ void main(void) {
 							}
 						}
 						else
-							isWait = 0;         ///
+							{isWait = 0;}         ///
 					}
+                    
 					// kiem tra trang thai do xe (bo khoa vuong goc voi mat dat)
-					if ( (buf[5] > -31) && (buf[5] < 31)) {
+					if ( ((signed char)buf[5] > -15) && ((signed char)buf[5] < 15)) {
 						isFall++;
-						if (isFall > 4) {
+						if (isFall > 4) {//4
 							isFall = 0;
 							beep(7, 2);
 							bitPwOn = 0;
@@ -584,20 +602,16 @@ void main(void) {
 					else {
 						isFall = 0;
 					}
+
 					// Luu gia tri goc
-					acYOld = buf[3]; acXOld = buf[1];
+					acYOld =(signed char)buf[3]; acXOld = (signed char)buf[1];
+
+				//Ide
 				}
-			}
-
-			// chong rung, chong dat khi may nghi
-			if ((timeTick > tmp16) && (mtState == _Ide ) ) { //|| mtState == _rCheck
-
-				if (timeTick > 65000) timeTick = 0;
-				tmp16 = timeTick + 40;
-
-				if (AccRead(0x02, buf, 6) == 0) {
+				else if(mtState== _Ide){
+					// chong rung, chong dat khi may nghi
 					if (vibrateOn) {
-						if (compe(buf[1], acXOld , 3) && compe(buf[3], acYOld , 3)) { 
+						if (compe((signed char)buf[1],acXOld , 3) && compe((signed char)buf[3],acYOld , 3)) { 
 							//beep(10,1);
 							isSw = 0;
 						}
@@ -607,6 +621,8 @@ void main(void) {
 						}
 					}
 				}
+                // Luu gia tri goc
+				//acYOld =(signed char)buf[3]; acXOld = (signed char)buf[1];
 			}
 		}
 		// Thuc thi lenh dieu khien

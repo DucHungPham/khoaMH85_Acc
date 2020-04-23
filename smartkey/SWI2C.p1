@@ -2005,9 +2005,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SWI2C.C: 129: TRISA &=0xbf;;
 "129
 [e =& _TRISA -> -> 191 `i `uc ]
-[; ;SWI2C.C: 131: RA6 = (Ack) ? 0 : 1;
+[; ;SWI2C.C: 131: RA6 = (Ack) ? 1 : 0;
 "131
-[e = _RA6 -> ? != -> _Ack `i -> -> -> 0 `i `uc `i : -> 0 `i -> 1 `i `b ]
+[e = _RA6 -> ? != -> _Ack `i -> -> -> 0 `i `uc `i : -> 1 `i -> 0 `i `b ]
 [; ;SWI2C.C: 132: RA7 = 1;
 "132
 [e = _RA7 -> -> 1 `i `b ]

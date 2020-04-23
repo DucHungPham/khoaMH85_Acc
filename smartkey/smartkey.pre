@@ -1082,7 +1082,7 @@ unsigned char cntCyc = 0, cntOff = 0;
 unsigned int timeOut = 0, timeTick = 0, cntTmp = 0;
 unsigned char mtState = 0, mtOldState = 0;
 
-regType RegStatus;
+volatile regType RegStatus;
 
 unsigned char READ_EEPROM(unsigned char EEAddr);
 void WRITE_EEPROM(unsigned char EEAddr, unsigned char EEData);
@@ -1229,7 +1229,7 @@ mtState = stt;
 timeTick = 0;
 timeOut = _tOut;
 }
-unsigned char compe(signed char a, signed char b, signed char dt) {
+unsigned char compe(signed char a, signed char b, unsigned char dt) {
 
 if (a > b) {
 if ((a - b) <= dt) return 1;
@@ -1252,9 +1252,9 @@ unsigned int isWait = 0;
 signed int acYsum = 0, acXsum = 0;
 unsigned int tmp16 = 0;
 signed char acYOld, acXOld;
-signed char buf[6];
+unsigned char buf[6];
 
-RegStatus.byte =0;
+RegStatus.byte =0x00;
 RegStatus.bits.b6 = 1;
 
 asm("clrwdt");
@@ -1278,19 +1278,6 @@ WRITE_EEPROM(0xFF, 0xAA);
 
 _delay((unsigned long)((100)*(4000000/4000.0)));
 
-buf[0] = 0x08;
-buf[1] = 0x4d;
-if ((AccWrite(0x10, (unsigned char)buf, 2) == 0)) {
-
-}
-else {
-
-beep(10, 2);
-}
-
-
-acXsum = (signed char)READ_EEPROM(0x10);
-acYsum = (signed char)READ_EEPROM(0x11);
 
 tmp8 = READ_EEPROM(0x41);
 if (tmp8 > 3) {WRITE_EEPROM(0x41, 0); _delay((unsigned long)((2)*(4000000/4000.0)));}
@@ -1310,6 +1297,29 @@ beepOn();
 setState(2, 400);
 mtOldState = 0;
 }
+
+
+
+
+buf[0] = 0x03;
+if ((AccWrite(0x0f, buf, 1) == 0)) {
+
+}
+else {
+
+beep(10, 2);
+}
+
+buf[0] = 0x08;
+if ((AccWrite(0x10,buf, 1) == 0)) {
+
+}
+else {
+
+beep(10, 2);
+}
+
+
 
 tmp8 = READ_EEPROM(0x3F);
 if (tmp8 == 5) {
@@ -1337,10 +1347,10 @@ switch (tmp8) {
 case 3:
 tmp8 = 0; beep(10, 3);
 while ((tmp8 < 11)) {
-if (AccRead(0x02, (unsigned char)buf, 6) == 0) {
-acXsum += buf[1];
-acYsum += buf[3];
-tmp16 = (signed int)tmp16 + buf[5];
+if (AccRead(0x02, buf, 6) == 0) {
+acXsum += (signed char)buf[1];
+acYsum += (signed char)buf[3];
+if ( ((signed char)buf[5] > -15) && ((signed char)buf[5] <15)) break;
 tmp8++;
 } else
 break;
@@ -1350,16 +1360,11 @@ _delay((unsigned long)((500)*(4000000/4000.0)));
 if (tmp8 == 11) {
 acXsum = acXsum / 10;
 acYsum = acYsum / 10;
-tmp16 = (signed int)tmp16 / 10;
 
-if (((signed char)tmp16 > (-31)) && ((signed char)tmp16 < 31)) {
-beep(10, 4);
-} else {
-
-WRITE_EEPROM(0x10, (unsigned char)acXsum);
-WRITE_EEPROM(0x11, (unsigned char)acYsum);
+WRITE_EEPROM(0x10, acXsum);
+WRITE_EEPROM(0x11, acYsum);
 beep(10, 3);
-}
+
 } else {
 beep(10, 2);
 }
@@ -1389,7 +1394,7 @@ else {
 tmp8 |= 1;
 }
 WRITE_EEPROM(0x41, tmp8);
-beep(10, 2);
+beep(10, 1);
 break;
 }
 
@@ -1408,6 +1413,10 @@ tmp16 = timeTick + 40;
 beep(10, 1);
 }
 }
+
+
+acXsum = (signed int)READ_EEPROM(0x10);
+acYsum = (signed int)READ_EEPROM(0x11);
 
 timeTick = 0;
 
@@ -1526,6 +1535,8 @@ if ((timeOut != 0) && ( timeTick > timeOut)) {
 
 switch (mtState) {
 case 1:
+
+
 break;
 case 3:
 beepOff();
@@ -1572,21 +1583,26 @@ break;
 }
 }
 
-if (RegStatus.bits.b6 == 1) {
-if ((timeTick > tmp16) && (mtState == 1) ) {
+if ((timeTick > tmp16) && (RegStatus.bits.b6 == 1)) {
+if (timeTick > 65000) timeTick = 0;
 tmp16 = timeTick + 40;
-if (AccRead(0x02, buf, 6) == 0) {
 
-if (compe(buf[1], (signed char)acXsum, 5) && compe(buf[3], (signed char)acYsum, 5)) {
+if (AccRead(0x02,buf, 6) == 0) {
+
+if((mtState == 1) ){
+
+
+if (compe((signed char)buf[1], (signed char)acXsum, 4) && compe((signed char)buf[3], (signed char)acYsum, 4)) {
 
 isSw++;
 if (isSw > 44) {
 isSw = 0;
 RegStatus.bits.b5 = 1;
 
-acYOld = buf[3]; acXOld = buf[1];
+
 RegStatus.bits.b0 = 0;
 setState(2, 300);
+tmp16 = timeTick + 40;
 }
 else if (isSw > 25) {
 if (isSw % 2 == 0) {
@@ -1595,11 +1611,13 @@ beepOn(); TMR2ON = 0; beep(7, 1);
 }
 }
 
-else {
+else
+
+{
 isSw = 0;
 
 
-if (compe(buf[1], acXOld, 1) && compe(buf[3], acYOld, 1)) {
+if (compe((signed char)buf[1],acXOld,1 ) && compe((signed char)buf[3],acYOld,1)) {
 isWait++;
 if (isWait == 450) {
 isWait = 0;
@@ -1610,10 +1628,11 @@ setState(2, 300);
 }
 }
 else
-isWait = 0;
+{isWait = 0;}
 }
 
-if ( (buf[5] > -31) && (buf[5] < 31)) {
+
+if ( ((signed char)buf[5] > -15) && ((signed char)buf[5] < 15)) {
 isFall++;
 if (isFall > 4) {
 isFall = 0;
@@ -1626,19 +1645,15 @@ else {
 isFall = 0;
 }
 
-acYOld = buf[3]; acXOld = buf[1];
+
+acYOld =(signed char)buf[3]; acXOld = (signed char)buf[1];
+
+
 }
-}
+else if(mtState== 0){
 
-
-if ((timeTick > tmp16) && (mtState == 0 ) ) {
-
-if (timeTick > 65000) timeTick = 0;
-tmp16 = timeTick + 40;
-
-if (AccRead(0x02, buf, 6) == 0) {
 if (RegStatus.bits.b5) {
-if (compe(buf[1], acXOld , 3) && compe(buf[3], acYOld , 3)) {
+if (compe((signed char)buf[1],acXOld , 3) && compe((signed char)buf[3],acYOld , 3)) {
 
 isSw = 0;
 }
@@ -1648,6 +1663,8 @@ beepOn(); TMR2ON = 0; beep(7, 3);
 }
 }
 }
+
+
 }
 }
 

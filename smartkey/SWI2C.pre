@@ -1157,7 +1157,7 @@ _delay((unsigned long)((16)*(4000000/4000000.0)));;
 
 TRISA &=0xbf;;
 
-RA6 = (Ack) ? 0 : 1;
+RA6 = (Ack) ? 1 : 0;
 RA7 = 1;
 _delay((unsigned long)((16)*(4000000/4000000.0)));;
 RA7 = 0;
