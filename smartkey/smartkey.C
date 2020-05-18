@@ -71,7 +71,7 @@ void interrupt ISR(void) {
 				tmp = READ_EEPROM(_adCt);
 				WRITE_EEPROM(_adCt, tmp + 1);
 			}
-			while (1); // doi tu xa
+			while (swPwOn == 0); // doi tu xa  - or while(1)?
 		}
 	}
 //====================
@@ -259,15 +259,6 @@ void main(void) {
 
 //BMA250 config
 
-buf[0] = 0x03;
-if ((AccWrite(0x0f, buf, 1) == 0)) {
-		//accEna =1;
-	}
-	else {
-		//accEna =0;
-		beep(10, 2); // bao loi giao tiep mpu
-	}
-    
 	buf[0] = 0x08;
 	if ((AccWrite(0x10,buf, 1) == 0)) {// (unsigned char)
 		//accEna =1;
