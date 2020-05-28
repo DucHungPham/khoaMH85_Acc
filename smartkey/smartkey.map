@@ -25,70 +25,70 @@ Machine type is 16F685
 startup.obj     end_init                              A        A        1        8       0
                 reset_vec                             0        0        1        0       0
 smartkey.obj    intentry                              4        4        6        8       0
-                text899                             6F0      6F0        8        8       0
-                text898                             63B      63B       18        8       0
-                text897                             40D      40D       84        8       0
-                text896                             6CF      6CF        D        8       0
-                text895                             620      620       1B        8       0
-                text894                             692      692       13        8       0
-                text893                             6F8      6F8        6        8       0
-                text892                             705      705        5      E0A       0
-                text891                             6DC      6DC        C        8       0
-                text890                             551      551       3D        8       0
-                text889                             669      669       16        8       0
-                text888                             6A5      6A5       10        8       0
-                text887                             605      605       1B        8       0
-                text886                             491      491       45        8       0
-                text885                             653      653       16        8       0
-                text884                             6E8      6E8        8        8       0
-                text883                             5E6      5E6       1F        8       0
-                text882                             67F      67F       13        8       0
-                text881                             6C2      6C2        D        8       0
-                text880                             514      514       3D        8       0
-                text879                             4D6      4D6       3E        8       0
-                text878                             5C5      5C5       21        8       0
-                text877                             58E      58E       37        8       0
-                swtext1                             700      700        5      E00       0
-                maintext                              B        B      402        8       0
+                text899                             6DB      6DB        8        8       0
+                text898                             626      626       18        8       0
+                text897                             3F6      3F6       86        8       0
+                text896                             6BA      6BA        D        8       0
+                text895                             60B      60B       1B        8       0
+                text894                             67D      67D       13        8       0
+                text893                             6E3      6E3        6        8       0
+                text892                             6EE      6EE        5      DDC       0
+                text891                             6C7      6C7        C        8       0
+                text890                             53C      53C       3D        8       0
+                text889                             654      654       16        8       0
+                text888                             690      690       10        8       0
+                text887                             5F0      5F0       1B        8       0
+                text886                             47C      47C       45        8       0
+                text885                             63E      63E       16        8       0
+                text884                             6D3      6D3        8        8       0
+                text883                             5D1      5D1       1F        8       0
+                text882                             66A      66A       13        8       0
+                text881                             6AD      6AD        D        8       0
+                text880                             4FF      4FF       3D        8       0
+                text879                             4C1      4C1       3E        8       0
+                text878                             5B0      5B0       21        8       0
+                text877                             579      579       37        8       0
+                swtext1                             6E9      6E9        5      DD2       0
+                maintext                              B        B      3EB        8       0
                 cstackBANK0                          20       20       21       20       1
                 cstackCOMMON                         75       75        5       70       1
                 bssBANK0                             41       41        6       20       1
                 bssCOMMON                            70       70        5       70       1
-                cinit                               6B5      6B5        D        8       0
+                cinit                               6A0      6A0        D        8       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   CONST          
-                swtext1                             700      700        5         0
+                swtext1                             6E9      6E9        5         0
 
         CLASS   CODE           
                 end_init                              A        A        1         0
                 intentry                              4        4        6         0
                 reset_vec                             0        0        1         0
-                text899                             6F0      6F0        8         0
-                text898                             63B      63B       18         0
-                text897                             40D      40D       84         0
-                text896                             6CF      6CF        D         0
-                text895                             620      620       1B         0
-                text894                             692      692       13         0
-                text893                             6F8      6F8        6         0
-                text892                             705      705        5         0
-                text891                             6DC      6DC        C         0
-                text890                             551      551       3D         0
-                text889                             669      669       16         0
-                text888                             6A5      6A5       10         0
-                text887                             605      605       1B         0
-                text886                             491      491       45         0
-                text885                             653      653       16         0
-                text884                             6E8      6E8        8         0
-                text883                             5E6      5E6       1F         0
-                text882                             67F      67F       13         0
-                text881                             6C2      6C2        D         0
-                text880                             514      514       3D         0
-                text879                             4D6      4D6       3E         0
-                text878                             5C5      5C5       21         0
-                text877                             58E      58E       37         0
-                maintext                              B        B      402         0
-                cinit                               6B5      6B5        D         0
+                text899                             6DB      6DB        8         0
+                text898                             626      626       18         0
+                text897                             3F6      3F6       86         0
+                text896                             6BA      6BA        D         0
+                text895                             60B      60B       1B         0
+                text894                             67D      67D       13         0
+                text893                             6E3      6E3        6         0
+                text892                             6EE      6EE        5         0
+                text891                             6C7      6C7        C         0
+                text890                             53C      53C       3D         0
+                text889                             654      654       16         0
+                text888                             690      690       10         0
+                text887                             5F0      5F0       1B         0
+                text886                             47C      47C       45         0
+                text885                             63E      63E       16         0
+                text884                             6D3      6D3        8         0
+                text883                             5D1      5D1       1F         0
+                text882                             66A      66A       13         0
+                text881                             6AD      6AD        D         0
+                text880                             4FF      4FF       3D         0
+                text879                             4C1      4C1       3E         0
+                text878                             5B0      5B0       21         0
+                text877                             579      579       37         0
+                maintext                              B        B      3EB         0
+                cinit                               6A0      6A0        D         0
 
         CLASS   STRCODE        
 
@@ -132,11 +132,11 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
                 reset_vec                      000000  000001  000001         0       0  CODE        2
-                intentry                       000004  0006FA  0006FE         8       0  CODE        2
+                intentry                       000004  0006E5  0006E9         8       0  CODE        2
                 cstackBANK0                    000020  000027  000047        20       1  BANK0       1
                 bssCOMMON                      000070  00000A  00007A        70       1  COMMON      1
-                swtext1                        000700  000005  000705       E00       0  CONST       2
-                text892                        000705  000005  00070A       E0A       0  CODE        2
+                swtext1                        0006E9  000005  0006EE       DD2       0  CONST       2
+                text892                        0006EE  000005  0006F3       DDC       0  CODE        2
 
 
 UNUSED ADDRESS RANGES
@@ -145,28 +145,23 @@ UNUSED ADDRESS RANGES
         BANK0            047-06F            29           1
         BANK1            0A0-0BF            20           1
         CODE             001-003             3           2
-                         6FE-6FF             2
-                         70A-7FF            F6
+                         6F3-7FF           10D
         COMMON           07A-07D             4           1
         CONFIG           2007-2007             1           2
         CONST            001-003             3           2
-                         6FE-6FF             2
-                         70A-7FF            F6
+                         6F3-7FF             D
         EEDATA           2100-21FF           100           2
         ENTRY            001-003             3           2
-                         6FE-6FF             2
-                         70A-7FF            F6
+                         6F3-7FF             D
         IDLOC            2000-2003             4           2
         RAM              047-06F            29           1
                          0A0-0BF            20
         SFR0             000-01F            20           1
         SFR1             080-09F            20           1
         STRCODE          001-003             3           2
-                         6FE-6FF             2
-                         70A-7FF            F6
+                         6F3-7FF           10D
         STRING           001-003             3           2
-                         6FE-6FF             2
-                         70A-7FF            F6
+                         6F3-7FF             D
 
                                   Symbol Table
 
@@ -245,8 +240,8 @@ _ANS8                      (abs)        8F8
 _ANS9                      (abs)        8F9
 _ANSEL                     (abs)        11E
 _ANSELH                    (abs)        11F
-_AccRead                   text877      58E
-_AccWrite                  text878      5C5
+_AccRead                   text877      579
+_AccWrite                  text878      5B0
 _C1CH0                     (abs)        8C8
 _C1CH1                     (abs)        8C9
 _C1OE                      (abs)        8CD
@@ -288,7 +283,7 @@ _IOCB4                     (abs)        8B4
 _IOCB5                     (abs)        8B5
 _IOCB6                     (abs)        8B6
 _IOCB7                     (abs)        8B7
-_ISR                       text897      40D
+_ISR                       text897      3F6
 _MC1OUT                    (abs)        8DF
 _MC2OUT                    (abs)        8DE
 _MSCON                     (abs)        01B
@@ -318,7 +313,7 @@ _RA7                       (abs)        02F
 _RC0                       (abs)        038
 _RC1                       (abs)        039
 _RD                        (abs)        4E0
-_READ_EEPROM               text896      6CF
+_READ_EEPROM               text896      6BA
 _RegStatus                 bssCOMMON    072
 _SR0                       (abs)        CF6
 _SR1                       (abs)        CF7
@@ -358,7 +353,7 @@ _WPUB7                     (abs)        8AF
 _WPUC                      (abs)        093
 _WR                        (abs)        4E8
 _WREN                      (abs)        C62
-_WRITE_EEPROM              text895      620
+_WRITE_EEPROM              text895      60B
 __Habs1                    abs1         000
 __Hbank0                   bank0        000
 __Hbank1                   bank1        000
@@ -413,70 +408,70 @@ __Lsfr0                    sfr0         000
 __Lsfr1                    sfr1         000
 __Lstrings                 strings      000
 __Ltext                    text         000
-__S0                       (abs)        70A
+__S0                       (abs)        6F3
 __S1                       (abs)        07A
 __S2                       (abs)        000
-___awdiv                   text886      491
+___awdiv                   text886      47C
 ___awdiv@counter           cstackBANK0  024
 ___awdiv@dividend          cstackBANK0  022
 ___awdiv@divisor           cstackBANK0  020
 ___awdiv@quotient          cstackBANK0  026
 ___awdiv@sign              cstackBANK0  025
-__end_of_AccRead           text877      5C5
-__end_of_AccWrite          text878      5E6
-__end_of_ISR               text897      491
-__end_of_READ_EEPROM       text896      6DC
-__end_of_WRITE_EEPROM      text895      63B
-__end_of___awdiv           text886      4D6
-__end_of_beep              text885      669
-__end_of_beepOff           text893      6FE
-__end_of_beepOn            text892      70A
-__end_of_compe             text890      58E
-__end_of_delay_x10ms       text894      6A5
-__end_of_gpio_init         text889      67F
-__end_of_int_init          text887      620
-__end_of_main              maintext     40D
-__end_of_setState          text891      6E8
-__end_of_swI2C_Init        text883      605
-__end_of_swI2C_ReadByte    text879      514
-__end_of_swI2C_Start       text882      692
-__end_of_swI2C_Stop        text881      6CF
-__end_of_swI2C_WriteByte   text880      551
-__end_of_sys_init          text884      6F0
-__end_of_timer_init        text888      6B5
-__end_ofi1_READ_EEPROM     text899      6F8
-__end_ofi1_WRITE_EEPROM    text898      653
+__end_of_AccRead           text877      5B0
+__end_of_AccWrite          text878      5D1
+__end_of_ISR               text897      47C
+__end_of_READ_EEPROM       text896      6C7
+__end_of_WRITE_EEPROM      text895      626
+__end_of___awdiv           text886      4C1
+__end_of_beep              text885      654
+__end_of_beepOff           text893      6E9
+__end_of_beepOn            text892      6F3
+__end_of_compe             text890      579
+__end_of_delay_x10ms       text894      690
+__end_of_gpio_init         text889      66A
+__end_of_int_init          text887      60B
+__end_of_main              maintext     3F6
+__end_of_setState          text891      6D3
+__end_of_swI2C_Init        text883      5F0
+__end_of_swI2C_ReadByte    text879      4FF
+__end_of_swI2C_Start       text882      67D
+__end_of_swI2C_Stop        text881      6BA
+__end_of_swI2C_WriteByte   text880      53C
+__end_of_sys_init          text884      6DB
+__end_of_timer_init        text888      6A0
+__end_ofi1_READ_EEPROM     text899      6E3
+__end_ofi1_WRITE_EEPROM    text898      63E
 __pbssBANK0                bssBANK0     041
 __pbssCOMMON               bssCOMMON    070
 __pcstackBANK0             cstackBANK0  020
 __pcstackCOMMON            cstackCOMMON 075
 __pintentry                intentry     004
 __pmaintext                maintext     00B
-__pswtext1                 swtext1      700
+__pswtext1                 swtext1      6E9
 __ptext876                 text876      000
-__ptext877                 text877      58E
-__ptext878                 text878      5C5
-__ptext879                 text879      4D6
-__ptext880                 text880      514
-__ptext881                 text881      6C2
-__ptext882                 text882      67F
-__ptext883                 text883      5E6
-__ptext884                 text884      6E8
-__ptext885                 text885      653
-__ptext886                 text886      491
-__ptext887                 text887      605
-__ptext888                 text888      6A5
-__ptext889                 text889      669
-__ptext890                 text890      551
-__ptext891                 text891      6DC
-__ptext892                 text892      705
-__ptext893                 text893      6F8
-__ptext894                 text894      692
-__ptext895                 text895      620
-__ptext896                 text896      6CF
-__ptext897                 text897      40D
-__ptext898                 text898      63B
-__ptext899                 text899      6F0
+__ptext877                 text877      579
+__ptext878                 text878      5B0
+__ptext879                 text879      4C1
+__ptext880                 text880      4FF
+__ptext881                 text881      6AD
+__ptext882                 text882      66A
+__ptext883                 text883      5D1
+__ptext884                 text884      6D3
+__ptext885                 text885      63E
+__ptext886                 text886      47C
+__ptext887                 text887      5F0
+__ptext888                 text888      690
+__ptext889                 text889      654
+__ptext890                 text890      53C
+__ptext891                 text891      6C7
+__ptext892                 text892      6EE
+__ptext893                 text893      6E3
+__ptext894                 text894      67D
+__ptext895                 text895      60B
+__ptext896                 text896      6BA
+__ptext897                 text897      3F6
+__ptext898                 text898      626
+__ptext899                 text899      6DB
 __ptext900                 text900      000
 __size_of_AccRead          (abs)        000
 __size_of_AccWrite         (abs)        000
@@ -502,30 +497,30 @@ __size_of_sys_init         (abs)        000
 __size_of_timer_init       (abs)        000
 __size_ofi1_READ_EEPROM    (abs)        000
 __size_ofi1_WRITE_EEPROM   (abs)        000
-_beep                      text885      653
-_beepOff                   text893      6F8
-_beepOn                    text892      705
+_beep                      text885      63E
+_beepOff                   text893      6E3
+_beepOn                    text892      6EE
 _cntCyc                    bssCOMMON    073
 _cntOff                    bssBANK0     045
 _cntTmp                    bssBANK0     041
-_compe                     text890      551
-_delay_x10ms               text894      692
+_compe                     text890      53C
+_delay_x10ms               text894      67D
 _exit                      init         00A
-_gpio_init                 text889      669
-_int_init                  text887      605
+_gpio_init                 text889      654
+_int_init                  text887      5F0
 _main                      maintext     00B
 _mtOldState                bssBANK0     046
 _mtState                   bssCOMMON    074
-_setState                  text891      6DC
-_swI2C_Init                text883      5E6
-_swI2C_ReadByte            text879      4D6
-_swI2C_Start               text882      67F
-_swI2C_Stop                text881      6C2
-_swI2C_WriteByte           text880      514
-_sys_init                  text884      6E8
+_setState                  text891      6C7
+_swI2C_Init                text883      5D1
+_swI2C_ReadByte            text879      4C1
+_swI2C_Start               text882      66A
+_swI2C_Stop                text881      6AD
+_swI2C_WriteByte           text880      4FF
+_sys_init                  text884      6D3
 _timeOut                   bssBANK0     043
 _timeTick                  bssCOMMON    070
-_timer_init                text888      6A5
+_timer_init                text888      690
 beep@delay                 cstackBANK0  025
 beep@rep                   cstackBANK0  024
 btemp                      (abs)        07E
@@ -534,33 +529,33 @@ compe@b                    cstackBANK0  020
 compe@dt                   cstackBANK0  021
 delay_x10ms@set            cstackBANK0  022
 delay_x10ms@t              cstackBANK0  020
-end_of_initialization      cinit        6C0
+end_of_initialization      cinit        6AB
 i1READ_EEPROM@EEAddr       cstackCOMMON 075
 i1READ_EEPROM@ReEepromData cstackCOMMON 076
 i1WRITE_EEPROM@EEAddr      cstackCOMMON 076
 i1WRITE_EEPROM@EEData      cstackCOMMON 075
-i1_READ_EEPROM             text899      6F0
-i1_WRITE_EEPROM            text898      63B
+i1_READ_EEPROM             text899      6DB
+i1_WRITE_EEPROM            text898      626
+i1l5458                                    
+i1l5460                                    
+i1l5466                                    
+i1l5468                                    
 i1l5474                                    
-i1l5476                                    
-i1l5482                                    
-i1l5484                                    
-i1l5490                                    
+i1l5488                                    
+i1l5494                                    
+i1l5496                                    
+i1l5500                                    
 i1l5504                                    
-i1l5510                                    
-i1l5512                                    
-i1l5516                                    
+i1l5508                                    
 i1l5520                                    
-i1l5524                                    
-i1l5536                                    
-i1l5546                                    
-i1l5560                                    
-i1l5724                                    
-i1l5726                                    
-i1l5728                                    
-i1l5732                                    
-i1l5736                                    
-i1l5738                                    
+i1l5530                                    
+i1l5544                                    
+i1l5708                                    
+i1l5710                                    
+i1l5712                                    
+i1l5716                                    
+i1l5720                                    
+i1l5722                                    
 i1l867                                     
 i1l876                                     
 interrupt_function         intentry     004
@@ -570,29 +565,44 @@ intlevel2                  functab      000
 intlevel3                  functab      000
 intlevel4                  functab      000
 intlevel5                  functab      000
-l1799                                      
-l1802                                      
-l1805                                      
-l1808                                      
-l2595                                      
-l2598                                      
-l2601                                      
-l2609                                      
-l2614                                      
-l4246                                      
+l1797                                      
+l1800                                      
+l1803                                      
+l1806                                      
+l2593                                      
+l2596                                      
+l2599                                      
+l2607                                      
+l2612                                      
+l4244                                      
+l6416                                      
+l6418                                      
+l6420                                      
+l6424                                      
+l6428                                      
+l6430                                      
+l6432                                      
+l6436                                      
+l6438                                      
+l6440                                      
+l6442                                      
+l6444                                      
 l6446                                      
-l6448                                      
-l6450                                      
-l6454                                      
-l6458                                      
-l6460                                      
-l6462                                      
-l6466                                      
-l6468                                      
-l6470                                      
-l6472                                      
-l6474                                      
-l6476                                      
+l6484                                      
+l6486                                      
+l6488                                      
+l6490                                      
+l6492                                      
+l6494                                      
+l6496                                      
+l6498                                      
+l6500                                      
+l6502                                      
+l6504                                      
+l6506                                      
+l6508                                      
+l6510                                      
+l6512                                      
 l6514                                      
 l6516                                      
 l6518                                      
@@ -605,37 +615,36 @@ l6530
 l6532                                      
 l6534                                      
 l6536                                      
-l6538                                      
 l6540                                      
-l6542                                      
-l6544                                      
 l6546                                      
-l6548                                      
 l6550                                      
-l6552                                      
-l6554                                      
-l6556                                      
-l6558                                      
 l6560                                      
-l6562                                      
 l6564                                      
-l6566                                      
-l6570                                      
-l6576                                      
+l6568                                      
+l6572                                      
+l6578                                      
 l6580                                      
-l6590                                      
+l6582                                      
+l6584                                      
+l6586                                      
+l6588                                      
+l6592                                      
 l6594                                      
+l6596                                      
 l6598                                      
+l6600                                      
 l6602                                      
+l6604                                      
+l6606                                      
 l6608                                      
 l6610                                      
 l6612                                      
 l6614                                      
 l6616                                      
 l6618                                      
+l6620                                      
 l6622                                      
 l6624                                      
-l6626                                      
 l6628                                      
 l6630                                      
 l6632                                      
@@ -644,7 +653,6 @@ l6636
 l6638                                      
 l6640                                      
 l6642                                      
-l6644                                      
 l6646                                      
 l6648                                      
 l6650                                      
@@ -656,138 +664,121 @@ l6662
 l6664                                      
 l6666                                      
 l6668                                      
-l6670                                      
 l6672                                      
+l6674                                      
 l6676                                      
 l6678                                      
-l6680                                      
 l6682                                      
-l6684                                      
-l6688                                      
-l6690                                      
 l6692                                      
-l6694                                      
-l6696                                      
-l6698                                      
-l6702                                      
-l6704                                      
-l6706                                      
-l6708                                      
-l6712                                      
-l6722                                      
-l6744                                      
+l6714                                      
+l6724                                      
+l6730                                      
+l6732                                      
+l6750                                      
+l6752                                      
 l6754                                      
+l6756                                      
+l6758                                      
 l6760                                      
 l6762                                      
-l6780                                      
+l6764                                      
+l6766                                      
+l6768                                      
+l6770                                      
+l6772                                      
+l6774                                      
+l6776                                      
+l6778                                      
 l6782                                      
-l6784                                      
 l6786                                      
-l6788                                      
 l6790                                      
-l6792                                      
-l6794                                      
 l6796                                      
 l6798                                      
 l6800                                      
 l6802                                      
 l6804                                      
-l6806                                      
 l6808                                      
-l6810                                      
-l6814                                      
-l6818                                      
-l6822                                      
+l6812                                      
+l6820                                      
+l6824                                      
 l6828                                      
 l6830                                      
-l6832                                      
 l6834                                      
-l6836                                      
-l6840                                      
 l6844                                      
-l6852                                      
-l6860                                      
-l6864                                      
-l6868                                      
-l6870                                      
+l6856                                      
+l6866                                      
 l6874                                      
-l6884                                      
+l6886                                      
+l6888                                      
+l6892                                      
+l6894                                      
 l6896                                      
+l6902                                      
 l6906                                      
-l6914                                      
-l6926                                      
-l6928                                      
-l6932                                      
-l6934                                      
-l6936                                      
+l6908                                      
+l6910                                      
+l6930                                      
+l6938                                      
+l6940                                      
 l6942                                      
-l6946                                      
 l6948                                      
-l6968                                      
+l6950                                      
+l6952                                      
+l6958                                      
+l6962                                      
+l6970                                      
 l6976                                      
 l6978                                      
-l6980                                      
-l6986                                      
-l6988                                      
+l6982                                      
 l6990                                      
-l6996                                      
+l6998                                      
 l7000                                      
-l7008                                      
-l7014                                      
-l7016                                      
-l7020                                      
+l7002                                      
+l7004                                      
+l7012                                      
 l7028                                      
+l7030                                      
+l7034                                      
 l7036                                      
 l7038                                      
 l7040                                      
 l7042                                      
-l7050                                      
-l7052                                      
-l7054                                      
+l7046                                      
 l7056                                      
-l7072                                      
-l7074                                      
+l7058                                      
+l7060                                      
+l7066                                      
+l7068                                      
 l7078                                      
 l7080                                      
 l7082                                      
 l7084                                      
 l7086                                      
-l7090                                      
-l7100                                      
-l7102                                      
-l7104                                      
-l7110                                      
+l7106                                      
+l7108                                      
 l7112                                      
+l7118                                      
 l7122                                      
 l7124                                      
 l7126                                      
 l7128                                      
 l7130                                      
+l7138                                      
+l7140                                      
+l7144                                      
 l7150                                      
-l7152                                      
+l7154                                      
 l7156                                      
-l7162                                      
-l7166                                      
-l7168                                      
+l7158                                      
+l7160                                      
 l7170                                      
-l7172                                      
 l7174                                      
-l7182                                      
+l7176                                      
+l7178                                      
 l7184                                      
-l7188                                      
-l7194                                      
 l7198                                      
 l7200                                      
 l7202                                      
-l7204                                      
-l7214                                      
-l7218                                      
-l7220                                      
-l7222                                      
-l7228                                      
-l7242                                      
-l7244                                      
-l7246                                      
 l852                                       
 l855                                       
 l858                                       
@@ -811,7 +802,7 @@ saved_w                    (abs)        07E
 setState@_tOut             cstackBANK0  020
 setState@stt               cstackBANK0  022
 start                      init         00A
-start_initialization       cinit        6B5
+start_initialization       cinit        6A0
 swI2C_ReadByte@Ack         cstackBANK0  021
 swI2C_ReadByte@dat         cstackBANK0  022
 swI2C_ReadByte@i           cstackBANK0  023

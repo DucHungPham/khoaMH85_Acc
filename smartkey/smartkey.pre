@@ -1116,7 +1116,7 @@ if (timeTick < 32) {
 tmp = READ_EEPROM(0x3F);
 WRITE_EEPROM(0x3F, tmp + 1);
 }
-while (1);
+while (RA2 == 0);
 }
 }
 
@@ -1267,8 +1267,6 @@ int_init();
 
 _delay((unsigned long)((100)*(4000000/4000.0)));
 
-PAIE = 1;
-
 swI2C_Init();
 
 setState(0, 0);
@@ -1301,15 +1299,6 @@ mtOldState = 0;
 
 
 
-buf[0] = 0x03;
-if ((AccWrite(0x0f, buf, 1) == 0)) {
-
-}
-else {
-
-beep(10, 2);
-}
-
 buf[0] = 0x08;
 if ((AccWrite(0x10,buf, 1) == 0)) {
 
@@ -1318,7 +1307,6 @@ else {
 
 beep(10, 2);
 }
-
 
 
 tmp8 = READ_EEPROM(0x3F);
@@ -1418,6 +1406,7 @@ beep(10, 1);
 acXsum = (signed int)READ_EEPROM(0x10);
 acYsum = (signed int)READ_EEPROM(0x11);
 
+PAIE = 1;
 timeTick = 0;
 
 
@@ -1519,8 +1508,8 @@ break;
 case 2:
 
 timeTick = 0;
-beepOn(); TMR2ON = 0;
-beep(10, 2);
+
+
 if (mtOldState == 3) {RegStatus.bits.b7 = 1;}
 break;
 }

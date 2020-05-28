@@ -225,8 +225,6 @@ void main(void) {
 
 	__delay_ms(100);
 
-	PAIE = 1;
-
 	swI2C_Init();
 
 	setState(_Ide, 0);
@@ -267,7 +265,6 @@ void main(void) {
 		//accEna =0;
 		beep(10, 2); // bao loi giao tiep mpu
 	}
-    
 
 // vao che do cai 
 	tmp8 = READ_EEPROM(_adCt);
@@ -367,6 +364,7 @@ void main(void) {
 	acXsum = (signed int)READ_EEPROM(_adsX);// (signed char) ????
 	acYsum  = (signed int)READ_EEPROM(_adsY);
     
+	PAIE = 1;
 	timeTick = 0;
 
 //================
@@ -468,8 +466,8 @@ void main(void) {
 						case _rCheck:
 							//if(timeTick >30){
 							timeTick = 0;
-							beepOn(); TMR2ON = 0;
-							beep(10, 2);
+							//beepOn(); TMR2ON = 0;
+							//beep(10, 2);
 							if (mtOldState == _Alert) {reAlertOn = 1;}
 							break;
 						}

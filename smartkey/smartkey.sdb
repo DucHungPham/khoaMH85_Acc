@@ -2762,7 +2762,7 @@
 "208
 [v main@lostDetect `uc  1 a 1 16 ]
 [v main@isFall `uc  1 a 1 15 ]
-"638
+"627
 } 0
 "34 mpu6x.c
 [v _AccRead `(uc  1 e 1 0 ]
